@@ -1,0 +1,903 @@
+app:
+  description: 我是酒店专属智能客服，精准理解需求并清晰解答
+  icon: ''
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: lyp
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/wenxin:0.0.3@01f14a7f686c8c0ac1afd9cf57e645983e1b2a69e8cfbb1329493a2d997307e1
+    version: null
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.0.42@85e7bb71e461653ac101330c751973085dfdde26c906b07d7dff8030c95bc39e
+    version: null
+kind: app
+version: 0.4.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: question-classifier
+      id: 1776498156667-source-1776498264454-target
+      source: '1776498156667'
+      sourceHandle: source
+      target: '1776498264454'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1776498264454-1-1776498277196-target
+      source: '1776498264454'
+      sourceHandle: '1'
+      target: '1776498277196'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1776498277196-source-llm-target
+      source: '1776498277196'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1776498264454-2-1776499500104-target
+      source: '1776498264454'
+      sourceHandle: '2'
+      target: '1776499500104'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1776499500104-source-1776499509929-target
+      source: '1776499500104'
+      sourceHandle: source
+      target: '1776499509929'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: llm-source-1776500219442-target
+      source: llm
+      sourceHandle: source
+      target: '1776500219442'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1776499509929-source-1776511352860-target
+      source: '1776499509929'
+      sourceHandle: source
+      target: '1776511352860'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1776498264454-1776498527615-1776511368580-target
+      source: '1776498264454'
+      sourceHandle: '1776498527615'
+      target: '1776511368580'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1776511368580-source-1776511376079-target
+      source: '1776511368580'
+      sourceHandle: source
+      target: '1776511376079'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1776511376079-source-1776511388544-target
+      source: '1776511376079'
+      sourceHandle: source
+      target: '1776511388544'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1776498264454-1776498557607-1776511399253-target
+      source: '1776498264454'
+      sourceHandle: '1776498557607'
+      target: '1776511399253'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1776511399253-source-1776511407931-target
+      source: '1776511399253'
+      sourceHandle: source
+      target: '1776511407931'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1776498264454-1776498578463-1776511447304-target
+      source: '1776498264454'
+      sourceHandle: '1776498578463'
+      target: '1776511447304'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1776511447304-source-1776511455200-target
+      source: '1776511447304'
+      sourceHandle: source
+      target: '1776511455200'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1776511407931-source-1776511464396-target
+      source: '1776511407931'
+      sourceHandle: source
+      target: '1776511464396'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1776511455200-source-1776511481705-target
+      source: '1776511455200'
+      sourceHandle: source
+      target: '1776511481705'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1776498264454-1776511540225-1776511579448-target
+      source: '1776498264454'
+      sourceHandle: '1776511540225'
+      target: '1776511579448'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1776511579448-source-1776511588231-target
+      source: '1776511579448'
+      sourceHandle: source
+      target: '1776511588231'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1776511588231-source-1776511595992-target
+      source: '1776511588231'
+      sourceHandle: source
+      target: '1776511595992'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 开始
+        type: start
+        variables: []
+      height: 52
+      id: '1776498156667'
+      position:
+        x: 30
+        y: 360.5
+      positionAbsolute:
+        x: 30
+        y: 360.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1776498277196'
+          - result
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 10
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: ernie-3.5-128k
+          provider: langgenius/wenxin/wenxin
+        prompt_template:
+        - id: c81552bc-3f33-478c-9228-4485b565cf8d
+          role: system
+          text: '用户内容：{{#1776498264454.class_name#}}
+
+            上下文：{{#context#}}
+
+            角色：
+
+            我是酒店专属智能客服，我的工作是认真倾听客人问题，精准理解需求并清晰解答熟悉酒店预订、入住、房型、设施、发票、退改、售后等全业务知识，据实回答，用语礼貌简洁，精准答疑，主动引导信息，复杂问题转接人工，高效解决客诉咨询，提升入住体验与服务满意度，辅助降本增效，不超权限承诺、不编造信息、不闲聊、不泄露隐私、不违规应，只能从知识库回答'
+        selected: false
+        title: 酒店基础知识
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: llm
+      position:
+        x: 943.1428571428571
+        y: 360.5
+      positionAbsolute:
+        x: 943.1428571428571
+        y: 360.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        classes:
+        - id: '1'
+          name: 酒店基础信息
+        - id: '2'
+          name: 客房产品体系
+        - id: '1776498527615'
+          name: 餐饮娱乐配套
+        - id: '1776498557607'
+          name: 会议宴会服务
+        - id: '1776498578463'
+          name: 周边旅游资源
+        - id: '1776511540225'
+          name: 高频问题库
+        instructions: ''
+        model:
+          completion_params:
+            disable_search: true
+            max_tokens: 502
+            temperature: 0.3
+            top_p: 0.5
+          mode: chat
+          name: qwen-turbo
+          provider: langgenius/tongyi/tongyi
+        query_variable_selector:
+        - '1776498156667'
+        - sys.query
+        selected: false
+        title: 问题分类器
+        type: question-classifier
+        vision:
+          enabled: false
+      height: 322
+      id: '1776498264454'
+      position:
+        x: 109.14285714285717
+        y: 662.1409976499957
+      positionAbsolute:
+        x: 109.14285714285717
+        y: 662.1409976499957
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        dataset_ids:
+        - YG2EskeMLr1LerXdiOcc6+ZxEKtQcksEkUFopB42kIIEaqXUeLQkCPh84fXh2h9F
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: gte-rerank-v2
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
+        query_variable_selector:
+        - '1776498156667'
+        - sys.query
+        retrieval_mode: multiple
+        selected: false
+        title: 知识检索
+        type: knowledge-retrieval
+      height: 90
+      id: '1776498277196'
+      position:
+        x: 634
+        y: 360.5
+      positionAbsolute:
+        x: 634
+        y: 360.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        dataset_ids:
+        - 4/wBr/1IpcQVfx0p1tYCzMmo9MFmI3+qH+jFWz7NMuyF7KTMBAp+x5Xgkev4C6JN
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: gte-rerank-v2
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
+        query_variable_selector:
+        - '1776498156667'
+        - sys.query
+        retrieval_mode: multiple
+        selected: false
+        title: 知识检索 2
+        type: knowledge-retrieval
+      height: 90
+      id: '1776499500104'
+      position:
+        x: 634
+        y: 489.5
+      positionAbsolute:
+        x: 634
+        y: 489.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1776499500104'
+          - result
+        model:
+          completion_params: {}
+          mode: chat
+          name: qwen-plus
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 7194962d-632f-4f3b-b40b-bc08d532bb9c
+          role: system
+          text: '用户内容：{{#1776498264454.class_name#}}
+
+            上下文：{{#context#}}
+
+            角色：
+
+            我是酒店专属智能客服，我的工作是认真倾听客人问题，精准理解需求并清晰解答熟悉酒店预订、入住、房型、设施、发票、退改、售后等全业务知识，据实回答，用语礼貌简洁，精准答疑，主动引导信息，复杂问题转接人工，高效解决客诉咨询，提升入住体验与服务满意度，辅助降本增效，不超权限承诺、不编造信息、不闲聊、不泄露隐私、不违规应
+
+            '
+        selected: false
+        title: 客房产品
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1776499509929'
+      position:
+        x: 936
+        y: 489.5
+      positionAbsolute:
+        x: 936
+        y: 489.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#llm.text#}}'
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 103
+      id: '1776500219442'
+      position:
+        x: 1238
+        y: 360.5
+      positionAbsolute:
+        x: 1238
+        y: 360.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#1776499509929.text#}}'
+        selected: false
+        title: 直接回复 2
+        type: answer
+        variables: []
+      height: 103
+      id: '1776511352860'
+      position:
+        x: 1238
+        y: 489.5
+      positionAbsolute:
+        x: 1238
+        y: 489.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        dataset_ids:
+        - LkEFhup8gYS4VpCK63P0fZqfy9AeoivK/Du4I8pBTT2ogTlyDUWjDOBdYgszV9nJ
+        multiple_retrieval_config:
+          reranking_enable: false
+          reranking_mode: reranking_model
+          reranking_model:
+            model: gte-rerank-v2
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
+        query_variable_selector:
+        - sys
+        - conversation_id
+        retrieval_mode: multiple
+        selected: false
+        title: 知识检索 3
+        type: knowledge-retrieval
+      height: 90
+      id: '1776511368580'
+      position:
+        x: 634
+        y: 618.5
+      positionAbsolute:
+        x: 634
+        y: 618.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1776511368580'
+          - result
+        model:
+          completion_params:
+            max_tokens: 300
+            temperature: 1
+          mode: chat
+          name: deepseek-v3
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 2cd142b7-0933-4123-9872-ecfe40df2abb
+          role: system
+          text: '用户内容：{{#1776498264454.class_name#}}
+
+            上下文：{{#context#}}
+
+            角色：
+
+            我是酒店专属智能客服，我的工作是认真倾听客人问题，精准理解需求并清晰解答熟悉酒店预订、入住、房型、设施、发票、退改、售后等全业务知识，据实回答，用语礼貌简洁，精准答疑，主动引导信息，复杂问题转接人工，高效解决客诉咨询，提升入住体验与服务满意度，辅助降本增效，不超权限承诺、不编造信息、不闲聊、不泄露隐私、不违规应
+
+            '
+        selected: false
+        title: 餐饮娱乐
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1776511376079'
+      position:
+        x: 936
+        y: 636.5
+      positionAbsolute:
+        x: 936
+        y: 636.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#1776511376079.text#}}'
+        selected: false
+        title: 直接回复 3
+        type: answer
+        variables: []
+      height: 103
+      id: '1776511388544'
+      position:
+        x: 1238
+        y: 618.5
+      positionAbsolute:
+        x: 1238
+        y: 618.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        dataset_ids:
+        - SBYSTSN0Dt8TJaDNoQBIYV6rjwA7KpLbQ3beH1dNrVhT4UAQVQOI1PXehW5Hei2S
+        multiple_retrieval_config:
+          reranking_enable: false
+          reranking_mode: reranking_model
+          reranking_model:
+            model: gte-rerank-v2
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
+        query_variable_selector:
+        - '1776498264454'
+        - class_name
+        retrieval_mode: multiple
+        selected: false
+        title: 知识检索 4
+        type: knowledge-retrieval
+      height: 90
+      id: '1776511399253'
+      position:
+        x: 634
+        y: 747.5
+      positionAbsolute:
+        x: 634
+        y: 747.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1776511399253'
+          - result
+        model:
+          completion_params:
+            max_tokens: 512
+            temperature: 0.7
+          mode: chat
+          name: deepseek-v3
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: ae398211-08d7-4a80-8f5e-1b37613574c4
+          role: system
+          text: '用户内容：{{#1776498264454.class_name#}}
+
+            上下文：{{#context#}}
+
+            角色：
+
+            我是酒店专属智能客服，我的工作是认真倾听客人问题，精准理解需求并清晰解答，据实回答，用语礼貌简洁，精准答疑，主动引导信息，复杂问题转接人工，高效解决客诉咨询，提升入住体验与服务满意度，辅助降本增效，不超权限承诺、不编造信息、不闲聊、不泄露隐私、不违规应
+
+            '
+        selected: false
+        title: 会议宴会
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1776511407931'
+      position:
+        x: 936
+        y: 771.2142857142857
+      positionAbsolute:
+        x: 936
+        y: 771.2142857142857
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        dataset_ids:
+        - Amigge0+D1c09vGoSmtJ+F/gZu6Ru2ex+3qyxuqzZlpdYZt+EYVfiRVWoXa1kbNq
+        multiple_retrieval_config:
+          reranking_enable: false
+          reranking_mode: reranking_model
+          reranking_model:
+            model: gte-rerank-v2
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
+        query_variable_selector:
+        - '1776498156667'
+        - sys.query
+        retrieval_mode: multiple
+        selected: false
+        title: 知识检索 5
+        type: knowledge-retrieval
+      height: 90
+      id: '1776511447304'
+      position:
+        x: 634
+        y: 876.5
+      positionAbsolute:
+        x: 634
+        y: 876.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1776511447304'
+          - result
+        model:
+          completion_params:
+            temperature: 0.6
+          mode: chat
+          name: deepseek-v3
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 25df0674-0af3-4576-a89c-f60701a20d6e
+          role: system
+          text: '用户内容：{{#1776498264454.class_name#}}
+
+            上下文：{{#context#}}
+
+            角色：
+
+            我是酒店专属智能客服，我的工作是认真倾听客人问题，精准理解需求并清晰解答熟悉酒店预订、入住、房型、设施、发票、退改、售后等全业务知识，据实回答，用语礼貌简洁，精准答疑，主动引导信息，复杂问题转接人工，高效解决客诉咨询，提升入住体验与服务满意度，辅助降本增效，不超权限承诺、不编造信息、不闲聊、不泄露隐私、不违规应
+
+            '
+        selected: false
+        title: 周边旅游
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1776511455200'
+      position:
+        x: 936
+        y: 905.9285714285711
+      positionAbsolute:
+        x: 936
+        y: 905.9285714285711
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#1776511407931.reasoning_content#}}'
+        selected: false
+        title: 直接回复 4
+        type: answer
+        variables: []
+      height: 103
+      id: '1776511464396'
+      position:
+        x: 1238
+        y: 747.5
+      positionAbsolute:
+        x: 1238
+        y: 747.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#1776511455200.usage#}}'
+        selected: false
+        title: 直接回复 5
+        type: answer
+        variables: []
+      height: 103
+      id: '1776511481705'
+      position:
+        x: 1242.2857142857142
+        y: 882.2142857142858
+      positionAbsolute:
+        x: 1242.2857142857142
+        y: 882.2142857142858
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        dataset_ids:
+        - 8hOvqdmTDpT5hF9v84zrSvFfWeor8DS8SCeemmgT/GRDMzup7Shkpinv319ybMob
+        multiple_retrieval_config:
+          reranking_enable: false
+          reranking_mode: reranking_model
+          reranking_model:
+            model: gte-rerank-v2
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
+        query_variable_selector:
+        - '1776498156667'
+        - sys.query
+        retrieval_mode: multiple
+        selected: false
+        title: 知识检索 6
+        type: knowledge-retrieval
+      height: 90
+      id: '1776511579448'
+      position:
+        x: 634
+        y: 1018.5
+      positionAbsolute:
+        x: 634
+        y: 1018.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1776511579448'
+          - result
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: ernie-3.5-128k
+          provider: langgenius/wenxin/wenxin
+        prompt_template:
+        - id: 81743219-88a8-482a-855f-2fd6f1808cb4
+          role: system
+          text: '用户内容：{{#1776498264454.class_name#}}
+
+            上下文：{{#context#}}
+
+            角色：
+
+            我是酒店专属智能客服，我的工作是认真倾听客人问题，精准理解需求并清晰解答熟悉酒店预订、入住、房型、设施、发票、退改、售后等全业务知识，据实回答，用语礼貌简洁，精准答疑，主动引导信息，复杂问题转接人工，高效解决客诉咨询，提升入住体验与服务满意度，辅助降本增效，不超权限承诺、不编造信息、不闲聊、不泄露隐私、不违规应
+
+            '
+        selected: false
+        title: 高频问题库
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1776511588231'
+      position:
+        x: 936
+        y: 1018.5
+      positionAbsolute:
+        x: 936
+        y: 1018.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#1776511588231.text#}}'
+        selected: false
+        title: 直接回复 6
+        type: answer
+        variables: []
+      height: 103
+      id: '1776511595992'
+      position:
+        x: 1238
+        y: 999.5
+      positionAbsolute:
+        x: 1238
+        y: 999.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: 167.69999999999982
+      y: -136.95000000000005
+      zoom: 0.7000000000000002
+  rag_pipeline_variables: []
