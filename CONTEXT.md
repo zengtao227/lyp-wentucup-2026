@@ -32,7 +32,7 @@ Important scoring interpretation:
 
 Current final candidate:
 
-- `大模型5月8日（决赛版）v1.2-DifySchema修正版.yml`
+- `大模型5月8日（决赛版）v1.3-HTTPBodySchema修正版.yml`
 
 Earlier versions are kept for comparison:
 
@@ -45,10 +45,11 @@ Earlier versions are kept for comparison:
 - `大模型5月8日（决赛版）8-预订Agent双工具版.yml`
 - `大模型5月8日（决赛版）v1.0-预订Agent双工具正式版.yml`
 - `大模型5月8日（决赛版）v1.1-平台兼容修正版.yml`
+- `大模型5月8日（决赛版）v1.2-DifySchema修正版.yml`
 
-## v1.2 Dify Import Notes
+## v1.3 Dify Import Notes
 
-After importing v1.2 into Dify:
+After importing v1.3 into Dify:
 
 1. Fill the Amap weather API key back into the weather HTTP node where the URL contains `AMAP_API_KEY_PLACEHOLDER`.
 2. Do not commit or publish the real Amap API key to the public GitHub repository.
@@ -58,10 +59,11 @@ After importing v1.2 into Dify:
 5. The official-looking MCP SSE configs from organizer video extraction are archived separately in `主办方视频资料与MCP服务配置.md`; v1.2 does not call them yet.
 6. v1.1 fixes a Dify 1.9 import/runtime issue from v1.0: all `conversation_variables.id` values are now valid UUIDs. v1.0 used readable suffixes such as `guest-name`, which caused PostgreSQL UUID insertion errors and made the chat preview return no answer.
 7. v1.2 fixes a Dify 1.9 runtime schema issue from v1.1: every LLM node now includes a `context` field, with `enabled: false` where no retrieval context is used.
+8. v1.3 fixes a Dify 1.9 HTTP node schema issue from v1.2: the booking submission POST body type is now `json`, not the older/invalid `raw` value.
 
-## v1.2 Booking Agent Status (Two-Tool Architecture)
+## v1.3 Booking Agent Status (Two-Tool Architecture)
 
-v1.2 is the final candidate based on v1.1. It keeps the two-stage booking Agent with two real HTTP tool calls, tightens the confirmation routing, fixes Dify UUID compatibility for conversation variables, and adds required disabled `context` fields to pure LLM nodes:
+v1.3 is the final candidate based on v1.2. It keeps the two-stage booking Agent with two real HTTP tool calls, tightens the confirmation routing, fixes Dify UUID compatibility for conversation variables, adds required disabled `context` fields to pure LLM nodes, and uses the Dify 1.9-compatible HTTP POST body type:
 
 **Stage 1 — Room inquiry + info collection:**
 `question-classifier(客房预订) -> 房态查询 HTTP GET(rooms.json) -> 客房预订 LLM -> answer`
@@ -89,7 +91,7 @@ Known limitations (keep visible in roadshow):
 
 ## Competition Fit Assessment
 
-For the final rules, v1.2 satisfies the scoring rubric because it demonstrates:
+For the final rules, v1.3 satisfies the scoring rubric because it demonstrates:
 
 - Two classifier categories for booking (inquiry vs. confirmation)
 - Two real HTTP tool calls (GET availability + POST submission)
@@ -132,3 +134,11 @@ The Dify web console page exposes the management-side API prefix in its HTML as:
 Treat `/console/api` as the web console/internal management API used by the browser UI. It is not the same as `/v1`, and it normally requires an authenticated console session/cookies and any platform-specific CSRF/session requirements. Do not assume a published app service API key can call these management endpoints.
 
 MCP server URLs are useful for external tool testing of a published app/workflow. They do not by themselves grant workflow editing permissions.
+
+Current tested MCP URL for the imported v1.2 app:
+
+- `http://playground.v2.dossm.cn/mcp/server/w03E7kYPAF3ZsIfw/mcp`
+
+Observed result on 2026-05-08: MCP initialization and `tools/list` succeeded, but `tools/call` failed because Dify 1.9 rejected `HttpRequestNodeData.body.type: raw`. v1.3 is the local fix for that specific schema error.
+
+Custom AI Web App deployment is a frontend option. The documented environment variables (`NEXT_PUBLIC_APP_ID`, `NEXT_PUBLIC_APP_KEY`, `NEXT_PUBLIC_API_URL`) make a forked frontend call the published app through `/v1`; they do not provide workflow editing or YAML import capability.
