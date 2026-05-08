@@ -76,7 +76,10 @@ Known limitations (keep visible in roadshow):
 - Room availability data is static demonstration JSON, does not vary by check-in/check-out date.
 - Booking submission goes to a public test API, not a real PMS.
 - Variable fields (guest_name, check_in_date, etc.) are not written back via variable-assigner; LLM memory window (size: 10) handles continuity within the demo session.
-- Because variable fields may be empty in the raw POST body, the payload also records confirmation text and fallback labels, with final details verified by hotel callback.
+- The structured POST payload is mainly for architecture demonstration. Because there are no parameter-extractor or variable-assigner nodes, fields such as `guest_name`, `check_in_date`, and `party_size` may be empty at runtime, and fallback labels such as "从上一轮预订信息确认摘要读取" may be sent literally.
+- The confirmation LLM only receives the current user query such as "确认预订" plus the POST response. It relies on memory window context to recover the Stage 1 booking summary. Keep the live demo booking conversation within 8-10 turns so the confirmation summary remains inside the memory window.
+- After importing into Dify, run one full booking flow and inspect the POST node runtime log. If empty payload fields are visually embarrassing for the roadshow, the real fix is adding parameter-extractor plus variable-assigner nodes before the POST call.
+- For scoring, the important visible chain is still: classifier routes explicit booking confirmation -> POST tool executes -> HTTP response returns `id` -> confirmation LLM emits `WCP-[id]`.
 
 ## Competition Fit Assessment
 
