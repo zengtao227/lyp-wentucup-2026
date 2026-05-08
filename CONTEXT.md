@@ -32,7 +32,7 @@ Important scoring interpretation:
 
 Current final candidate:
 
-- `大模型5月8日（决赛版）v1.1-平台兼容修正版.yml`
+- `大模型5月8日（决赛版）v1.2-DifySchema修正版.yml`
 
 Earlier versions are kept for comparison:
 
@@ -44,22 +44,24 @@ Earlier versions are kept for comparison:
 - `大模型5月8日（决赛版）7-预订Agent增强版.yml`
 - `大模型5月8日（决赛版）8-预订Agent双工具版.yml`
 - `大模型5月8日（决赛版）v1.0-预订Agent双工具正式版.yml`
+- `大模型5月8日（决赛版）v1.1-平台兼容修正版.yml`
 
-## v1.1 Dify Import Notes
+## v1.2 Dify Import Notes
 
-After importing v1.1 into Dify:
+After importing v1.2 into Dify:
 
 1. Fill the Amap weather API key back into the weather HTTP node where the URL contains `AMAP_API_KEY_PLACEHOLDER`.
 2. Do not commit or publish the real Amap API key to the public GitHub repository.
 3. The booking branch GitHub raw URL is directly usable and does not need extra Dify configuration:
    `https://raw.githubusercontent.com/zengtao227/lyp-wentucup-2026/main/mock-data/rooms.json`
 4. The booking submission HTTP POST node calls `https://jsonplaceholder.typicode.com/posts` — no configuration needed, works immediately.
-5. The official-looking MCP SSE configs from organizer video extraction are archived separately in `主办方视频资料与MCP服务配置.md`; v1.1 does not call them yet.
+5. The official-looking MCP SSE configs from organizer video extraction are archived separately in `主办方视频资料与MCP服务配置.md`; v1.2 does not call them yet.
 6. v1.1 fixes a Dify 1.9 import/runtime issue from v1.0: all `conversation_variables.id` values are now valid UUIDs. v1.0 used readable suffixes such as `guest-name`, which caused PostgreSQL UUID insertion errors and made the chat preview return no answer.
+7. v1.2 fixes a Dify 1.9 runtime schema issue from v1.1: every LLM node now includes a `context` field, with `enabled: false` where no retrieval context is used.
 
-## v1.1 Booking Agent Status (Two-Tool Architecture)
+## v1.2 Booking Agent Status (Two-Tool Architecture)
 
-v1.1 is the final candidate based on v1.0. It keeps the two-stage booking Agent with two real HTTP tool calls, tightens the confirmation routing, and fixes Dify UUID compatibility for conversation variables:
+v1.2 is the final candidate based on v1.1. It keeps the two-stage booking Agent with two real HTTP tool calls, tightens the confirmation routing, fixes Dify UUID compatibility for conversation variables, and adds required disabled `context` fields to pure LLM nodes:
 
 **Stage 1 — Room inquiry + info collection:**
 `question-classifier(客房预订) -> 房态查询 HTTP GET(rooms.json) -> 客房预订 LLM -> answer`
@@ -87,7 +89,7 @@ Known limitations (keep visible in roadshow):
 
 ## Competition Fit Assessment
 
-For the final rules, v1.1 satisfies the scoring rubric because it demonstrates:
+For the final rules, v1.2 satisfies the scoring rubric because it demonstrates:
 
 - Two classifier categories for booking (inquiry vs. confirmation)
 - Two real HTTP tool calls (GET availability + POST submission)
