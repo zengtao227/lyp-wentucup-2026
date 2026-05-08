@@ -1,6 +1,7 @@
 {
   "hotel": "新会碧桂园凤凰酒店",
-  "query_date": "2026-05-08",
+  "query_date": "demo-live",
+  "last_updated_label": "演示实时房态；决赛导入或路演前可按当天日期刷新",
   "rooms": [
     {"type": "高级客房",   "available": 25, "total": 184, "status": "充裕"},
     {"type": "豪华套房",   "available": 3,  "total": 17,  "status": "少量"},

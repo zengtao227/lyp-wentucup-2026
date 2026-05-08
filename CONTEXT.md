@@ -31,7 +31,7 @@ Important scoring interpretation:
 
 Current final candidate:
 
-- `大模型5月8日（决赛版）8-预订Agent双工具版.yml`
+- `大模型5月8日（决赛版）v1.0-预订Agent双工具正式版.yml`
 
 Earlier versions are kept for comparison:
 
@@ -41,10 +41,11 @@ Earlier versions are kept for comparison:
 - `大模型4月25日（定稿）5-决赛增强版.yml`
 - `大模型4月25日（定稿）6-材料修订版.yml`
 - `大模型5月8日（决赛版）7-预订Agent增强版.yml`
+- `大模型5月8日（决赛版）8-预订Agent双工具版.yml`
 
-## v8 Dify Import Notes
+## v1.0 Dify Import Notes
 
-After importing v8 into Dify:
+After importing v1.0 into Dify:
 
 1. Fill the Amap weather API key back into the weather HTTP node where the URL contains `AMAP_API_KEY_PLACEHOLDER`.
 2. Do not commit or publish the real Amap API key to the public GitHub repository.
@@ -52,9 +53,9 @@ After importing v8 into Dify:
    `https://raw.githubusercontent.com/zengtao227/lyp-wentucup-2026/main/mock-data/rooms.json`
 4. The booking submission HTTP POST node calls `https://jsonplaceholder.typicode.com/posts` — no configuration needed, works immediately.
 
-## v8 Booking Agent Status (Two-Tool Architecture)
+## v1.0 Booking Agent Status (Two-Tool Architecture)
 
-v8 upgrades v7 to a genuine two-stage booking Agent with two real HTTP tool calls:
+v1.0 is the final candidate based on v8. It keeps the two-stage booking Agent with two real HTTP tool calls and tightens the confirmation routing:
 
 **Stage 1 — Room inquiry + info collection:**
 `question-classifier(客房预订) -> 房态查询 HTTP GET(rooms.json) -> 客房预订 LLM -> answer`
@@ -66,19 +67,20 @@ The user flow:
 1. User asks to book → classifier routes to Stage 1
 2. LLM shows real-time room availability (from HTTP GET), collects 6 fields: check-in/out dates, party size, room type, contact name, phone
 3. LLM outputs a formatted confirmation summary, asks user to reply "确认预订"
-4. User replies "确认预订" → classifier routes to Stage 2
-5. HTTP POST fires to jsonplaceholder.typicode.com/posts, returns `{"id": 101, ...}`
+4. User replies "确认预订" or another explicit booking-confirmation phrase → classifier routes to Stage 2
+5. HTTP POST fires to jsonplaceholder.typicode.com/posts with a structured booking payload, returns `{"id": 101, ...}`
 6. Confirmation LLM extracts `id` and outputs: "✅ 预订申请已提交！流水编号：WCP-101"
 
 Known limitations (keep visible in roadshow):
 
-- Room availability data is static JSON, does not vary by date.
+- Room availability data is static demonstration JSON, does not vary by check-in/check-out date.
 - Booking submission goes to a public test API, not a real PMS.
 - Variable fields (guest_name, check_in_date, etc.) are not written back via variable-assigner; LLM memory window (size: 10) handles continuity within the demo session.
+- Because variable fields may be empty in the raw POST body, the payload also records confirmation text and fallback labels, with final details verified by hotel callback.
 
 ## Competition Fit Assessment
 
-For the final rules, v8 satisfies the scoring rubric because it demonstrates:
+For the final rules, v1.0 satisfies the scoring rubric because it demonstrates:
 
 - Two classifier categories for booking (inquiry vs. confirmation)
 - Two real HTTP tool calls (GET availability + POST submission)
@@ -86,6 +88,7 @@ For the final rules, v8 satisfies the scoring rubric because it demonstrates:
 - Sequential booking flow with explicit parameter collection
 - Exception fallback wording for both HTTP nodes
 - Genuine "tool calling + task planning" pattern the rubric requires
+- Confirmation routing that avoids accidental submission from generic "确认" messages
 - Token/memory window settings across all LLM nodes
 
 It should be described as a competition-demo booking Agent with a mock room-availability tool and a mock booking submission endpoint, not as a fully production-integrated hotel PMS.
@@ -97,4 +100,3 @@ Public repository:
 - `https://github.com/zengtao227/lyp-wentucup-2026`
 
 Because the repository is public, never commit live API keys, private credentials, or unpublished competition-sensitive secrets.
-
