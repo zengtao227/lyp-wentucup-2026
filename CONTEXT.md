@@ -109,3 +109,26 @@ Public repository:
 - `https://github.com/zengtao227/lyp-wentucup-2026`
 
 Because the repository is public, never commit live API keys, private credentials, or unpublished competition-sensitive secrets.
+
+## Versioning Rule
+
+When project files are updated, commit and push the change to the public GitHub repository so the competition materials remain versioned and recoverable.
+
+Keep local system files such as `.DS_Store` out of commits. Do not commit real Amap keys, Dify service API keys, console cookies, or other credentials.
+
+## Dify Platform API Notes
+
+The platform runtime service API base URL is:
+
+- `http://playground.v2.dossm.cn/v1`
+
+This `/v1` API is for published app runtime calls such as chat/completion interaction. A service API key can invoke the app, but it is not enough to modify the workflow canvas or import/overwrite YAML.
+
+The Dify web console page exposes the management-side API prefix in its HTML as:
+
+- `data-api-prefix="/console/api"`
+- `data-public-api-prefix="/api"`
+
+Treat `/console/api` as the web console/internal management API used by the browser UI. It is not the same as `/v1`, and it normally requires an authenticated console session/cookies and any platform-specific CSRF/session requirements. Do not assume a published app service API key can call these management endpoints.
+
+MCP server URLs are useful for external tool testing of a published app/workflow. They do not by themselves grant workflow editing permissions.
