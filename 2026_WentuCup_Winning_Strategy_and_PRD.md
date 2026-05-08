@@ -38,6 +38,15 @@
 | LangGraph 状态机 | ❌ 平台外 | 竞赛环境不适用，概念答辩中可提 |
 | 物理机器人 API 集成 | ❌ 平台外 | 答辩 PPT 中作为愿景展示 |
 
+**新增官方视频提取资料（2026-05-08）**：
+
+项目已归档主办方视频中出现的 MCP 服务配置，详见 `主办方视频资料与MCP服务配置.md`：
+
+- 酒店客房预订 MCP：`http://mcp-server-booking.v4.test.dossm.cn/sse`
+- 景区门票预订 MCP：`http://mcp-server-travel.v4.test.dossm.cn/sse`
+
+当前 v1.0 YAML 仍使用 HTTP mock 工具完成可演示闭环。若问途 AI Playground / Dify 导入环境确认支持 MCP SSE 服务，可在 v1.1 中将 mock 房态查询和 mock 预订提交替换为官方 MCP 工具；在未跑通平台日志前，路演中应表述为“可替换接入的官方工具配置”，不要表述为 v1.0 已实际调用。
+
 **行动建议**：
 - 优先用 **Dify 平台原生能力** 搭建 Demo，确保评委可现场点击验证
 - 超出平台能力的技术架构（LangGraph、MCP、Robot API）在答辩 PPT 中以**系统设计图**形式展示，标注"扩展架构愿景"

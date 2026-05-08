@@ -1,0 +1,8 @@
+{  
+    "fetch": {
+        "url": "http://mcp-server-travel.v4.test.dossm.cn/sse",    
+        "headers": {}, 
+        "timeout": 60,    
+        "sse_read_timeout": 300  
+    }
+}

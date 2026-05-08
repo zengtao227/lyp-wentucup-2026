@@ -21,6 +21,7 @@ Use these files as the primary local references:
 - `第五届“问途杯”高校酒店及旅游人工智能创新应用大赛-决赛规则及评分指南.pdf`
 - `决赛规则及评分指南.md`
 - `2026_WentuCup_Winning_Strategy_and_PRD.md`
+- `主办方视频资料与MCP服务配置.md`
 
 Important scoring interpretation:
 
@@ -52,6 +53,7 @@ After importing v1.0 into Dify:
 3. The booking branch GitHub raw URL is directly usable and does not need extra Dify configuration:
    `https://raw.githubusercontent.com/zengtao227/lyp-wentucup-2026/main/mock-data/rooms.json`
 4. The booking submission HTTP POST node calls `https://jsonplaceholder.typicode.com/posts` — no configuration needed, works immediately.
+5. The official-looking MCP SSE configs from organizer video extraction are archived separately in `主办方视频资料与MCP服务配置.md`; v1.0 does not call them yet.
 
 ## v1.0 Booking Agent Status (Two-Tool Architecture)
 
