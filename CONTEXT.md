@@ -22,6 +22,7 @@ Use these files as the primary local references:
 - `决赛规则及评分指南.md`
 - `2026_WentuCup_Winning_Strategy_and_PRD.md`
 - `主办方视频资料与MCP服务配置.md`
+- `Dify平台工作流管理API研究记录.md`
 
 Important scoring interpretation:
 
@@ -135,10 +136,12 @@ Treat `/console/api` as the web console/internal management API used by the brow
 
 MCP server URLs are useful for external tool testing of a published app/workflow. They do not by themselves grant workflow editing permissions.
 
-Current tested MCP URL for the imported v1.2 app:
+Current tested MCP URL for the imported v1.3 app:
 
-- `http://playground.v2.dossm.cn/mcp/server/w03E7kYPAF3ZsIfw/mcp`
+- `http://playground.v2.dossm.cn/mcp/server/HaQaWvhvkC3VvFz5/mcp`
 
-Observed result on 2026-05-08: MCP initialization and `tools/list` succeeded, but `tools/call` failed because Dify 1.9 rejected `HttpRequestNodeData.body.type: raw`. v1.3 is the local fix for that specific schema error.
+Observed result on 2026-05-08: MCP initialization, `tools/list`, and a simple `tools/call` with `你好` all succeeded. v1.3 fixed the prior v1.2 HTTP body schema error.
 
 Custom AI Web App deployment is a frontend option. The documented environment variables (`NEXT_PUBLIC_APP_ID`, `NEXT_PUBLIC_APP_KEY`, `NEXT_PUBLIC_API_URL`) make a forked frontend call the published app through `/v1`; they do not provide workflow editing or YAML import capability.
+
+Detailed workflow-management API research is recorded in `Dify平台工作流管理API研究记录.md`. In short: the real workflow management surface is `/console/api/*`, including draft fetch/save, DSL import/export, and publish endpoints. It requires console login state and edit permission; `/v1` service API keys and MCP URLs cannot edit workflows.
