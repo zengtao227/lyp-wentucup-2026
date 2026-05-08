@@ -33,7 +33,7 @@ Important scoring interpretation:
 
 Current final candidate:
 
-- `大模型5月8日（决赛版）v1.3-HTTPBodySchema修正版.yml`
+- `大模型5月8日（决赛版）v1.4-预订批量输入稳健版.yml`
 
 Earlier versions are kept for comparison:
 
@@ -47,24 +47,26 @@ Earlier versions are kept for comparison:
 - `大模型5月8日（决赛版）v1.0-预订Agent双工具正式版.yml`
 - `大模型5月8日（决赛版）v1.1-平台兼容修正版.yml`
 - `大模型5月8日（决赛版）v1.2-DifySchema修正版.yml`
+- `大模型5月8日（决赛版）v1.3-HTTPBodySchema修正版.yml`
 
-## v1.3 Dify Import Notes
+## v1.4 Dify Import Notes
 
-After importing v1.3 into Dify:
+After importing v1.4 into Dify:
 
 1. Fill the Amap weather API key back into the weather HTTP node where the URL contains `AMAP_API_KEY_PLACEHOLDER`.
 2. Do not commit or publish the real Amap API key to the public GitHub repository.
-3. The booking branch GitHub raw URL is directly usable and does not need extra Dify configuration:
-   `https://raw.githubusercontent.com/zengtao227/lyp-wentucup-2026/main/mock-data/rooms.json`
+3. The booking branch room-status URL uses jsDelivr CDN for better runtime stability and does not need extra Dify configuration:
+   `https://cdn.jsdelivr.net/gh/zengtao227/lyp-wentucup-2026@main/mock-data/rooms.json`
 4. The booking submission HTTP POST node calls `https://jsonplaceholder.typicode.com/posts` — no configuration needed, works immediately.
 5. The official-looking MCP SSE configs from organizer video extraction are archived separately in `主办方视频资料与MCP服务配置.md`; v1.2 does not call them yet.
 6. v1.1 fixes a Dify 1.9 import/runtime issue from v1.0: all `conversation_variables.id` values are now valid UUIDs. v1.0 used readable suffixes such as `guest-name`, which caused PostgreSQL UUID insertion errors and made the chat preview return no answer.
 7. v1.2 fixes a Dify 1.9 runtime schema issue from v1.1: every LLM node now includes a `context` field, with `enabled: false` where no retrieval context is used.
 8. v1.3 fixes a Dify 1.9 HTTP node schema issue from v1.2: the booking submission POST body type is now `json`, not the older/invalid `raw` value.
+9. v1.4 improves booking robustness: room-status GET now uses jsDelivr CDN with longer timeouts, classifier instructions explicitly route batched booking-field replies to `客房预订`, and the booking LLM accepts multiple fields in one message while asking only the earliest missing item.
 
-## v1.3 Booking Agent Status (Two-Tool Architecture)
+## v1.4 Booking Agent Status (Two-Tool Architecture)
 
-v1.3 is the final candidate based on v1.2. It keeps the two-stage booking Agent with two real HTTP tool calls, tightens the confirmation routing, fixes Dify UUID compatibility for conversation variables, adds required disabled `context` fields to pure LLM nodes, and uses the Dify 1.9-compatible HTTP POST body type:
+v1.4 is the final candidate based on v1.3. It keeps the two-stage booking Agent with two real HTTP tool calls, tightens the confirmation routing, fixes Dify UUID compatibility for conversation variables, adds required disabled `context` fields to pure LLM nodes, uses the Dify 1.9-compatible HTTP POST body type, and improves batched booking-info handling:
 
 **Stage 1 — Room inquiry + info collection:**
 `question-classifier(客房预订) -> 房态查询 HTTP GET(rooms.json) -> 客房预订 LLM -> answer`
@@ -92,7 +94,7 @@ Known limitations (keep visible in roadshow):
 
 ## Competition Fit Assessment
 
-For the final rules, v1.3 satisfies the scoring rubric because it demonstrates:
+For the final rules, v1.4 satisfies the scoring rubric because it demonstrates:
 
 - Two classifier categories for booking (inquiry vs. confirmation)
 - Two real HTTP tool calls (GET availability + POST submission)
@@ -141,6 +143,8 @@ Current tested MCP URL for the imported v1.3 app:
 - `http://playground.v2.dossm.cn/mcp/server/HaQaWvhvkC3VvFz5/mcp`
 
 Observed result on 2026-05-08: MCP initialization, `tools/list`, and a simple `tools/call` with `你好` all succeeded. v1.3 fixed the prior v1.2 HTTP body schema error.
+
+Preview issue observed after v1.3 import: during a booking flow, a batched reply such as `6月2号、3人、套房、zengtao、0041665456732` triggered `Run failed: The handshake operation timed out` in Dify preview. MCP single-call testing with the same booking information succeeded, so the failure is likely an intermittent runtime HTTP handshake problem rather than an LLM inability to parse the batched input. v1.4 mitigates this by switching room-status GET from GitHub raw to jsDelivr CDN and increasing the HTTP timeout.
 
 Custom AI Web App deployment is a frontend option. The documented environment variables (`NEXT_PUBLIC_APP_ID`, `NEXT_PUBLIC_APP_KEY`, `NEXT_PUBLIC_API_URL`) make a forked frontend call the published app through `/v1`; they do not provide workflow editing or YAML import capability.
 
