@@ -1,0 +1,14 @@
+{
+  "hotel": "新会碧桂园凤凰酒店",
+  "query_date": "2026-05-08",
+  "rooms": [
+    {"type": "高级客房",   "available": 25, "total": 184, "status": "充裕"},
+    {"type": "豪华套房",   "available": 3,  "total": 17,  "status": "少量"},
+    {"type": "行政客房",   "available": 5,  "total": 16,  "status": "少量"},
+    {"type": "亲子主题房", "available": 8,  "total": 15,  "status": "较多"},
+    {"type": "蜜月套房",   "available": 1,  "total": 1,   "status": "仅余1间"},
+    {"type": "皇室套房",   "available": 1,  "total": 2,   "status": "少量"},
+    {"type": "总统套房",   "available": 0,  "total": 1,   "status": "已满"}
+  ],
+  "note": "演示数据，实际房态请联系前台 0750-662-9888"
+}
