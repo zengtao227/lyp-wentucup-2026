@@ -33,7 +33,7 @@ Important scoring interpretation:
 
 Current final candidate:
 
-- `大模型5月8日（决赛版）v1.4-预订批量输入稳健版.yml`
+- `大模型5月8日（决赛版）v1.5-确认信息完整版.yml`
 
 Earlier versions are kept for comparison:
 
@@ -48,10 +48,11 @@ Earlier versions are kept for comparison:
 - `大模型5月8日（决赛版）v1.1-平台兼容修正版.yml`
 - `大模型5月8日（决赛版）v1.2-DifySchema修正版.yml`
 - `大模型5月8日（决赛版）v1.3-HTTPBodySchema修正版.yml`
+- `大模型5月8日（决赛版）v1.4-预订批量输入稳健版.yml`
 
-## v1.4 Dify Import Notes
+## v1.5 Dify Import Notes
 
-After importing v1.4 into Dify:
+After importing v1.5 into Dify:
 
 1. Fill the Amap weather API key back into the weather HTTP node where the URL contains `AMAP_API_KEY_PLACEHOLDER`.
 2. Do not commit or publish the real Amap API key to the public GitHub repository.
@@ -63,10 +64,11 @@ After importing v1.4 into Dify:
 7. v1.2 fixes a Dify 1.9 runtime schema issue from v1.1: every LLM node now includes a `context` field, with `enabled: false` where no retrieval context is used.
 8. v1.3 fixes a Dify 1.9 HTTP node schema issue from v1.2: the booking submission POST body type is now `json`, not the older/invalid `raw` value.
 9. v1.4 improves booking robustness: room-status GET now uses jsDelivr CDN with longer timeouts, classifier instructions explicitly route batched booking-field replies to `客房预订`, and the booking LLM accepts multiple fields in one message while asking only the earliest missing item.
+10. v1.5 fixes two booking-flow issues observed in v1.4 preview: batched booking details such as `6月2号、3人、套房、zengtao、0041665456732` must stay in `客房预订` and must not trigger `预订确认提交`; after the user later replies `确认预订`, the confirmation LLM must restate check-in/check-out dates, room type, guest count, contact name, and phone from the previous booking summary.
 
-## v1.4 Booking Agent Status (Two-Tool Architecture)
+## v1.5 Booking Agent Status (Two-Tool Architecture)
 
-v1.4 is the final candidate based on v1.3. It keeps the two-stage booking Agent with two real HTTP tool calls, tightens the confirmation routing, fixes Dify UUID compatibility for conversation variables, adds required disabled `context` fields to pure LLM nodes, uses the Dify 1.9-compatible HTTP POST body type, and improves batched booking-info handling:
+v1.5 is the final candidate based on v1.4. It keeps the two-stage booking Agent with two real HTTP tool calls, tightens the confirmation routing, fixes Dify UUID compatibility for conversation variables, adds required disabled `context` fields to pure LLM nodes, uses the Dify 1.9-compatible HTTP POST body type, improves batched booking-info handling, and requires final confirmation messages to restate the actual booking details:
 
 **Stage 1 — Room inquiry + info collection:**
 `question-classifier(客房预订) -> 房态查询 HTTP GET(rooms.json) -> 客房预订 LLM -> answer`
@@ -94,7 +96,7 @@ Known limitations (keep visible in roadshow):
 
 ## Competition Fit Assessment
 
-For the final rules, v1.4 satisfies the scoring rubric because it demonstrates:
+For the final rules, v1.5 satisfies the scoring rubric because it demonstrates:
 
 - Two classifier categories for booking (inquiry vs. confirmation)
 - Two real HTTP tool calls (GET availability + POST submission)
@@ -145,6 +147,12 @@ Current tested MCP URL for the imported v1.3 app:
 Observed result on 2026-05-08: MCP initialization, `tools/list`, and a simple `tools/call` with `你好` all succeeded. v1.3 fixed the prior v1.2 HTTP body schema error.
 
 Preview issue observed after v1.3 import: during a booking flow, a batched reply such as `6月2号、3人、套房、zengtao、0041665456732` triggered `Run failed: The handshake operation timed out` in Dify preview. MCP single-call testing with the same booking information succeeded, so the failure is likely an intermittent runtime HTTP handshake problem rather than an LLM inability to parse the batched input. v1.4 mitigates this by switching room-status GET from GitHub raw to jsDelivr CDN and increasing the HTTP timeout.
+
+Current tested MCP URL for the imported v1.4 app:
+
+- `http://playground.v2.dossm.cn/mcp/server/10vJ8HQ4Z03QcBHQ/mcp`
+
+Observed result on 2026-05-08: MCP initialization and `tools/list` succeeded, showing `大模型5月8日（决赛版）v1.4-预订批量输入稳健版`. User preview testing showed the booking flow no longer had the prior batched-input timeout, but the batched booking-info reply was wrongly routed to submission and generated `WCP-101` before the user replied `确认预订`; the final confirmation also omitted the specific check-in/check-out time. v1.5 fixes both the classifier guard and the final confirmation prompt gap.
 
 Custom AI Web App deployment is a frontend option. The documented environment variables (`NEXT_PUBLIC_APP_ID`, `NEXT_PUBLIC_APP_KEY`, `NEXT_PUBLIC_API_URL`) make a forked frontend call the published app through `/v1`; they do not provide workflow editing or YAML import capability.
 
