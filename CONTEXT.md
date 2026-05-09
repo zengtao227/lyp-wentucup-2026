@@ -71,15 +71,17 @@ After importing v1.11 into Dify:
 After importing v1.10 into Dify:
 
 1. All v1.9 import notes apply.
-2. v1.10 fixes the 404 failure caused by making the main GitHub repository private. Dify cannot fetch private GitHub files through jsDelivr.
+2. v1.10 fixes the immediate 404 failure caused by making the main GitHub repository private. Dify cannot fetch private GitHub files through jsDelivr.
 3. Room and ticket GET nodes now use the public data-only repository:
    - `https://cdn.jsdelivr.net/gh/zengtao227/lyp-wentucup-2026-public-data@main/mock-data/rooms.json`
    - `https://cdn.jsdelivr.net/gh/zengtao227/lyp-wentucup-2026-public-data@main/mock-data/tickets.json`
-4. The public data repository contains only mock JSON files and no Amap key, Dify API key, console cookie, or private workflow YAML.
+4. The public data repository is a temporary fallback mock-data source. It contains only mock JSON files and no Amap key, Dify API key, console cookie, or private workflow YAML.
 5. `mock-data/tickets.json` now correctly says scenic tickets use `小途乐游`, not `小途乐订`.
 6. Both hotel and scenic POST payloads now use `"payload_version":"final_v1.10"`.
 
 Do not import v1.4-v1.9 for a live demo after the main repository privacy change unless their mock-data URLs are manually updated. Those historical YAML files still reference the private main repository through jsDelivr and will fail with 404 in Dify.
+
+Important correction: GitHub/jsDelivr is not an architectural requirement. Earlier project versions worked without GitHub because they either had no room/ticket HTTP data nodes or only called weather. The preferred production-like direction is to use organizer/platform-provided MCP tools or the digital marketing management platform's own room/ticket price and inventory APIs. The public data repository is only a stable mock fallback until those platform tools are connected and verified.
 
 Known v1.10 issue fixed by v1.11: the booking confirmation LLM could still hallucinate operational outcomes such as "confirmation SMS sent" or "electronic booking voucher generated". No such SMS/voucher service exists in the workflow.
 
@@ -232,11 +234,11 @@ Private repository:
 
 The repository was changed from public to private on 2026-05-09. Avoid committing long-lived production credentials, Dify service keys, console cookies, or unpublished competition-sensitive secrets. The Amap key embedded in v1.9 is a disposable competition-only key.
 
-Public data-only repository for Dify HTTP GET nodes:
+Temporary public data-only repository for Dify HTTP GET fallback nodes:
 
 - `https://github.com/zengtao227/lyp-wentucup-2026-public-data`
 
-This repository is intentionally public because Dify and jsDelivr cannot fetch mock JSON from the private main repository. It must contain only non-secret mock data.
+This repository is intentionally public because Dify and jsDelivr cannot fetch mock JSON from the private main repository. It must contain only non-secret mock data. It should be replaced by official MCP tools or platform APIs once those are configured and verified in the competition Dify workspace.
 
 ## Versioning Rule
 
