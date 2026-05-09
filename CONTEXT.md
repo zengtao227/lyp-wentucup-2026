@@ -69,6 +69,8 @@ After importing v1.10 into Dify:
 5. `mock-data/tickets.json` now correctly says scenic tickets use `小途乐游`, not `小途乐订`.
 6. Both hotel and scenic POST payloads now use `"payload_version":"final_v1.10"`.
 
+Do not import v1.4-v1.9 for a live demo after the main repository privacy change unless their mock-data URLs are manually updated. Those historical YAML files still reference the private main repository through jsDelivr and will fail with 404 in Dify.
+
 ## v1.9 Dify Import Notes
 
 After importing v1.9 into Dify:
