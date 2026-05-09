@@ -33,7 +33,7 @@ Important scoring interpretation:
 
 Current final candidate:
 
-- `大模型5月8日（决赛版）v1.6-数字选项理解版.yml`
+- `大模型5月8日（决赛版）v1.7-景区购票支付版.yml`
 
 Earlier versions are kept for comparison:
 
@@ -50,6 +50,20 @@ Earlier versions are kept for comparison:
 - `大模型5月8日（决赛版）v1.3-HTTPBodySchema修正版.yml`
 - `大模型5月8日（决赛版）v1.4-预订批量输入稳健版.yml`
 - `大模型5月8日（决赛版）v1.5-确认信息完整版.yml`
+- `大模型5月8日（决赛版）v1.6-数字选项理解版.yml`
+
+## v1.7 Dify Import Notes
+
+After importing v1.7 into Dify:
+
+1. All v1.6 import notes apply (Amap API key placeholder, jsDelivr CDN, jsonplaceholder, UUID compatibility).
+2. Two new HTTP nodes have been added for scenic ticket booking:
+   - `票务查询` GET: `https://cdn.jsdelivr.net/gh/zengtao227/lyp-wentucup-2026@main/mock-data/tickets.json`
+   - `购票提交` POST: `https://jsonplaceholder.typicode.com/posts` (same mock as hotel booking)
+3. The hotel booking confirmation now includes: "请在微信搜索「小途乐订」小程序，凭流水编号完成支付（演示账户含 ¥20,000 虚拟余额）"
+4. The ticket confirmation output mirrors the same line.
+5. The two new classifier classes are `景区门票预订` and `景区票务确认提交`.
+6. `mock-data/tickets.json` on GitHub (and available via jsDelivr) lists 4 nearby attractions with availability and ticket pricing.
 
 ## v1.6 Dify Import Notes
 
@@ -67,6 +81,38 @@ After importing v1.6 into Dify:
 9. v1.4 improves booking robustness: room-status GET now uses jsDelivr CDN with longer timeouts, classifier instructions explicitly route batched booking-field replies to `客房预订`, and the booking LLM accepts multiple fields in one message while asking only the earliest missing item.
 10. v1.5 fixes two booking-flow issues observed in v1.4 preview: batched booking details such as `6月2号、3人、套房、zengtao、0041665456732` must stay in `客房预订` and must not trigger `预订确认提交`; after the user later replies `确认预订`, the confirmation LLM must restate check-in/check-out dates, room type, guest count, contact name, and phone from the previous booking summary.
 11. v1.6 fixes numeric option handling and anti-hallucination in the booking branch: if the assistant lists suite options and the user replies `1`, it must map to `豪华套房`; `17间` and other room counts must not be rewritten as square meters; room features, breakfast rights, private butler, or 15-minute hold language must not be invented.
+
+## v1.7 Booking Agent Status (Four-Tool Architecture)
+
+v1.7 adds a complete scenic ticket booking flow on top of v1.6. It now has **4 real HTTP tool calls**:
+1. Hotel room availability GET (rooms.json)
+2. Hotel booking submission POST (jsonplaceholder)
+3. Scenic ticket availability GET (tickets.json)
+4. Scenic ticket submission POST (jsonplaceholder)
+
+**Classifier: 11 classes** (9 from v1.6 + 2 new):
+- `景区门票预订` → Stage 1: ticket query + info collection
+- `景区票务确认提交` → Stage 2: ticket submission + confirmation
+
+**Stage 1 — Scenic ticket inquiry + info collection:**
+`question-classifier(景区门票预订) -> 票务查询 HTTP GET(tickets.json) -> 景区门票预订 LLM -> answer`
+
+**Stage 2 — Ticket submission + confirmation:**
+`question-classifier(景区票务确认提交) -> 购票提交 HTTP POST(jsonplaceholder) -> 景区购票确认 LLM -> answer`
+
+**Payment (both hotel and scenic):**
+Both confirmation LLMs now output: "请在微信搜索「小途乐订」小程序，凭流水编号完成支付（演示账户含 ¥20,000 虚拟余额）"
+
+**4 mock attractions in tickets.json:**
+- 新会陈皮村（88元/人）
+- 圭峰山国家森林公园（50元/人）
+- 梁启超故居纪念馆（30元/人）
+- 新会小鸟天堂（45元/人）
+
+Known limitations inherited from v1.6 (plus new):
+- Scenic ticket availability data is static demo JSON, does not vary by date.
+- Both booking submission endpoints use the same jsonplaceholder mock.
+- Ticket pricing calculations (adult×price + child×price) are done by the LLM from prompt context; no arithmetic node used.
 
 ## v1.6 Booking Agent Status (Two-Tool Architecture)
 
