@@ -1,0 +1,52 @@
+{
+  "hotel": "新会碧桂园凤凰酒店",
+  "query_date": "demo-live",
+  "last_updated_label": "演示实时票务；路演前可按当天日期更新",
+  "attractions": [
+    {
+      "name": "新会陈皮村",
+      "type": "文化景区",
+      "address": "广东省江门市新会区会城镇陈皮村",
+      "distance_from_hotel": "约8公里，车程约15分钟",
+      "ticket": {"adult": 88, "child": 44, "unit": "元/人"},
+      "available_today": 120,
+      "status": "充裕",
+      "hours": "09:00-17:30",
+      "note": "含陈皮博物馆+体验区，儿童身高1.2m以下免票"
+    },
+    {
+      "name": "圭峰山国家森林公园",
+      "type": "自然景区",
+      "address": "广东省江门市新会区圭峰山风景区",
+      "distance_from_hotel": "约12公里，车程约20分钟",
+      "ticket": {"adult": 50, "child": 25, "unit": "元/人"},
+      "available_today": 80,
+      "status": "较多",
+      "hours": "08:00-18:00",
+      "note": "建议穿运动鞋，含缆车观光（缆车单程另收20元）"
+    },
+    {
+      "name": "梁启超故居纪念馆",
+      "type": "历史人文",
+      "address": "广东省江门市新会区茶坑村",
+      "distance_from_hotel": "约6公里，车程约12分钟",
+      "ticket": {"adult": 30, "child": 15, "unit": "元/人"},
+      "available_today": 50,
+      "status": "少量",
+      "hours": "09:00-17:00（周一闭馆）",
+      "note": "人文历史游览，含讲解服务（需提前预约）"
+    },
+    {
+      "name": "新会小鸟天堂",
+      "type": "生态景区",
+      "address": "广东省江门市新会区天马村",
+      "distance_from_hotel": "约10公里，车程约18分钟",
+      "ticket": {"adult": 45, "child": 22, "unit": "元/人"},
+      "available_today": 200,
+      "status": "充裕",
+      "hours": "07:30-18:30",
+      "note": "巴金笔下《鸟的天堂》真实原型，建议早晨或傍晚前往观鸟"
+    }
+  ],
+  "booking_note": "演示数据，实际票务请联系前台 0750-662-9888 或通过小途乐订小程序购买"
+}
