@@ -34,7 +34,7 @@ Important scoring interpretation:
 
 Current final candidate:
 
-- `大模型5月8日（决赛版）v1.9-高德天气Key配置版.yml`
+- `大模型5月8日（决赛版）v1.10-公开数据源修正版.yml`
 
 Earlier versions are kept for comparison:
 
@@ -54,6 +54,20 @@ Earlier versions are kept for comparison:
 - `大模型5月8日（决赛版）v1.6-数字选项理解版.yml`
 - `大模型5月8日（决赛版）v1.7-景区购票支付版.yml`
 - `大模型5月8日（决赛版）v1.8-小程序支付边界修正版.yml`
+- `大模型5月8日（决赛版）v1.9-高德天气Key配置版.yml`
+
+## v1.10 Dify Import Notes
+
+After importing v1.10 into Dify:
+
+1. All v1.9 import notes apply.
+2. v1.10 fixes the 404 failure caused by making the main GitHub repository private. Dify cannot fetch private GitHub files through jsDelivr.
+3. Room and ticket GET nodes now use the public data-only repository:
+   - `https://cdn.jsdelivr.net/gh/zengtao227/lyp-wentucup-2026-public-data@main/mock-data/rooms.json`
+   - `https://cdn.jsdelivr.net/gh/zengtao227/lyp-wentucup-2026-public-data@main/mock-data/tickets.json`
+4. The public data repository contains only mock JSON files and no Amap key, Dify API key, console cookie, or private workflow YAML.
+5. `mock-data/tickets.json` now correctly says scenic tickets use `小途乐游`, not `小途乐订`.
+6. Both hotel and scenic POST payloads now use `"payload_version":"final_v1.10"`.
 
 ## v1.9 Dify Import Notes
 
@@ -64,6 +78,8 @@ After importing v1.9 into Dify:
 3. The GitHub repository is private as of 2026-05-09, so this one-time competition key is included for testing convenience.
 4. Rotate or delete the Amap key after the competition/demo period.
 5. Both hotel and scenic POST payloads now use `"payload_version":"final_v1.9"`.
+
+Known v1.9 issue fixed by v1.10: after the main repository was changed to private, the room and ticket GET URLs under `cdn.jsdelivr.net/gh/zengtao227/lyp-wentucup-2026@main/...` returned 404. This made `房态查询` and `票务查询` fail in Dify preview.
 
 ## v1.8 Dify Import Notes
 
@@ -201,6 +217,12 @@ Private repository:
 - `https://github.com/zengtao227/lyp-wentucup-2026`
 
 The repository was changed from public to private on 2026-05-09. Avoid committing long-lived production credentials, Dify service keys, console cookies, or unpublished competition-sensitive secrets. The Amap key embedded in v1.9 is a disposable competition-only key.
+
+Public data-only repository for Dify HTTP GET nodes:
+
+- `https://github.com/zengtao227/lyp-wentucup-2026-public-data`
+
+This repository is intentionally public because Dify and jsDelivr cannot fetch mock JSON from the private main repository. It must contain only non-secret mock data.
 
 ## Versioning Rule
 
