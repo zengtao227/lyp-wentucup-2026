@@ -34,7 +34,7 @@ Important scoring interpretation:
 
 Current final candidate:
 
-- `大模型5月8日（决赛版）v1.10-公开数据源修正版.yml`
+- `大模型5月8日（决赛版）v1.11-预订确认防幻觉版.yml`
 
 Earlier versions are kept for comparison:
 
@@ -55,6 +55,16 @@ Earlier versions are kept for comparison:
 - `大模型5月8日（决赛版）v1.7-景区购票支付版.yml`
 - `大模型5月8日（决赛版）v1.8-小程序支付边界修正版.yml`
 - `大模型5月8日（决赛版）v1.9-高德天气Key配置版.yml`
+- `大模型5月8日（决赛版）v1.10-公开数据源修正版.yml`
+
+## v1.11 Dify Import Notes
+
+After importing v1.11 into Dify:
+
+1. All v1.10 import notes apply.
+2. v1.11 fixes a booking-confirmation hallucination risk: the `预订确认` LLM must not say confirmation SMS has been sent, electronic booking vouchers have been generated, payment has succeeded, the order is finally effective, or the room has been locked.
+3. The correct wording is only: booking application submitted, workflow returned a `WCP-[id]` reference number, hotel will call back to verify, and payment must be completed in `小途乐订`.
+4. Both hotel and scenic POST payloads now use `"payload_version":"final_v1.11"`.
 
 ## v1.10 Dify Import Notes
 
@@ -70,6 +80,8 @@ After importing v1.10 into Dify:
 6. Both hotel and scenic POST payloads now use `"payload_version":"final_v1.10"`.
 
 Do not import v1.4-v1.9 for a live demo after the main repository privacy change unless their mock-data URLs are manually updated. Those historical YAML files still reference the private main repository through jsDelivr and will fail with 404 in Dify.
+
+Known v1.10 issue fixed by v1.11: the booking confirmation LLM could still hallucinate operational outcomes such as "confirmation SMS sent" or "electronic booking voucher generated". No such SMS/voucher service exists in the workflow.
 
 ## v1.9 Dify Import Notes
 

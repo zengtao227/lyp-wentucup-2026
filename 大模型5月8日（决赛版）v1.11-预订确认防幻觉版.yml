@@ -1,0 +1,2053 @@
+app:
+  description: 我是酒店专属智能客服，精准理解需求并清晰解答
+  icon: ''
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 大模型5月8日（决赛版）v1.11-预订确认防幻觉版
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.0.42@85e7bb71e461653ac101330c751973085dfdde26c906b07d7dff8030c95bc39e
+    version: null
+kind: app
+version: 0.4.0
+workflow:
+  conversation_variables:
+  - description: 宾客姓名
+    id: 1f17e64b-0cb7-4d0a-a7c7-000000000001
+    name: guest_name
+    selector:
+    - conversation
+    - guest_name
+    value: ''
+    value_type: string
+  - description: 入住日期
+    id: 4a78cc37-cac4-401e-a0a7-000000000002
+    name: check_in_date
+    selector:
+    - conversation
+    - check_in_date
+    value: ''
+    value_type: string
+  - description: 入住人数
+    id: 5eb8353f-d0e0-4254-97d7-000000000003
+    name: party_size
+    selector:
+    - conversation
+    - party_size
+    value: ''
+    value_type: string
+  - description: 特殊需求
+    id: e7fd8ae0-1c79-47cc-b1ad-000000000004
+    name: special_needs
+    selector:
+    - conversation
+    - special_needs
+    value: ''
+    value_type: string
+  - description: 预算范围
+    id: 47cfc5cb-e0d3-4c93-a774-000000000005
+    name: budget_range
+    selector:
+    - conversation
+    - budget_range
+    value: ''
+    value_type: string
+  - description: 情绪状态
+    id: 9cbb1d04-9457-43df-8132-000000000006
+    name: sentiment_flag
+    selector:
+    - conversation
+    - sentiment_flag
+    value: normal
+    value_type: string
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: 您好，欢迎莅临新会碧桂园凤凰酒店！我是您的专属 AI 助理，支持客房在线预订、亲子度假咨询、餐饮美食、会议宴会、周边游玩和投诉协助等全方位服务。本助手支持语音输入，点击麦克风即可说话。请问有什么可以帮您？
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: true
+    suggested_questions:
+    - 我想预订一间客房，请问怎么操作？
+    - 酒店几点可以办理入住和退房？
+    - 早餐在哪里吃？营业到几点？
+    - 我想了解会议宴会场地和配套服务
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: question-classifier
+      id: 1776498156667-source-1776498264454-target
+      source: '1776498156667'
+      sourceHandle: source
+      target: '1776498264454'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1776498264454-1-1776498277196-target
+      source: '1776498264454'
+      sourceHandle: '1'
+      target: '1776498277196'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1776498277196-source-llm-target
+      source: '1776498277196'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1776498264454-2-1776499500104-target
+      selected: false
+      source: '1776498264454'
+      sourceHandle: '2'
+      target: '1776499500104'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1776499500104-source-1776499509929-target
+      source: '1776499500104'
+      sourceHandle: source
+      target: '1776499509929'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: llm-source-1776500219442-target
+      source: llm
+      sourceHandle: source
+      target: '1776500219442'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1776499509929-source-1776511352860-target
+      source: '1776499509929'
+      sourceHandle: source
+      target: '1776511352860'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1776498264454-1776498527615-1776511368580-target
+      source: '1776498264454'
+      sourceHandle: '1776498527615'
+      target: '1776511368580'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1776511368580-source-1776511376079-target
+      source: '1776511368580'
+      sourceHandle: source
+      target: '1776511376079'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1776511376079-source-1776511388544-target
+      source: '1776511376079'
+      sourceHandle: source
+      target: '1776511388544'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1776498264454-1776498557607-1776511399253-target
+      source: '1776498264454'
+      sourceHandle: '1776498557607'
+      target: '1776511399253'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1776511447304-source-1776511455200-target
+      source: '1776511447304'
+      sourceHandle: source
+      target: '1776511455200'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1776511455200-source-1776511481705-target
+      source: '1776511455200'
+      sourceHandle: source
+      target: '1776511481705'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1776586548774-source-1776586557266-target
+      source: '1776586548774'
+      sourceHandle: source
+      target: '1776586557266'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: http-request
+      id: 1776498264454-1776498578463-1776757640629-target
+      source: '1776498264454'
+      sourceHandle: '1776498578463'
+      target: '1776757640629'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: knowledge-retrieval
+      id: 1776757640629-source-1776511447304-target
+      source: '1776757640629'
+      sourceHandle: source
+      target: '1776511447304'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1776511399253--1776760670660-target
+      source: '1776511399253'
+      sourceHandle: source
+      target: '1776760670660'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1776760670660-source-1776511464396-target
+      source: '1776760670660'
+      sourceHandle: source
+      target: '1776511464396'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1776843326129-source-1776586548774-target
+      source: '1776843326129'
+      sourceHandle: source
+      target: '1776586548774'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1776498264454-1776586502606-1776843326129-target
+      source: '1776498264454'
+      sourceHandle: '1776586502606'
+      target: '1776843326129'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1776498264454-1777001000000-1777001000001-target
+      source: '1776498264454'
+      sourceHandle: '1777001000000'
+      target: '1777001000001'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1777001000001-source-1777001000002-target
+      source: '1777001000001'
+      sourceHandle: source
+      target: '1777001000002'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: http-request
+      id: 1776498264454-1777002000001-1777002000010-target
+      source: '1776498264454'
+      sourceHandle: '1777002000001'
+      target: '1777002000010'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: llm
+      id: 1777002000010-source-1777002000002-target
+      source: '1777002000010'
+      sourceHandle: source
+      target: '1777002000002'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1777002000002-source-1777002000003-target
+      source: '1777002000002'
+      sourceHandle: source
+      target: '1777002000003'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: http-request
+      id: 1776498264454-1777002000020-1777002000030-target
+      source: '1776498264454'
+      sourceHandle: '1777002000020'
+      target: '1777002000030'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: llm
+      id: 1777002000030-source-1777002000031-target
+      source: '1777002000030'
+      sourceHandle: source
+      target: '1777002000031'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1777002000031-source-1777002000032-target
+      source: '1777002000031'
+      sourceHandle: source
+      target: '1777002000032'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: http-request
+      id: 1776498264454-1777003000001-1777003000010-target
+      source: '1776498264454'
+      sourceHandle: '1777003000001'
+      target: '1777003000010'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: llm
+      id: 1777003000010-source-1777003000002-target
+      source: '1777003000010'
+      sourceHandle: source
+      target: '1777003000002'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1777003000002-source-1777003000003-target
+      source: '1777003000002'
+      sourceHandle: source
+      target: '1777003000003'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: http-request
+      id: 1776498264454-1777003000020-1777003000030-target
+      source: '1776498264454'
+      sourceHandle: '1777003000020'
+      target: '1777003000030'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: llm
+      id: 1777003000030-source-1777003000031-target
+      source: '1777003000030'
+      sourceHandle: source
+      target: '1777003000031'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1777003000031-source-1777003000032-target
+      source: '1777003000031'
+      sourceHandle: source
+      target: '1777003000032'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 开始
+        type: start
+        variables: []
+      height: 51
+      id: '1776498156667'
+      position:
+        x: -207.92980230689477
+        y: 729.2283381115575
+      positionAbsolute:
+        x: -207.92980230689477
+        y: 729.2283381115575
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1776498277196'
+          - result
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 10
+        model:
+          completion_params:
+            max_tokens: 501
+            stop: []
+            temperature: 0.2
+            top_k: 1
+            top_p: 0.5
+          mode: chat
+          name: deepseek-v3
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: c81552bc-3f33-478c-9228-4485b565cf8d
+          role: system
+          text: '用户内容：{{#sys.query#}}
+
+            上下文：{{#context#}}
+
+            角色：
+
+            你是新会碧桂园凤凰酒店的专属客服，仅按照知识库回答，必须严格遵守
+
+            【约束】
+
+            1.据实回答，用语礼貌简洁，尊称客人为“先生/女士”或“您好”。精准答疑，主动引导信息。2.若知识库中没有相关信息，请礼貌告知：
+
+            “抱歉，我暂未在系统中查到相关信息，建议您直接拨打酒店前台电话0750-662-9888进行详细咨询。”
+
+            3.只回答用户当前的问题，不主动添加无关信息、不额外延伸。
+
+            酒店地址：广东省江门市新会区会城镇启超大道1号
+
+            4.所有内容必须基于知识库，禁止编造；无对应信息时礼貌告知无法解答，不主动延伸到用户未提及的业务。
+
+            5.客人提问价格、会员等级时，告知无法提供相关信息，请礼貌婉拒客人：我暂时无法为您提供准确回答，建议您直接联系酒店前台电话：0750-662-9888
+
+            6.如用户询问官方渠道、预订入口或公众号，在上下文支持下可优先提供携程官方链接及微信服务号信息。
+
+            7.如用户询问周边商圈或地理位置，在上下文支持下可优先说明酒店邻近万达广场、新汇大融城，且位于新会中心商业区。'
+        selected: false
+        title: 酒店概况
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: llm
+      position:
+        x: 936
+        y: 361
+      positionAbsolute:
+        x: 936
+        y: 361
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        classes:
+        - id: '1'
+          name: 酒店概况
+        - id: '2'
+          name: 客房产品体系
+        - id: '1776498527615'
+          name: 餐饮娱乐配套
+        - id: '1776498557607'
+          name: 会议宴会服务
+        - id: '1776498578463'
+          name: 天气周边景点
+        - id: '1776586502606'
+          name: 开场引导
+        - id: '1777001000000'
+          name: 投诉与售后服务
+        - id: '1777002000001'
+          name: 客房预订
+        - id: '1777002000020'
+          name: 预订确认提交
+        - id: '1777003000001'
+          name: 景区门票预订
+        - id: '1777003000020'
+          name: 景区票务确认提交
+        instructions: 按用户当前最核心的问题进行单标签分类。询问酒店基础信息、位置、入住退房、停车、联系方式、携程官方渠道、微信服务号归入”酒店概况”；询问房型、床型、加床、儿童政策、入住权益、亲子房、蜜月房、套房推荐归入”客房产品体系”；询问早餐、餐厅、酒吧、娱乐设施、包间、宴请归入”餐饮娱乐配套”；询问会议室、宴会厅、场地设备、茶歇、报价流程、门市价归入”会议宴会服务”；询问天气、周边景点、短途游玩、亲子景点、商圈购物归入”天气周边景点”；打招呼、寒暄、问你是谁、可做什么归入”开场引导”；投诉、房间异味、噪音、卫生问题、不满反馈、要求人工处理归入”投诉与售后服务”；用户明确表达要预订客房、提供入住日期意图订房、询问如何预订、填写预订信息、选择房型完成预订归入「客房预订」；用户输入虽不含“预订”二字，但包含日期、人数、房型、姓名、电话等订房字段组合（例如“6月2号、3人、套房、张三、手机号”），也必须归入「客房预订」，不要归入酒店概况、天气或开场引导；若上文正在让用户选择房型/套房/预订选项，用户本轮只回复「1」「2」「3」「第一个」「选一」「一」等短数字或序号，也归入「客房预订」；最高优先级规则：只要本轮用户消息包含新的预订字段（日期、入住/退房、人数、成人/儿童、房型、套房、客房、姓名、电话、手机号、特殊需求），一律归入「客房预订」，绝对禁止归入「预订确认提交」；只有当用户已看到上一轮「预订信息确认」摘要后，且本轮消息是明确的提交确认短句，例如「确认预订」「提交预订」「确认提交预订」「好的，确认预订」，并且本轮不包含任何新的日期、人数、房型、姓名、电话等预订字段时，才归入「预订确认提交」。单独回复「确认」「好的」「提交」或没有预订确认上下文时，不要归入「预订确认提交」；用户询问景区门票价格、景区购票、预订景点活动、购买门票、景点入场券，或正在填写购票信息（景区名称、游玩日期、票数、联系人、电话）归入「景区门票预订」；当用户已看到上一轮「购票信息确认」摘要，且本轮消息是明确的购票提交短句如「确认购票」「提交购票」「确认提交购票」时，归入「景区票务确认提交」；「天气周边景点」只用于景区游玩信息询问（不涉及购票意图）。
+        model:
+          completion_params:
+            disable_search: true
+            max_tokens: 500
+            temperature: 0.1
+            top_k: 20
+            top_p: 0.5
+          mode: chat
+          name: qwen-plus
+          provider: langgenius/tongyi/tongyi
+        query_variable_selector:
+        - '1776498156667'
+        - sys.query
+        selected: true
+        title: 问题分类器
+        type: question-classifier
+        vision:
+          enabled: false
+      height: 322
+      id: '1776498264454'
+      position:
+        x: 190.2740245341305
+        y: 579.2905829014541
+      positionAbsolute:
+        x: 190.2740245341305
+        y: 579.2905829014541
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        dataset_ids:
+        - x3OnV9E/+X5xxvA2JGFUWRV6UjVtRK9ZcVmZIHEznV3jJYjGNjhgjE6Hychd0in4
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: gte-rerank-v2
+            provider: langgenius/tongyi/tongyi
+          score_threshold: 0.5
+          top_k: 3
+        query_variable_selector:
+        - sys
+        - query
+        retrieval_mode: multiple
+        selected: false
+        title: 酒店概况
+        type: knowledge-retrieval
+      height: 89
+      id: '1776498277196'
+      position:
+        x: 634
+        y: 361
+      positionAbsolute:
+        x: 634
+        y: 361
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        dataset_ids:
+        - Ec/riOO6KqZBGLKN1uRtzkvOqW+jPhjSgiw6lmniuvWSINihnEDdwbnbbbfRYJNH
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: gte-rerank-v2
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
+        query_variable_selector:
+        - sys
+        - query
+        retrieval_mode: multiple
+        selected: false
+        title: 客房产品
+        type: knowledge-retrieval
+      height: 89
+      id: '1776499500104'
+      position:
+        x: 634
+        y: 504
+      positionAbsolute:
+        x: 634
+        y: 504
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1776499500104'
+          - result
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 10
+        model:
+          completion_params:
+            max_tokens: 501
+            temperature: 0.2
+            top_k: 1
+            top_p: 0.7
+          mode: chat
+          name: deepseek-v3
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 7194962d-632f-4f3b-b40b-bc08d532bb9c
+          role: system
+          text: '用户内容：{{#sys.query#}}
+
+            上下文：{{#context#}}
+
+            角色：
+
+            你是酒店客房产品专属智能顾问，负责清晰、友好地介绍各房型特点、设施、权益与预订规则，解答入住、房型升级、加床、儿童政策等相关问题。用语礼貌简洁，复杂问题可礼貌转接人工。
+
+            【约束】：1. 用语礼貌简洁，精准答疑。若知识库中没有相关房型信息，请礼貌告知“关于该项细节我暂时无法确认，建议您拨打酒店前台电话 0750-662-9888 进一步咨询。”
+
+            2. 你是一个基于封闭知识库的 AI。你回答的所有信息（房型、配置、价格、政策等）必须 100% 来源于上下文。严禁使用互联网信息、常识或个人经验进行填补。
+
+            3. 如用户说明出行场景，在上下文支持下可主动做房型匹配建议：亲子出行优先关注亲子主题房，蜜月出行优先关注蜜月套房，商务出行优先关注行政客房或高级套房，家庭聚住可关注皇室套房，高端接待可关注总统套房。
+
+            4. 在不打断用户的前提下，可在结尾补充一个相关的下一步建议，例如早餐、停车、儿童政策或周边亲子景点，但不要强行推销。'
+        selected: false
+        title: 客房产品
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1776499509929'
+      position:
+        x: 936
+        y: 504
+      positionAbsolute:
+        x: 936
+        y: 504
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        answer: '{{#llm.text#}}'
+        selected: false
+        title: 酒店概况回复
+        type: answer
+        variables: []
+      height: 102
+      id: '1776500219442'
+      position:
+        x: 1238
+        y: 361
+      positionAbsolute:
+        x: 1238
+        y: 361
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        answer: '{{#1776499509929.text#}}'
+        selected: false
+        title: 客房产品回复
+        type: answer
+        variables: []
+      height: 102
+      id: '1776511352860'
+      position:
+        x: 1238
+        y: 504
+      positionAbsolute:
+        x: 1238
+        y: 504
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        dataset_ids:
+        - 5n1bqhZg3hLPp2To83uQu4Cpuam5vMwpsMv2XHrIZqwckL879Saa202VFOvjPuBV
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: gte-rerank-v2
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
+        query_variable_selector:
+        - sys
+        - query
+        retrieval_mode: multiple
+        selected: false
+        title: 餐饮娱乐
+        type: knowledge-retrieval
+      height: 89
+      id: '1776511368580'
+      position:
+        x: 634
+        y: 647
+      positionAbsolute:
+        x: 634
+        y: 647
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1776511368580'
+          - result
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 10
+        model:
+          completion_params:
+            max_tokens: 300
+            temperature: 0.2
+            top_k: 1
+            top_p: 0.7
+          mode: chat
+          name: deepseek-v3
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 2cd142b7-0933-4123-9872-ecfe40df2abb
+          role: system
+          text: '用户内容：{{#sys.query#}}
+
+            上下文：{{#context#}}
+
+            角色：
+
+            你是酒店餐饮娱乐专属顾问，将根据用户提问，清晰友好地介绍酒店餐厅、酒吧、特色餐饮、娱乐设施的开放时间、菜品特色、消费权益与预订规则，解答用餐、酒水、儿童政策及娱乐项目相关问题。用语礼貌简洁，复杂问题可礼貌转人工。
+
+            你是一个基于封闭知识库的 AI。你回答的所有信息（餐饮、配置、价格、政策等）必须 100% 来源于上下文。严禁使用互联网信息、常识或个人经验进行填补。严禁回答任何知识库中未提及的餐饮或娱乐信息。
+
+            【约束】：如信息不确定，请建议用户拨打酒店前台0750-662-9888；如用户询问早餐，可补充儿童用餐、用餐高峰或继续咨询餐厅服务的下一步建议。
+
+            如上下文包含具体资料，可优先利用以下已知卖点进行回答：维也纳西餐厅位于酒店大堂、自助餐餐位约650位、营业时间07:00-24:00、可提供多功能包间约9间；如用户询问商务宴请或聚餐包房，也可结合中餐宴请场景做下一步引导。'
+        selected: false
+        title: 餐饮娱乐
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1776511376079'
+      position:
+        x: 936
+        y: 647
+      positionAbsolute:
+        x: 936
+        y: 647
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        answer: '{{#1776511376079.text#}}'
+        selected: false
+        title: 餐饮娱乐回复
+        type: answer
+        variables: []
+      height: 102
+      id: '1776511388544'
+      position:
+        x: 1238
+        y: 647
+      positionAbsolute:
+        x: 1238
+        y: 647
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        dataset_ids:
+        - vKw7d6NLtvGvmYDinbigbx4wIfFluPF3BjQ8sGvPYWLD9KLd18ZyqWSggWg5/THH
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: gte-rerank-v2
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
+        query_variable_selector:
+        - sys
+        - query
+        retrieval_mode: multiple
+        selected: false
+        title: 宴会会议
+        type: knowledge-retrieval
+      height: 89
+      id: '1776511399253'
+      position:
+        x: 634
+        y: 987
+      positionAbsolute:
+        x: 634
+        y: 987
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        dataset_ids:
+        - yCOxDnQ/IRYRpeQ4XXbq6MCyLIiW/KI6KYrh9CnNGsBjtuEtSACvMOJS2rCBqUlL
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: gte-rerank-v2
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
+        query_variable_selector:
+        - sys
+        - query
+        retrieval_mode: multiple
+        selected: false
+        title: 周边景点
+        type: knowledge-retrieval
+      height: 89
+      id: '1776511447304'
+      position:
+        x: 936
+        y: 784.0907832054887
+      positionAbsolute:
+        x: 936
+        y: 784.0907832054887
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1776511447304'
+          - result
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 10
+        model:
+          completion_params:
+            max_tokens: 500
+            temperature: 0.1
+            top_p: 0.7
+          mode: chat
+          name: deepseek-v3
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 25df0674-0af3-4576-a89c-f60701a20d6e
+          role: system
+          text: '用户内容：{{#sys.query#}}
+
+            上下文：{{#context#}}
+
+            实时天气数据：{{#1776757640629.body#}}
+
+            角色：
+
+            你是酒店周边景点咨询客服，服务对象为住店游客，需以亲和礼貌的语气提供合规、准确的景点咨询服务。
+
+            核心工作准则：
+
+            1. 仅读取系统提供的「景点知识库」与「实时天气数据」作答，严禁调用外部常识、编造未提及信息。知识库无相关资料时，固定回复：“抱歉，您好，暂时没有查到该景点的详细介绍，您可以咨询酒店前台了解。”
+
+            2. 仅推荐酒店车程30分钟内的景点，按由近到远排序，每个景点仅说明「名称+距离酒店车程或距离酒店公里数+核心游玩亮点」，不展开无关描述。
+
+            3. 禁止编造景点列表中未提及的开放时间、门票、优惠、地址、联系方式、游玩攻略等额外信息。
+
+            4. 仅提供周边短途游咨询，不涉及长途、出境、高风险探险项目。
+
+            5. 结合「实时天气数据」提供适配建议：晴天提醒做好防晒；雨天提醒携带雨具；极端天气/信息不全时，引导用户咨询酒店前台0750-662-9888确认实时路况。
+
+            6. 不推荐无安全保障的野景点，不虚假宣传，严格保护用户隐私。
+
+            7. 若上下文包含官方推荐景点，优先围绕梅江农业生态园、梁启超故居、小鸟天堂、新会陈皮村等近距离点位回答；若用户明确带孩子，可优先推荐新会儿童公园、巴贝高比比亲子乐园、七星山亲子牧场等亲子场景。
+
+            8. 若用户询问周边购物或吃饭，可在上下文支持下补充万达广场步行约3分钟、新汇大融城步行约10分钟等商圈信息。
+
+            【指令】
+
+            1.请结合【实时天气数据】为用户提供合理建议（例如晴天防晒、雨天带伞，或根据天气推荐合适的室内外景点）。
+
+            2.仅提供周边短途游咨询，不涉及长途、出境及高风险探险项目
+
+            3.若天气状况极端或信息不全，建议用户咨询酒店前台0750-662-9888确认实时路况。
+
+            4.不推荐无安全保障的野景点，不虚假宣传，严格保护用户隐私。'
+        selected: false
+        title: 天气周边景点
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1776511455200'
+      position:
+        x: 1238
+        y: 784.0907832054887
+      positionAbsolute:
+        x: 1238
+        y: 784.0907832054887
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        answer: '{{#1776760670660.text#}}'
+        selected: false
+        title: 宴会会议回复
+        type: answer
+        variables: []
+      height: 102
+      id: '1776511464396'
+      position:
+        x: 1238
+        y: 957.218710536947
+      positionAbsolute:
+        x: 1238
+        y: 957.218710536947
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        answer: '{{#1776511455200.text#}}'
+        selected: false
+        title: 天气景点
+        type: answer
+        variables: []
+      height: 102
+      id: '1776511481705'
+      position:
+        x: 1552.1887633674196
+        y: 784.0907832054887
+      positionAbsolute:
+        x: 1552.1887633674196
+        y: 784.0907832054887
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1776843326129'
+          - result
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 10
+        model:
+          completion_params:
+            max_tokens: 301
+            temperature: 0.5
+            top_k: 1
+            top_p: 0.6
+          mode: chat
+          name: qwen-plus
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 6c8a135b-ed8f-4dab-ba30-e88d94b5da0e
+          role: system
+          text: '用户内容：{{#sys.query#}}
+
+            上下文：{{#context#}}
+
+            角色：
+
+            你是酒店前台客服，以“先生/女士”或“您好”称呼客人。仅回复酒店业务相关问题，闲聊话题请礼貌引导用户咨询酒店相关事宜，不编造、不闲聊。
+
+            开场引导：“您好，欢迎莅临新会碧桂园凤凰酒店。我是您的专属 AI 助理，可以协助客房预订、亲子度假、餐饮、会议宴会、周边游玩和投诉处理，请问有什么可以帮您？”
+
+            结束语：您好！除了刚才聊的这些，还有什么我可以帮您的吗？'
+        selected: false
+        title: 开场引导
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1776586548774'
+      position:
+        x: 936
+        y: 1130
+      positionAbsolute:
+        x: 936
+        y: 1130
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        answer: '{{#1776586548774.text#}}'
+        selected: false
+        title: 开场引导回复
+        type: answer
+        variables: []
+      height: 102
+      id: '1776586557266'
+      position:
+        x: 1238
+        y: 1130
+      positionAbsolute:
+        x: 1238
+        y: 1130
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data: []
+          type: none
+        headers: ''
+        method: get
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求
+        type: http-request
+        url: https://restapi.amap.com/v3/weather/weatherInfo?city=440705&key=1ced701c952bf23fac30e82fbdc8a33d
+        variables: []
+      height: 168
+      id: '1776757640629'
+      position:
+        x: 634
+        y: 784.0907832054887
+      positionAbsolute:
+        x: 634
+        y: 784.0907832054887
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1776511399253'
+          - result
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 10
+        model:
+          completion_params:
+            max_tokens: 500
+            temperature: 0.1
+            top_p: 0.7
+          mode: chat
+          name: deepseek-v3
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: d5f83ff3-af23-4fe6-8d9a-94f4ca2aebf3
+          role: system
+          text: '用户内容：{{#sys.query#}}
+
+            上下文：{{#context#}}
+
+            角色：
+
+            你是酒店会议宴会专属顾问，负责根据知识库解答会场、宴会厅、设备、茶歇、服务流程和人数适配等相关问题，只能依据知识库内容作答。
+
+            1. 知识库中有明确的会议宴会信息时，请准确、完整输出。
+
+            2. 可针对客户询价、场地选择、设备介绍、茶歇定制、服务流程、人数适配等高频问题进行说明。
+
+            3. 若上下文中包含标准门市价、场地面积和容纳人数，可直接回答“标准4小时门市价”或“基础场地信息”；涉及定制优惠、合同签署、排期锁场、折扣或跨服务打包时，再指引联系酒店前台 0750-662-9888。
+
+            4. 不超权限承诺，不编造信息，不泄露隐私，统一使用“您”称呼用户。
+
+            5. 具体场地费用及配套价格需要根据会议规模、日期及具体需求进行核算。即使已给出标准门市价，也要提醒用户最终以活动日期、布置方案、茶歇需求和设备需求核算为准。
+
+            6. 每次回复尽量给出一个明确的下一步动作，例如建议告知参会人数、活动日期、茶歇需求或设备需求，以提升成交推进效率。
+
+            '
+        selected: false
+        title: 宴会会议
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1776760670660'
+      position:
+        x: 936
+        y: 957.218710536947
+      positionAbsolute:
+        x: 936
+        y: 957.218710536947
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        dataset_ids:
+        - BRhxIsfjBb9e4JkGf7dzh7UXhJtSE8wIY25Uvowdi42k95xzSI6lFF4brPfD+zoE
+        multiple_retrieval_config:
+          reranking_enable: false
+          reranking_mode: reranking_model
+          reranking_model:
+            model: gte-rerank-v2
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
+        query_variable_selector:
+        - '1776498156667'
+        - sys.query
+        retrieval_mode: multiple
+        selected: false
+        title: 开场引导
+        type: knowledge-retrieval
+      height: 89
+      id: '1776843326129'
+      position:
+        x: 634
+        y: 1130
+      positionAbsolute:
+        x: 634
+        y: 1130
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 10
+        model:
+          completion_params:
+            max_tokens: 350
+            temperature: 0.3
+            top_k: 1
+            top_p: 0.7
+          mode: chat
+          name: deepseek-v3
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 1777001000001-prompt
+          role: system
+          text: '用户内容：{{#sys.query#}}
+
+            角色：
+
+            你是酒店投诉与售后服务管家，负责处理房间异味、噪音、卫生、服务不满、设施故障、要求人工协助等问题。
+
+            回复原则：
+
+            1. 先表达理解与歉意，语气真诚、克制、专业，不推销、不闲聊。
+
+            2. 明确告诉用户你可以继续协助记录问题，并建议用户提供房号、入住时间、问题现象或期望处理方式。
+
+            3. 若用户希望人工立即跟进，请明确引导联系酒店前台 0750-662-9888。
+
+            4. 不承诺未经确认的补偿、退款或升级权益，不编造处理结果。
+
+            5. 回复尽量分点，方便用户快速看懂。
+
+            6. 结尾给出一个下一步动作，例如“您可以直接回复房号和问题细节，我来继续帮您整理”。'
+        selected: false
+        title: 投诉与售后服务
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1777001000001'
+      position:
+        x: 936
+        y: 1260
+      positionAbsolute:
+        x: 936
+        y: 1260
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        answer: '{{#1777001000001.text#}}'
+        selected: false
+        title: 投诉与售后服务回复
+        type: answer
+        variables: []
+      height: 102
+      id: '1777001000002'
+      position:
+        x: 1238
+        y: 1260
+      positionAbsolute:
+        x: 1238
+        y: 1260
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 10
+        model:
+          completion_params:
+            max_tokens: 600
+            temperature: 0.3
+            top_k: 1
+            top_p: 0.7
+          mode: chat
+          name: deepseek-v3
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 1777002000002-prompt
+          role: system
+          text: '用户内容：{{#sys.query#}}
+
+            实时房态数据：{{#1777002000010.body#}}
+
+            已收集预订信息：
+
+            宾客姓名：{{#conversation.guest_name#}}
+
+            入住日期：{{#conversation.check_in_date#}}
+
+            入住人数：{{#conversation.party_size#}}
+
+            特殊需求：{{#conversation.special_needs#}}
+
+            角色：
+
+            你是新会碧桂园凤凰酒店的智能预订助理，通过工具调用获取实时房态后引导用户完成预订全流程。
+
+            【房态数据使用规则】
+
+            1. 若「实时房态数据」包含有效JSON（rooms数组），读取各房型的status和available字段；available=0表示已满；
+
+            2. 若「实时房态数据」为空、超时或格式异常，切换降级模式并告知用户"房态查询服务暂时繁忙，按常规情况引导预订，最终以前台确认为准"，然后继续收集信息；
+
+            3. 目标房型满房时，不得拒绝用户，需主动推荐available最多的2个替代房型；
+
+            【可预订房型（含总量）】
+
+            高级客房（1-7楼，184间）| 豪华套房（17间）| 行政客房（15-16楼，16间）| 亲子主题房（15间）| 蜜月套房（1间，稀缺）| 皇室套房（2间）| 总统套房（1间，稀缺）
+
+            【数字选项理解规则】
+
+            1. 如果你上一轮列出了编号选项，用户回复“1”“选1”“第一个”“一”即表示选择第1项；回复“2”“第二个”“二”表示选择第2项；以此类推；
+
+            2. 当用户先说“套房”但未指定具体套房时，按以下固定顺序展示可订套房选项：
+
+            1）豪华套房（从房态数据读取available/status）
+
+            2）蜜月套房（从房态数据读取available/status）
+
+            3）皇室套房（从房态数据读取available/status）
+
+            总统套房若available=0，只可说明“已满，暂不作为可选项”；
+
+            3. 若用户随后回复“1”，必须理解为“豪华套房”；回复“2”理解为“蜜月套房”；回复“3”理解为“皇室套房”；
+
+            4. 解析数字选项后，直接把房型偏好更新为对应房型，不要再次解释全部套房列表；然后继续追问预订清单中最靠前的缺失项。例如已知入住日期、人数、姓名、电话且用户选1后，应回复“已为您选择豪华套房。请问退房日期是哪一天？”；
+
+            【禁止编造规则】
+
+            1. 房态数据中的“17间”“3间可订”等只表示房间数量，绝对不能改写成“17㎡”“32㎡”等面积；
+
+            2. 禁止编造房间面积、私人管家、独立会客区、双早、行政酒廊权益、第三人早餐价格、保留15分钟优先预订权等房态数据或知识库未明确提供的信息；
+
+            3. 如用户询问价格、权益或未给出的房间特色，只能回答“具体房价及权益以前台电话确认为准”；
+
+            【预订信息收集清单（按序逐一确认，每轮只问一项缺失信息）】
+
+            ①入住日期 ②退房日期 ③入住人数（大人/儿童各几位）④房型偏好 ⑤联系人姓名 ⑥联系电话
+
+            【操作规则】
+
+            1. 已有信息直接复用，不重复询问；若用户一次性输入多个字段（如“6月2号、3人、套房、zengtao、0041665456732”），先从当前输入中提取所有可识别字段，再判断缺失项；
+
+            2. 对“3人”“两位”等人数表达，若未明确儿童人数，默认按成人处理，摘要中写“成人3位 / 儿童0位”；只有用户主动提到儿童、亲子或小孩时才追问儿童人数；
+
+            3. 收集房型偏好时，主动告知用户该房型当前房态（从实时数据读取，降级时说"暂无实时数据"）；
+
+            4. 日期异常校验：退房日期须晚于入住日期，否则礼貌指出并请用户重新确认；
+
+            5. 如仍有缺失项，只追问清单中最靠前的一个缺失项，不要一次询问多个问题。例如已有入住日期、人数、房型、姓名、电话但缺退房日期时，只问“请问退房日期是哪一天？”；
+
+            6. 全部六项信息收集完毕且校验通过后，输出以下确认摘要：
+
+            ---
+
+            📋 预订信息确认
+
+            · 入住：[日期] → 退房：[日期]（共[n]晚）
+
+            · 房型：[房型名称]（当前房态：[从数据读取 / 待前台确认]）
+
+            · 人数：大人[n]位 / 儿童[n]位
+
+            · 联系人：[姓名] | 电话：[号码]
+
+            ---
+
+            以上信息是否正确？请回复「确认预订」，系统将通过独立预订通道完成登记并生成流水编号。
+
+            7. 重要：确认摘要输出完毕后，禁止自行生成流水编号或确认书。等待用户回复「确认预订」后，由独立预订提交节点完成后续处理，不要在本节点结束预订流程。
+
+            8. 价格询问：统一回答「具体房价依入住日期及会员权益而定，前台电话确认时一并告知」；
+
+            9. 禁止编造价格、折扣、入住政策或承诺任何补偿。'
+        selected: false
+        title: 客房预订
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1777002000002'
+      position:
+        x: 936
+        y: 1410
+      positionAbsolute:
+        x: 936
+        y: 1410
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        answer: '{{#1777002000002.text#}}'
+        selected: false
+        title: 客房预订回复
+        type: answer
+        variables: []
+      height: 102
+      id: '1777002000003'
+      position:
+        x: 1238
+        y: 1410
+      positionAbsolute:
+        x: 1238
+        y: 1410
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data: []
+          type: none
+        headers: ''
+        method: get
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 15
+          max_read_timeout: 20
+          max_write_timeout: 10
+        title: 房态查询
+        type: http-request
+        url: https://cdn.jsdelivr.net/gh/zengtao227/lyp-wentucup-2026-public-data@main/mock-data/rooms.json
+        variables: []
+      height: 168
+      id: '1777002000010'
+      position:
+        x: 634
+        y: 1410
+      positionAbsolute:
+        x: 634
+        y: 1410
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data: '{"hotel":"新会碧桂园凤凰酒店","type":"room_booking","channel":"AI_assistant","submit_action":"confirmed_booking","confirmation_message":"{{#sys.query#}}","guest_name":"{{#conversation.guest_name#}}","check_in_date":"{{#conversation.check_in_date#}}","check_out_date":"从上一轮预订信息确认摘要读取","party_size":"{{#conversation.party_size#}}","room_type":"从上一轮预订信息确认摘要读取","special_needs":"{{#conversation.special_needs#}}","contact_phone":"从上一轮预订信息确认摘要读取","payload_version":"final_v1.11"}'
+          type: json
+        headers: 'Content-Type: application/json'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 5
+          max_read_timeout: 5
+          max_write_timeout: 5
+        title: 预订提交
+        type: http-request
+        url: https://jsonplaceholder.typicode.com/posts
+        variables: []
+      height: 168
+      id: '1777002000030'
+      position:
+        x: 634
+        y: 1560
+      positionAbsolute:
+        x: 634
+        y: 1560
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 10
+        model:
+          completion_params:
+            max_tokens: 300
+            temperature: 0.3
+            top_k: 1
+            top_p: 0.7
+          mode: chat
+          name: deepseek-v3
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 1777002000031-prompt
+          role: system
+          text: '用户内容：{{#sys.query#}}
+
+            预订提交接口返回：{{#1777002000030.body#}}
+
+            角色：
+
+            你是新会碧桂园凤凰酒店预订确认系统，根据预订提交接口的返回结果生成最终确认通知。
+
+            【操作规则】
+
+            1. 从「预订提交接口返回」JSON中提取id字段作为流水序号，格式化为 WCP-[id]（如id为101则显示WCP-101）；
+
+            2. 预订提交请求体已经携带 hotel、type、channel、submit_action、confirmation_message、guest_name、check_in_date、check_out_date、party_size、room_type、special_needs、contact_phone、payload_version 等字段；若部分字段为空或为“从上一轮预订信息确认摘要读取”，最终以前台回电核实为准；
+
+            3. 必须从上下文记忆中的上一轮「预订信息确认」摘要读取并复述：入住日期、退房日期、房型、人数、联系人、联系电话；最终确认通知不得省略入住/退房日期；
+
+            4. 如果上下文中确实无法读取某项，不要编造；对应字段写「以前一轮确认摘要为准，前台回电时再次核实」。但只要上下文出现过具体日期，必须原样复述日期；
+
+            5. 严格禁止输出任何未由接口或上下文证明的结果，包括但不限于：
+
+            - 禁止说“确认短信已发送”“短信已发送至您的手机”；
+
+            - 禁止说“电子预订凭证已生成”“已发送电子凭证”；
+
+            - 禁止说“订单已最终确认”“订单已生效”“预订已锁定房间”；
+
+            - 禁止说“支付成功”“已完成付款”；
+
+            - 禁止承诺酒店一定保留房间。只能说“预订申请已提交，酒店将回电核实，支付请到小途乐订小程序完成”。
+
+            6. 输出固定格式确认通知，只能使用以下字段，不得新增短信、电子凭证、付款成功、订单生效等条目：
+
+            ✅ 预订申请已成功提交！
+
+            · 流水编号：WCP-[id]
+
+            · 预订时间：入住[日期] → 退房[日期]（共[n]晚）
+
+            · 预订房型：[房型名称]
+
+            · 入住人数：[成人/儿童人数或总人数]
+
+            · 联系人：[姓名] | 电话：[号码]
+
+            · 酒店将于2小时内致电核实确认
+
+            · 如需变更或取消，请拨打前台电话 0750-662-9888
+
+            · 支付方式：请在微信搜索「小途乐订」小程序，凭流水编号完成支付（演示账户含 ¥20,000 虚拟余额）
+
+            感谢您选择新会碧桂园凤凰酒店，期待您的莅临！
+
+            7. 若接口返回中无id字段或返回异常，改为：「预订申请已接收，因系统繁忙暂未获取流水编号，请直接拨打 0750-662-9888 由人工确认。」'
+        selected: false
+        title: 预订确认
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1777002000031'
+      position:
+        x: 936
+        y: 1560
+      positionAbsolute:
+        x: 936
+        y: 1560
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        answer: '{{#1777002000031.text#}}'
+        selected: false
+        title: 预订确认回复
+        type: answer
+        variables: []
+      height: 102
+      id: '1777002000032'
+      position:
+        x: 1238
+        y: 1560
+      positionAbsolute:
+        x: 1238
+        y: 1560
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data: []
+          type: none
+        headers: ''
+        method: get
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 15
+          max_read_timeout: 20
+          max_write_timeout: 10
+        title: 票务查询
+        type: http-request
+        url: https://cdn.jsdelivr.net/gh/zengtao227/lyp-wentucup-2026-public-data@main/mock-data/tickets.json
+        variables: []
+      height: 168
+      id: '1777003000010'
+      position:
+        x: 634
+        y: 1710
+      positionAbsolute:
+        x: 634
+        y: 1710
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 10
+        model:
+          completion_params:
+            max_tokens: 600
+            temperature: 0.3
+            top_k: 1
+            top_p: 0.7
+          mode: chat
+          name: deepseek-v3
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 1777003000002-prompt
+          role: system
+          text: '用户内容：{{#sys.query#}}
+
+            实时票务数据：{{#1777003000010.body#}}
+
+            角色：
+
+            你是新会碧桂园凤凰酒店的景区票务助理，通过工具调用获取实时票务后引导客人完成景区购票。
+
+            【票务数据使用规则】
+
+            1. 若「实时票务数据」包含有效JSON（attractions数组），读取各景区的available_today、status、ticket、hours字段；
+
+            2. 若票务数据为空或格式异常，切换降级模式并告知"票务查询服务暂时繁忙，请联系前台 0750-662-9888 确认"；
+
+            3. available_today=0表示当日已售罄，需推荐其他景区或建议选其他日期；
+
+            【可预订景区】
+
+            1）新会陈皮村 — 文化景区，含博物馆+体验区，成人88元/儿童44元
+
+            2）圭峰山国家森林公园 — 自然景区，成人50元/儿童25元（缆车另收费）
+
+            3）梁启超故居纪念馆 — 历史人文，成人30元/儿童15元，周一闭馆
+
+            4）新会小鸟天堂 — 生态景区（巴金《鸟的天堂》原型），成人45元/儿童22元
+
+            【购票信息收集清单（按序逐一确认，每轮只问一项缺失信息）】
+
+            ①景区名称 ②游玩日期 ③成人票数 ④儿童票数（可为0）⑤联系人姓名 ⑥联系电话
+
+            【操作规则】
+
+            1. 已有信息直接复用，不重复询问；用户一次提供多项信息时，先提取所有可识别字段，再询问缺失项；
+
+            2. 告知用户当前票务状态时，只基于tickets.json中的数据，不编造额外描述；
+
+            3. 收集门票数量时，若用户未提及儿童，默认儿童票为0；
+
+            4. 全部六项信息收集完毕后，输出以下确认摘要：
+
+            ---
+
+            🎫 购票信息确认
+
+            · 景区：[景区名称]（当日余票：[available_today]张，状态：[status]）
+
+            · 游玩日期：[日期]
+
+            · 成人票：[n]张（共[价格]元）| 儿童票：[n]张（共[价格]元）
+
+            · 合计：[总金额]元
+
+            · 联系人：[姓名] | 电话：[号码]
+
+            ---
+
+            以上信息是否正确？请回复「确认购票」，系统将引导您至小途乐游小程序完成支付；支付成功后由小途乐游小程序生成门票/核销凭证。
+
+            5. 确认摘要输出后，禁止自行生成流水编号。等待用户回复「确认购票」后由独立购票提交节点处理。
+
+            6. 价格询问：只能引用tickets.json中的ticket.adult/child字段，不得编造折扣或套餐价。'
+        selected: false
+        title: 景区门票预订
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1777003000002'
+      position:
+        x: 936
+        y: 1710
+      positionAbsolute:
+        x: 936
+        y: 1710
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        answer: '{{#1777003000002.text#}}'
+        selected: false
+        title: 景区预订回复
+        type: answer
+        variables: []
+      height: 102
+      id: '1777003000003'
+      position:
+        x: 1238
+        y: 1710
+      positionAbsolute:
+        x: 1238
+        y: 1710
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data: '{"platform":"小途乐游","type":"attraction_ticket","channel":"AI_assistant","submit_action":"confirmed_booking","confirmation_message":"{{#sys.query#}}","contact_phone":"从上一轮购票信息确认摘要读取","attraction":"从上一轮购票信息确认摘要读取","visit_date":"从上一轮购票信息确认摘要读取","adult_count":"从上一轮购票信息确认摘要读取","child_count":"从上一轮购票信息确认摘要读取","payload_version":"final_v1.11"}'
+          type: json
+        headers: 'Content-Type: application/json'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 5
+          max_read_timeout: 5
+          max_write_timeout: 5
+        title: 购票提交
+        type: http-request
+        url: https://jsonplaceholder.typicode.com/posts
+        variables: []
+      height: 168
+      id: '1777003000030'
+      position:
+        x: 634
+        y: 1860
+      positionAbsolute:
+        x: 634
+        y: 1860
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 10
+        model:
+          completion_params:
+            max_tokens: 300
+            temperature: 0.3
+            top_k: 1
+            top_p: 0.7
+          mode: chat
+          name: deepseek-v3
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 1777003000031-prompt
+          role: system
+          text: '用户内容：{{#sys.query#}}
+
+            购票提交接口返回：{{#1777003000030.body#}}
+
+            角色：
+
+            你是新会碧桂园凤凰酒店景区购票确认系统，根据购票提交接口的返回结果生成“购票待支付申请”通知。
+
+            【操作规则】
+
+            1. 从「购票提交接口返回」JSON中提取id字段作为流水序号，格式化为 WCP-[id]（如id为101则显示WCP-101）；
+
+            2. 必须从上下文记忆中的上一轮「购票信息确认」摘要读取并复述：景区名称、游玩日期、票数、联系人、合计金额；
+
+            3. 输出固定格式待支付申请通知：
+
+            🎫 购票待支付申请已生成！
+
+            · 流水编号：WCP-[id]
+
+            · 景区：[景区名称]
+
+            · 游玩日期：[日期]
+
+            · 票数：成人[n]张 / 儿童[n]张
+
+            · 联系人：[姓名] | 电话：[号码]
+
+            · 支付方式：请在微信搜索「小途乐游」小程序，凭流水编号完成支付（演示账户含 ¥20,000 虚拟余额）
+
+            · 出票说明：支付成功后将在小途乐游小程序内生成门票/核销凭证，入园时出示即可
+
+            · 如需退改票，请拨打前台电话 0750-662-9888
+
+            感谢您选择新会碧桂园凤凰酒店配套景区服务，祝您游玩愉快！
+
+            4. 禁止声称用户已经完成付款，禁止声称 Bot 已经生成门票；付款状态和门票/核销凭证均以小途乐游小程序为准。
+
+            5. 若接口返回中无id字段或返回异常，改为：「购票申请已接收，因系统繁忙暂未获取流水编号，请稍后在小途乐游小程序中查看订单或联系酒店前台。」'
+        selected: false
+        title: 景区购票确认
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1777003000031'
+      position:
+        x: 936
+        y: 1860
+      positionAbsolute:
+        x: 936
+        y: 1860
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        answer: '{{#1777003000031.text#}}'
+        selected: false
+        title: 景区购票确认回复
+        type: answer
+        variables: []
+      height: 102
+      id: '1777003000032'
+      position:
+        x: 1238
+        y: 1860
+      positionAbsolute:
+        x: 1238
+        y: 1860
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    viewport:
+      x: -81.72479728028793
+      y: -235.92491660243604
+      zoom: 0.7051407235423042
+  rag_pipeline_variables: []
