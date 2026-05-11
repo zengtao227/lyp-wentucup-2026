@@ -1,0 +1,8 @@
+{
+  "hotel": "新会碧桂园凤凰酒店",
+  "action": "cancel_booking",
+  "status": "cancelled",
+  "message": "预订已成功取消",
+  "refund_policy": "根据取消条款，将按原支付方式退回。具体退款金额及到账时间请参见取消政策或联系前台确认。",
+  "note": "示例数据，实际取消状态以酒店确认为准"
+}
