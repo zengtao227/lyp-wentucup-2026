@@ -34,7 +34,7 @@ Important scoring interpretation:
 
 Current final candidate:
 
-- `大模型5月8日（决赛版）v1.11-预订确认防幻觉版.yml`
+- `大模型5月8日（决赛版）v1.12-修复占位符+取消退款+支付确认.yml`
 
 Earlier versions are kept for comparison:
 
@@ -56,6 +56,8 @@ Earlier versions are kept for comparison:
 - `大模型5月8日（决赛版）v1.8-小程序支付边界修正版.yml`
 - `大模型5月8日（决赛版）v1.9-高德天气Key配置版.yml`
 - `大模型5月8日（决赛版）v1.10-公开数据源修正版.yml`
+- `大模型5月8日（决赛版）v1.11-预订确认防幻觉版.yml`
+- `大模型5月8日（决赛版）v1.12-修复占位符+取消退款+支付确认.yml`
 
 ## v1.11 Dify Import Notes
 
@@ -301,3 +303,56 @@ Current business decisions:
 - Prices should ideally come from the digital marketing management platform's price-management database/API, not from hardcoded YAML text.
 - User will test whether changing a date/range price in the platform's room-price management page propagates to the web page and mini programs. If this is confirmed and a query API can be identified, a later workflow version should query that source.
 - If no price API is available, the Bot should say prices are subject to the real-time display in the relevant mini program.
+
+## v1.12 Dify Import Notes
+
+After importing v1.12 into Dify:
+
+1. All v1.11 import notes apply.
+2. v1.12 adds two new classifier classes on top of the 11 existing classes: `支付确认` and `取消预订/退款`.
+3. **Classifier now has 13 classes total:**
+   - 开场引导, 酒店概况, 客房产品体系, 餐饮娱乐配套, 会议宴会服务, 天气周边景点, 投诉与售后服务, 客房预订, 预订确认提交, 景区门票预订, 景区票务确认提交, **支付确认**, **取消预订/退款**
+4. **支付确认** (line 763): User messages such as `已支付`, `支付完成`, `已付款`, `付过了`, `支付成功`, `已付` are classified here. The LLM response must not claim payment is verified unless a real payment status API is available — it only acknowledges the user's statement and prompts to check the mini program for transaction records.
+5. **取消预订/退款** (line 765): Explicit cancel phrases (`取消预订`, `取消房间预订`, `取消订单`, `退款`, `退房`, `取消购票`, `退票`) are classified here. The workflow calls a mock cancel JSON (line 2332: `cancel_booking.json` from the public data repository). The reply includes:
+   - The action type and cancellation status from the API response
+   - "如已于小途乐订/小途乐游完成支付，退款将由酒店前台核实后按原路返还"
+   - Front desk phone 0750-662-9888 for assistance
+   - The Bot must not fabricate refund amounts, times, or progress.
+6. **Placeholder fix**: The `酒店概况` branch was broken by nonexistent conversation variables in earlier versions; v1.12 cleans up placeholder references so all general enquiry branches respond correctly.
+7. **Known limitation**: Payment confirmation is classification-only; no backend payment status API is called yet. This is acceptable as a first step — the class of user intent is correctly identified and routed.
+
+## Outstanding Gap Items
+
+Based on a full review of `主办方视频资料与MCP服务配置.md`, `小程序支付与统一价格源设计记录.md`, and `Dify平台工作流管理API研究记录.md`, the following capabilities are **not yet implemented**:
+
+### P1: MCP Service Integration (replace GitHub mock)
+- Swap `rooms.json` GET → hotel MCP SSE (mcp-server-booking)
+- Swap `tickets.json` GET → travel MCP SSE (mcp-server-travel)
+- Swap `jsonplaceholder POST` → real MCP booking/ticketing tool
+- Requires Dify/问途 AI Playground MCP tool configuration in the competition platform
+
+### P1: Unified Pricing API
+- Confirm digital marketing platform price management → web/mini-program sync
+- Identify the price query API
+- Replace static JSON prices with real-time API calls
+
+### P1: Payment Status Query
+- Confirm mini program order query API availability (小途乐订 / 小途乐游)
+- Add an HTTP node to query real payment status
+- Move beyond "user says paid" → "system verifies paid"
+
+### P2: Arithmetic Node for Ticket Pricing
+- Add a Code/arithmetic node to compute `adult × price + child × price`
+- Reduce LLM prompt-based calculation risk
+
+### P2: Multi-turn Cancellation Flow
+- Extend single cancel command → 2-3 turn flow: confirm → select refund method → amount
+- Connect to real cancellation API (not mock JSON)
+
+### P2: Parameter Extractor + Variable Assigner for POST Payloads
+- Extract parsed booking fields from LLM output → write to conversation variables → pass reliably to POST
+- Eliminate empty/literal fallback fields in the booking payload
+
+### P3: Dify Console Auto-Import Script
+- Use console session token to call `/console/api/apps/imports` + `/confirm` programmatically
+- See `Dify平台工作流管理API研究记录.md` for API details
