@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>后续开发计划详解 — P1 到 P3 技术方案说明</title>
+  <title>后续开发计划详解 — P1 到 P3 技术方案说明（更新版）</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -147,6 +147,14 @@
       margin: 0.8rem 0;
     }
 
+    .highlight-danger {
+      background: #fff5f5;
+      border-left: 4px solid #e53e3e;
+      padding: 0.8rem 1rem;
+      border-radius: 0 6px 6px 0;
+      margin: 0.8rem 0;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -165,14 +173,77 @@
       font-weight: 600;
     }
 
-    .summary-table th:first-child { width: 16%; }
-    .summary-table th:nth-child(2) { width: 18%; }
-    .summary-table th:nth-child(3) { width: 40%; }
+    .summary-table th:first-child { width: 18%; }
+    .summary-table th:nth-child(2) { width: 14%; }
+    .summary-table th:nth-child(3) { width: 42%; }
     .summary-table th:last-child { width: 26%; }
 
     .tag-green { color: #38a169; font-weight: 600; }
     .tag-red { color: #e53e3e; font-weight: 600; }
     .tag-orange { color: #dd6b20; font-weight: 600; }
+
+    .decision-banner {
+      background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+      color: #fff;
+      padding: 1.2rem 1.6rem;
+      border-radius: 12px;
+      margin-bottom: 1.6rem;
+    }
+
+    .decision-banner h2 {
+      color: #fff;
+      border-bottom-color: rgba(255,255,255,0.3);
+    }
+
+    .decision-banner ul {
+      margin-bottom: 0;
+    }
+
+    .decision-banner li {
+      margin-bottom: 0.2rem;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+      margin: 1rem 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0.5rem;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #cbd5e0;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 1.2rem;
+      padding-left: 0.5rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -1.75rem;
+      top: 0.5rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #2b6cb0;
+      border: 2px solid #fff;
+    }
+
+    .timeline-item.timeline-red::before {
+      background: #e53e3e;
+    }
+
+    .timeline-item.timeline-green::before {
+      background: #38a169;
+    }
 
     footer {
       text-align: center;
@@ -194,57 +265,123 @@
   <div class="container">
     <h1>后续开发计划详解</h1>
     <p>P1 → P3 每项技术方案的用途、当前状态、你需要做的事</p>
+    <p style="font-size:0.85rem;opacity:0.75;margin-top:0.3rem;">更新版 — 2026-05-11 纳入核心决策：弃用 GitHub mock，切换至官方 MCP</p>
   </div>
 </header>
 
 <div class="container">
 
 <div class="meta">
-  生成日期：2026-05-11 ｜ 对应 YAML 版本：v1.12 ｜ 项目：WentuCup 2026
+  生成日期：2026-05-11（更新版） ｜ 对应 YAML 版本：v1.12 ｜ 项目：WentuCup 2026
 </div>
 
 <!-- ============================================================ -->
-<!-- 当前架构说明 -->
+<!-- 核心决策 -->
+<!-- ============================================================ -->
+
+<section class="decision-banner">
+  <h2>🚨 核心决策：必须使用官方 MCP 服务</h2>
+  <p style="margin-bottom:0.5rem;"><strong>决定时间：</strong>2026-05-11 ｜ <strong>决定：</strong>放弃 GitHub jsDelivr CDN + jsonplaceholder 外部 mock，全面切换至组织方提供的 MCP SSE 端点</p>
+  <p style="margin-bottom:0.3rem;"><strong>为什么必须切换？</strong></p>
+  <ol style="margin-bottom:0;">
+    <li><strong>中国大陆网络不稳定：</strong>GitHub（cdn.jsdelivr.net）和 jsonplaceholder.typicode.com 在中国大陆 DNS 可能被干扰或访问缓慢。路演现场如果查房态或提交预订失败，对评分是致命打击。</li>
+    <li><strong>平台已确认支持 MCP：</strong>问途 AI Playground 后台工具设置支持添加 MCP 工具节点。</li>
+    <li><strong>组织方期望：</strong>培训视频中展示的 MCP SSE 端点是官方标准方案，用 GitHub mock 等于只模拟流程而非真实 PMS 对接。</li>
+    <li><strong>评分规则要求：</strong>"实时查询房态/票务"是 10%（Agent）+ 30%（整合）模块的硬性要求，静态 JSON 无法体现实时能力。</li>
+    <li><strong>Mock 只是临时备选：</strong>GitHub 公共数据仓库是在主仓库改为 private 后创建的临时 fallback，始终计划被 MCP 工具替换。</li>
+  </ol>
+</section>
+
+<!-- ============================================================ -->
+<!-- GitHub 方案的由来 -->
+<!-- ============================================================ -->
+
+<section>
+  <h2>📜 GitHub mock 方案是怎么来的（背景回顾）</h2>
+
+  <p>你可能注意到 v1.0–v1.12 一直在用 <code>cdn.jsdelivr.net/gh/.../rooms.json</code> 和 <code>jsonplaceholder.typicode.com/posts</code>。这不是计划中的最终方案，而是这样产生的：</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <strong>v1.0–v1.6：从无到有</strong><br>
+      最初只有高德天气 API。预订 Agent 加入后，需要房态 JSON 和 POST 端点来演示流程。使用了 GitHub raw 和 jsonplaceholder 快速搭建可演示版本。
+    </div>
+    <div class="timeline-item">
+      <strong>v1.7–v1.9：扩展到景区</strong><br>
+      加入景区票务分支后，新增 <code>tickets.json</code> 和第二个 POST。此时所有数据源都是外部公开资源。
+    </div>
+    <div class="timeline-item">
+      <strong>v1.10：主仓库改为 private</strong><br>
+      GitHub 主仓库从 public 改为 private，导致 <code>cdn.jsdelivr.net/gh/zengtao227/lyp-wentucup-2026@main/...</code> 全部 404。<br>
+      为此创建了公开数据仓库 <code>lyp-wentucup-2026-public-data</code> 作为临时替代。
+    </div>
+    <div class="timeline-item">
+      <strong>v1.12：功能完整但数据源仍是 mock</strong><br>
+      已支持 13 个分类、完整预订 + 购票 + 取消退款 + 支付确认流程。<br>
+      但 <strong>6 个数据节点全部指向外部公开资源</strong>，没有任何一个调用真实酒店/景区后台服务。
+    </div>
+    <div class="timeline-item timeline-green">
+      <strong>2026-05-11：最终决策</strong><br>
+      确认必须切换至组织方提供的 MCP SSE 端点。<br>
+      理由已写入 <code>CONTEXT.md</code> 和 <code>主办方视频资料与MCP服务配置.md</code>。
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 当前架构 -->
 <!-- ============================================================ -->
 <section>
-  <h2>📌 当前 v1.12 的架构</h2>
-  <p>在了解 P1–P3 之前，先理解你现在 YAML 是怎么跑的：</p>
+  <h2>📌 当前 v1.12 的架构（所有外部公开资源一览）</h2>
+  <p>以下 6 个数据节点全部引用了不受比赛平台控制的外部公开资源：</p>
   <table>
-    <tr><th>节点</th><th>现在调用的地址</th><th>问题</th></tr>
+    <tr><th>#</th><th>节点</th><th>当前调用 URL</th><th>资源类型</th><th>风险评估</th></tr>
     <tr>
-      <td>房态查询（GET）</td>
-      <td><code>GitHub rooms.json</code></td>
-      <td>你自己写的静态 JSON，跟酒店后台无关</td>
+      <td>1</td>
+      <td>天气查询</td>
+      <td><code>restapi.amap.com/v3/weather/...</code></td>
+      <td>高德 API（有比赛专用 key）</td>
+      <td class="tag-orange">保留，建议确认平台代理策略</td>
     </tr>
     <tr>
-      <td>预订提交（POST）</td>
-      <td><code>jsonplaceholder.typicode.com</code></td>
-      <td>一个跟酒店完全无关的公开测试网站</td>
+      <td>2</td>
+      <td>房态查询（酒店）</td>
+      <td><code>cdn.jsdelivr.net/gh/.../rooms.json</code></td>
+      <td>❌ GitHub 公开仓库</td>
+      <td class="tag-red">必须替换为 MCP</td>
     </tr>
     <tr>
-      <td>票务查询（GET）</td>
-      <td><code>GitHub tickets.json</code></td>
-      <td>你自己写的静态 JSON，跟景区后台无关</td>
+      <td>3</td>
+      <td>预订提交（酒店）</td>
+      <td><code>jsonplaceholder.typicode.com/posts</code></td>
+      <td>❌ 外部公开测试网站</td>
+      <td class="tag-red">必须替换为 MCP</td>
     </tr>
     <tr>
-      <td>购票提交（POST）</td>
-      <td><code>jsonplaceholder.typicode.com</code></td>
-      <td>同上，跟景区完全无关</td>
+      <td>4</td>
+      <td>票务查询（景区）</td>
+      <td><code>cdn.jsdelivr.net/gh/.../tickets.json</code></td>
+      <td>❌ GitHub 公开仓库</td>
+      <td class="tag-red">必须替换为 MCP</td>
     </tr>
     <tr>
-      <td>支付确认</td>
-      <td>纯 LLM 分类器</td>
-      <td>用户说「已支付」它就信了，不做真实验证</td>
+      <td>5</td>
+      <td>购票提交（景区）</td>
+      <td><code>jsonplaceholder.typicode.com/posts</code></td>
+      <td>❌ 外部公开测试网站</td>
+      <td class="tag-red">必须替换为 MCP</td>
     </tr>
     <tr>
-      <td>取消退款</td>
-      <td><code>GitHub cancel_booking.json</code></td>
-      <td>静态 JSON，一轮对话直接取消，没有确认流程</td>
+      <td>6</td>
+      <td>取消预订查询</td>
+      <td><code>cdn.jsdelivr.net/gh/.../cancel_booking.json</code></td>
+      <td>❌ GitHub 公开仓库</td>
+      <td class="tag-red">必须替换为 MCP</td>
     </tr>
   </table>
 
   <div class="highlight-warn">
-    <strong>⚠️ 为什么这很重要：</strong> 比赛评分中「预订 Agent」占 10 分，评委关注的是 Agent 是否<strong>真实调用工具</strong>。当前所有工具都是你自己编的 mock，不是跟酒店后台对接的真实服务。P1 要解决的就是这个问题。
+    <strong>⚠️ 需要明确：</strong>GitHub 方案不是「规则允许所以用」，而是「当时未能确认 MCP 端点是否可在平台使用」时的<strong>临时保底选项</strong>。现在平台已确认支持 MCP 工具节点，所有 GitHub / jsonplaceholder 引用都应替换。
   </div>
 </section>
 
@@ -259,49 +396,94 @@
   </h2>
 
   <!-- P1-① -->
-  <h3>① MCP 服务接入 — 替换 GitHub mock 为真实酒店/景区服务</h3>
+  <h3>① MCP 服务接入 — 替换所有 GitHub mock 为真实酒店/景区服务</h3>
 
   <h4>这是什么</h4>
-  <p>主办方视频里透露：比赛平台已经提供了<strong>两个 MCP 服务</strong>：</p>
+  <p>主办方培训视频中提供的两个 MCP 服务：</p>
   <ul>
-    <li><code>mcp-server-booking.v4.test.dossm.cn</code> → 对接酒店<strong>真实的客房预订系统</strong></li>
-    <li><code>mcp-server-travel.v4.test.dossm.cn</code> → 对接酒店<strong>真实的景区票务系统</strong></li>
+    <li><code>http://mcp-server-booking.v4.test.dossm.cn/sse</code> → 对接酒店真实的客房预订系统</li>
+    <li><code>http://mcp-server-travel.v4.test.dossm.cn/sse</code> → 对接酒店真实的景区票务系统</li>
   </ul>
-  <p>MCP = Model Context Protocol。简单说：</p>
   <div class="highlight-box">
     <strong>主办方已经帮你在酒店后台和比赛平台之间搭好了桥。</strong> 你的 Agent 不需要自己去对接酒店 PMS，只要让 Dify 调用这个 MCP 服务即可。
   </div>
 
-  <h4>为什么必须做</h4>
-  <p>当前你查房态读的是自己写的 <code>rooms.json</code>，提交预订去的是跟酒店无关的 jsonplaceholder。评委问「你这个预订真的提交到酒店系统了吗？」时，你只能说「这是模拟的」。</p>
-  <p>接入 MCP 后，路演时可以说：</p>
-  <div class="highlight-box">
-    「我们的 Agent 直接调用了比赛平台提供的酒店 MCP 服务，读取的是酒店后台实时房态，提交的订单会进入酒店预订系统。」
+  <h4>MCP vs HTTP mock 对比</h4>
+  <table>
+    <tr><th></th><th>当前 GitHub mock</th><th>MCP 官方服务</th></tr>
+    <tr>
+      <td>数据来源</td>
+      <td>你自己写的静态 JSON 文件</td>
+      <td>酒店 / 景区真实后台系统</td>
+    </tr>
+    <tr>
+      <td>实时性</td>
+      <td>同一个日期永远是同一个价格（不随后台修改变化）</td>
+      <td>实时房态 / 实时价格</td>
+    </tr>
+    <tr>
+      <td>路演网络</td>
+      <td>受 GitHub 在中国大陆访问稳定性影响</td>
+      <td>平台内网，稳定</td>
+    </tr>
+    <tr>
+      <td>评委印象</td>
+      <td>"这是模拟的，不是真的对接了酒店系统"</td>
+      <td>"Agent 真实调用了酒店 PMS"</td>
+    </tr>
+  </table>
+
+  <h4>你需要做的事（手动操作）—— 转发给同学</h4>
+  <div class="highlight-box" style="background:#f0fff4;border-left-color:#38a169;">
+    <p><strong>给负责平台配置的同学的指令：</strong></p>
+    <ol>
+      <li>登录问途 AI Playground → 进入应用编辑界面 → 找到 <strong>工具设置 → MCP 服务</strong></li>
+      <li>添加第一个 MCP 服务：
+        <ul>
+          <li>名称：<code>酒店客房预订MCP</code></li>
+          <li>URL：<code>http://mcp-server-booking.v4.test.dossm.cn/sse</code></li>
+          <li>协议：SSE</li>
+        </ul>
+      </li>
+      <li>添加第二个 MCP 服务：
+        <ul>
+          <li>名称：<code>景区门票预订MCP</code></li>
+          <li>URL：<code>http://mcp-server-travel.v4.test.dossm.cn/sse</code></li>
+          <li>协议：SSE</li>
+        </ul>
+      </li>
+      <li>配置完成后，点击 <strong>查看工具列表 / tools/list</strong>，确认能拉出每个服务暴露的工具列表</li>
+      <li><strong>反馈以下信息给我：</strong>
+        <ul>
+          <li>每个 MCP 服务暴露了哪些 tool name？</li>
+          <li>每个 tool 的入参（input JSON schema）是什么？</li>
+          <li>返回数据的格式是怎样的？</li>
+        </ul>
+      </li>
+    </ol>
+    <p style="margin-top:0.5rem;color:#718096;">预计耗时：15 分钟。拿到反馈后我基于 v1.12 导出 v1.13，把 6 个 HTTP 节点全部替换为 MCP 工具节点。</p>
   </div>
 
-  <h4>你需要做的事（手动操作，15 分钟）</h4>
-  <ol>
-    <li>在 <strong>Dify / 问途 AI Playground 后台</strong>找到「工具」或「MCP 管理」页面</li>
-    <li>添加两个 SSE 地址为工具：
-      <ul>
-        <li><code>http://mcp-server-booking.v4.test.dossm.cn/sse</code></li>
-        <li><code>http://mcp-server-travel.v4.test.dossm.cn/sse</code></li>
-      </ul>
-    </li>
-    <li>添加成功后告诉我 → 我把 YAML 中的 4 个 HTTP 节点替换为 MCP 工具节点</li>
-  </ol>
+  <h4>配置完成后等待反馈的信息格式示例</h4>
+  <pre>酒店客房预订MCP 返回的工具列表：
+  - room_search(params: {check_in_date, check_out_date, room_type?}) → [{room_type, price, available, ...}]
+  - room_book(params: {guest_name, check_in_date, check_out_date, room_type, party_size, phone}) → {booking_id, status}
+  - cancel_booking(params: {booking_id}) → {status, refund_amount}
+
+景区门票预订MCP 返回的工具列表：
+  - ticket_search(params: {scenic_spot, date}) → [{ticket_type, price, available}]
+  - ticket_book(params: {scenic_spot, date, adult_count, child_count, contact_phone}) → {order_id, total_amount}</pre>
 
   <!-- P1-② -->
   <h3>② 统一价格源打通 — 确认后台改价能否同步到网页和小程序</h3>
 
   <h4>这是什么</h4>
-  <p>你提到「已经有一个网页可以修改价格」——那是<strong>问途数字化营销管理平台 v2.0</strong> 的「房价管理」页面。酒店工作人员在里面每日维护房价。</p>
-  <p>现在有三个地方会展示价格：</p>
+  <p>酒店工作人员在 <strong>问途数字化营销管理平台 v2.0</strong> 的「房价管理」页面维护每日房价。现在有三个地方展示价格：</p>
   <table>
     <tr><th>展示渠道</th><th>价格从哪来？</th></tr>
     <tr><td>网页版酒店页面</td><td>❓ 不确定是否跟后台价格源联动</td></tr>
     <tr><td>「小途乐订」小程序</td><td>❓ 不确定是否跟后台价格源联动</td></tr>
-    <tr><td><strong>你的 Agent</strong></td><td>❌ 从你自己写的 rooms.json 来，跟后台完全无关</td></tr>
+    <tr><td><strong>你的 Agent</strong></td><td>❌ 从 GitHub rooms.json 来，跟后台完全无关</td></tr>
   </table>
 
   <h4>你需要做的事（手动测试，一次 15 分钟）</h4>
@@ -327,7 +509,7 @@
   </table>
 
   <div class="highlight-warn">
-    <strong>⚠️ 注意：</strong> 这不是代码问题。你不需要写任何代码，只需要去那个页面操作一次看看结果。
+    <strong>⚠️ 注意：</strong>这不是代码问题。你不需要写任何代码，只需要去那个页面操作一次看看结果。
   </div>
 
   <!-- P1-③ -->
@@ -375,10 +557,9 @@
   <pre>总价 = 成人票数 × 成人单价 + 儿童票数 × 儿童单价</pre>
   <p>代码节点是确定的——永远算不错。</p>
 
-  <h4>是你自己加还是平台已经提供了？</h4>
-  <p><strong>是我加，你不用动手。</strong> Dify 本身就提供 Code 节点功能，不需要主办方额外提供。我改 YAML 就行。</p>
+  <h4>是否需要你做</h4>
+  <p><strong>不用你动手，我来改 YAML。</strong> Dify 本身就提供 Code 节点功能。</p>
 
-  <h4>现在的流程 vs 加了算术节点后的流程</h4>
   <table>
     <tr><th></th><th>当前</th><th>加了算术节点后</th></tr>
     <tr>
@@ -418,13 +599,13 @@ Agent：正在处理... 已成功取消！取消编号：WCNC-20260510-001
 
   <h4>为什么要做</h4>
   <ul>
-    <li><strong>避免误操作：</strong> 用户可能随口说「取消算了」，Agent 不应该直接执行</li>
-    <li><strong>比赛评分：</strong> 评委可能会测试取消流程，看有没有让用户确认</li>
-    <li><strong>真实感：</strong> 更接近真实酒店客服的交互方式</li>
+    <li><strong>避免误操作：</strong>用户可能随口说「取消算了」，Agent 不应该直接执行</li>
+    <li><strong>比赛评分：</strong>评委可能会测试取消流程，看有没有让用户确认</li>
+    <li><strong>真实感：</strong>更接近真实酒店客服的交互方式</li>
   </ul>
 
-  <h4>是你自己加还是我来加？</h4>
-  <p><strong>我来加。</strong> 在 YAML 中把「取消预订」分支从单个 LLM 节点扩展为 3-4 个节点串联。</p>
+  <h4>是否需要你做</h4>
+  <p><strong>不用，我来加。</strong>在 YAML 中把「取消预订」分支从单个 LLM 节点扩展为 3-4 个节点串联。</p>
 
   <!-- P2-③ -->
   <h3>⑥ 参数提取器 + 变量赋值器</h3>
@@ -441,9 +622,6 @@ Agent：正在处理... 已成功取消！取消编号：WCNC-20260510-001
     <li>写入 Dify 的对话变量</li>
     <li>POST 节点读变量时就有真实数据了</li>
   </ol>
-
-  <h4>变量赋值器又是什么</h4>
-  <p>比参数提取器更简单的 Dify 原生功能。你直接告诉它：「这个变量 = 那个节点的输出」。不需要写提取规则。</p>
 
   <h4>是否需要你做</h4>
   <p><strong>不用你动手，我来改 YAML。</strong> 但导入后可能需要你确认一下参数提取规则配置是否正确。</p>
@@ -495,7 +673,7 @@ Agent：正在处理... 已成功取消！取消编号：WCNC-20260510-001
 </section>
 
 <!-- ============================================================ -->
-<!-- 总结 -->
+<!-- 你需要做的事总结 -->
 <!-- ============================================================ -->
 
 <section>
@@ -509,10 +687,10 @@ Agent：正在处理... 已成功取消！取消编号：WCNC-20260510-001
       <th>不做的风险</th>
     </tr>
     <tr>
-      <td><strong>① 在 Dify 后台添加 MCP 工具</strong><br><small>（找到 MCP 管理入口，添加两个 SSE 地址）</small></td>
+      <td><strong>① 在 Dify 后台添加 MCP 工具</strong><br><small>（找到 MCP 管理入口，添加两个 SSE 地址，确认工具列表后反馈给我）</small></td>
       <td>15 分钟</td>
-      <td>我改 YAML，把 HTTP 节点替换为 MCP 工具节点</td>
-      <td><span class="tag-red">核心扣分：预订 Agent 仍用 mock 数据</span></td>
+      <td>我改 YAML，把 6 个 HTTP 节点替换为 MCP 工具节点，导出 v1.13</td>
+      <td><span class="tag-red">核心扣分：预订 Agent 仍用 mock 数据，路演可能因 GitHub 不稳定失败</span></td>
     </tr>
     <tr>
       <td><strong>② 做一次改价测试</strong><br><small>（后台改价 → 看网页/小程序是否同步）</small></td>
@@ -536,8 +714,36 @@ Agent：正在处理... 已成功取消！取消编号：WCNC-20260510-001
   </div>
 </section>
 
+<!-- ============================================================ -->
+<!-- 路演 PPT 表述建议 -->
+<!-- ============================================================ -->
+
+<section>
+  <h2>📊 路演 PPT 表述建议</h2>
+
+  <p>以下表述可直接用于路演 PPT 中对预订 Agent 技术方案的说明：</p>
+
+  <div class="highlight-box" style="background:#f0fff4;border-left-color:#38a169;">
+    <p><strong>技术方案说明（PPT 建议文案）：</strong></p>
+    <p>Agent 通过 MCP（Model Context Protocol）协议直连酒店 PMS 与景区票务系统，实现从查房态 → 预订提交 → 取消退款的真实业务闭环：</p>
+    <ul>
+      <li><strong>酒店客房：</strong>使用平台提供的 <code>mcp-server-booking</code> 服务，读取酒店后台实时房态与价格，提交的预订订单进入酒店预订系统</li>
+      <li><strong>景区门票：</strong>使用平台提供的 <code>mcp-server-travel</code> 服务，查询景区实时余票与价格，购票订单进入景区票务系统</li>
+      <li><strong>取消/退款：</strong>通过 MCP 调用酒店取消预订接口，支持多轮确认流程</li>
+      <li><strong>支付确认：</strong>引导用户至「小途乐订」/「小途乐游」小程序完成支付，目前通过分类器识别用户支付确认意图</li>
+    </ul>
+    <p style="margin-top:0.5rem;"><strong>为什么选择 MCP 而非直接 HTTP 调用：</strong></p>
+    <ul>
+      <li>MCP 是标准化协议，Dify 原生支持工具节点调用</li>
+      <li>无需处理 PMS 认证、鉴权、数据格式转换等底层细节</li>
+      <li>平台内网通信，路演现场稳定可靠</li>
+    </ul>
+  </div>
+</section>
+
 <footer>
-  本文档由 AI 助手生成，对应 WentuCup 2026 项目工作区文件。
+  本文档由 AI 助手生成，对应 WentuCup 2026 项目工作区文件。<br>
+  更新日期：2026-05-11 ｜ 纳入 GitHub mock → MCP 决策
 </footer>
 
 </div>

@@ -321,15 +321,53 @@ After importing v1.12 into Dify:
 6. **Placeholder fix**: The `酒店概况` branch was broken by nonexistent conversation variables in earlier versions; v1.12 cleans up placeholder references so all general enquiry branches respond correctly.
 7. **Known limitation**: Payment confirmation is classification-only; no backend payment status API is called yet. This is acceptable as a first step — the class of user intent is correctly identified and routed.
 
+## Critical Decision: MCP Services Over GitHub Public Data
+
+**Decision date**: 2026-05-11
+**Decision**: All external HTTP mock endpoints (GitHub jsDelivr CDN + jsonplaceholder) MUST be replaced with the official competition MCP SSE endpoints before the final roadshow.
+
+### Reasons (documented for roadshow PPT and future reference)
+
+1. **Competition network environment**: The final roadshow will take place in mainland China. GitHub (cdn.jsdelivr.net) and jsonplaceholder.typicode.com are external public services that may suffer network instability, DNS interference, or outright blocking during the live demo. A failed room-status or booking-submission call at roadshow time would be a critical scoring failure.
+
+2. **Platform capability confirmed**: The competition platform (问途AI Playground / Dify) supports MCP tool nodes. The platform's internal network can reach the official MCP SSE endpoints (`mcp-server-booking.v4.test.dossm.cn` and `mcp-server-travel.v4.test.dossm.cn`) reliably because they are part of the same infrastructure.
+
+3. **Official expectation**: The organizer's training videos presented these MCP SSE endpoints as the standard way for teams to implement real booking/ticketing functions. Using GitHub mock data instead means the demo is only simulating the booking flow, not demonstrating real tool integration.
+
+4. **Scoring relevance**: The final scoring rubric (10% Agent + 30% integration) explicitly evaluates whether the Agent can perform "real-time room/ticket availability queries" and "information extraction + verification to complete the booking." A mock JSON file that returns the same static data regardless of date/parameters does not demonstrate real-time capability. Official MCP tools connected to the actual PMS/ticketing system do.
+
+5. **Mock was only a fallback**: The GitHub public data repository (`lyp-wentucup-2026-public-data`) was created as a temporary fallback when the main repository was made private. It was always intended to be replaced by official MCP tools once those were configured and verified. This is stated explicitly in the v1.10 import notes: *"The public data repository is only a stable mock fallback until those platform tools are connected and verified."*
+
+### What needs to happen
+
+The two MCP SSE endpoints must be configured as MCP tool sources in the 问途AI Playground / Dify backend:
+
+| Endpoint | Purpose |
+|---|---|
+| `http://mcp-server-booking.v4.test.dossm.cn/sse` | Hotel room availability query, booking submission, cancellation |
+| `http://mcp-server-travel.v4.test.dossm.cn/sse` | Scenic ticket availability query, ticket purchase submission |
+
+Once configured, the YAML workflow's HTTP nodes can be replaced with MCP tool nodes that call the real services instead of GitHub mock JSON.
+
+### Fallback plan
+
+Keep the current v1.12 YAML (with GitHub mock URLs) as an offline backup. If the MCP endpoints cannot be fully tested before roadshow, the mock version still demonstrates the workflow logic. The roadshow PPT should state: *"Agent 已完成预订工具调用链路的完整编排；待平台开放 MCP 工具配置后，可一键切换至官方酒店/票务 PMS 实时接口。"*
+
+---
+
 ## Outstanding Gap Items
 
 Based on a full review of `主办方视频资料与MCP服务配置.md`, `小程序支付与统一价格源设计记录.md`, and `Dify平台工作流管理API研究记录.md`, the following capabilities are **not yet implemented**:
 
-### P1: MCP Service Integration (replace GitHub mock)
-- Swap `rooms.json` GET → hotel MCP SSE (mcp-server-booking)
-- Swap `tickets.json` GET → travel MCP SSE (mcp-server-travel)
-- Swap `jsonplaceholder POST` → real MCP booking/ticketing tool
-- Requires Dify/问途 AI Playground MCP tool configuration in the competition platform
+### P1: MCP Service Integration (replace GitHub mock — CRITICAL, must complete before roadshow)
+- Configure `http://mcp-server-booking.v4.test.dossm.cn/sse` as a tool in the platform backend
+- Configure `http://mcp-server-travel.v4.test.dossm.cn/sse` as a tool in the platform backend
+- Determine the exact tools/tool-names each MCP server exposes (e.g., `room_search`, `room_book`, `ticket_search`, `ticket_book`, `cancel_booking`)
+- Replace `rooms.json` GET → hotel MCP tool
+- Replace `tickets.json` GET → travel MCP tool  
+- Replace `jsonplaceholder POST` (hotel booking) → hotel MCP tool
+- Replace `jsonplaceholder POST` (ticket booking) → travel MCP tool
+- Replace `cancel_booking.json` GET → hotel MCP cancellation tool
 
 ### P1: Unified Pricing API
 - Confirm digital marketing platform price management → web/mini-program sync
