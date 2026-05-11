@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>后续开发计划详解 — P1 到 P3 技术方案说明</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: #f0f4f8;
+      color: #1a202c;
+      line-height: 1.75;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1.6rem;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+      color: #fff;
+      padding: 2.4rem 0;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    header p {
+      font-size: 0.95rem;
+      opacity: 0.85;
+    }
+
+    .meta {
+      text-align: center;
+      color: #718096;
+      font-size: 0.85rem;
+      padding: 0.8rem 0 1.2rem 0;
+      border-bottom: 1px solid #e2e8f0;
+      margin-bottom: 1.6rem;
+    }
+
+    section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.6rem 1.8rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    .priority-badge {
+      display: inline-block;
+      padding: 0.2rem 0.7rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #fff;
+      margin-right: 0.4rem;
+    }
+
+    .badge-p1 { background: #e53e3e; }
+    .badge-p2 { background: #dd6b20; }
+    .badge-p3 { background: #718096; }
+
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 0 0 1rem 0;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #2d3748;
+      margin: 1.2rem 0 0.5rem 0;
+      padding-left: 0.5rem;
+      border-left: 3px solid #2b6cb0;
+    }
+
+    h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #4a5568;
+      margin: 0.8rem 0 0.3rem 0;
+    }
+
+    p {
+      margin-bottom: 0.8rem;
+    }
+
+    ul, ol {
+      margin: 0.5rem 0 1rem 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.3rem;
+    }
+
+    code {
+      font-family: "SF Mono", "Fira Code", "Menlo", monospace;
+      background: #edf2f7;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: #2b6cb0;
+    }
+
+    pre {
+      background: #1a202c;
+      color: #e2e8f0;
+      padding: 1rem 1.2rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      margin: 0.6rem 0 1rem 0;
+    }
+
+    .highlight-box {
+      background: #ebf8ff;
+      border-left: 4px solid #2b6cb0;
+      padding: 0.8rem 1rem;
+      border-radius: 0 6px 6px 0;
+      margin: 0.8rem 0;
+    }
+
+    .highlight-warn {
+      background: #fffaf0;
+      border-left: 4px solid #dd6b20;
+      padding: 0.8rem 1rem;
+      border-radius: 0 6px 6px 0;
+      margin: 0.8rem 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.8rem 0;
+      font-size: 0.88rem;
+    }
+
+    th, td {
+      border: 1px solid #e2e8f0;
+      padding: 0.5rem 0.7rem;
+      text-align: left;
+    }
+
+    th {
+      background: #f7fafc;
+      font-weight: 600;
+    }
+
+    .summary-table th:first-child { width: 16%; }
+    .summary-table th:nth-child(2) { width: 18%; }
+    .summary-table th:nth-child(3) { width: 40%; }
+    .summary-table th:last-child { width: 26%; }
+
+    .tag-green { color: #38a169; font-weight: 600; }
+    .tag-red { color: #e53e3e; font-weight: 600; }
+    .tag-orange { color: #dd6b20; font-weight: 600; }
+
+    footer {
+      text-align: center;
+      color: #a0aec0;
+      font-size: 0.8rem;
+      padding: 1rem 0 2rem 0;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 0.8rem; }
+      section { padding: 1rem; }
+      header h1 { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>后续开发计划详解</h1>
+    <p>P1 → P3 每项技术方案的用途、当前状态、你需要做的事</p>
+  </div>
+</header>
+
+<div class="container">
+
+<div class="meta">
+  生成日期：2026-05-11 ｜ 对应 YAML 版本：v1.12 ｜ 项目：WentuCup 2026
+</div>
+
+<!-- ============================================================ -->
+<!-- 当前架构说明 -->
+<!-- ============================================================ -->
+<section>
+  <h2>📌 当前 v1.12 的架构</h2>
+  <p>在了解 P1–P3 之前，先理解你现在 YAML 是怎么跑的：</p>
+  <table>
+    <tr><th>节点</th><th>现在调用的地址</th><th>问题</th></tr>
+    <tr>
+      <td>房态查询（GET）</td>
+      <td><code>GitHub rooms.json</code></td>
+      <td>你自己写的静态 JSON，跟酒店后台无关</td>
+    </tr>
+    <tr>
+      <td>预订提交（POST）</td>
+      <td><code>jsonplaceholder.typicode.com</code></td>
+      <td>一个跟酒店完全无关的公开测试网站</td>
+    </tr>
+    <tr>
+      <td>票务查询（GET）</td>
+      <td><code>GitHub tickets.json</code></td>
+      <td>你自己写的静态 JSON，跟景区后台无关</td>
+    </tr>
+    <tr>
+      <td>购票提交（POST）</td>
+      <td><code>jsonplaceholder.typicode.com</code></td>
+      <td>同上，跟景区完全无关</td>
+    </tr>
+    <tr>
+      <td>支付确认</td>
+      <td>纯 LLM 分类器</td>
+      <td>用户说「已支付」它就信了，不做真实验证</td>
+    </tr>
+    <tr>
+      <td>取消退款</td>
+      <td><code>GitHub cancel_booking.json</code></td>
+      <td>静态 JSON，一轮对话直接取消，没有确认流程</td>
+    </tr>
+  </table>
+
+  <div class="highlight-warn">
+    <strong>⚠️ 为什么这很重要：</strong> 比赛评分中「预订 Agent」占 10 分，评委关注的是 Agent 是否<strong>真实调用工具</strong>。当前所有工具都是你自己编的 mock，不是跟酒店后台对接的真实服务。P1 要解决的就是这个问题。
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- P1 -->
+<!-- ============================================================ -->
+
+<section>
+  <h2>
+    <span class="priority-badge badge-p1">P1</span>
+    路演前必须完成（直接影响评分核心）
+  </h2>
+
+  <!-- P1-① -->
+  <h3>① MCP 服务接入 — 替换 GitHub mock 为真实酒店/景区服务</h3>
+
+  <h4>这是什么</h4>
+  <p>主办方视频里透露：比赛平台已经提供了<strong>两个 MCP 服务</strong>：</p>
+  <ul>
+    <li><code>mcp-server-booking.v4.test.dossm.cn</code> → 对接酒店<strong>真实的客房预订系统</strong></li>
+    <li><code>mcp-server-travel.v4.test.dossm.cn</code> → 对接酒店<strong>真实的景区票务系统</strong></li>
+  </ul>
+  <p>MCP = Model Context Protocol。简单说：</p>
+  <div class="highlight-box">
+    <strong>主办方已经帮你在酒店后台和比赛平台之间搭好了桥。</strong> 你的 Agent 不需要自己去对接酒店 PMS，只要让 Dify 调用这个 MCP 服务即可。
+  </div>
+
+  <h4>为什么必须做</h4>
+  <p>当前你查房态读的是自己写的 <code>rooms.json</code>，提交预订去的是跟酒店无关的 jsonplaceholder。评委问「你这个预订真的提交到酒店系统了吗？」时，你只能说「这是模拟的」。</p>
+  <p>接入 MCP 后，路演时可以说：</p>
+  <div class="highlight-box">
+    「我们的 Agent 直接调用了比赛平台提供的酒店 MCP 服务，读取的是酒店后台实时房态，提交的订单会进入酒店预订系统。」
+  </div>
+
+  <h4>你需要做的事（手动操作，15 分钟）</h4>
+  <ol>
+    <li>在 <strong>Dify / 问途 AI Playground 后台</strong>找到「工具」或「MCP 管理」页面</li>
+    <li>添加两个 SSE 地址为工具：
+      <ul>
+        <li><code>http://mcp-server-booking.v4.test.dossm.cn/sse</code></li>
+        <li><code>http://mcp-server-travel.v4.test.dossm.cn/sse</code></li>
+      </ul>
+    </li>
+    <li>添加成功后告诉我 → 我把 YAML 中的 4 个 HTTP 节点替换为 MCP 工具节点</li>
+  </ol>
+
+  <!-- P1-② -->
+  <h3>② 统一价格源打通 — 确认后台改价能否同步到网页和小程序</h3>
+
+  <h4>这是什么</h4>
+  <p>你提到「已经有一个网页可以修改价格」——那是<strong>问途数字化营销管理平台 v2.0</strong> 的「房价管理」页面。酒店工作人员在里面每日维护房价。</p>
+  <p>现在有三个地方会展示价格：</p>
+  <table>
+    <tr><th>展示渠道</th><th>价格从哪来？</th></tr>
+    <tr><td>网页版酒店页面</td><td>❓ 不确定是否跟后台价格源联动</td></tr>
+    <tr><td>「小途乐订」小程序</td><td>❓ 不确定是否跟后台价格源联动</td></tr>
+    <tr><td><strong>你的 Agent</strong></td><td>❌ 从你自己写的 rooms.json 来，跟后台完全无关</td></tr>
+  </table>
+
+  <h4>你需要做的事（手动测试，一次 15 分钟）</h4>
+  <ol>
+    <li>在「房价管理」页面选一个测试日期（如 2026-05-20）和一个房型（如豪华套房）</li>
+    <li>把价格改为一个醒目的数字，如 <code>888</code></li>
+    <li>打开网页版 → 看同一日期同一房型是否显示 <code>888</code></li>
+    <li>打开「小途乐订」小程序 → 看是否也显示 <code>888</code></li>
+  </ol>
+
+  <table>
+    <tr><th>测试结果</th><th>结论</th><th>后续做法</th></tr>
+    <tr>
+      <td><span class="tag-green">✅ 网页和小程序都变成 888</span></td>
+      <td>共享同一价格源</td>
+      <td>找技术人员要价格查询 API 地址 → 我加到 YAML 中替换 rooms.json</td>
+    </tr>
+    <tr>
+      <td><span class="tag-red">❌ 网页或小程序没变</span></td>
+      <td>价格源尚未打通</td>
+      <td>Agent 保持现状，说「价格以小途乐订小程序实时显示为准」</td>
+    </tr>
+  </table>
+
+  <div class="highlight-warn">
+    <strong>⚠️ 注意：</strong> 这不是代码问题。你不需要写任何代码，只需要去那个页面操作一次看看结果。
+  </div>
+
+  <!-- P1-③ -->
+  <h3>③ 支付状态真实查询 — 从「用户说已支付」升级到「系统验证已支付」</h3>
+
+  <h4>现在的支付确认</h4>
+  <p>用户说「已支付」→ 分类器识别 → LLM 回复「好的，已记录」。</p>
+  <p><strong>这是纯口头的</strong>——Agent 没有真的去查小程序后台，用户说「已支付」它就信了。</p>
+
+  <h4>理想流程</h4>
+  <ol>
+    <li>用户说「已支付」</li>
+    <li>HTTP 节点调用小程序订单查询 API：传流水编号 <code>WCP-101</code></li>
+    <li>API 返回：<code>{"status": "paid", "amount": 1280}</code></li>
+    <li>LLM 回复：「确认成功，您已支付 ¥1,280」</li>
+  </ol>
+
+  <h4>你需要做的事（问一句即可）</h4>
+  <p>问主办方或技术人员：<strong>「小途乐订 / 小途乐游有没有提供订单查询 API？」</strong></p>
+  <ul>
+    <li>如果有 → 我加 HTTP 节点实现真实验证</li>
+    <li>如果没有 → 保持现在的纯分类器方案（至少能识别出用户意图）</li>
+  </ul>
+</section>
+
+<!-- ============================================================ -->
+<!-- P2 -->
+<!-- ============================================================ -->
+
+<section>
+  <h2>
+    <span class="priority-badge badge-p2">P2</span>
+    加分项（增强技术亮点和工程严谨性）
+  </h2>
+
+  <!-- P2-① -->
+  <h3>④ 景区门票价格的独立算术节点</h3>
+
+  <h4>这是什么</h4>
+  <p>当前景区购票的价格计算是由 <strong>LLM 自己心算</strong>：prompt 里写了「成人票 88 元，儿童票 44 元」，让 AI 去算 <code>3×88+1×44=?</code></p>
+  <p><strong>问题：</strong>大模型算数偶尔会出错。你希望评委对价格数据有信心，就不应该让 AI 心算。</p>
+
+  <h4>解决方案</h4>
+  <p>在 Dify 工作流中加一个 <strong>Code 节点</strong>（代码执行节点），固定公式：</p>
+  <pre>总价 = 成人票数 × 成人单价 + 儿童票数 × 儿童单价</pre>
+  <p>代码节点是确定的——永远算不错。</p>
+
+  <h4>是你自己加还是平台已经提供了？</h4>
+  <p><strong>是我加，你不用动手。</strong> Dify 本身就提供 Code 节点功能，不需要主办方额外提供。我改 YAML 就行。</p>
+
+  <h4>现在的流程 vs 加了算术节点后的流程</h4>
+  <table>
+    <tr><th></th><th>当前</th><th>加了算术节点后</th></tr>
+    <tr>
+      <td>流程</td>
+      <td>票务查询 → LLM（在prompt里算价格）→ 确认摘要</td>
+      <td>票务查询 → LLM → <strong>Code 节点算总价</strong> → 确认摘要</td>
+    </tr>
+    <tr>
+      <td>价格准确率</td>
+      <td>大模型心算，可能出错</td>
+      <td>代码计算，100% 准确</td>
+    </tr>
+  </table>
+
+  <!-- P2-② -->
+  <h3>⑤ 取消退款多轮流程</h3>
+
+  <h4>现在的取消退款</h4>
+  <p>用户说「取消预订」→ 分类器识别 → 读 JSON → 回复「已取消，请联系前台」。</p>
+  <p><strong>问题：</strong>一轮对话直接执行，没有确认。真实酒店客服不会这样做。</p>
+
+  <h4>多轮流程长什么样</h4>
+  <pre>你：我要取消预订
+Agent：您的预订信息如下：
+       · 入住：2026-05-15  · 房型：豪华套房  · 金额：¥1,280
+       确认要取消吗？回复「确认取消」或「不取消」
+
+你：确认取消
+Agent：好的。退款方式请选择：
+       A. 原路返还（退回支付账户）
+       B. 到酒店前台领取现金
+
+你：A
+Agent：正在处理... 已成功取消！取消编号：WCNC-20260510-001
+       退款 ¥1,280 将按原路返还。
+       前台电话：0750-662-9888</pre>
+
+  <h4>为什么要做</h4>
+  <ul>
+    <li><strong>避免误操作：</strong> 用户可能随口说「取消算了」，Agent 不应该直接执行</li>
+    <li><strong>比赛评分：</strong> 评委可能会测试取消流程，看有没有让用户确认</li>
+    <li><strong>真实感：</strong> 更接近真实酒店客服的交互方式</li>
+  </ul>
+
+  <h4>是你自己加还是我来加？</h4>
+  <p><strong>我来加。</strong> 在 YAML 中把「取消预订」分支从单个 LLM 节点扩展为 3-4 个节点串联。</p>
+
+  <!-- P2-③ -->
+  <h3>⑥ 参数提取器 + 变量赋值器</h3>
+
+  <h4>这是什么</h4>
+  <p>当前预订提交 POST 的 payload 中有这样的字段：</p>
+  <pre>"guest_name": "{{#conversation.guest_name#}}"</pre>
+  <p>如果 conversation 变量里没有 <code>guest_name</code>，发出去的就是<strong>空字符串</strong>，甚至更糟——把 <code>{{#conversation.guest_name#}}</code> 这串文字直接发出去。</p>
+
+  <h4>参数提取器解决什么</h4>
+  <p>它解决「怎么把 LLM 说的文本变成程序能用的变量」。具体：</p>
+  <ol>
+    <li>LLM 输出确认摘要后，参数提取器从摘要文本中提取「姓名=张三」「入住日期=5月15日」「房型=豪华套房」</li>
+    <li>写入 Dify 的对话变量</li>
+    <li>POST 节点读变量时就有真实数据了</li>
+  </ol>
+
+  <h4>变量赋值器又是什么</h4>
+  <p>比参数提取器更简单的 Dify 原生功能。你直接告诉它：「这个变量 = 那个节点的输出」。不需要写提取规则。</p>
+
+  <h4>是否需要你做</h4>
+  <p><strong>不用你动手，我来改 YAML。</strong> 但导入后可能需要你确认一下参数提取规则配置是否正确。</p>
+</section>
+
+<!-- ============================================================ -->
+<!-- P3 -->
+<!-- ============================================================ -->
+
+<section>
+  <h2>
+    <span class="priority-badge badge-p3">P3</span>
+    锦上添花（赛后或有空再做）
+  </h2>
+
+  <!-- P3-① -->
+  <h3>⑦ Dify 控制台自动导入脚本</h3>
+
+  <h4>现状</h4>
+  <p>我改完 YAML → 提交到 GitHub → 你手动打开 Dify 网页 → 导入 YAML → 发布。全部手动操作。</p>
+
+  <h4>脚本做什么</h4>
+  <p>写一个脚本自动完成上述手动步骤：</p>
+  <ol>
+    <li>从浏览器中安全获取登录 session</li>
+    <li>调用 <code>/console/api/apps/imports</code> 自动导入 YAML</li>
+    <li>调用 <code>/console/api/apps/imports/{id}/confirm</code> 确认</li>
+    <li>调用 <code>/console/api/apps/{id}/workflows/publish</code> 发布</li>
+  </ol>
+
+  <h4>为什么是 P3</h4>
+  <p>因为涉及登录凭证（cookie/session），需要额外注意安全性。且比赛期间版本迭代不频繁，手动导入完全够用。</p>
+
+  <!-- P3-② -->
+  <h3>⑧ MCP 回归测试脚本</h3>
+
+  <h4>现状</h4>
+  <p>每次导入新版后，你手动在聊天框测试几个场景：说「你好」「我要订房间」「已支付」「取消预订」，检查回复是否正常。</p>
+
+  <h4>脚本做什么</h4>
+  <pre>用例1：输入「你好」       → 期望回复含「碧桂园」「凤凰酒店」  ✅
+用例2：输入「我要订房间」  → 期望回复含「入住日期」「房型」     ✅
+用例3：输入「已支付」     → 期望回复含「支付」                ✅
+用例4：输入「取消预订」   → 期望回复含「取消」                ✅
+全部通过 → 绿灯 ✅   任何失败 → 红灯 ❌ + 告诉你是哪个用例失败</pre>
+
+  <h4>为什么是 P3</h4>
+  <p>手动测试也很快（1-2 分钟），写脚本需要额外维护，不是比赛评分要求。</p>
+</section>
+
+<!-- ============================================================ -->
+<!-- 总结 -->
+<!-- ============================================================ -->
+
+<section>
+  <h2>📋 总结：你真正需要手动做的只有三件事</h2>
+
+  <table class="summary-table">
+    <tr>
+      <th>要做的事</th>
+      <th>耗时</th>
+      <th>做了之后我干什么</th>
+      <th>不做的风险</th>
+    </tr>
+    <tr>
+      <td><strong>① 在 Dify 后台添加 MCP 工具</strong><br><small>（找到 MCP 管理入口，添加两个 SSE 地址）</small></td>
+      <td>15 分钟</td>
+      <td>我改 YAML，把 HTTP 节点替换为 MCP 工具节点</td>
+      <td><span class="tag-red">核心扣分：预订 Agent 仍用 mock 数据</span></td>
+    </tr>
+    <tr>
+      <td><strong>② 做一次改价测试</strong><br><small>（后台改价 → 看网页/小程序是否同步）</small></td>
+      <td>15 分钟</td>
+      <td>若同步，我加价格 API 节点；若不同步，保持现状</td>
+      <td><span class="tag-orange">路演时价格来源说不清楚</span></td>
+    </tr>
+    <tr>
+      <td><strong>③ 问一句：订单查询 API</strong><br><small>（问技术：小途乐订/游有没有订单查询接口）</small></td>
+      <td>一句话</td>
+      <td>有 → 我加支付验证节点；没有 → 保持分类器方案</td>
+      <td><span class="tag-orange">支付验证停留在「用户说了算」</span></td>
+    </tr>
+  </table>
+
+  <p style="margin-top: 1rem;">其余项目（算术节点、多轮取消、参数提取器）都是<strong>我直接改 YAML</strong>，你不需要动手。</p>
+
+  <div class="highlight-box" style="font-size: 1rem; text-align: center; padding: 1.2rem;">
+    <strong>建议执行顺序：</strong> ① → ② → ③。<br>
+    如果时间只够做一件，<strong>优先做 ①（MCP 服务接入）</strong>，它直接影响路演核心评分。
+  </div>
+</section>
+
+<footer>
+  本文档由 AI 助手生成，对应 WentuCup 2026 项目工作区文件。
+</footer>
+
+</div>
+</body>
+</html>
