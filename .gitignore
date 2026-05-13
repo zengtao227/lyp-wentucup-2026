@@ -23,3 +23,11 @@ Icon
 # Extracted temp files
 extracted_docx/
 ocr_pages/
+
+# Sensitive API keys and credentials
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+api_keys.txt

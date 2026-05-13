@@ -1,9 +1,9 @@
 app:
-  description: 2026问途杯决赛 - 酒店全能智能前台 (真·Agent 终极稳健版)。删除了所有硬编码 ID，完全交由平台自动注入。
+  description: 2026问途杯决赛 - 酒店全能智能前台 v2.1 (增强版)。新增智能引导功能，当客人提到不存在的房型时自动推荐合适选项。
   icon: 🏨
   icon_background: '#B0C4DE'
   mode: agent-chat
-  name: 大模型5月12日-v2.0-Agent
+  name: 大模型5月13日-v2.1-Agent
   use_icon_as_answer_icon: false
 kind: app
 model_config:
