@@ -47,94 +47,94 @@ workflow:
     - special_needs
     value: ''
     value_type: string
-   - description: 预算范围
-     id: 47cfc5cb-e0d3-4c93-a774-000000000005
-     name: budget_range
-     selector:
-     - conversation
-     - budget_range
-     value: ''
-     value_type: string
-   - description: 情绪状态
-     id: 9cbb1d04-9457-43df-8132-000000000006
-     name: sentiment_flag
-     selector:
-     - conversation
-     - sentiment_flag
-     value: normal
-     value_type: string
-   - description: 退房日期
-     id: 1f17e64b-0cb7-4d0a-a7c7-000000000007
-     name: check_out_date
-     selector:
-     - conversation
-     - check_out_date
-     value: ''
-     value_type: string
-   - description: 房型偏好
-     id: 1f17e64b-0cb7-4d0a-a7c7-000000000008
-     name: room_type
-     selector:
-     - conversation
-     - room_type
-     value: ''
-     value_type: string
-   - description: 联系电话
-     id: 1f17e64b-0cb7-4d0a-a7c7-000000000009
-     name: contact_phone
-     selector:
-     - conversation
-     - contact_phone
-     value: ''
-     value_type: string
-   - description: 景区名称（购票）
-     id: 1f17e64b-0cb7-4d0a-a7c7-000000000010
-     name: attraction_name
-     selector:
-     - conversation
-     - attraction_name
-     value: ''
-     value_type: string
-   - description: 游玩日期（购票）
-     id: 1f17e64b-0cb7-4d0a-a7c7-000000000011
-     name: visit_date
-     selector:
-     - conversation
-     - visit_date
-     value: ''
-     value_type: string
-   - description: 成人票数（购票）
-     id: 1f17e64b-0cb7-4d0a-a7c7-000000000012
-     name: adult_count
-     selector:
-     - conversation
-     - adult_count
-     value: ''
-     value_type: string
-   - description: 儿童票数（购票）
-     id: 1f17e64b-0cb7-4d0a-a7c7-000000000013
-     name: child_count
-     selector:
-     - conversation
-     - child_count
-     value: ''
-     value_type: string
-   - description: 支付状态
-     id: 1f17e64b-0cb7-4d0a-a7c7-000000000014
-     name: payment_status
-     selector:
-     - conversation
-     - payment_status
-     value: unpaid
-     value_type: string
-   - description: 流水编号
-     id: 1f17e64b-0cb7-4d0a-a7c7-000000000015
-     name: booking_reference
-     selector:
-     - conversation
-     - booking_reference
-     value: ''
-     value_type: string
+  - description: 预算范围
+    id: 47cfc5cb-e0d3-4c93-a774-000000000005
+    name: budget_range
+    selector:
+    - conversation
+    - budget_range
+    value: ''
+    value_type: string
+  - description: 情绪状态
+    id: 9cbb1d04-9457-43df-8132-000000000006
+    name: sentiment_flag
+    selector:
+    - conversation
+    - sentiment_flag
+    value: normal
+    value_type: string
+  - description: 退房日期
+    id: 1f17e64b-0cb7-4d0a-a7c7-000000000007
+    name: check_out_date
+    selector:
+    - conversation
+    - check_out_date
+    value: ''
+    value_type: string
+  - description: 房型偏好
+    id: 1f17e64b-0cb7-4d0a-a7c7-000000000008
+    name: room_type
+    selector:
+    - conversation
+    - room_type
+    value: ''
+    value_type: string
+  - description: 联系电话
+    id: 1f17e64b-0cb7-4d0a-a7c7-000000000009
+    name: contact_phone
+    selector:
+    - conversation
+    - contact_phone
+    value: ''
+    value_type: string
+  - description: 景区名称（购票）
+    id: 1f17e64b-0cb7-4d0a-a7c7-000000000010
+    name: attraction_name
+    selector:
+    - conversation
+    - attraction_name
+    value: ''
+    value_type: string
+  - description: 游玩日期（购票）
+    id: 1f17e64b-0cb7-4d0a-a7c7-000000000011
+    name: visit_date
+    selector:
+    - conversation
+    - visit_date
+    value: ''
+    value_type: string
+  - description: 成人票数（购票）
+    id: 1f17e64b-0cb7-4d0a-a7c7-000000000012
+    name: adult_count
+    selector:
+    - conversation
+    - adult_count
+    value: ''
+    value_type: string
+  - description: 儿童票数（购票）
+    id: 1f17e64b-0cb7-4d0a-a7c7-000000000013
+    name: child_count
+    selector:
+    - conversation
+    - child_count
+    value: ''
+    value_type: string
+  - description: 支付状态
+    id: 1f17e64b-0cb7-4d0a-a7c7-000000000014
+    name: payment_status
+    selector:
+    - conversation
+    - payment_status
+    value: unpaid
+    value_type: string
+  - description: 流水编号
+    id: 1f17e64b-0cb7-4d0a-a7c7-000000000015
+    name: booking_reference
+    selector:
+    - conversation
+    - booking_reference
+    value: ''
+    value_type: string
   environment_variables: []
   features:
     file_upload:

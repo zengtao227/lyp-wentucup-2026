@@ -1,0 +1,409 @@
+app:
+  description: 2026问途杯决赛 - 酒店全能智能前台 (接入预订与支付系统)
+  icon: 🏨
+  icon_background: '#B0C4DE'
+  mode: agent-chat
+  name: 酒店智能客服助手-决赛版
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.0.42@85e7bb71e461653ac101330c751973085dfdde26c906b07d7dff8030c95bc39e
+    version: null
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openweather:0.0.6@a16f3f6c79b1cb45bc22942ed84c53a9732c118bde0a46d0d9282a9d15581347
+    version: null
+kind: app
+model_config:
+  agent_mode:
+    enabled: true
+    max_iteration: 10
+    prompt: null
+    strategy: react
+    tools:
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: travel-booking
+      provider_name: 景区票务预订
+      provider_type: mcp
+      tool_label: submitPurchase
+      tool_name: submitPurchase
+      tool_parameters:
+        date: ''
+        email: ''
+        items: ''
+        mobile: ''
+        name: ''
+        teamId: ''
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: travel-booking
+      provider_name: 景区票务预订
+      provider_type: mcp
+      tool_label: getTravelMerchandiseViews4Group
+      tool_name: getTravelMerchandiseViews4Group
+      tool_parameters:
+        teamId: ''
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: travel-booking
+      provider_name: 景区票务预订
+      provider_type: mcp
+      tool_label: getTravelMerchandiseViewById
+      tool_name: getTravelMerchandiseViewById
+      tool_parameters:
+        date: ''
+        id: ''
+        teamId: ''
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: travel-booking
+      provider_name: 景区票务预订
+      provider_type: mcp
+      tool_label: getTravelMerchandiseViews4Ticket
+      tool_name: getTravelMerchandiseViews4Ticket
+      tool_parameters:
+        teamId: ''
+    - enabled: true
+      notAuthor: false
+      provider_id: langgenius/openweather/openweather
+      provider_name: langgenius/openweather/openweather
+      provider_type: builtin
+      tool_label: 天气查询
+      tool_name: weather
+      tool_parameters:
+        city: ''
+        lang: ''
+        units: ''
+    - enabled: true
+      notAuthor: false
+      provider_id: time
+      provider_name: time
+      provider_type: builtin
+      tool_label: 获取当前时间
+      tool_name: current_time
+      tool_parameters:
+        format: ''
+        timezone: ''
+    - enabled: true
+      notAuthor: false
+      provider_id: time
+      provider_name: time
+      provider_type: builtin
+      tool_label: 获取时间戳
+      tool_name: localtime_to_timestamp
+      tool_parameters:
+        localtime: ''
+        timezone: ''
+    - enabled: true
+      notAuthor: false
+      provider_id: time
+      provider_name: time
+      provider_type: builtin
+      tool_label: 星期几计算器
+      tool_name: weekday
+      tool_parameters:
+        day: ''
+        month: ''
+        year: ''
+    - enabled: true
+      notAuthor: false
+      provider_id: time
+      provider_name: time
+      provider_type: builtin
+      tool_label: 时区转换
+      tool_name: timezone_conversion
+      tool_parameters:
+        current_time: ''
+        current_timezone: ''
+        target_timezone: ''
+    - enabled: true
+      notAuthor: false
+      provider_id: hotel-booking
+      provider_name: 酒店客房预订
+      provider_type: mcp
+      tool_label: getAvailableRoomsByDate
+      tool_name: getAvailableRoomsByDate
+      tool_parameters:
+        checkInDate: ''
+        checkOutDate: ''
+        teamId: ''
+    - enabled: true
+      notAuthor: false
+      provider_id: hotel-booking
+      provider_name: 酒店客房预订
+      provider_type: mcp
+      tool_label: getAvailableRoomsByRoomTypeAndDate
+      tool_name: getAvailableRoomsByRoomTypeAndDate
+      tool_parameters:
+        checkInDate: ''
+        checkOutDate: ''
+        roomType: ''
+        teamId: ''
+    - enabled: true
+      notAuthor: false
+      provider_id: hotel-booking
+      provider_name: 酒店客房预订
+      provider_type: mcp
+      tool_label: getRoomDetailByRoomCode
+      tool_name: getRoomDetailByRoomCode
+      tool_parameters:
+        checkInDate: ''
+        checkOutDate: ''
+        code: ''
+        roomCode: ''
+        teamId: ''
+    - enabled: true
+      notAuthor: false
+      provider_id: hotel-booking
+      provider_name: 酒店客房预订
+      provider_type: mcp
+      tool_label: getHotelHelpAfterSubmitBookingError
+      tool_name: getHotelHelpAfterSubmitBookingError
+      tool_parameters:
+        teamId: ''
+    - enabled: true
+      notAuthor: false
+      provider_id: hotel-booking
+      provider_name: 酒店客房预订
+      provider_type: mcp
+      tool_label: submitBooking
+      tool_name: submitBooking
+      tool_parameters:
+        checkInDate: ''
+        checkOutDate: ''
+        email: ''
+        mobile: ''
+        name: ''
+        number: ''
+        rateCode: ''
+        roomCode: ''
+        teamId: ''
+        verifyId: ''
+        verifyIds: ''
+  annotation_reply:
+    enabled: false
+  chat_prompt_config: {}
+  completion_prompt_config: {}
+  dataset_configs:
+    datasets:
+      datasets:
+      - dataset:
+          enabled: true
+          id: b2578566-0fc1-4333-bf81-17441829b236
+      - dataset:
+          enabled: true
+          id: ee12d6ea-6f9b-4f35-ab9b-6a441d2b9f94
+      - dataset:
+          enabled: true
+          id: 44f95b96-185d-4593-b394-b1f307bcb6b4
+      - dataset:
+          enabled: true
+          id: 3b42c867-9fa9-4602-a4a6-da829cae6a78
+      - dataset:
+          enabled: true
+          id: a41f219c-9ea5-49b3-889a-da112feb49f0
+    reranking_enable: false
+    reranking_mode: reranking_model
+    reranking_model:
+      reranking_model_name: gte-rerank-v2
+      reranking_provider_name: langgenius/tongyi/tongyi
+    retrieval_model: multiple
+    top_k: 4
+  dataset_query_variable: ''
+  external_data_tools: []
+  file_upload:
+    allowed_file_extensions:
+    - .JPG
+    - .JPEG
+    - .PNG
+    - .GIF
+    - .WEBP
+    - .SVG
+    - .MP4
+    - .MOV
+    - .MPEG
+    - .WEBM
+    allowed_file_types: []
+    allowed_file_upload_methods:
+    - remote_url
+    - local_file
+    enabled: false
+    image:
+      detail: high
+      enabled: false
+      number_limits: 3
+      transfer_methods:
+      - remote_url
+      - local_file
+    number_limits: 3
+  model:
+    completion_params:
+      stop: []
+    mode: chat
+    name: deepseek-v3
+    provider: langgenius/tongyi/tongyi
+  more_like_this:
+    enabled: false
+  opening_statement: '您好！欢迎光临。我是您的酒店数字前台。
+
+    我已深度对接【问途数字化营销管理平台 V2.0】，可为您提供实时房源查询、订单预订及在线支付指引。
+
+    请问今天有什么可以帮您？'
+  pre_prompt: '# 角色
+
+    你是「新会碧桂园凤凰酒店」的智能客服助手，核心职责是帮助客人解决预订、入住、餐饮、交通、设施使用等问题。具备调用【问途数字化营销管理平台 V2.0】MCP
+    工具的权限。
+
+
+    # 工具调用原则（重要）
+
+    - 只有当客人明确表达「订房」「预订」「查房价」「看房型」「我要住」等订房意向时，才调用订房工具。
+
+    - 只有当客人明确询问「景区」「门票」「买票」等意向时，才调用景区票务工具。
+
+    - 普通问询（餐饮、停车、Wi-Fi、周边景点介绍等）直接用知识库回答，禁止调用 MCP 工具。
+
+    - 每次调用工具前，必须先确认所需信息齐全，避免无效调用。
+
+    - 严禁捏造任何房价、房态、票价、订单号，所有数据必须来自工具实时返回结果。
+
+
+    # 核心任务一：酒店订房 SOP（仅在客人有订房意向时执行）
+
+
+    ## 第一步：查询房态与价格
+
+    收集入住日期 {{checkin_date}}、离店日期、房型偏好后，调用：
+
+    - `getAvailableRoomsByDate` 按日期查询可用房型、价格和剩余数量
+
+    - 或 `getAvailableRoomsByRoomTypeAndDate` 查询指定房型的可用情况
+
+    将实时结果展示给客人选择。
+
+
+    ## 第二步：展示房型详情
+
+    客人选定房型后，调用 `getRoomDetailByRoomCode` 获取完整房型描述和图文信息。
+
+
+    ## 第三步：核实预订信息
+
+    必须全部获取后才能下单：
+
+    - 宾客姓名 {{guest_name}}
+
+    - 手机号码
+
+    - 入住日期 / 离店日期 {{checkin_date}}
+
+    - 确认房型
+
+
+    ## 第四步：提交预订
+
+    调用 `submitBooking` 提交订单。成功后向客人展示【订单号】，并告知：
+
+    「系统已为您生成支付链接，请在 15 分钟内完成支付以锁定房源。」
+
+
+    ## 第五步：预订失败处理
+
+    如 `submitBooking` 返回失败，调用 `getHotelHelpAfterSubmitBookingError` 引导客人完成退款或重新预订。
+
+
+    # 核心任务二：景区票务 SOP（仅在客人询问景区门票时执行）
+
+
+    ## 第一步：查询景区产品
+
+    - 调用 `getTravelMerchandiseViews4Group` 获取所有旅游商品分类
+
+    - 或调用 `getTravelMerchandiseViews4Ticket` 获取所有景区门票列表
+
+    展示给客人选择。
+
+
+    ## 第二步：查询景区详情
+
+    客人选定后调用 `getTravelMerchandiseViewById` 展示详细信息、价格和游玩日期限制。
+
+
+    ## 第三步：核实购票信息
+
+    必须全部获取：
+
+    - 宾客姓名 {{guest_name}}
+
+    - 手机号码
+
+    - 游玩日期 {{checkin_date}}
+
+    - 票种及数量
+
+
+    ## 第四步：提交购票
+
+    调用 `submitPurchase` 提交订单。成功后展示【订单号】及支付信息。
+
+
+    # 业务规范
+
+    - 严禁虚假承诺：所有房价、票价、房态必须以 MCP 工具实时返回为准。
+
+    - 礼仪：保持五星级酒店服务标准，用词优雅、主动热情。
+
+    - 遇到无法处理的问题（投诉、紧急情况），引导客人联系前台或人工客服。
+
+
+    # 变量上下文
+
+    - 姓名：{{guest_name}}
+
+    - 日期：{{checkin_date}}
+
+    - 需求：{{guest_query}}'
+  prompt_type: simple
+  retriever_resource:
+    enabled: true
+  sensitive_word_avoidance:
+    configs: []
+    enabled: false
+    type: ''
+  speech_to_text:
+    enabled: false
+  suggested_questions: []
+  suggested_questions_after_answer:
+    enabled: false
+  text_to_speech:
+    enabled: false
+    language: ''
+    voice: ''
+  user_input_form:
+  - text-input:
+      default: ''
+      label: 宾客姓名
+      max_length: 48
+      required: true
+      variable: guest_name
+  - text-input:
+      default: ''
+      label: 您的需求
+      max_length: 256
+      required: true
+      variable: guest_query
+  - text-input:
+      default: ''
+      label: 入住/游玩日期
+      max_length: 48
+      required: false
+      variable: checkin_date
+version: 0.4.0
