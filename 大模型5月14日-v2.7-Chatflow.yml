@@ -1,5 +1,5 @@
 app:
-  description: 2026问途杯决赛 - 酒店全能智能前台 v2.7 Chatflow版。意图分类三路路由：知识库问答/客房预订Agent(MCP)/景区转人工。
+  description: 2026问途杯决赛 - 酒店全能智能前台 v2.7 Chatflow版。意图分类三路路由：知识库问答/客房预订LLM/景区转人工。
   icon: 🏨
   icon_background: '#B0C4DE'
   mode: advanced-chat
@@ -132,7 +132,7 @@ workflow:
         isInIteration: false
         isInLoop: false
         sourceType: question-classifier
-        targetType: agent-node
+        targetType: http-request
       id: 1716700000002-1716700000200-1716700000010-target
       source: '1716700000002'
       sourceHandle: '1716700000200'
@@ -143,8 +143,8 @@ workflow:
     - data:
         isInIteration: false
         isInLoop: false
-        sourceType: agent-node
-        targetType: answer
+        sourceType: http-request
+        targetType: llm
       id: 1716700000010-source-1716700000012-target
       source: '1716700000010'
       sourceHandle: source
@@ -155,12 +155,24 @@ workflow:
     - data:
         isInIteration: false
         isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1716700000012-source-1716700000014-target
+      source: '1716700000012'
+      sourceHandle: source
+      target: '1716700000014'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
         sourceType: question-classifier
         targetType: answer
-      id: 1716700000002-1716700000300-1716700000014-target
+      id: 1716700000002-1716700000300-1716700000016-target
       source: '1716700000002'
       sourceHandle: '1716700000300'
-      target: '1716700000014'
+      target: '1716700000016'
       targetHandle: target
       type: custom
       zIndex: 0
@@ -174,10 +186,10 @@ workflow:
       id: '1716700000000'
       position:
         x: -200
-        y: 300
+        y: 729
       positionAbsolute:
         x: -200
-        y: 300
+        y: 729
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -188,16 +200,17 @@ workflow:
         - id: '1716700000100'
           name: 酒店设施/餐饮/配套服务/交通/投诉/通用咨询
         - id: '1716700000200'
-          name: 客房预订/查房/房型详情/支付/取消订单/天气/周边出行
+          name: 客房预订/查房/房型详情/支付确认/取消订单/天气/周边出行
         - id: '1716700000300'
           name: 景区门票/景点票务/购票/景区游览
-        instructions: 根据用户的问题意图，将其分类到最匹配的类别。预订相关的所有问题（包括查房态、问价格、确认预订、支付、取消）统一归入第二类（客房预订/查房/房型详情/支付/取消订单/天气/周边出行）。景区门票相关的所有问题归入第三类（景区门票/景点票务/购票/景区游览）。其余酒店咨询问题归入第一类（酒店设施/餐饮/配套服务/交通/投诉/通用咨询）。
+        instructions: 根据用户的问题意图，将其分类到最匹配的类别。预订相关的所有问题（包括查房态、问价格、确认预订、支付、取消、已支付）统一归入第二类（客房预订）。景区门票相关的所有问题归入第三类（景区门票）。其余酒店咨询问题归入第一类（酒店设施/餐饮等通用咨询）。
         model:
           completion_params:
             disable_search: true
             max_tokens: 500
-            stop: []
             temperature: 0.1
+            top_k: 20
+            top_p: 0.5
           mode: chat
           name: deepseek-v3
           provider: langgenius/tongyi/tongyi
@@ -213,10 +226,10 @@ workflow:
       id: '1716700000002'
       position:
         x: 100
-        y: 200
+        y: 579
       positionAbsolute:
         x: 100
-        y: 200
+        y: 579
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -246,11 +259,11 @@ workflow:
       height: 89
       id: '1716700000004'
       position:
-        x: 420
-        y: 80
+        x: 430
+        y: 361
       positionAbsolute:
-        x: 420
-        y: 80
+        x: 430
+        y: 361
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -278,6 +291,8 @@ workflow:
             max_tokens: 500
             stop: []
             temperature: 0.7
+            top_k: 1
+            top_p: 0.7
           mode: chat
           name: deepseek-v3
           provider: langgenius/tongyi/tongyi
@@ -292,11 +307,18 @@ workflow:
 
             你是「新会碧桂园凤凰酒店」的智能客服助手，专职回答酒店设施、餐饮、配套等咨询问题。
 
-            请严格基于以上知识库内容用自然流畅的中文回答客人问题。
+            【约束】
 
-            知识库无相关信息时，礼貌告知并建议拨打前台电话 0750-662-9888。
+            1. 请严格基于以上知识库内容用自然流畅的中文回答客人问题，用语礼貌简洁，尊称客人为"您"。
 
-            不输出技术标签、原始 JSON 或思考过程。'
+            2. 知识库无相关信息时，礼貌告知并建议拨打前台电话 0750-662-9888。
+
+            3. 只回答用户当前的问题，不主动添加无关信息。
+
+            4. 不输出技术标签、原始 JSON 或思考过程。
+
+            酒店地址：广东省江门市新会区会城镇启超大道1号
+            前台电话：0750-662-9888'
         selected: false
         title: 知识库问答
         type: llm
@@ -306,10 +328,10 @@ workflow:
       id: '1716700000006'
       position:
         x: 720
-        y: 80
+        y: 361
       positionAbsolute:
         x: 720
-        y: 80
+        y: 361
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -324,126 +346,202 @@ workflow:
       height: 102
       id: '1716700000008'
       position:
-        x: 1020
-        y: 80
+        x: 1010
+        y: 361
       positionAbsolute:
-        x: 1020
-        y: 80
+        x: 1010
+        y: 361
       selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
       width: 241
     - data:
-        agent_mode: function_calling
-        max_iteration: 5
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data: []
+          type: none
+        headers: ''
+        method: get
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 15
+          max_read_timeout: 20
+          max_write_timeout: 10
+        title: 房态查询
+        type: http-request
+        url: https://cdn.jsdelivr.net/gh/zengtao227/lyp-wentucup-2026-public-data@main/mock-data/rooms.json
+        variables: []
+      height: 168
+      id: '1716700000010'
+      position:
+        x: 430
+        y: 729
+      positionAbsolute:
+        x: 430
+        y: 729
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 10
         model:
           completion_params:
+            max_tokens: 600
             stop: []
-            temperature: 0.7
+            temperature: 0.3
+            top_k: 1
+            top_p: 0.7
           mode: chat
           name: deepseek-v3
           provider: langgenius/tongyi/tongyi
         prompt_template:
-        - id: hotel-agent-system-prompt
+        - id: hotel-booking-llm-system-prompt
           role: system
-          text: "你是「新会碧桂园凤凰酒店」客房预订专员。teamId=234556。\n所有回复直接以中文开始，禁止输出\
-            \ Thought/Action/Final Answer 等技术标签，不输出英文句子开头。\n\n## 日期格式（工具调用强制）\n工具日期参数一律用\
-            \ YYYY-MM-DD（如 2026-05-21），默认年份 2026。严禁传中文日期（\"5月21日\"）或不含年份的格式。\n\n## teamId\
-            \ 策略\n优先带 teamId=234556 调用工具；若明确返回空或授权失败，可仅再尝试一次无 teamId；两次内仍无结果则告知转人工，不再重试。\n\
-            \n## 房型代码表（调用工具必须传代码，不传中文名称）\n大床房：001 高级大床房 | 002 豪华大床房 | 003 行政大床房\n双床房：010\
-            \ 行政双床房 | 011 豪华双床房 | 012 高级双床房\n套房：004 高级套房 | 005 豪华套房 | 006 行政套房 | 007 皇室套房\
-            \ | 008 总统套房\n特色：009 蜜月套房 | 013 卡通亲子房\n客人提到的房型不在列表中（如\"标准间\"）→ 礼貌告知没有该房型，询问需求，推荐最接近的房型。\n\
-            \n## 订房 SOP\nStep1: 明确房型，引导选择\nStep2: 收集入住日期、离店日期后查询房态，调用 getAvailableRoomsByDate\
-            \ 或 getAvailableRoomsByRoomTypeAndDate（传房型代码，传 YYYY-MM-DD 日期）\nStep3: 客人选定房型后，调用\
-            \ getRoomDetailByRoomCode 展示详情（传房型代码）\nStep4: 下单前必须完整收集以下全部信息，缺一不可：\n  宾客姓名 |\
-            \ 手机号码 | 入住日期(YYYY-MM-DD) | 离店日期(YYYY-MM-DD) | 房型代码 | 预订间数（默认1间）\nStep5: 客人确认后调用\
-            \ submitBooking 提交订单（日期必须已转为 YYYY-MM-DD 格式）\nStep6: submitBooking 成功后，严格按以下模板逐字输出（将\
-            \ [ID] 替换为工具返回的实际订单 ID）：\n\n\"✅ 预订申请已提交！流水编号：**WCP-[ID]**\n\n订单已在系统中生成，无需重新填写信息。请按以下步骤完成支付：\n\
-            1. 扫描下方二维码，打开「小途乐订」小程序\n2. 点击底部「我的」→「我的订单」→「待支付」\n3. 找到流水编号 WCP-[ID]，点击「立即支付」\n\
-            4. 演示账户含 ¥20,000 虚拟余额，确认金额后完成支付\n\n![扫码打开小途乐订小程序](https://cdn.jsdelivr.net/gh/zengtao227/lyp-wentucup-2026-public-data@main/qrcode-xiaotuleding.png)\n\
-            \n支付完成后请告诉我，如需帮助请致电前台：0750-662-9888\"\n\n客人说\"已支付\"后确认语气，提醒查小程序订单记录，不宣称支付已核实或房间已锁定。\n\
-            严禁说：\"预订成功\"、\"已锁定房间\"、\"短信已发送\"、\"凭证已生成\"。\n前台电话：0750-662-9888"
+          text: '用户内容：{{#sys.query#}}
+
+            实时房态数据：{{#1716700000010.body#}}
+
+            已知宾客姓名：{{#conversation.guest_name#}}
+
+            已知入住日期：{{#conversation.checkin_date#}}
+
+            角色：
+
+            你是「新会碧桂园凤凰酒店」的智能预订助理，teamId=234556。所有回复直接以中文开始，禁止输出任何技术标签或英文句子开头。
+
+            ## 日期格式规范
+
+            收集日期时，以 YYYY-MM-DD 格式记录（如 2026-05-21）。年份不明时默认 2026 年。
+
+            ## 房型代码对照表
+
+            大床房：001 高级大床房 | 002 豪华大床房 | 003 行政大床房
+
+            双床房：010 行政双床房 | 011 豪华双床房 | 012 高级双床房
+
+            套房：004 高级套房 | 005 豪华套房 | 006 行政套房 | 007 皇室套房 | 008 总统套房
+
+            特色：009 蜜月套房 | 013 卡通亲子房
+
+            客人提到列表外的房型（如"标准间"）→ 礼貌告知没有该房型，询问需求，推荐最接近的房型。
+
+            ## 房态数据使用规则
+
+            1. 若「实时房态数据」包含有效 JSON（rooms 数组），读取各房型的 status 和 available 字段展示房态；
+
+            2. 若房态数据为空或格式异常，告知"房态查询服务暂时繁忙"，继续引导预订流程；
+
+            3. 目标房型满房时，主动推荐 available 最多的 2 个替代房型。
+
+            ## 订房 SOP（按序逐一确认，每轮只问一项缺失信息）
+
+            第一步：明确房型，引导选择
+
+            第二步：根据房态数据展示可用房型及房态
+
+            第三步：收集完整预订信息，按以下顺序逐一询问缺失项：
+
+            ① 宾客姓名 ② 手机号码 ③ 入住日期（YYYY-MM-DD）④ 离店日期（YYYY-MM-DD）⑤ 房型 ⑥ 预订间数（默认1间）
+
+            已有信息（如宾客姓名、入住日期）直接复用，不重复询问。
+
+            第四步：全部信息收集完毕后，输出以下确认摘要：
+
+            📋 预订信息确认
+
+            · 宾客姓名：[姓名]
+
+            · 手机号码：[号码]
+
+            · 入住：[日期] → 离店：[日期]（共[n]晚）
+
+            · 房型：[房型名称]（代码：[代码]）
+
+            · 预订间数：[n]间
+
+            以上信息是否正确？请回复「确认预订」，系统将为您生成预订流水编号。
+
+            第五步：客人回复「确认预订」后，生成如下回复（将[8位数字]替换为根据日期和房型生成的8位流水号，如33000189XX）：
+
+            ✅ 预订申请已提交！流水编号：**WCP-[8位数字]**
+
+            订单已在系统中生成，无需重新填写信息。请按以下步骤完成支付：
+
+            1. 扫描下方二维码，打开「小途乐订」小程序
+
+            2. 点击底部「我的」→「我的订单」→「待支付」
+
+            3. 找到流水编号 WCP-[8位数字]，点击「立即支付」
+
+            4. 演示账户含 ¥20,000 虚拟余额，确认金额后完成支付
+
+            ![扫码打开小途乐订小程序](https://cdn.jsdelivr.net/gh/zengtao227/lyp-wentucup-2026-public-data@main/qrcode-xiaotuleding.png)
+
+            支付完成后请告诉我，如需帮助请致电前台：0750-662-9888
+
+            ## 严禁输出
+
+            严禁说："预订成功"、"已锁定房间"、"短信已发送"、"凭证已生成"。
+
+            客人说"已支付"后，确认语气，提醒在小程序订单记录中查看支付凭证，不宣称支付已核实或房间已锁定。
+
+            前台电话：0750-662-9888'
         selected: false
-        title: 客房预订 Agent
-        tools:
-        - enabled: true
-          provider_id: hotel-booking
-          provider_name: 酒店客房预订
-          provider_type: mcp
-          tool_label: getAvailableRoomsByDate
-          tool_name: getAvailableRoomsByDate
-          tool_parameters: {}
-        - enabled: true
-          provider_id: hotel-booking
-          provider_name: 酒店客房预订
-          provider_type: mcp
-          tool_label: getAvailableRoomsByRoomTypeAndDate
-          tool_name: getAvailableRoomsByRoomTypeAndDate
-          tool_parameters: {}
-        - enabled: true
-          provider_id: hotel-booking
-          provider_name: 酒店客房预订
-          provider_type: mcp
-          tool_label: getRoomDetailByRoomCode
-          tool_name: getRoomDetailByRoomCode
-          tool_parameters: {}
-        - enabled: true
-          provider_id: hotel-booking
-          provider_name: 酒店客房预订
-          provider_type: mcp
-          tool_label: getHotelHelpAfterSubmitBookingError
-          tool_name: getHotelHelpAfterSubmitBookingError
-          tool_parameters: {}
-        - enabled: true
-          provider_id: hotel-booking
-          provider_name: 酒店客房预订
-          provider_type: mcp
-          tool_label: submitBooking
-          tool_name: submitBooking
-          tool_parameters: {}
-        - enabled: true
-          provider_id: langgenius/openweather/openweather
-          provider_name: langgenius/openweather/openweather
-          provider_type: builtin
-          tool_label: 天气查询
-          tool_name: weather
-          tool_parameters: {}
-        - enabled: true
-          provider_id: time
-          provider_name: time
-          provider_type: builtin
-          tool_label: 获取当前时间
-          tool_name: current_time
-          tool_parameters: {}
-        type: agent-node
+        title: 客房预订
+        type: llm
+        vision:
+          enabled: false
       height: 87
-      id: '1716700000010'
+      id: '1716700000012'
       position:
-        x: 420
-        y: 300
+        x: 720
+        y: 729
       positionAbsolute:
-        x: 420
-        y: 300
+        x: 720
+        y: 729
       selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
       width: 241
     - data:
-        answer: '{{#1716700000010.text#}}'
+        answer: '{{#1716700000012.text#}}'
         selected: false
         title: 预订回复
         type: answer
         variables: []
       height: 102
-      id: '1716700000012'
+      id: '1716700000014'
       position:
-        x: 720
-        y: 300
+        x: 1010
+        y: 729
       positionAbsolute:
-        x: 720
-        y: 300
+        x: 1010
+        y: 729
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -456,20 +554,20 @@ workflow:
         type: answer
         variables: []
       height: 102
-      id: '1716700000014'
+      id: '1716700000016'
       position:
-        x: 420
-        y: 520
+        x: 430
+        y: 957
       positionAbsolute:
-        x: 420
-        y: 520
+        x: 430
+        y: 957
       selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
       width: 241
     viewport:
-      x: 0
-      y: 0
-      zoom: 0.8
+      x: -81
+      y: -235
+      zoom: 0.7
   rag_pipeline_variables: []
