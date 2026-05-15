@@ -80,9 +80,9 @@ workflow:
     speech_to_text:
       enabled: true
     suggested_questions:
+    - 今晚还有空房吗？
+    - 可以带宠物入住吗？
     - 酒店几点可以办理入住和退房？
-    - 我想预订5月20日的高级大床房
-    - 新会今天天气怎么样？
     suggested_questions_after_answer:
       enabled: false
     text_to_speech:
@@ -1514,7 +1514,10 @@ workflow:
         tool_label: getAvailableRoomsByDate
         tool_name: getAvailableRoomsByDate
         tool_node_version: '2'
-        tool_parameters: {}
+        tool_parameters:
+          teamId:
+            type: constant
+            value: 234556
         type: tool
       height: 84
       id: '1778843661327'
