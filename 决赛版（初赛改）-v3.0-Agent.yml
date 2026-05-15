@@ -100,19 +100,19 @@ model_config:
       datasets:
       - dataset:
           enabled: true
-          id: Ec/riOO6KqZBGLKN1uRtzkvOqW+jPhjSgiw6lmniuvWSINihnEDdwbnbbbfRYJNH
+          id: b2578566-0fc1-4333-bf81-17441829b236
       - dataset:
           enabled: true
-          id: yCOxDnQ/IRYRpeQ4XXbq6MCyLIiW/KI6KYrh9CnNGsBjtuEtSACvMOJS2rCBqUlL
+          id: ee12d6ea-6f9b-4f35-ab9b-6a441d2b9f94
       - dataset:
           enabled: true
-          id: x3OnV9E/+X5xxvA2JGFUWRV6UjVtRK9ZcVmZIHEznV3jJYjGNjhgjE6Hychd0in4
+          id: 44f95b96-185d-4593-b394-b1f307bcb6b4
       - dataset:
           enabled: true
-          id: EW+k6w8HVGyAPYUNBvOOgwywDiVaQZQM9PHzaht29YyEQojheqfFZdU7IkScMWb4
+          id: 3b42c867-9fa9-4602-a4a6-da829cae6a78
       - dataset:
           enabled: true
-          id: /7PMu+ZJZB3fNPKBE0EBe5bVLHz/rotF07R7gnYjUC6hSEk4G7rKCdmj80831xRm
+          id: a41f219c-9ea5-49b3-889a-da112feb49f0
     reranking_enable: false
     retrieval_model: multiple
     top_k: 4
@@ -308,8 +308,4 @@ model_config:
       label: 入住/游玩日期
       required: false
       variable: checkin_date
-  suggested_questions:
-  - 今晚还有空房吗？
-  - 可以带宠物入住吗？
-  - 酒店几点可以办理入住和退房？
 version: 0.4.0
