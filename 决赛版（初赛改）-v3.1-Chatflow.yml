@@ -1250,8 +1250,8 @@ workflow:
         tool_node_version: '2'
         tool_parameters:
           city:
-            type: mixed
-            value: ''
+            type: constant
+            value: Xinhui
         type: tool
       height: 114
       id: '1778841497605'
