@@ -1,5 +1,5 @@
 app:
-  description: 2026问途杯决赛 - 酒店全能智能前台 v2.7 Chatflow版。意图分类三路路由：知识库问答/客房预订LLM/景区转人工。
+  description: 2026问途杯决赛 - 酒店全能智能前台 v2.7 Chatflow版。双路路由：知识库问答 / 客房预订+天气（含实时房态+天气查询）。
   icon: 🏨
   icon_background: '#B0C4DE'
   mode: advanced-chat
@@ -61,7 +61,7 @@ workflow:
         - local_file
         - remote_url
       number_limits: 3
-    opening_statement: 您好！欢迎光临新会碧桂园凤凰酒店。我是您的数字前台，可以帮您查询房态、办理预订、了解酒店设施。请问有什么可以帮您？
+    opening_statement: 您好！欢迎光临新会碧桂园凤凰酒店。我是您的数字前台，可以帮您查询房态、办理预订、查询天气、了解酒店设施。请问有什么可以帮您？
     retriever_resource:
       enabled: true
     sensitive_word_avoidance:
@@ -71,7 +71,7 @@ workflow:
     suggested_questions:
     - 我想预订5月20日的高级大床房
     - 酒店有游泳池吗？
-    - 酒店餐厅营业时间是？
+    - 新会今天天气怎么样？
     suggested_questions_after_answer:
       enabled: false
     text_to_speech:
@@ -144,9 +144,21 @@ workflow:
         isInIteration: false
         isInLoop: false
         sourceType: http-request
-        targetType: llm
-      id: 1716700000010-source-1716700000012-target
+        targetType: http-request
+      id: 1716700000010-source-1716700000011-target
       source: '1716700000010'
+      sourceHandle: source
+      target: '1716700000011'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: llm
+      id: 1716700000011-source-1716700000012-target
+      source: '1716700000011'
       sourceHandle: source
       target: '1716700000012'
       targetHandle: target
@@ -164,18 +176,6 @@ workflow:
       targetHandle: target
       type: custom
       zIndex: 0
-    - data:
-        isInIteration: false
-        isInLoop: false
-        sourceType: question-classifier
-        targetType: answer
-      id: 1716700000002-1716700000300-1716700000016-target
-      source: '1716700000002'
-      sourceHandle: '1716700000300'
-      target: '1716700000016'
-      targetHandle: target
-      type: custom
-      zIndex: 0
     nodes:
     - data:
         selected: false
@@ -185,10 +185,10 @@ workflow:
       height: 51
       id: '1716700000000'
       position:
-        x: -200
+        x: -207
         y: 729
       positionAbsolute:
-        x: -200
+        x: -207
         y: 729
       selected: false
       sourcePosition: right
@@ -200,10 +200,8 @@ workflow:
         - id: '1716700000100'
           name: 酒店设施/餐饮/配套服务/交通/投诉/通用咨询
         - id: '1716700000200'
-          name: 客房预订/查房/房型详情/支付确认/取消订单/天气/周边出行
-        - id: '1716700000300'
-          name: 景区门票/景点票务/购票/景区游览
-        instructions: 根据用户的问题意图，将其分类到最匹配的类别。预订相关的所有问题（包括查房态、问价格、确认预订、支付、取消、已支付）统一归入第二类（客房预订）。景区门票相关的所有问题归入第三类（景区门票）。其余酒店咨询问题归入第一类（酒店设施/餐饮等通用咨询）。
+          name: 客房预订/查房/房型详情/支付确认/取消订单/天气查询/周边出行
+        instructions: 根据用户的问题意图，将其分类到最匹配的类别。预订相关的所有问题（包括查房态、问价格、确认预订、支付、取消、已支付）以及天气查询、周边出行咨询，统一归入第二类（客房预订/天气/周边出行）。其余酒店通用咨询（设施、餐饮、停车、投诉等）归入第一类（通用咨询）。
         model:
           completion_params:
             disable_search: true
@@ -305,7 +303,7 @@ workflow:
 
             角色：
 
-            你是「新会碧桂园凤凰酒店」的智能客服助手，专职回答酒店设施、餐饮、配套等咨询问题。
+            你是「新会碧桂园凤凰酒店」的智能客服助手，专职回答酒店设施、餐饮、配套等通用咨询问题。
 
             【约束】
 
@@ -318,6 +316,7 @@ workflow:
             4. 不输出技术标签、原始 JSON 或思考过程。
 
             酒店地址：广东省江门市新会区会城镇启超大道1号
+
             前台电话：0750-662-9888'
         selected: false
         title: 知识库问答
@@ -384,10 +383,47 @@ workflow:
       id: '1716700000010'
       position:
         x: 430
-        y: 729
+        y: 640
       positionAbsolute:
         x: 430
-        y: 729
+        y: 640
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data: []
+          type: none
+        headers: ''
+        method: get
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 10
+          max_read_timeout: 15
+          max_write_timeout: 10
+        title: 天气查询
+        type: http-request
+        url: https://restapi.amap.com/v3/weather/weatherInfo?city=440705&key=1ced701c952bf23fac30e82fbdc8a33d
+        variables: []
+      height: 168
+      id: '1716700000011'
+      position:
+        x: 430
+        y: 860
+      positionAbsolute:
+        x: 430
+        y: 860
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -425,13 +461,27 @@ workflow:
 
             实时房态数据：{{#1716700000010.body#}}
 
+            实时天气数据：{{#1716700000011.body#}}
+
             已知宾客姓名：{{#conversation.guest_name#}}
 
             已知入住日期：{{#conversation.checkin_date#}}
 
             角色：
 
-            你是「新会碧桂园凤凰酒店」的智能预订助理，teamId=234556。所有回复直接以中文开始，禁止输出任何技术标签或英文句子开头。
+            你是「新会碧桂园凤凰酒店」的智能预订与出行助理。所有回复直接以中文开始，禁止输出任何技术标签或英文句子开头。
+
+            ## 天气查询处理规则
+
+            当客人询问天气时：
+
+            1. 从「实时天气数据」JSON 中提取 lives[0] 下的 weather/temperature/humidity/windpower 字段，自然语言描述天气；
+
+            2. 若天气数据为空或格式异常，礼貌告知暂无实时数据，建议关注当地天气预报；
+
+            3. 结合天气状况给出贴心建议（晴天防晒、雨天带伞、高温多补水等）；
+
+            4. 可顺带提示适合当日天气的周边出行活动。
 
             ## 日期格式规范
 
@@ -451,21 +501,21 @@ workflow:
 
             ## 房态数据使用规则
 
-            1. 若「实时房态数据」包含有效 JSON（rooms 数组），读取各房型的 status 和 available 字段展示房态；
+            1. 若「实时房态数据」包含有效 JSON（rooms 数组），读取各房型的 status 和 available 字段展示给客人；
 
             2. 若房态数据为空或格式异常，告知"房态查询服务暂时繁忙"，继续引导预订流程；
 
             3. 目标房型满房时，主动推荐 available 最多的 2 个替代房型。
 
-            ## 订房 SOP（按序逐一确认，每轮只问一项缺失信息）
+            ## 订房 SOP（按序逐一询问缺失信息，每轮只问一项）
 
             第一步：明确房型，引导选择
 
             第二步：根据房态数据展示可用房型及房态
 
-            第三步：收集完整预订信息，按以下顺序逐一询问缺失项：
+            第三步：收集完整预订信息：
 
-            ① 宾客姓名 ② 手机号码 ③ 入住日期（YYYY-MM-DD）④ 离店日期（YYYY-MM-DD）⑤ 房型 ⑥ 预订间数（默认1间）
+            ① 宾客姓名 ② 手机号码 ③ 入住日期（YYYY-MM-DD）④ 离店日期（YYYY-MM-DD）⑤ 房型代码 ⑥ 预订间数（默认1间）
 
             已有信息（如宾客姓名、入住日期）直接复用，不重复询问。
 
@@ -485,7 +535,7 @@ workflow:
 
             以上信息是否正确？请回复「确认预订」，系统将为您生成预订流水编号。
 
-            第五步：客人回复「确认预订」后，生成如下回复（将[8位数字]替换为根据日期和房型生成的8位流水号，如33000189XX）：
+            第五步：客人回复「确认预订」后，输出（将[8位数字]替换为基于入住日期和房型生成的合理数字，如3300018976）：
 
             ✅ 预订申请已提交！流水编号：**WCP-[8位数字]**
 
@@ -503,15 +553,15 @@ workflow:
 
             支付完成后请告诉我，如需帮助请致电前台：0750-662-9888
 
-            ## 严禁输出
+            ## 严禁
 
             严禁说："预订成功"、"已锁定房间"、"短信已发送"、"凭证已生成"。
 
-            客人说"已支付"后，确认语气，提醒在小程序订单记录中查看支付凭证，不宣称支付已核实或房间已锁定。
+            客人说"已支付"后，确认语气，提醒在小程序查看支付凭证，不宣称支付已核实或房间已锁定。
 
             前台电话：0750-662-9888'
         selected: false
-        title: 客房预订
+        title: 客房预订与天气
         type: llm
         vision:
           enabled: false
@@ -531,7 +581,7 @@ workflow:
     - data:
         answer: '{{#1716700000012.text#}}'
         selected: false
-        title: 预订回复
+        title: 预订与天气回复
         type: answer
         variables: []
       height: 102
@@ -542,25 +592,6 @@ workflow:
       positionAbsolute:
         x: 1010
         y: 729
-      selected: false
-      sourcePosition: right
-      targetPosition: left
-      type: custom
-      width: 241
-    - data:
-        answer: 非常抱歉，景区门票预订需前往酒店前台办理，欢迎拨打前台电话 0750-662-9888，工作人员将为您提供帮助。
-        selected: false
-        title: 景区票务回复
-        type: answer
-        variables: []
-      height: 102
-      id: '1716700000016'
-      position:
-        x: 430
-        y: 957
-      positionAbsolute:
-        x: 430
-        y: 957
       selected: false
       sourcePosition: right
       targetPosition: left
