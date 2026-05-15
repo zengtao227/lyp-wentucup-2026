@@ -124,6 +124,10 @@ model_config:
     name: deepseek-v3
     provider: langgenius/tongyi/tongyi
   opening_statement: 您好，欢迎莅临新会碧桂园凤凰酒店。我是您的专属 AI 助理，可以为您解答客房预订、餐饮美食、会议宴会和周边游玩问题，并直接帮您完成订房。本助手支持语音输入，点击麦克风即可说话。请问有什么可以帮您？
+  suggested_questions:
+  - 今晚还有空房吗？
+  - 可以带宠物入住吗？
+  - 酒店几点可以办理入住和退房？
   pre_prompt: '# ⚠️ 核心规则（最高优先级）
 
 
