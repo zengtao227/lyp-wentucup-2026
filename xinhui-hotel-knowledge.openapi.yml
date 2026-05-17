@@ -1,53 +1,132 @@
 openapi: 3.0.3
 info:
   title: 新会碧桂园凤凰酒店知识
-  version: 1.0.0
-  description: 查询新会碧桂园凤凰酒店静态知识事实表，供 Agent 回答酒店事实问题。
+  version: 1.1.0
+  description: 查询新会碧桂园凤凰酒店 JSON 知识事实表，供 Agent 回答酒店事实问题。每个接口返回 application/json，避免 Dify 自定义工具处理 Markdown/text/plain 时卡住。
 servers:
   - url: https://cdn.jsdelivr.net
 paths:
-  /gh/zengtao227/lyp-wentucup-2026@main/hotel-knowledge-agent.json:
+  /gh/zengtao227/lyp-wentucup-2026@main/agent-tools/hotel-overview.json:
     get:
-      operationId: getXinhuiPhoenixHotelKnowledge
-      summary: 查询新会碧桂园凤凰酒店知识
-      description: 回答新会碧桂园凤凰酒店事实问题前调用本工具。工具返回酒店概况、客房产品、餐饮娱乐、宴会会议、停车、宠物政策等事实内容。
+      operationId: getHotelOverviewKnowledge
+      summary: 查询酒店概况知识
+      description: 查询酒店概况、前台电话、停车、充电车位、押金、儿童、宠物政策、入住退房等信息。
       tags:
         - rag
-      parameters:
-        - name: query
-          in: query
-          required: false
-          description: 用户提出的酒店相关问题。该静态知识工具会返回完整事实表，query 仅用于帮助 Agent 决定调用工具。
-          schema:
-            type: string
       responses:
         "200":
-          description: 查询成功，返回酒店知识事实表。
+          description: 查询成功，返回酒店概况 JSON 事实表。
           content:
             application/json:
               schema:
                 type: object
                 required:
-                  - name
+                  - tool
+                  - title
                   - facts
                 properties:
-                  name:
+                  tool:
                     type: string
-                  version:
-                    type: string
-                  scope:
+                  title:
                     type: string
                   front_desk_phone:
                     type: string
-                  answer_rule:
-                    type: string
                   facts:
-                    type: object
-                    additionalProperties:
-                      type: array
-                      items:
-                        type: string
-                  negative_examples:
                     type: array
                     items:
                       type: string
+                  fallback:
+                    type: string
+  /gh/zengtao227/lyp-wentucup-2026@main/agent-tools/room-product.json:
+    get:
+      operationId: getRoomProductKnowledge
+      summary: 查询客房产品知识
+      description: 查询房型代码、房型名称、客房设施、客房服务、宠物入住收费等客房相关信息。
+      tags:
+        - rag
+      responses:
+        "200":
+          description: 查询成功，返回客房产品 JSON 事实表。
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - tool
+                  - title
+                  - facts
+                properties:
+                  tool:
+                    type: string
+                  title:
+                    type: string
+                  front_desk_phone:
+                    type: string
+                  facts:
+                    type: array
+                    items:
+                      type: string
+                  fallback:
+                    type: string
+  /gh/zengtao227/lyp-wentucup-2026@main/agent-tools/dining-entertainment.json:
+    get:
+      operationId: getDiningEntertainmentKnowledge
+      summary: 查询餐饮娱乐知识
+      description: 查询维也纳西餐厅、早餐时间、餐饮、健身房、娱乐设施等信息。
+      tags:
+        - rag
+      responses:
+        "200":
+          description: 查询成功，返回餐饮娱乐 JSON 事实表。
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - tool
+                  - title
+                  - facts
+                properties:
+                  tool:
+                    type: string
+                  title:
+                    type: string
+                  front_desk_phone:
+                    type: string
+                  facts:
+                    type: array
+                    items:
+                      type: string
+                  fallback:
+                    type: string
+  /gh/zengtao227/lyp-wentucup-2026@main/agent-tools/banquet-meeting.json:
+    get:
+      operationId: getBanquetMeetingKnowledge
+      summary: 查询宴会会议知识
+      description: 查询会议室、宴会厅、门市价、面积、剧院式、课桌式、U型、宴会式容纳人数等信息。
+      tags:
+        - rag
+      responses:
+        "200":
+          description: 查询成功，返回宴会会议 JSON 事实表。
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - tool
+                  - title
+                  - facts
+                properties:
+                  tool:
+                    type: string
+                  title:
+                    type: string
+                  front_desk_phone:
+                    type: string
+                  facts:
+                    type: array
+                    items:
+                      type: string
+                  fallback:
+                    type: string
