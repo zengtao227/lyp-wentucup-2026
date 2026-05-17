@@ -1,5 +1,5 @@
 app:
-  description: 2026问途杯决赛版（初赛改）- 酒店全能智能前台 v3.4。基于Dify手动绑定后的加密知识库ID连接20260516合并知识库；仅移除比赛不使用的周边景点知识库检索，保留天气查询；景点、门票、游玩路线类问题统一引导拨打前台；客房预订链路增加Asia/Shanghai当前时间节点，用于处理今晚、明天、后天等相对日期。
+  description: 2026问途杯决赛版（初赛改）- 酒店全能智能前台 v3.4。基于Dify手动绑定后的加密知识库ID连接20260516合并知识库；仅移除比赛不使用的周边景点知识库检索，保留天气查询；景点、门票、游玩路线类问题统一引导拨打前台；客房预订链路使用Asia/Shanghai当前时间节点和参数提取器，将入住/离店日期传给MCP房态房价工具。
   icon: 🏨
   icon_background: '#FFEAD5'
   mode: advanced-chat
@@ -333,9 +333,33 @@ workflow:
         isInIteration: false
         isInLoop: false
         sourceType: tool
-        targetType: tool
-      id: 1779049137062-source-1778843661327-target
+        targetType: template-transform
+      id: 1779049137062-source-1779100000001-target
       source: '1779049137062'
+      sourceHandle: source
+      target: '1779100000001'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: template-transform
+        targetType: parameter-extractor
+      id: 1779100000001-source-1779100000002-target
+      source: '1779100000001'
+      sourceHandle: source
+      target: '1779100000002'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: parameter-extractor
+        targetType: tool
+      id: 1779100000002-source-1778843661327-target
+      source: '1779100000002'
       sourceHandle: source
       target: '1778843661327'
       targetHandle: target
@@ -1088,6 +1112,104 @@ workflow:
       type: custom
       width: 242
     - data:
+        selected: false
+        template: "当前日期时间（Asia/Shanghai）：{{ current_time }}\n用户内容：{{ user_query }}\n\n\
+          请把用户订房、查房态、查房价、确认预订相关表达转换为后续参数提取可用的上下文。处理规则：\n1. 今天/今晚按当前日期理解；未说离店日期时默认住1晚。\n\
+          2. 明天/后天按当前日期顺延；本周末按当前日期之后最近的周六入住、周日离店。\n3. 年份不明时使用当前日期所在年份，即2026年。\n\
+          4. 输出中保留用户原话、当前日期时间和推导依据。"
+        title: 订房参数上下文
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1779049137062'
+          - text
+          variable: current_time
+        - value_selector:
+          - sys
+          - query
+          variable: user_query
+      height: 54
+      id: '1779100000001'
+      position:
+        x: 936
+        y: 1201.5
+      positionAbsolute:
+        x: 936
+        y: 1201.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        instruction: '从输入文本中提取用于酒店房态房价查询的入住日期和离店日期。
+
+          当前日期时间已包含在输入文本中，必须优先使用该时间解析“今天、今晚、明天、后天、本周末、周末”等相对日期。
+
+          规则：
+
+          1. checkInDate 必须输出 YYYY-MM-DD。
+
+          2. checkOutDate 必须输出 YYYY-MM-DD。
+
+          3. 用户只说“今晚/今天入住/本周末/高级大床房一间有吗”等没有明确离店日期的表达时，默认住1晚，checkOutDate=checkInDate次日。
+
+          4. 用户说“本周末”时，按当前日期之后最近的周六入住、周日离店。
+
+          5. 年份不明时使用当前日期所在年份。
+
+          6. 如果对话历史中上一轮已经确认过日期，本轮只提供姓名/电话/确认语时，可以沿用上一轮日期。
+
+          7. 无法判断日期时，两个字段都输出空字符串，不得编造。'
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 10
+        model:
+          completion_params:
+            temperature: 0.1
+          mode: chat
+          name: deepseek-v3
+          provider: langgenius/tongyi/tongyi
+        parameters:
+        - description: 入住日期，YYYY-MM-DD格式；无法判断时为空字符串。
+          name: checkInDate
+          required: true
+          type: string
+        - description: 离店日期，YYYY-MM-DD格式；无法判断时为空字符串。
+          name: checkOutDate
+          required: true
+          type: string
+        query:
+        - '1779100000001'
+        - output
+        reasoning_mode: prompt
+        selected: false
+        title: 预订日期参数提取
+        type: parameter-extractor
+        vision:
+          enabled: false
+      height: 88
+      id: '1779100000002'
+      position:
+        x: 1238
+        y: 1201.5
+      positionAbsolute:
+        x: 1238
+        y: 1201.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
         is_team_authorization: true
         paramSchemas:
         - auto_generate: null
@@ -1287,10 +1409,10 @@ workflow:
       height: 88
       id: '1776900001000'
       position:
-        x: 1238
+        x: 1842
         y: 1260
       positionAbsolute:
-        x: 1238
+        x: 1842
         y: 1260
       selected: false
       sourcePosition: right
@@ -1306,10 +1428,10 @@ workflow:
       height: 103
       id: '1776900002000'
       position:
-        x: 1540
+        x: 2144
         y: 1260
       positionAbsolute:
-        x: 1540
+        x: 2144
         y: 1260
       selected: false
       sourcePosition: right
@@ -1406,6 +1528,16 @@ workflow:
         tool_name: getAvailableRoomsByDate
         tool_node_version: '2'
         tool_parameters:
+          checkInDate:
+            type: variable
+            value:
+            - '1779100000002'
+            - checkInDate
+          checkOutDate:
+            type: variable
+            value:
+            - '1779100000002'
+            - checkOutDate
           teamId:
             type: constant
             value: 234556
@@ -1413,10 +1545,10 @@ workflow:
       height: 84
       id: '1778843661327'
       position:
-        x: 936
+        x: 1540
         y: 1201.5
       positionAbsolute:
-        x: 936
+        x: 1540
         y: 1201.5
       sourcePosition: right
       targetPosition: left
