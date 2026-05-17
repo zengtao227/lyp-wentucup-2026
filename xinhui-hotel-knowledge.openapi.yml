@@ -1,0 +1,53 @@
+openapi: 3.0.3
+info:
+  title: 新会碧桂园凤凰酒店知识
+  version: 1.0.0
+  description: 查询新会碧桂园凤凰酒店静态知识事实表，供 Agent 回答酒店事实问题。
+servers:
+  - url: https://cdn.jsdelivr.net
+paths:
+  /gh/zengtao227/lyp-wentucup-2026@main/hotel-knowledge-agent.json:
+    get:
+      operationId: getXinhuiPhoenixHotelKnowledge
+      summary: 查询新会碧桂园凤凰酒店知识
+      description: 回答新会碧桂园凤凰酒店事实问题前调用本工具。工具返回酒店概况、客房产品、餐饮娱乐、宴会会议、停车、宠物政策等事实内容。
+      tags:
+        - rag
+      parameters:
+        - name: query
+          in: query
+          required: false
+          description: 用户提出的酒店相关问题。该静态知识工具会返回完整事实表，query 仅用于帮助 Agent 决定调用工具。
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 查询成功，返回酒店知识事实表。
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - name
+                  - facts
+                properties:
+                  name:
+                    type: string
+                  version:
+                    type: string
+                  scope:
+                    type: string
+                  front_desk_phone:
+                    type: string
+                  answer_rule:
+                    type: string
+                  facts:
+                    type: object
+                    additionalProperties:
+                      type: array
+                      items:
+                        type: string
+                  negative_examples:
+                    type: array
+                    items:
+                      type: string
