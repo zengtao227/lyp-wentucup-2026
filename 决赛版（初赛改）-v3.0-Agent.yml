@@ -5,6 +5,17 @@ app:
   mode: agent-chat
   name: 决赛版（初赛改）-v3.0-Agent
   use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.0.42@85e7bb71e461653ac101330c751973085dfdde26c906b07d7dff8030c95bc39e
+    version: null
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openweather:0.0.6@a16f3f6c79b1cb45bc22942ed84c53a9732c118bde0a46d0d9282a9d15581347
+    version: null
 kind: app
 model_config:
   agent_mode:
@@ -13,6 +24,7 @@ model_config:
     strategy: react
     tools:
     - enabled: true
+      isDeleted: false
       notAuthor: false
       provider_id: langgenius/openweather/openweather
       provider_name: langgenius/openweather/openweather
@@ -24,6 +36,7 @@ model_config:
           type: constant
           value: Xinhui
     - enabled: true
+      isDeleted: false
       notAuthor: false
       provider_id: time
       provider_name: time
@@ -32,6 +45,7 @@ model_config:
       tool_name: current_time
       tool_parameters: {}
     - enabled: true
+      isDeleted: false
       notAuthor: false
       provider_id: time
       provider_name: time
@@ -40,6 +54,7 @@ model_config:
       tool_name: localtime_to_timestamp
       tool_parameters: {}
     - enabled: true
+      isDeleted: false
       notAuthor: false
       provider_id: time
       provider_name: time
@@ -48,6 +63,7 @@ model_config:
       tool_name: weekday
       tool_parameters: {}
     - enabled: true
+      isDeleted: false
       notAuthor: false
       provider_id: time
       provider_name: time
@@ -56,6 +72,7 @@ model_config:
       tool_name: timezone_conversion
       tool_parameters: {}
     - enabled: true
+      isDeleted: false
       notAuthor: false
       provider_id: hotel-booking
       provider_name: 酒店客房预订
@@ -64,6 +81,7 @@ model_config:
       tool_name: getAvailableRoomsByDate
       tool_parameters: {}
     - enabled: true
+      isDeleted: false
       notAuthor: false
       provider_id: hotel-booking
       provider_name: 酒店客房预订
@@ -72,6 +90,7 @@ model_config:
       tool_name: getAvailableRoomsByRoomTypeAndDate
       tool_parameters: {}
     - enabled: true
+      isDeleted: false
       notAuthor: false
       provider_id: hotel-booking
       provider_name: 酒店客房预订
@@ -80,6 +99,7 @@ model_config:
       tool_name: getRoomDetailByRoomCode
       tool_parameters: {}
     - enabled: true
+      isDeleted: false
       notAuthor: false
       provider_id: hotel-booking
       provider_name: 酒店客房预订
@@ -88,6 +108,7 @@ model_config:
       tool_name: getHotelHelpAfterSubmitBookingError
       tool_parameters: {}
     - enabled: true
+      isDeleted: false
       notAuthor: false
       provider_id: hotel-booking
       provider_name: 酒店客房预订
@@ -95,46 +116,90 @@ model_config:
       tool_label: submitBooking
       tool_name: submitBooking
       tool_parameters: {}
+  annotation_reply:
+    enabled: false
+  chat_prompt_config: {}
+  completion_prompt_config: {}
   dataset_configs:
     datasets:
       datasets:
       - dataset:
           enabled: true
-          id: b2578566-0fc1-4333-bf81-17441829b236
+          id: 614cb7e9-0050-4a78-84b2-2458f1f74d83
       - dataset:
           enabled: true
-          id: ee12d6ea-6f9b-4f35-ab9b-6a441d2b9f94
+          id: 137fb61c-4108-4c14-821c-b0d9aeb5403a
       - dataset:
           enabled: true
-          id: 44f95b96-185d-4593-b394-b1f307bcb6b4
+          id: efca047e-3ef0-4b54-b628-c9b9da128f99
       - dataset:
           enabled: true
-          id: 3b42c867-9fa9-4602-a4a6-da829cae6a78
+          id: a7855ecf-014f-4c2e-934c-b798cfafbc1c
       - dataset:
           enabled: true
-          id: a41f219c-9ea5-49b3-889a-da112feb49f0
-    reranking_enable: false
+          id: 965f7788-33eb-452c-bd60-c453366a43a7
+    reranking_enable: true
+    reranking_mode: reranking_model
+    reranking_model:
+      reranking_model_name: gte-rerank-v2
+      reranking_provider_name: langgenius/tongyi/tongyi
     retrieval_model: multiple
     top_k: 4
+  dataset_query_variable: ''
+  external_data_tools: []
+  file_upload:
+    allowed_file_extensions:
+    - .JPG
+    - .JPEG
+    - .PNG
+    - .GIF
+    - .WEBP
+    - .SVG
+    - .MP4
+    - .MOV
+    - .MPEG
+    - .WEBM
+    allowed_file_types: []
+    allowed_file_upload_methods:
+    - remote_url
+    - local_file
+    enabled: false
+    image:
+      detail: high
+      enabled: false
+      number_limits: 3
+      transfer_methods:
+      - remote_url
+      - local_file
+    number_limits: 3
   model:
     completion_params:
       stop: []
-      temperature: 0.3
+      temperature: 0.1
     mode: chat
     name: deepseek-v3
     provider: langgenius/tongyi/tongyi
+  more_like_this:
+    enabled: false
   opening_statement: 您好，欢迎莅临新会碧桂园凤凰酒店。我是您的专属 AI 助理，可以为您解答客房预订、餐饮美食、会议宴会和周边游玩问题，并直接帮您完成订房。本助手支持语音输入，点击麦克风即可说话。请问有什么可以帮您？
-  suggested_questions:
-  - 今晚还有空房吗？
-  - 可以带宠物入住吗？
-  - 酒店几点可以办理入住和退房？
   pre_prompt: '# ⚠️ 核心规则（最高优先级）
 
 
     你是一个智能客服助手，NOT a code generator or API documentation tool.
 
 
-    **绝对禁止**：
+    ## 必须做到：
+
+    - 所有回复必须以中文直接开始，不加任何前缀标签
+
+    - 使用自然、流畅的中文与客人对话
+
+    - 像真人客服一样礼貌、专业、热情
+
+    - 常见问题严格从知识库中回答
+
+
+    ## 绝对禁止：
 
     - 禁止输出任何工具调用标记（如 <｜tool▁calls▁begin｜>、function、tool_sep 等）
 
@@ -146,14 +211,6 @@ model_config:
 
     - 禁止输出任何内部思考过程，只向客人展示最终结论
 
-
-    **必须做到**：
-
-    - 所有回复必须以中文直接开始，不加任何前缀标签
-
-    - 使用自然、流畅的中文与客人对话
-
-    - 像真人客服一样礼貌、专业、热情
 
 
     ## 📅 日期格式规范（调用任何工具时强制执行）
@@ -301,6 +358,25 @@ model_config:
     3. 严禁包含任何 JSON 括号或技术后缀。
 
     '
+  prompt_type: simple
+  retriever_resource:
+    enabled: true
+  sensitive_word_avoidance:
+    configs: []
+    enabled: false
+    type: ''
+  speech_to_text:
+    enabled: false
+  suggested_questions:
+  - 今晚还有空房吗？
+  - 可以带宠物入住吗？
+  - 酒店几点可以办理入住和退房？
+  suggested_questions_after_answer:
+    enabled: false
+  text_to_speech:
+    enabled: false
+    language: ''
+    voice: ''
   user_input_form:
   - text-input:
       default: ''

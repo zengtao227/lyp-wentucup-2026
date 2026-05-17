@@ -501,8 +501,7 @@ workflow:
           reranking_model:
             model: gte-rerank-v2
             provider: langgenius/tongyi/tongyi
-          score_threshold: 0.5
-          top_k: 3
+          top_k: 4
         query_variable_selector:
         - sys
         - query

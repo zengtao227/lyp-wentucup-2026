@@ -31,3 +31,4 @@ ocr_pages/
 *.key
 *.pem
 api_keys.txt
+superpowers.db
