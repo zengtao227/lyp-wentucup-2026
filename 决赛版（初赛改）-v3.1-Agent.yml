@@ -1,9 +1,9 @@
 app:
-  description: 2026问途杯决赛版（初赛改）- 酒店全能智能前台 Agent v3.0。与Chatflow v3.2同步：更新开场语/建议问题/加密数据集ID/天气固定新会；max_iteration升至5支持完整订房链路；temperature降至0.3提升稳定性。
+  description: 2026问途杯决赛版（初赛改）- 酒店全能智能前台 Agent v3.1。与Chatflow v3.3同步：启用Reranker(gte-rerank-v2)提升知识库检索精度；temperature降至0.1；Prompt增加完整引用政策细节约束，修复宠物政策等信息遗漏问题。
   icon: 🏨
   icon_background: '#FFEAD5'
   mode: agent-chat
-  name: 决赛版（初赛改）-v3.0-Agent
+  name: 决赛版（初赛改）-v3.1-Agent
   use_icon_as_answer_icon: false
 dependencies:
 - current_identifier: null
