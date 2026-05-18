@@ -32,3 +32,7 @@ ocr_pages/
 *.pem
 api_keys.txt
 superpowers.db
+
+# 背景图（由 build_pptx.py 自动生成，无需入库）
+pptx-export/*/backgrounds/
+__pycache__/
