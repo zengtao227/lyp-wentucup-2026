@@ -33,6 +33,17 @@ ocr_pages/
 api_keys.txt
 superpowers.db
 
-# 背景图（由 build_pptx.py 自动生成，无需入库）
-pptx-export/*/backgrounds/
+# Build artifacts (regenerate with: node build_slides.mjs all)
+路演PPT*.html
+路演PPT*.pdf
+路演PPT*.pptx
+
+# Node
+node_modules/
+
+# Python cache
 __pycache__/
+.ruff_cache/
+
+# Old export dir
+pptx-export/
