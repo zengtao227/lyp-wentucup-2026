@@ -542,41 +542,48 @@ section.opc {
 ══════════════════════════════════════════ -->
 ---
 
-# 两个关键技术决策
+# 三个关键技术决策
 
-<div class="grid2" style="margin-top:16px">
+<div style="display:table;width:100%;border-collapse:separate;border-spacing:12px 0;margin:12px -12px 0">
+<div style="display:table-row">
 
-<div>
-<h3>🔧 决策一：编码统一化</h3>
-<div class="card" style="margin:8px 0;border-color:rgba(248,113,113,0.3);background:rgba(248,113,113,0.05)">
-
-⚠️ 根因：原始 GBK 格式文档上传 Dify 后，向量索引产生乱码
-→ "可带宠物入住"无法被检索到
-→ 模型回退训练数据，错误回答"不支持宠物入住"
-
+<div style="display:table-cell;width:50%;vertical-align:top">
+<h3 style="margin:0 0 6px">🔧 决策一：编码统一化</h3>
+<div class="card" style="margin:0 0 6px;padding:8px 12px;border-color:rgba(248,113,113,0.3);background:rgba(248,113,113,0.05);font-size:0.88em">
+⚠️ GBK 格式上传 Dify → 向量乱码<br>→ "宠物入住"检索失败 → 模型错误回答
 </div>
-<div class="card card-blue">
-
-✅ 修复：全部转为 UTF-8 Markdown，"标准问答 + 事实条目"双段结构，Chunk 语义完整
-
+<div class="card card-blue" style="padding:8px 12px;font-size:0.88em">
+✅ 全部转 UTF-8 Markdown<br>双段结构：标准问答 + 事实条目，Chunk 语义完整
 </div>
 </div>
 
-<div>
-<h3>🏗️ 决策二：统一知识库</h3>
-<div class="card" style="margin:8px 0;border-color:rgba(248,113,113,0.3);background:rgba(248,113,113,0.05)">
-
-❌ 旧方案：5 个独立知识库
-→ 每次只检索 1 个 KB（Knowledge Base，知识库）
-→ 跨场景问题（如"订房+宠物政策"）信息碎片化
+<div style="display:table-cell;width:50%;vertical-align:top">
+<h3 style="margin:0 0 6px">🏗️ 决策二：统一知识库</h3>
+<div class="card" style="margin:0 0 6px;padding:8px 12px;border-color:rgba(248,113,113,0.3);background:rgba(248,113,113,0.05);font-size:0.88em">
+❌ 旧方案：5 个独立 KB<br>→ 每次只检索 1 个，跨场景问题信息碎片化
+</div>
+<div class="card card-blue" style="padding:8px 12px;font-size:0.88em">
+✅ 合并为 1 个统一 KB<br>+ gte-rerank-v2 跨文档重排序，top_k=4
+</div>
+</div>
 
 </div>
-<div class="card card-blue">
+</div>
 
-✅ 新方案：合并为 1 个统一 KB
-+ `gte-rerank-v2` 跨文档重排序
-→ top\_k=4，精准返回最相关块
-
+<div style="margin-top:10px">
+<h3 style="margin:0 0 6px">🤖 决策三：Agent 知识工具外部化</h3>
+<div style="display:table;width:100%;border-collapse:separate;border-spacing:10px 0">
+<div style="display:table-row">
+<div style="display:table-cell;width:50%;vertical-align:top">
+<div class="card" style="padding:8px 12px;border-color:rgba(248,113,113,0.3);background:rgba(248,113,113,0.05);font-size:0.88em">
+❌ 原生局限：Agent 无法强制调用 KB，ReAct 推理时 KB 检索属"自主决策"<br>→ 高峰/模糊问题下回答偶有偏离
+</div>
+</div>
+<div style="display:table-cell;width:50%;vertical-align:top">
+<div class="card" style="padding:8px 12px;border-color:rgba(167,139,250,0.4);background:rgba(167,139,250,0.07);font-size:0.88em">
+✅ 自研解法：KB 内容 JSON 外部化 + 封装自定义工具<br>→ Agent 通过工具调用强制获取知识，与 Chatflow 统一知识源
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -956,33 +963,39 @@ section.opc {
 <div style="margin-top:16px">
 
 <div class="card" style="margin-bottom:10px;padding:12px 20px;display:flex;align-items:center;gap:16px">
-  <span class="tag">Chatflow v3.0</span>
-  <span>初始版本 · 5 个独立知识库 · 无预订功能</span>
-  <span style="margin-left:auto;color:rgba(255,255,255,0.3);font-size:0.8em">May 7</span>
+  <span class="tag">v1.0</span>
+  <span>初赛起点 · 多场景意图分类框架 · 基础预订 Agent 雏形搭建</span>
+  <span style="margin-left:auto;color:rgba(255,255,255,0.3);font-size:0.8em">May 8</span>
 </div>
 
 <div class="card" style="margin-bottom:10px;padding:12px 20px;display:flex;align-items:center;gap:16px">
-  <span class="tag">Chatflow v3.2</span>
-  <span>接入 MCP 预订工具 · 开场语 & 建议问题优化</span>
-  <span style="margin-left:auto;color:rgba(255,255,255,0.3);font-size:0.8em">May 12</span>
+  <span class="tag">v1.7</span>
+  <span>景区购票分支上线 · 小程序支付二维码打通</span>
+  <span style="margin-left:auto;color:rgba(255,255,255,0.3);font-size:0.8em">May 9</span>
+</div>
+
+<div class="card" style="margin-bottom:10px;padding:12px 20px;display:flex;align-items:center;gap:16px">
+  <span class="tag">v1.12</span>
+  <span>酒店知识库构建完成 · 取消退款流程 · MCP 官方接入策略确立</span>
+  <span style="margin-left:auto;color:rgba(255,255,255,0.3);font-size:0.8em">May 11</span>
+</div>
+
+<div class="card" style="margin-bottom:10px;padding:12px 20px;display:flex;align-items:center;gap:16px">
+  <span class="tag">v2.0–v2.7</span>
+  <span>Agent v2.0 全量 SOP 注入 · Chatflow 意图三路架构 · 天气查询接入</span>
+  <span style="margin-left:auto;color:rgba(255,255,255,0.3);font-size:0.8em">May 13–14</span>
 </div>
 
 <div class="card card-blue" style="margin-bottom:10px;padding:12px 20px;display:flex;align-items:center;gap:16px">
-  <span class="tag">Chatflow v3.3 ★</span>
-  <span>合并知识库 · 修复碎片化检索 · Reranker 启用</span>
-  <span style="margin-left:auto;color:rgba(255,255,255,0.3);font-size:0.8em">May 16</span>
-</div>
-
-<div class="card" style="margin-bottom:10px;padding:12px 20px;display:flex;align-items:center;gap:16px">
-  <span class="tag">Agent v3.0</span>
-  <span>初始 Agent · MCP 工具接入 · max_iteration=5</span>
-  <span style="margin-left:auto;color:rgba(255,255,255,0.3);font-size:0.8em">May 14</span>
+  <span class="tag">v3.0–v3.2 ★</span>
+  <span>决赛双链路：Chatflow 预订节点 + Agent v3.0 对齐 · MCP 实时房态</span>
+  <span style="margin-left:auto;color:rgba(255,255,255,0.3);font-size:0.8em">May 15</span>
 </div>
 
 <div class="card card-blue" style="padding:12px 20px;display:flex;align-items:center;gap:16px">
-  <span class="tag">Agent v3.1 ★</span>
-  <span>统一 KB · temperature 0.3→<strong>0.1</strong> · Prompt 强化止损规则</span>
-  <span style="margin-left:auto;color:rgba(255,255,255,0.3);font-size:0.8em">May 16</span>
+  <span class="tag">v3.4 双模 ★</span>
+  <span>知识工具 JSON 外部化 · 统一知识库 · Chatflow + Agent 双模架构收敛</span>
+  <span style="margin-left:auto;color:rgba(255,255,255,0.3);font-size:0.8em">May 17–18</span>
 </div>
 
 </div>

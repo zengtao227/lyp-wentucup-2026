@@ -952,33 +952,39 @@ section.opc {
 <div style="margin-top:16px">
 
 <div class="card" style="margin-bottom:10px;padding:12px 20px;display:flex;align-items:center;gap:16px">
-  <span class="tag">Chatflow v3.0</span>
-  <span>初始版本 · 5 个独立知识库 · 无预订功能</span>
-  <span style="margin-left:auto;color:rgba(255,255,255,0.3);font-size:0.8em">May 7</span>
+  <span class="tag">v1.0</span>
+  <span>初赛起点 · 多场景意图分类 · 基础问答框架搭建</span>
+  <span style="margin-left:auto;color:rgba(255,255,255,0.3);font-size:0.8em">May 8</span>
 </div>
 
 <div class="card" style="margin-bottom:10px;padding:12px 20px;display:flex;align-items:center;gap:16px">
-  <span class="tag">Chatflow v3.2</span>
-  <span>接入 MCP 预订工具 · 开场语 & 建议问题优化</span>
-  <span style="margin-left:auto;color:rgba(255,255,255,0.3);font-size:0.8em">May 12</span>
-</div>
-
-<div class="card card-blue" style="margin-bottom:10px;padding:12px 20px;display:flex;align-items:center;gap:16px">
-  <span class="tag">Chatflow v3.3 ★</span>
-  <span>合并知识库 · 修复碎片化检索 · Reranker 启用</span>
-  <span style="margin-left:auto;color:rgba(255,255,255,0.3);font-size:0.8em">May 16</span>
+  <span class="tag">v1.7</span>
+  <span>景区购票分支上线 · 小程序支付二维码打通</span>
+  <span style="margin-left:auto;color:rgba(255,255,255,0.3);font-size:0.8em">May 9</span>
 </div>
 
 <div class="card" style="margin-bottom:10px;padding:12px 20px;display:flex;align-items:center;gap:16px">
-  <span class="tag">Agent v3.0</span>
-  <span>初始 Agent · MCP 工具接入 · max_iteration=5</span>
+  <span class="tag">v1.12</span>
+  <span>酒店知识库整合 · 取消退款流程 · MCP 官方接入策略确立</span>
+  <span style="margin-left:auto;color:rgba(255,255,255,0.3);font-size:0.8em">May 11</span>
+</div>
+
+<div class="card" style="margin-bottom:10px;padding:12px 20px;display:flex;align-items:center;gap:16px">
+  <span class="tag">v2.7</span>
+  <span>意图三路路由架构 · 天气查询接入 · 导入稳定性修复</span>
   <span style="margin-left:auto;color:rgba(255,255,255,0.3);font-size:0.8em">May 14</span>
 </div>
 
+<div class="card card-blue" style="margin-bottom:10px;padding:12px 20px;display:flex;align-items:center;gap:16px">
+  <span class="tag">v3.2 ★</span>
+  <span>预订分支接入组委会 MCP · getAvailableRoomsByDate 实时房态查询</span>
+  <span style="margin-left:auto;color:rgba(255,255,255,0.3);font-size:0.8em">May 15</span>
+</div>
+
 <div class="card card-blue" style="padding:12px 20px;display:flex;align-items:center;gap:16px">
-  <span class="tag">Agent v3.1 ★</span>
-  <span>统一 KB · temperature 0.3→<strong>0.1</strong> · Prompt 强化止损规则</span>
-  <span style="margin-left:auto;color:rgba(255,255,255,0.3);font-size:0.8em">May 16</span>
+  <span class="tag">v3.4 ★</span>
+  <span>统一知识库 · 预订前置校验强化 · 开场语与建议问题最终收敛</span>
+  <span style="margin-left:auto;color:rgba(255,255,255,0.3);font-size:0.8em">May 17</span>
 </div>
 
 </div>
