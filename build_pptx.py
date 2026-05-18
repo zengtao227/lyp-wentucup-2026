@@ -35,13 +35,13 @@ BASE = Path(__file__).parent
 
 CONFIGS = {
     "dual": {
-        "md":    BASE / "路演PPT-v2.md",
+        "md":    BASE / "路演PPT-v3.0.md",
         "outdir": BASE / "pptx-export" / "dual-mode",
         "pptx":   BASE / "pptx-export" / "dual-mode" / "slides_dual_v3.pptx",
         "label":  "双模版",
     },
     "chatflow": {
-        "md":    BASE / "路演PPT-v2-chatflow.md",
+        "md":    BASE / "路演PPT-v3.0-chatflow.md",
         "outdir": BASE / "pptx-export" / "chatflow",
         "pptx":   BASE / "pptx-export" / "chatflow" / "slides_chatflow_v3.pptx",
         "label":  "Chatflow版",
