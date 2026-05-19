@@ -1,0 +1,26 @@
+Task mode: create from existing Markdown source.
+Primary deck-profile: product-platform.
+Secondary gates: gtm-growth and strategy-leadership, because this is a competition roadshow deck with operational ROI claims.
+
+Required proof objects:
+- OPC before/after operating model.
+- Pain-point table with quantified impact.
+- Unified Chatflow architecture map.
+- Knowledge-domain table and configuration table.
+- Booking workflow and MCP tool chain.
+- Accuracy before/after evidence and cost metrics.
+- Version milestone timeline.
+
+Source/asset requirements:
+- Use the Markdown as the canonical story source.
+- Use docs/CONTEXT.md for project terminology: WentuCup, Dify advanced-chat workflow, Xinhuì Country Garden Phoenix Hotel, 小途乐订, MCP, final roadshow scoring.
+- Avoid unsourced or unverified identity assets.
+
+Profile-specific QA gates:
+- Every non-chapter slide must have a claim-like title and a proof object.
+- Product workflow diagrams must tie modules to service/operating value.
+- Cost and accuracy claims must be visibly marked as source/internal-test based.
+
+Known missing inputs:
+- No official template PPTX was provided.
+- No separately verified hotel/platform logos were provided.

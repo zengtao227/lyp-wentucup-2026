@@ -1,0 +1,16 @@
+Source file:
+- /Users/zengtao/Doc/My code/lyp-wentucup/路演PPT-v3.0-chatflow.md
+
+Project context:
+- /Users/zengtao/Doc/My code/lyp-wentucup/docs/CONTEXT.md
+
+Identity asset policy:
+- School identity asset came from the local project file:
+  /Users/zengtao/Doc/My code/lyp-wentucup/logo.png
+- Derived local assets were created only for contrast and opacity treatment:
+  assets/school-seal-dark.png, assets/school-seal-watermark.png.
+- No hotel, Dify, DeepSeek, payment platform, or competition logo/mascot/icon has been redrawn or approximated.
+
+Metrics used:
+- 80% high-frequency/repeatable questions, traditional monthly cost ¥18,000+, estimated monthly savings ¥17,500+, ROI 36x+, response < 3s, 20 questions x 3 rounds, ≈51% to 100% retrieval accuracy, 5 MCP tools, teamId 234556, 13 room codes, memory_window 10, max_iteration 5.
+- These are carried over from the source Markdown and project context, not independently remeasured in this generation step.

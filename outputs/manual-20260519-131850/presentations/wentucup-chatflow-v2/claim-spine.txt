@@ -1,0 +1,37 @@
+Thesis:
+WentuCup Chatflow turns a hotel front-desk workload into an OPC-style AI service unit: one入口, one knowledge base, one controllable booking workflow, and a measurable reduction in manual service burden.
+
+Audience:
+WentuCup final judges evaluating roadshow story, workflow quality, customer-service integration, and booking Agent capability.
+
+One-line arc:
+Start with service pain and OPC economics, prove the knowledge and workflow design, show the MCP booking chain, then close with iteration evidence and operational ROI.
+
+Slide list:
+01 Cover: Hotel AI customer-service application for the WentuCup final.
+02 OPC: Traditional staffing model is structurally expensive; AI enables a smaller service unit.
+03 Agenda: The roadshow follows the scoring-relevant build story.
+04 Chapter 01: Demand analysis and planning.
+05 Pain: Five real service scenarios explain why automation matters.
+06 Architecture: FAQ and booking share one Chatflow entrance.
+07 Chapter 02: Knowledge-base construction.
+08 Knowledge domains: Five domains provide full-scenario coverage.
+09 Decisions: Encoding, unified KB, and flow convergence remove the root causes.
+10 Chapter 03: Workflow and module planning.
+11 Chatflow architecture: FAQ and booking paths coexist in one controllable workflow.
+12 Booking workflow: Six steps prevent premature submission.
+13 Chapter 04: App orchestration and node configuration.
+14 Parameters: Every key parameter maps to a stability reason.
+15 Guardrails: Stop-loss rules are the reliability design, not a fallback afterthought.
+16 Chapter 05: Performance and cost.
+17 Accuracy: Internal tests show the accuracy jump after KB/process changes.
+18 Cost: OPC value is visible in monthly operating cost and coverage.
+19 Chapter 06: Booking Agent integration.
+20 MCP tools: Five tools form the booking loop.
+21 Conversation: The user experience moves from inquiry to pending payment without manual intervention.
+22 Chapter 07: Design optimization and iteration.
+23 Timeline: Each version solved a concrete delivery risk.
+24 Three-layer optimization: Architecture, model, and prompt layers compound the accuracy gain.
+25 OPC proof: AI capability maps directly to OPC operating outcomes.
+26 Thanks: Stakeholders and support.
+27 Closing: Q&A.

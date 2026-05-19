@@ -1,0 +1,33 @@
+Rendered QA scorecard
+
+story: 5/5
+specificity: 4/5
+competition fit: 5/5
+rhythm: 4/5
+whitespace: 4/5
+chart clarity: 4/5
+typography: 4/5
+restraint: 5/5
+precision: 5/5
+coherence: 5/5
+
+Total: 44/50
+
+Profile gates:
+- hotel-management IT competition framing: pass
+- product-platform proof objects: pass
+- workflow-to-operating-value linkage: pass
+- source/metric provenance notes: pass
+- school identity asset: pass; local logo.png used, with cover seal and interior watermark
+- unverified logo avoidance: pass; no hotel/platform/Dify/DeepSeek marks approximated
+
+Verification:
+- artifact-tool export produced 27-slide PPTX.
+- PNG preview and contact sheet rendered.
+- competition-required PDF version generated from the rendered 27-slide preview set.
+- layout quality check: 0 errors, 0 warnings.
+- cover and contact sheet were visually inspected after simplifying the cover and switching to the full school logo lockup.
+
+Known residual limits:
+- This is a native editable PowerPoint rebuild of the Markdown story, not a pixel-perfect Marp conversion.
+- Embedded source raster images without local provenance were intentionally omitted, except the provided local school identity asset.
