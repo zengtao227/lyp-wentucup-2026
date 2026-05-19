@@ -1,0 +1,57 @@
+Slide size: 1280x720.
+
+Audience:
+- Hotel management students presenting an IT application competition roadshow.
+- The deck should read as a polished competition defense, not a corporate financing pitch.
+
+Background system:
+- Cool light base (#F6F8FB) with white cards and pale blue-gray identity rail.
+- Top green rule plus amber hairline for consistent stage presence.
+- Chapter slides use extra whitespace, large section numerals, and a quiet right-side rail.
+
+Typography:
+- Title/body: PingFang SC with system fallback.
+- Large claims use heavy weight and compact line breaks.
+- Numeric proof points use larger size and accent color.
+
+Palette:
+- Ink: #172033.
+- Muted text: #5F6978 / #9299A5.
+- Cards: #FFFFFF / #EEF3F8.
+- Rules: #D7DEE8.
+- Accents: green #087F5B, cyan #0E7490, blue #2457D6, amber #B7791F, rose #C24155.
+- Purple is secondary only.
+
+Identity system:
+- Cover uses the provided school seal from /Users/zengtao/Doc/My code/lyp-wentucup/logo.png, recolored for contrast.
+- Interior slides use a low-opacity school-seal watermark in the upper-right identity rail.
+- No hotel, platform, Dify, DeepSeek, or payment-logo marks are redrawn or approximated.
+
+Chart grammar:
+- Use editable bars, metric rails, timelines, and tables.
+- Direct labels only; no heavy legends.
+
+Diagram grammar:
+- Process nodes are native rectangles with hairline connectors.
+- Directional arrows appear only when process order matters.
+
+Footer grammar:
+- Quiet footer line with competition / major / team identity and page number.
+
+Layout families:
+- Cover with school identity, proof metrics, and competition positioning.
+- Before/after comparison.
+- Answer/defense agenda index.
+- Chapter transition.
+- Evidence table plus metric side rail.
+- Architecture map.
+- Sequential workflow.
+- Configuration matrix.
+- Tool-chain diagram.
+- Milestone timeline.
+- Closing/thanks.
+
+Banned motifs:
+- Unverified logos.
+- Decorative icon-only filler.
+- Repeated card grids on more than two consecutive slides.

@@ -1,0 +1,1497 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/kvlv9m",
+    "id": "kvlv9m",
+    "slide": 5,
+    "layoutId": "f845d4f3-a928-4e6d-a456-8179485a1da5",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "cc915725-7ecb-4e11-8bd5-5665e32af563",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "PingFang SC"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "f845d4f3-a928-4e6d-a456-8179485a1da5",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "cc915725-7ecb-4e11-8bd5-5665e32af563",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "cc915725-7ecb-4e11-8bd5-5665e32af563",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1cfa9w3m",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#F8FAFC",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ulwval87",
+      "id": "2",
+      "bbox": [
+        0,
+        0,
+        1280,
+        8
+      ],
+      "geometry": "rect",
+      "fillColor": "#0369A1",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/j6tovaho",
+      "id": "3",
+      "bbox": [
+        0,
+        8,
+        1280,
+        2
+      ],
+      "geometry": "rect",
+      "fillColor": "#047857",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/xobm58z2",
+      "id": "4",
+      "bbox": [
+        1134,
+        42,
+        72,
+        72
+      ],
+      "alt": "海南职业技术学院校徽水印",
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "0f728d4b-8f8b-4a31-9293-49804c187bbf",
+        "contentType": "image/png",
+        "byteLength": 138493
+      }
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1kre1w7m",
+      "id": "5",
+      "bbox": [
+        64,
+        42,
+        30,
+        4
+      ],
+      "geometry": "rect",
+      "fillColor": "#BE123C",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/uxc3ylc7",
+      "id": "6",
+      "bbox": [
+        64,
+        54,
+        420,
+        20
+      ],
+      "geometry": "rect",
+      "text": "酒店服务痛点",
+      "textPreview": "酒店服务痛点",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "酒店服务痛点"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "酒店服务痛点",
+          "runs": [
+            {
+              "index": 1,
+              "text": "酒店服务痛点",
+              "fontSize": 10.51,
+              "typeface": "PingFang SC",
+              "color": "#475569",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ji5snelo",
+      "id": "7",
+      "bbox": [
+        64,
+        78,
+        980,
+        86
+      ],
+      "geometry": "rect",
+      "text": "五类真实场景决定了 AI 前台\n必须同时解决速度、口径和成本",
+      "textPreview": "五类真实场景决定了 AI 前台 | 必须同时解决速度、口径和成本",
+      "resolvedFontSize": 29,
+      "resolvedTextStyle": {
+        "fontSize": 29,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "五类真实场景决定了 AI 前台"
+          },
+          {
+            "index": 2,
+            "text": "必须同时解决速度、口径和成本"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "五类真实场景决定了 AI 前台",
+          "runs": [
+            {
+              "index": 1,
+              "text": "五类真实场景决定了 AI 前台",
+              "fontSize": 29,
+              "typeface": "PingFang SC",
+              "color": "#020617",
+              "bold": true
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "必须同时解决速度、口径和成本",
+          "runs": [
+            {
+              "index": 1,
+              "text": "必须同时解决速度、口径和成本",
+              "fontSize": 29,
+              "typeface": "PingFang SC",
+              "color": "#020617",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8bat47y1",
+      "id": "8",
+      "bbox": [
+        72,
+        190,
+        690,
+        46
+      ],
+      "geometry": "rect",
+      "fillColor": "#E5EFF7",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1w7mp0bi",
+      "id": "9",
+      "bbox": [
+        84,
+        200,
+        242,
+        22
+      ],
+      "geometry": "rect",
+      "text": "痛点",
+      "textPreview": "痛点",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "痛点"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "痛点",
+          "runs": [
+            {
+              "index": 1,
+              "text": "痛点",
+              "fontSize": 16,
+              "typeface": "PingFang SC",
+              "color": "#020617",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d0z61032",
+      "id": "10",
+      "bbox": [
+        344,
+        200,
+        412,
+        22
+      ],
+      "geometry": "rect",
+      "text": "量化影响",
+      "textPreview": "量化影响",
+      "resolvedFontSize": 16,
+      "resolvedTextStyle": {
+        "fontSize": 16,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "量化影响"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "量化影响",
+          "runs": [
+            {
+              "index": 1,
+              "text": "量化影响",
+              "fontSize": 16,
+              "typeface": "PingFang SC",
+              "color": "#020617",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kf6dcbul",
+      "id": "11",
+      "bbox": [
+        332,
+        190,
+        1,
+        336
+      ],
+      "geometry": "rect",
+      "fillColor": "#CBD5E1",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vu9knih4",
+      "id": "12",
+      "bbox": [
+        72,
+        236,
+        690,
+        58
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/29gr2p8n",
+      "id": "13",
+      "bbox": [
+        72,
+        236,
+        690,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#E2E8F0",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d8bat47y",
+      "id": "14",
+      "bbox": [
+        84,
+        246,
+        242,
+        34
+      ],
+      "geometry": "rect",
+      "text": "响应延迟",
+      "textPreview": "响应延迟",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "响应延迟"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "响应延迟",
+          "runs": [
+            {
+              "index": 1,
+              "text": "响应延迟",
+              "fontSize": 17,
+              "typeface": "PingFang SC",
+              "color": "#020617",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/knih4byh",
+      "id": "15",
+      "bbox": [
+        344,
+        246,
+        412,
+        34
+      ],
+      "geometry": "rect",
+      "text": "高峰期等待 > 5 分钟",
+      "textPreview": "高峰期等待 > 5 分钟",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "PingFang SC",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "高峰期等待 > 5 分钟"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "高峰期等待 > 5 分钟",
+          "runs": [
+            {
+              "index": 1,
+              "text": "高峰期等待 > 5 分钟",
+              "fontSize": 17,
+              "typeface": "PingFang SC",
+              "color": "#020617"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/v6psfil0",
+      "id": "16",
+      "bbox": [
+        72,
+        294,
+        690,
+        58
+      ],
+      "geometry": "rect",
+      "fillColor": "#F1F5F9",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2lszqtcj",
+      "id": "17",
+      "bbox": [
+        72,
+        294,
+        690,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#E2E8F0",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dcbulwva",
+      "id": "18",
+      "bbox": [
+        84,
+        304,
+        242,
+        34
+      ],
+      "geometry": "rect",
+      "text": "夜间缺口",
+      "textPreview": "夜间缺口",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "夜间缺口"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "夜间缺口",
+          "runs": [
+            {
+              "index": 1,
+              "text": "夜间缺口",
+              "fontSize": 17,
+              "typeface": "PingFang SC",
+              "color": "#020617",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kre1w7mp",
+      "id": "19",
+      "bbox": [
+        344,
+        304,
+        412,
+        34
+      ],
+      "geometry": "rect",
+      "text": "23:00-8:00 无人接待",
+      "textPreview": "23:00-8:00 无人接待",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "PingFang SC",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "23:00-8:00 无人接待"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "23:00-8:00 无人接待",
+          "runs": [
+            {
+              "index": 1,
+              "text": "23:00-8:00 无人接待",
+              "fontSize": 17,
+              "typeface": "PingFang SC",
+              "color": "#020617"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kzupwb2h",
+      "id": "20",
+      "bbox": [
+        72,
+        352,
+        690,
+        58
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9knih4by",
+      "id": "21",
+      "bbox": [
+        72,
+        352,
+        690,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#E2E8F0",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2t83itgf",
+      "id": "22",
+      "bbox": [
+        84,
+        362,
+        242,
+        34
+      ],
+      "geometry": "rect",
+      "text": "知识分散",
+      "textPreview": "知识分散",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "知识分散"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "知识分散",
+          "runs": [
+            {
+              "index": 1,
+              "text": "知识分散",
+              "fontSize": 17,
+              "typeface": "PingFang SC",
+              "color": "#020617",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/re1w7mp0",
+      "id": "23",
+      "bbox": [
+        344,
+        362,
+        412,
+        34
+      ],
+      "geometry": "rect",
+      "text": "5 类场景，5 人口径不同",
+      "textPreview": "5 类场景，5 人口径不同",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "PingFang SC",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "5 类场景，5 人口径不同"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "5 类场景，5 人口径不同",
+          "runs": [
+            {
+              "index": 1,
+              "text": "5 类场景，5 人口径不同",
+              "fontSize": 17,
+              "typeface": "PingFang SC",
+              "color": "#020617"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kb6xkf6d",
+      "id": "24",
+      "bbox": [
+        72,
+        410,
+        690,
+        58
+      ],
+      "geometry": "rect",
+      "fillColor": "#F1F5F9",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9w3m94fu",
+      "id": "25",
+      "bbox": [
+        72,
+        410,
+        690,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#E2E8F0",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/25kb6xkf",
+      "id": "26",
+      "bbox": [
+        84,
+        420,
+        242,
+        34
+      ],
+      "geometry": "rect",
+      "text": "重复劳动",
+      "textPreview": "重复劳动",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "重复劳动"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "重复劳动",
+          "runs": [
+            {
+              "index": 1,
+              "text": "重复劳动",
+              "fontSize": 17,
+              "typeface": "PingFang SC",
+              "color": "#020617",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 27,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rqd4vmtw",
+      "id": "27",
+      "bbox": [
+        344,
+        420,
+        412,
+        34
+      ],
+      "geometry": "rect",
+      "text": "80% 问题为高频重复",
+      "textPreview": "80% 问题为高频重复",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "PingFang SC",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "80% 问题为高频重复"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "80% 问题为高频重复",
+          "runs": [
+            {
+              "index": 1,
+              "text": "80% 问题为高频重复",
+              "fontSize": 17,
+              "typeface": "PingFang SC",
+              "color": "#020617"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 28,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kjm1cfa9",
+      "id": "28",
+      "bbox": [
+        72,
+        468,
+        690,
+        58
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 29,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/94fu18jq",
+      "id": "29",
+      "bbox": [
+        72,
+        468,
+        690,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#E2E8F0",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 30,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fmlkjm1c",
+      "id": "30",
+      "bbox": [
+        84,
+        478,
+        242,
+        34
+      ],
+      "geometry": "rect",
+      "text": "成本高企",
+      "textPreview": "成本高企",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "成本高企"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "成本高企",
+          "runs": [
+            {
+              "index": 1,
+              "text": "成本高企",
+              "fontSize": 17,
+              "typeface": "PingFang SC",
+              "color": "#020617",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 31,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/q1orytsv",
+      "id": "31",
+      "bbox": [
+        344,
+        478,
+        412,
+        34
+      ],
+      "geometry": "rect",
+      "text": "3-5 名专职客服/月",
+      "textPreview": "3-5 名专职客服/月",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "PingFang SC",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "3-5 名专职客服/月"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "3-5 名专职客服/月",
+          "runs": [
+            {
+              "index": 1,
+              "text": "3-5 名专职客服/月",
+              "fontSize": 17,
+              "typeface": "PingFang SC",
+              "color": "#020617"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 32,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xs72x4na",
+      "id": "32",
+      "bbox": [
+        72,
+        526,
+        690,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#E2E8F0",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 33,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/87ed8bat",
+      "id": "33",
+      "bbox": [
+        830,
+        238,
+        300,
+        118
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 34,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/je9cvixc",
+      "id": "34",
+      "bbox": [
+        830,
+        238,
+        300,
+        5
+      ],
+      "geometry": "rect",
+      "fillColor": "#0891B2",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 35,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qtcj6tov",
+      "id": "35",
+      "bbox": [
+        852,
+        260,
+        256,
+        40
+      ],
+      "geometry": "rect",
+      "text": "80%",
+      "textPreview": "80%",
+      "resolvedFontSize": 34,
+      "resolvedTextStyle": {
+        "fontSize": 34,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "80%"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "80%",
+          "runs": [
+            {
+              "index": 1,
+              "text": "80%",
+              "fontSize": 34,
+              "typeface": "PingFang SC",
+              "color": "#0891B2",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 36,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1gvy90je",
+      "id": "36",
+      "bbox": [
+        852,
+        310,
+        256,
+        28
+      ],
+      "geometry": "rect",
+      "text": "问题可被知识库标准化处理",
+      "textPreview": "问题可被知识库标准化处理",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "PingFang SC",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "问题可被知识库标准化处理"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "问题可被知识库标准化处理",
+          "runs": [
+            {
+              "index": 1,
+              "text": "问题可被知识库标准化处理",
+              "fontSize": 14,
+              "typeface": "PingFang SC",
+              "color": "#475569"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 37,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8z25kb6x",
+      "id": "37",
+      "bbox": [
+        830,
+        390,
+        300,
+        118
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 38,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fa9w3m94",
+      "id": "38",
+      "bbox": [
+        830,
+        390,
+        300,
+        5
+      ],
+      "geometry": "rect",
+      "fillColor": "#B45309",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 39,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qpg3ex0n",
+      "id": "39",
+      "bbox": [
+        852,
+        412,
+        256,
+        40
+      ],
+      "geometry": "rect",
+      "text": "¥18,000+",
+      "textPreview": "¥18,000+",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "fontSize": 28,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "¥18,000+"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "¥18,000+",
+          "runs": [
+            {
+              "index": 1,
+              "text": "¥18,000+",
+              "fontSize": 28,
+              "typeface": "PingFang SC",
+              "color": "#B45309",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 40,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/al87ed8b",
+      "id": "40",
+      "bbox": [
+        852,
+        462,
+        256,
+        28
+      ],
+      "geometry": "rect",
+      "text": "传统模式月均人力成本",
+      "textPreview": "传统模式月均人力成本",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "PingFang SC",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "传统模式月均人力成本"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "传统模式月均人力成本",
+          "runs": [
+            {
+              "index": 1,
+              "text": "传统模式月均人力成本",
+              "fontSize": 14,
+              "typeface": "PingFang SC",
+              "color": "#475569"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 41,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/z61032ls",
+      "id": "41",
+      "bbox": [
+        64,
+        660,
+        1048,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#E2E8F0",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 42,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/orytsvu9",
+      "id": "42",
+      "bbox": [
+        64,
+        674,
+        850,
+        20
+      ],
+      "geometry": "rect",
+      "text": "问途杯决赛 · 酒店/旅游业智能客服应用功能整合优化与方案路演 · 彬彬有礼团队",
+      "textPreview": "问途杯决赛 · 酒店/旅游业智能客服应用功能整合优化与方案路演 · 彬彬有礼团队",
+      "resolvedFontSize": 9.51,
+      "resolvedTextStyle": {
+        "fontSize": 9.51,
+        "typeface": "PingFang SC",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "问途杯决赛 · 酒店/旅游业智能客服应用功能整合优化与方案路演 · 彬彬有礼团队"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "问途杯决赛 · 酒店/旅游业智能客服应用功能整合优化与方案路演 · 彬彬有礼团队",
+          "runs": [
+            {
+              "index": 1,
+              "text": "问途杯决赛 · 酒店/旅游业智能客服应用功能整合优化与方案路演 · 彬彬有礼团队",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#64748B"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 43,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/hcrmhk3q",
+      "id": "43",
+      "bbox": [
+        1146,
+        666,
+        52,
+        30
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 44,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/a9w3m94f",
+      "id": "44",
+      "bbox": [
+        1156,
+        672,
+        32,
+        15
+      ],
+      "geometry": "rect",
+      "text": "05",
+      "textPreview": "05",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "center"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "05"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "05",
+          "runs": [
+            {
+              "index": 1,
+              "text": "05",
+              "fontSize": 12.51,
+              "typeface": "PingFang SC",
+              "color": "#0369A1",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

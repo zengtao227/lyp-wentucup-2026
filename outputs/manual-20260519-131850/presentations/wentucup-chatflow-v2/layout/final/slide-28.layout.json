@@ -1,0 +1,406 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/tthvuh",
+    "id": "tthvuh",
+    "slide": 28,
+    "layoutId": "f845d4f3-a928-4e6d-a456-8179485a1da5",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "cc915725-7ecb-4e11-8bd5-5665e32af563",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "PingFang SC"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "f845d4f3-a928-4e6d-a456-8179485a1da5",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "cc915725-7ecb-4e11-8bd5-5665e32af563",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "cc915725-7ecb-4e11-8bd5-5665e32af563",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/32lszqtc",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#F1F5F9",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sneloj2t",
+      "id": "2",
+      "bbox": [
+        0,
+        0,
+        1280,
+        8
+      ],
+      "geometry": "rect",
+      "fillColor": "#0F172A",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/l87ed8ba",
+      "id": "3",
+      "bbox": [
+        0,
+        8,
+        1280,
+        2
+      ],
+      "geometry": "rect",
+      "fillColor": "#047857",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/zed8v6ps",
+      "id": "4",
+      "bbox": [
+        1134,
+        42,
+        72,
+        72
+      ],
+      "alt": "海南职业技术学院校徽水印",
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "d97d0b53-20d2-4f35-bce8-9a82c37502f2",
+        "contentType": "image/png",
+        "byteLength": 138493
+      }
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3ex0nuxc",
+      "id": "5",
+      "bbox": [
+        200,
+        214,
+        880,
+        64
+      ],
+      "geometry": "rect",
+      "text": "感谢各位评委聆听",
+      "textPreview": "感谢各位评委聆听",
+      "resolvedFontSize": 52,
+      "resolvedTextStyle": {
+        "fontSize": 52,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "center"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "感谢各位评委聆听"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "感谢各位评委聆听",
+          "runs": [
+            {
+              "index": 1,
+              "text": "感谢各位评委聆听",
+              "fontSize": 52,
+              "typeface": "PingFang SC",
+              "color": "#020617",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/szqtcj6t",
+      "id": "6",
+      "bbox": [
+        340,
+        310,
+        600,
+        36
+      ],
+      "geometry": "rect",
+      "text": "欢迎提问与指导",
+      "textPreview": "欢迎提问与指导",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "fontSize": 28,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "center"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "欢迎提问与指导"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "欢迎提问与指导",
+          "runs": [
+            {
+              "index": 1,
+              "text": "欢迎提问与指导",
+              "fontSize": 28,
+              "typeface": "PingFang SC",
+              "color": "#0891B2",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lkjm1cfa",
+      "id": "7",
+      "bbox": [
+        300,
+        390,
+        680,
+        26
+      ],
+      "geometry": "rect",
+      "text": "酒店/旅游业智能客服应用功能整合优化方案路演",
+      "textPreview": "酒店/旅游业智能客服应用功能整合优化方案路演",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "center"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "酒店/旅游业智能客服应用功能整合优化方案路演"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "酒店/旅游业智能客服应用功能整合优化方案路演",
+          "runs": [
+            {
+              "index": 1,
+              "text": "酒店/旅游业智能客服应用功能整合优化方案路演",
+              "fontSize": 17,
+              "typeface": "PingFang SC",
+              "color": "#047857",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/z61032ls",
+      "id": "8",
+      "bbox": [
+        480,
+        430,
+        320,
+        81
+      ],
+      "alt": "海南职业技术学院完整标识",
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "c98bf4c4-b288-4445-8c60-1881e87a7e4c",
+        "contentType": "image/png",
+        "byteLength": 345164
+      }
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3itgfmlk",
+      "id": "9",
+      "bbox": [
+        340,
+        562,
+        600,
+        24
+      ],
+      "geometry": "rect",
+      "text": "彬彬有礼团队：符秀晶、温媛、李秋慧、符志鹏",
+      "textPreview": "彬彬有礼团队：符秀晶、温媛、李秋慧、符志鹏",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "PingFang SC",
+        "alignment": "center"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "彬彬有礼团队：符秀晶、温媛、李秋慧、符志鹏"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "彬彬有礼团队：符秀晶、温媛、李秋慧、符志鹏",
+          "runs": [
+            {
+              "index": 1,
+              "text": "彬彬有礼团队：符秀晶、温媛、李秋慧、符志鹏",
+              "fontSize": 15,
+              "typeface": "PingFang SC",
+              "color": "#475569"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/bm58z25k",
+      "id": "10",
+      "bbox": [
+        540,
+        616,
+        200,
+        22
+      ],
+      "geometry": "rect",
+      "text": "2026.05",
+      "textPreview": "2026.05",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "PingFang SC",
+        "alignment": "center"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "2026.05"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "2026.05",
+          "runs": [
+            {
+              "index": 1,
+              "text": "2026.05",
+              "fontSize": 15,
+              "typeface": "PingFang SC",
+              "color": "#64748B"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

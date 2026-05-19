@@ -1,0 +1,934 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/arca77",
+    "id": "arca77",
+    "slide": 21,
+    "layoutId": "f845d4f3-a928-4e6d-a456-8179485a1da5",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "cc915725-7ecb-4e11-8bd5-5665e32af563",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "PingFang SC"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "f845d4f3-a928-4e6d-a456-8179485a1da5",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "cc915725-7ecb-4e11-8bd5-5665e32af563",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "cc915725-7ecb-4e11-8bd5-5665e32af563",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/x0nuxc3y",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#F8FAFC",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/m94fu18j",
+      "id": "2",
+      "bbox": [
+        0,
+        0,
+        1280,
+        8
+      ],
+      "geometry": "rect",
+      "fillColor": "#0369A1",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fu18jqh0",
+      "id": "3",
+      "bbox": [
+        0,
+        8,
+        1280,
+        2
+      ],
+      "geometry": "rect",
+      "fillColor": "#047857",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/1kre1w7m",
+      "id": "4",
+      "bbox": [
+        1134,
+        42,
+        72,
+        72
+      ],
+      "alt": "海南职业技术学院校徽水印",
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "c21aa490-77d7-4518-833a-65a4508b7b67",
+        "contentType": "image/png",
+        "byteLength": 138493
+      }
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xobm58z2",
+      "id": "5",
+      "bbox": [
+        64,
+        42,
+        30,
+        4
+      ],
+      "geometry": "rect",
+      "fillColor": "#047857",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qxs72x4n",
+      "id": "6",
+      "bbox": [
+        64,
+        54,
+        420,
+        20
+      ],
+      "geometry": "rect",
+      "text": "用户体验演示",
+      "textPreview": "用户体验演示",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "用户体验演示"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "用户体验演示",
+          "runs": [
+            {
+              "index": 1,
+              "text": "用户体验演示",
+              "fontSize": 10.51,
+              "typeface": "PingFang SC",
+              "color": "#475569",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fil0rqd4",
+      "id": "7",
+      "bbox": [
+        64,
+        78,
+        980,
+        86
+      ],
+      "geometry": "rect",
+      "text": "用户体验呈现为一次连续对话：\n查询、确认、待支付申请都在同一入口完成",
+      "textPreview": "用户体验呈现为一次连续对话： | 查询、确认、待支付申请都在同一入口完成",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "fontSize": 28,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "用户体验呈现为一次连续对话："
+          },
+          {
+            "index": 2,
+            "text": "查询、确认、待支付申请都在同一入口完成"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "用户体验呈现为一次连续对话：",
+          "runs": [
+            {
+              "index": 1,
+              "text": "用户体验呈现为一次连续对话：",
+              "fontSize": 28,
+              "typeface": "PingFang SC",
+              "color": "#020617",
+              "bold": true
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "查询、确认、待支付申请都在同一入口完成",
+          "runs": [
+            {
+              "index": 1,
+              "text": "查询、确认、待支付申请都在同一入口完成",
+              "fontSize": 28,
+              "typeface": "PingFang SC",
+              "color": "#020617",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4zidonyd",
+      "id": "8",
+      "bbox": [
+        92,
+        188,
+        312,
+        300
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xkf6dcbu",
+      "id": "9",
+      "bbox": [
+        92,
+        188,
+        312,
+        7
+      ],
+      "geometry": "rect",
+      "fillColor": "#0891B2",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1kre1w7m",
+      "id": "10",
+      "bbox": [
+        114,
+        218,
+        258,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Step 1 · 查询与选房",
+      "textPreview": "Step 1 · 查询与选房",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Step 1 · 查询与选房"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Step 1 · 查询与选房",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Step 1 · 查询与选房",
+              "fontSize": 18,
+              "typeface": "PingFang SC",
+              "color": "#0891B2",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/c3ylc7u5",
+      "id": "11",
+      "bbox": [
+        116,
+        278,
+        252,
+        150
+      ],
+      "geometry": "rect",
+      "text": "用户：6 月 2 日入住，两间豪华大床房。\nAI：已调用 MCP 查询房态，并展示可订房型与价格。",
+      "textPreview": "用户：6 月 2 日入住，两间豪华大床房。 | AI：已调用 MCP 查询房态，并展示可订房型与价格。",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "PingFang SC",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "用户：6 月 2"
+          },
+          {
+            "index": 2,
+            "text": "日入住，两间豪华大床房。"
+          },
+          {
+            "index": 3,
+            "text": "AI：已调用 MCP"
+          },
+          {
+            "index": 4,
+            "text": "查询房态，并展示可订房型与价格。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "用户：6 月 2 日入住，两间豪华大床房。",
+          "runs": [
+            {
+              "index": 1,
+              "text": "用户：6 月 2 日入住，两间豪华大床房。",
+              "fontSize": 15,
+              "typeface": "PingFang SC",
+              "color": "#020617"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "AI：已调用 MCP 查询房态，并展示可订房型与价格。",
+          "runs": [
+            {
+              "index": 1,
+              "text": "AI：已调用 MCP 查询房态，并展示可订房型与价格。",
+              "fontSize": 15,
+              "typeface": "PingFang SC",
+              "color": "#020617"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ji5snelo",
+      "id": "12",
+      "bbox": [
+        462,
+        188,
+        312,
+        300
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/uxc3ylc7",
+      "id": "13",
+      "bbox": [
+        462,
+        188,
+        312,
+        7
+      ],
+      "geometry": "rect",
+      "fillColor": "#047857",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1cfa9w3m",
+      "id": "14",
+      "bbox": [
+        484,
+        218,
+        258,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Step 2 · 确认信息",
+      "textPreview": "Step 2 · 确认信息",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Step 2 · 确认信息"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Step 2 · 确认信息",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Step 2 · 确认信息",
+              "fontSize": 18,
+              "typeface": "PingFang SC",
+              "color": "#047857",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/crmhk3q5",
+      "id": "15",
+      "bbox": [
+        486,
+        278,
+        252,
+        150
+      ],
+      "geometry": "rect",
+      "text": "用户：确认，姓名符秀晶，手机号 138****8888。\nAI：复述入住日期、房型、间数、联系人，等待明确确认。",
+      "textPreview": "用户：确认，姓名符秀晶，手机号 138****8888。 | AI：复述入住日期、房型、间数、联系人，等待明确确认。",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "PingFang SC",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "用户：确认，姓名符秀晶，手机号"
+          },
+          {
+            "index": 2,
+            "text": "138****8888。"
+          },
+          {
+            "index": 3,
+            "text": "AI：复述入住日期、房型、间数、联"
+          },
+          {
+            "index": 4,
+            "text": "系人，等待明确确认。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "用户：确认，姓名符秀晶，手机号 138****8888。",
+          "runs": [
+            {
+              "index": 1,
+              "text": "用户：确认，姓名符秀晶，手机号 138****8888。",
+              "fontSize": 15,
+              "typeface": "PingFang SC",
+              "color": "#020617"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "AI：复述入住日期、房型、间数、联系人，等待明确确认。",
+          "runs": [
+            {
+              "index": 1,
+              "text": "AI：复述入住日期、房型、间数、联系人，等待明确确认。",
+              "fontSize": 15,
+              "typeface": "PingFang SC",
+              "color": "#020617"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/j6tovaho",
+      "id": "16",
+      "bbox": [
+        832,
+        188,
+        312,
+        300
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ulwval87",
+      "id": "17",
+      "bbox": [
+        832,
+        188,
+        312,
+        7
+      ],
+      "geometry": "rect",
+      "fillColor": "#B45309",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/18jqh0fe",
+      "id": "18",
+      "bbox": [
+        854,
+        218,
+        258,
+        24
+      ],
+      "geometry": "rect",
+      "text": "Step 3 · 下单支付",
+      "textPreview": "Step 3 · 下单支付",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Step 3 · 下单支付"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Step 3 · 下单支付",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Step 3 · 下单支付",
+              "fontSize": 18,
+              "typeface": "PingFang SC",
+              "color": "#B45309",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/8nqxs72x",
+      "id": "19",
+      "bbox": [
+        856,
+        278,
+        252,
+        150
+      ],
+      "geometry": "rect",
+      "text": "用户：确认预订。\nAI：预订申请已提交，流水编号 WCP-101；请前往小途乐订完成支付。",
+      "textPreview": "用户：确认预订。 | AI：预订申请已提交，流水编号 WCP-101；请前往小途乐订完成支付。",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "fontSize": 15,
+        "typeface": "PingFang SC",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 4,
+        "lines": [
+          {
+            "index": 1,
+            "text": "用户：确认预订。"
+          },
+          {
+            "index": 2,
+            "text": "AI：预订申请已提交，流水编号"
+          },
+          {
+            "index": 3,
+            "text": "WCP-101；请前往小途乐订完成支付"
+          },
+          {
+            "index": 4,
+            "text": "。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "用户：确认预订。",
+          "runs": [
+            {
+              "index": 1,
+              "text": "用户：确认预订。",
+              "fontSize": 15,
+              "typeface": "PingFang SC",
+              "color": "#020617"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "AI：预订申请已提交，流水编号 WCP-101；请前往小途乐订完成支付。",
+          "runs": [
+            {
+              "index": 1,
+              "text": "AI：预订申请已提交，流水编号 WCP-101；请前往小途乐订完成支付。",
+              "fontSize": 15,
+              "typeface": "PingFang SC",
+              "color": "#020617"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/oj2t83it",
+      "id": "20",
+      "bbox": [
+        156,
+        548,
+        920,
+        28
+      ],
+      "geometry": "rect",
+      "text": "从咨询到下单 · 全程无需人工介入 · 完成预订 < 5 min",
+      "textPreview": "从咨询到下单 · 全程无需人工介入 · 完成预订 < 5 min",
+      "resolvedFontSize": 20,
+      "resolvedTextStyle": {
+        "fontSize": 20,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "center"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "从咨询到下单 · 全程无需人工介入 · 完成预订 < 5 min"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "从咨询到下单 · 全程无需人工介入 · 完成预订 < 5 min",
+          "runs": [
+            {
+              "index": 1,
+              "text": "从咨询到下单 · 全程无需人工介入 · 完成预订 < 5 min",
+              "fontSize": 20,
+              "typeface": "PingFang SC",
+              "color": "#020617",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d4vmtwra",
+      "id": "21",
+      "bbox": [
+        64,
+        660,
+        1048,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#E2E8F0",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6dcbulwv",
+      "id": "22",
+      "bbox": [
+        64,
+        674,
+        850,
+        20
+      ],
+      "geometry": "rect",
+      "text": "问途杯决赛 · 酒店/旅游业智能客服应用功能整合优化与方案路演 · 彬彬有礼团队",
+      "textPreview": "问途杯决赛 · 酒店/旅游业智能客服应用功能整合优化与方案路演 · 彬彬有礼团队",
+      "resolvedFontSize": 9.51,
+      "resolvedTextStyle": {
+        "fontSize": 9.51,
+        "typeface": "PingFang SC",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "问途杯决赛 · 酒店/旅游业智能客服应用功能整合优化与方案路演 · 彬彬有礼团队"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "问途杯决赛 · 酒店/旅游业智能客服应用功能整合优化与方案路演 · 彬彬有礼团队",
+          "runs": [
+            {
+              "index": 1,
+              "text": "问途杯决赛 · 酒店/旅游业智能客服应用功能整合优化与方案路演 · 彬彬有礼团队",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#64748B"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vy90je9c",
+      "id": "23",
+      "bbox": [
+        1146,
+        666,
+        52,
+        30
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/o7qpg3ex",
+      "id": "24",
+      "bbox": [
+        1156,
+        672,
+        32,
+        15
+      ],
+      "geometry": "rect",
+      "text": "21",
+      "textPreview": "21",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "center"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "21"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "21",
+          "runs": [
+            {
+              "index": 1,
+              "text": "21",
+              "fontSize": 12.51,
+              "typeface": "PingFang SC",
+              "color": "#0369A1",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

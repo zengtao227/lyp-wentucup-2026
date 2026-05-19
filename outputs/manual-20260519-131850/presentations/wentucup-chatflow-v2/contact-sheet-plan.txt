@@ -1,0 +1,33 @@
+Contact-sheet rhythm:
+01 cover with title and proof rail
+02 before/after comparison
+03 agenda matrix
+04 chapter transition
+05 table plus metric rail
+06 architecture map
+07 chapter transition
+08 knowledge table plus metrics
+09 decision stack
+10 chapter transition
+11 split-path architecture
+12 six-step workflow
+13 chapter transition
+14 parameter table plus principles
+15 exception matrix
+16 chapter transition
+17 accuracy evidence table and before/after bars
+18 cost metric dashboard
+19 chapter transition
+20 MCP tool-chain diagram
+21 conversation storyboard
+22 chapter transition
+23 milestone timeline
+24 three-layer optimization lanes
+25 OPC proof matrix plus ROI rail
+26 thanks columns
+27 closing
+
+Hard gates:
+- No 3 consecutive evidence slides share the same macro layout.
+- Native text/tables/shapes remain editable in PowerPoint.
+- Preview contact sheet must show distinct chapter rhythm and no blank slides.

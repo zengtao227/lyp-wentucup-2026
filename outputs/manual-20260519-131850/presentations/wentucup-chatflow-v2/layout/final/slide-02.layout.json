@@ -1,0 +1,1172 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/bkr749",
+    "id": "bkr749",
+    "slide": 2,
+    "layoutId": "f845d4f3-a928-4e6d-a456-8179485a1da5",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "cc915725-7ecb-4e11-8bd5-5665e32af563",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "PingFang SC"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "f845d4f3-a928-4e6d-a456-8179485a1da5",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "cc915725-7ecb-4e11-8bd5-5665e32af563",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "cc915725-7ecb-4e11-8bd5-5665e32af563",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7u54zido",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#F8FAFC",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wfyxobm5",
+      "id": "2",
+      "bbox": [
+        0,
+        0,
+        1280,
+        8
+      ],
+      "geometry": "rect",
+      "fillColor": "#0369A1",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/l0rqd4vm",
+      "id": "3",
+      "bbox": [
+        0,
+        8,
+        1280,
+        2
+      ],
+      "geometry": "rect",
+      "fillColor": "#047857",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/nih4byhg",
+      "id": "4",
+      "bbox": [
+        1134,
+        42,
+        72,
+        72
+      ],
+      "alt": "海南职业技术学院校徽水印",
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "94a97b18-916b-491e-a00e-20d6776c3d5a",
+        "contentType": "image/png",
+        "byteLength": 138493
+      }
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/36hcrmhk",
+      "id": "5",
+      "bbox": [
+        64,
+        42,
+        30,
+        4
+      ],
+      "geometry": "rect",
+      "fillColor": "#047857",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wra5gbq1",
+      "id": "6",
+      "bbox": [
+        64,
+        54,
+        420,
+        20
+      ],
+      "geometry": "rect",
+      "text": "选题价值",
+      "textPreview": "选题价值",
+      "resolvedFontSize": 10.51,
+      "resolvedTextStyle": {
+        "fontSize": 10.51,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "选题价值"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "选题价值",
+          "runs": [
+            {
+              "index": 1,
+              "text": "选题价值",
+              "fontSize": 10.51,
+              "typeface": "PingFang SC",
+              "color": "#475569",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lc7u54zi",
+      "id": "7",
+      "bbox": [
+        64,
+        78,
+        980,
+        86
+      ],
+      "geometry": "rect",
+      "text": "参赛项目的核心价值：\n让酒店客服从人力班表变成系统能力",
+      "textPreview": "参赛项目的核心价值： | 让酒店客服从人力班表变成系统能力",
+      "resolvedFontSize": 30,
+      "resolvedTextStyle": {
+        "fontSize": 30,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "参赛项目的核心价值："
+          },
+          {
+            "index": 2,
+            "text": "让酒店客服从人力班表变成系统能力"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "参赛项目的核心价值：",
+          "runs": [
+            {
+              "index": 1,
+              "text": "参赛项目的核心价值：",
+              "fontSize": 30,
+              "typeface": "PingFang SC",
+              "color": "#020617",
+              "bold": true
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "text": "让酒店客服从人力班表变成系统能力",
+          "runs": [
+            {
+              "index": 1,
+              "text": "让酒店客服从人力班表变成系统能力",
+              "fontSize": 30,
+              "typeface": "PingFang SC",
+              "color": "#020617",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/epkzupwb",
+      "id": "8",
+      "bbox": [
+        74,
+        202,
+        500,
+        314
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7adsji5s",
+      "id": "9",
+      "bbox": [
+        74,
+        202,
+        500,
+        7
+      ],
+      "geometry": "rect",
+      "fillColor": "#BE123C",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nqxs72x4",
+      "id": "10",
+      "bbox": [
+        102,
+        234,
+        420,
+        32
+      ],
+      "geometry": "rect",
+      "text": "传统客服模式",
+      "textPreview": "传统客服模式",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "传统客服模式"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "传统客服模式",
+          "runs": [
+            {
+              "index": 1,
+              "text": "传统客服模式",
+              "fontSize": 24,
+              "typeface": "PingFang SC",
+              "color": "#BE123C",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/u54zidon",
+      "id": "11",
+      "bbox": [
+        104,
+        306,
+        7,
+        7
+      ],
+      "geometry": "rect",
+      "fillColor": "#BE123C",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5sneloj2",
+      "id": "12",
+      "bbox": [
+        122,
+        298,
+        400,
+        41
+      ],
+      "geometry": "rect",
+      "text": "3-5 名客服，三班轮值",
+      "textPreview": "3-5 名客服，三班轮值",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "PingFang SC",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "3-5 名客服，三班轮值"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "3-5 名客服，三班轮值",
+          "runs": [
+            {
+              "index": 1,
+              "text": "3-5 名客服，三班轮值",
+              "fontSize": 18,
+              "typeface": "PingFang SC",
+              "color": "#020617"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cbulwval",
+      "id": "13",
+      "bbox": [
+        104,
+        349,
+        7,
+        7
+      ],
+      "geometry": "rect",
+      "fillColor": "#BE123C",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/neloj2t8",
+      "id": "14",
+      "bbox": [
+        122,
+        341,
+        400,
+        41
+      ],
+      "geometry": "rect",
+      "text": "夜间响应缺口，凌晨询问流失",
+      "textPreview": "夜间响应缺口，凌晨询问流失",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "PingFang SC",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "夜间响应缺口，凌晨询问流失"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "夜间响应缺口，凌晨询问流失",
+          "runs": [
+            {
+              "index": 1,
+              "text": "夜间响应缺口，凌晨询问流失",
+              "fontSize": 18,
+              "typeface": "PingFang SC",
+              "color": "#020617"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ytsvu9kn",
+      "id": "15",
+      "bbox": [
+        104,
+        392,
+        7,
+        7
+      ],
+      "geometry": "rect",
+      "fillColor": "#BE123C",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5kb6xkf6",
+      "id": "16",
+      "bbox": [
+        122,
+        384,
+        400,
+        41
+      ],
+      "geometry": "rect",
+      "text": "知识口径不一，差评风险高",
+      "textPreview": "知识口径不一，差评风险高",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "PingFang SC",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "知识口径不一，差评风险高"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "知识口径不一，差评风险高",
+          "runs": [
+            {
+              "index": 1,
+              "text": "知识口径不一，差评风险高",
+              "fontSize": 18,
+              "typeface": "PingFang SC",
+              "color": "#020617"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/czed8v6p",
+      "id": "17",
+      "bbox": [
+        104,
+        435,
+        7,
+        7
+      ],
+      "geometry": "rect",
+      "fillColor": "#BE123C",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/n29gr2p8",
+      "id": "18",
+      "bbox": [
+        122,
+        427,
+        400,
+        41
+      ],
+      "geometry": "rect",
+      "text": "人力成本 ¥18,000+/月",
+      "textPreview": "人力成本 ¥18,000+/月",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "PingFang SC",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "人力成本 ¥18,000+/月"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "人力成本 ¥18,000+/月",
+          "runs": [
+            {
+              "index": 1,
+              "text": "人力成本 ¥18,000+/月",
+              "fontSize": 18,
+              "typeface": "PingFang SC",
+              "color": "#020617"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yhgn29gr",
+      "id": "19",
+      "bbox": [
+        658,
+        202,
+        500,
+        314
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6hcrmhk3",
+      "id": "20",
+      "bbox": [
+        658,
+        202,
+        500,
+        7
+      ],
+      "geometry": "rect",
+      "fillColor": "#047857",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/z25kb6xk",
+      "id": "21",
+      "bbox": [
+        686,
+        234,
+        420,
+        32
+      ],
+      "geometry": "rect",
+      "text": "OPC × AI 模式",
+      "textPreview": "OPC × AI 模式",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "OPC × AI 模式"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "OPC × AI 模式",
+          "runs": [
+            {
+              "index": 1,
+              "text": "OPC × AI 模式",
+              "fontSize": 24,
+              "typeface": "PingFang SC",
+              "color": "#047857",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/onyd0z61",
+      "id": "22",
+      "bbox": [
+        688,
+        306,
+        7,
+        7
+      ],
+      "geometry": "rect",
+      "fillColor": "#047857",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d8v6psfi",
+      "id": "23",
+      "bbox": [
+        706,
+        298,
+        400,
+        41
+      ],
+      "geometry": "rect",
+      "text": "1 人运营，系统 7×24 自动响应",
+      "textPreview": "1 人运营，系统 7×24 自动响应",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "PingFang SC",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "1 人运营，系统 7×24 自动响应"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "1 人运营，系统 7×24 自动响应",
+          "runs": [
+            {
+              "index": 1,
+              "text": "1 人运营，系统 7×24 自动响应",
+              "fontSize": 18,
+              "typeface": "PingFang SC",
+              "color": "#020617"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6tovahoz",
+      "id": "24",
+      "bbox": [
+        688,
+        349,
+        7,
+        7
+      ],
+      "geometry": "rect",
+      "fillColor": "#047857",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vahoza1g",
+      "id": "25",
+      "bbox": [
+        706,
+        341,
+        400,
+        41
+      ],
+      "geometry": "rect",
+      "text": "秒级答复，知识统一标准化",
+      "textPreview": "秒级答复，知识统一标准化",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "PingFang SC",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "秒级答复，知识统一标准化"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "秒级答复，知识统一标准化",
+          "runs": [
+            {
+              "index": 1,
+              "text": "秒级答复，知识统一标准化",
+              "fontSize": 18,
+              "typeface": "PingFang SC",
+              "color": "#020617"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ovahoza1",
+      "id": "26",
+      "bbox": [
+        688,
+        392,
+        7,
+        7
+      ],
+      "geometry": "rect",
+      "fillColor": "#047857",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 27,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dg7adsji",
+      "id": "27",
+      "bbox": [
+        706,
+        384,
+        400,
+        41
+      ],
+      "geometry": "rect",
+      "text": "从“智能问答”到“智能服务”",
+      "textPreview": "从“智能问答”到“智能服务”",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "PingFang SC",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "从“智能问答”到“智能服务”"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "从“智能问答”到“智能服务”",
+          "runs": [
+            {
+              "index": 1,
+              "text": "从“智能问答”到“智能服务”",
+              "fontSize": 18,
+              "typeface": "PingFang SC",
+              "color": "#020617"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 28,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/61032lsz",
+      "id": "28",
+      "bbox": [
+        688,
+        435,
+        7,
+        7
+      ],
+      "geometry": "rect",
+      "fillColor": "#047857",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 29,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vmtwra5g",
+      "id": "29",
+      "bbox": [
+        706,
+        427,
+        400,
+        41
+      ],
+      "geometry": "rect",
+      "text": "运营成本降低 > 95%",
+      "textPreview": "运营成本降低 > 95%",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "fontSize": 18,
+        "typeface": "PingFang SC",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "运营成本降低 > 95%"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "运营成本降低 > 95%",
+          "runs": [
+            {
+              "index": 1,
+              "text": "运营成本降低 > 95%",
+              "fontSize": 18,
+              "typeface": "PingFang SC",
+              "color": "#020617"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 30,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/loj2t83i",
+      "id": "30",
+      "bbox": [
+        118,
+        560,
+        1030,
+        54
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 31,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/w3m94fu1",
+      "id": "31",
+      "bbox": [
+        148,
+        575,
+        970,
+        22
+      ],
+      "geometry": "rect",
+      "text": "核心主张：用 AI 技术构建极简商业单元，让一人即可运营专业级酒店智能前台。",
+      "textPreview": "核心主张：用 AI 技术构建极简商业单元，让一人即可运营专业级酒店智能前台。",
+      "resolvedFontSize": 17,
+      "resolvedTextStyle": {
+        "fontSize": 17,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "center"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "核心主张：用 AI 技术构建极简商业单元，让一人即可运营专业级酒店智能前台。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "核心主张：用 AI 技术构建极简商业单元，让一人即可运营专业级酒店智能前台。",
+          "runs": [
+            {
+              "index": 1,
+              "text": "核心主张：用 AI 技术构建极简商业单元，让一人即可运营专业级酒店智能前台。",
+              "fontSize": 17,
+              "typeface": "PingFang SC",
+              "color": "#020617",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 32,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3itgfmlk",
+      "id": "32",
+      "bbox": [
+        64,
+        660,
+        1048,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#E2E8F0",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 33,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ex0nuxc3",
+      "id": "33",
+      "bbox": [
+        64,
+        674,
+        850,
+        20
+      ],
+      "geometry": "rect",
+      "text": "问途杯决赛 · 酒店/旅游业智能客服应用功能整合优化与方案路演 · 彬彬有礼团队",
+      "textPreview": "问途杯决赛 · 酒店/旅游业智能客服应用功能整合优化与方案路演 · 彬彬有礼团队",
+      "resolvedFontSize": 9.51,
+      "resolvedTextStyle": {
+        "fontSize": 9.51,
+        "typeface": "PingFang SC",
+        "alignment": "left"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "问途杯决赛 · 酒店/旅游业智能客服应用功能整合优化与方案路演 · 彬彬有礼团队"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "问途杯决赛 · 酒店/旅游业智能客服应用功能整合优化与方案路演 · 彬彬有礼团队",
+          "runs": [
+            {
+              "index": 1,
+              "text": "问途杯决赛 · 酒店/旅游业智能客服应用功能整合优化与方案路演 · 彬彬有礼团队",
+              "fontSize": 9.51,
+              "typeface": "PingFang SC",
+              "color": "#64748B"
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 34,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lwval87e",
+      "id": "34",
+      "bbox": [
+        1146,
+        666,
+        52,
+        30
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 35,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wb2hwfyx",
+      "id": "35",
+      "bbox": [
+        1156,
+        672,
+        32,
+        15
+      ],
+      "geometry": "rect",
+      "text": "02",
+      "textPreview": "02",
+      "resolvedFontSize": 12.51,
+      "resolvedTextStyle": {
+        "fontSize": 12.51,
+        "typeface": "PingFang SC",
+        "bold": true,
+        "alignment": "center"
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "02"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "02",
+          "runs": [
+            {
+              "index": 1,
+              "text": "02",
+              "fontSize": 12.51,
+              "typeface": "PingFang SC",
+              "color": "#0369A1",
+              "bold": true
+            }
+          ]
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}
