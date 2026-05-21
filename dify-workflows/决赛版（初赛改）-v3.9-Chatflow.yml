@@ -1,0 +1,2987 @@
+app:
+  description: >-
+    2026问途杯决赛版（初赛改）- 酒店全能智能前台
+    v3.9。基于v3.7，增加真实 submitBooking 提交链路。触发逻辑：parameter-extractor 从对话中提取到 roomCode+name+mobile，且 Code 节点在实时房态中成功匹配价格计划（status=ok），才调用 submitBooking。Code 节点同时将日期转换为 ISO 格式（YYYY-MM-DDT00:00:00.000+08:00）避免 2996 错误。
+  icon: 🏨
+  icon_background: “#FFEAD5”
+  mode: advanced-chat
+  name: 决赛版（初赛改）-v3.9-Chatflow
+  use_icon_as_answer_icon: false
+dependencies:
+  - current_identifier: null
+    type: marketplace
+    value:
+      marketplace_plugin_unique_identifier: langgenius/tongyi:0.0.42@85e7bb71e461653ac101330c751973085dfdde26c906b07d7dff8030c95bc39e
+      version: null
+  - current_identifier: null
+    type: marketplace
+    value:
+      marketplace_plugin_unique_identifier: langgenius/openweather:0.0.6@a16f3f6c79b1cb45bc22942ed84c53a9732c118bde0a46d0d9282a9d15581347
+      version: null
+  - current_identifier: null
+    type: marketplace
+    value:
+      marketplace_plugin_unique_identifier: hotel-booking
+      version: null
+kind: app
+version: 0.4.0
+workflow:
+  conversation_variables:
+    - description: 宾客姓名
+      id: 1f17e64b-0cb7-4d0a-a7c7-000000000001
+      name: guest_name
+      selector:
+        - conversation
+        - guest_name
+      value: ""
+      value_type: string
+    - description: 入住日期
+      id: 4a78cc37-cac4-401e-a0a7-000000000002
+      name: checkin_date
+      selector:
+        - conversation
+        - checkin_date
+      value: ""
+      value_type: string
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+        - .JPG
+        - .JPEG
+        - .PNG
+        - .GIF
+        - .WEBP
+        - .SVG
+      allowed_file_types:
+        - image
+      allowed_file_upload_methods:
+        - local_file
+        - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+          - local_file
+          - remote_url
+      number_limits: 3
+    opening_statement: 您好，欢迎莅临新会碧桂园凤凰酒店。我是您的专属 AI 助理，可以为您解答客房预订、餐饮美食、会议宴会和周边游玩问题，并直接帮您完成订房。本助手支持语音输入，点击麦克风即可说话。请问有什么可以帮您？
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: true
+    suggested_questions:
+      - 今晚还有空房吗？
+      - 可以带宠物入住吗？
+      - 酒店几点可以办理入住和退房？
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ""
+      voice: ""
+  graph:
+    edges:
+      - data:
+          isInIteration: false
+          isInLoop: false
+          sourceType: start
+          targetType: question-classifier
+        id: 1776498156667-source-1776498264454-target
+        source: "1776498156667"
+        sourceHandle: source
+        target: "1776498264454"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInLoop: false
+          sourceType: question-classifier
+          targetType: knowledge-retrieval
+        id: 1776498264454-1-1776498277196-target
+        source: "1776498264454"
+        sourceHandle: "1"
+        target: "1776498277196"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInLoop: false
+          sourceType: knowledge-retrieval
+          targetType: llm
+        id: 1776498277196-source-llm-target
+        source: "1776498277196"
+        sourceHandle: source
+        target: llm
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInLoop: false
+          sourceType: question-classifier
+          targetType: knowledge-retrieval
+        id: 1776498264454-2-1776499500104-target
+        selected: false
+        source: "1776498264454"
+        sourceHandle: "2"
+        target: "1776499500104"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInLoop: false
+          sourceType: knowledge-retrieval
+          targetType: llm
+        id: 1776499500104-source-1776499509929-target
+        source: "1776499500104"
+        sourceHandle: source
+        target: "1776499509929"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInLoop: false
+          sourceType: llm
+          targetType: answer
+        id: llm-source-1776500219442-target
+        source: llm
+        sourceHandle: source
+        target: "1776500219442"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInLoop: false
+          sourceType: llm
+          targetType: answer
+        id: 1776499509929-source-1776511352860-target
+        source: "1776499509929"
+        sourceHandle: source
+        target: "1776511352860"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInLoop: false
+          sourceType: question-classifier
+          targetType: knowledge-retrieval
+        id: 1776498264454-1776498527615-1776511368580-target
+        source: "1776498264454"
+        sourceHandle: "1776498527615"
+        target: "1776511368580"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInLoop: false
+          sourceType: knowledge-retrieval
+          targetType: llm
+        id: 1776511368580-source-1776511376079-target
+        source: "1776511368580"
+        sourceHandle: source
+        target: "1776511376079"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInLoop: false
+          sourceType: llm
+          targetType: answer
+        id: 1776511376079-source-1776511388544-target
+        source: "1776511376079"
+        sourceHandle: source
+        target: "1776511388544"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInLoop: false
+          sourceType: question-classifier
+          targetType: knowledge-retrieval
+        id: 1776498264454-1776498557607-1776511399253-target
+        source: "1776498264454"
+        sourceHandle: "1776498557607"
+        target: "1776511399253"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInLoop: false
+          sourceType: llm
+          targetType: answer
+        id: 1776511455200-source-1776511481705-target
+        source: "1776511455200"
+        sourceHandle: source
+        target: "1776511481705"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInLoop: false
+          sourceType: llm
+          targetType: answer
+        id: 1776586548774-source-1776586557266-target
+        source: "1776586548774"
+        sourceHandle: source
+        target: "1776586557266"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInIteration: false
+          isInLoop: false
+          sourceType: question-classifier
+          targetType: tool
+        id: 1776498264454-1776498578463-1778841497605-target
+        source: "1776498264454"
+        sourceHandle: "1776498578463"
+        target: "1778841497605"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInIteration: false
+          isInLoop: false
+          sourceType: knowledge-retrieval
+          targetType: llm
+        id: 1776511399253--1776760670660-target
+        source: "1776511399253"
+        sourceHandle: source
+        target: "1776760670660"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInLoop: false
+          sourceType: llm
+          targetType: answer
+        id: 1776760670660-source-1776511464396-target
+        source: "1776760670660"
+        sourceHandle: source
+        target: "1776511464396"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInIteration: false
+          isInLoop: false
+          sourceType: knowledge-retrieval
+          targetType: llm
+        id: 1776843326129-source-1776586548774-target
+        source: "1776843326129"
+        sourceHandle: source
+        target: "1776586548774"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInLoop: false
+          sourceType: question-classifier
+          targetType: knowledge-retrieval
+        id: 1776498264454-1776586502606-1776843326129-target
+        source: "1776498264454"
+        sourceHandle: "1776586502606"
+        target: "1776843326129"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInIteration: false
+          isInLoop: false
+          sourceType: llm
+          targetType: answer
+        id: 1776900001000-source-1776900002000-target
+        source: "1776900001000"
+        sourceHandle: source
+        target: "1776900002000"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInIteration: false
+          isInLoop: false
+          sourceType: tool
+          targetType: llm
+        id: 1778841497605-source-1776511455200-target
+        source: "1778841497605"
+        sourceHandle: source
+        target: "1776511455200"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInIteration: false
+          isInLoop: false
+          sourceType: question-classifier
+          targetType: tool
+        id: 1776498264454-1776900000000-1779049137062-target
+        source: "1776498264454"
+        sourceHandle: "1776900000000"
+        target: "1779049137062"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInIteration: false
+          isInLoop: false
+          sourceType: tool
+          targetType: template-transform
+        id: 1779049137062-source-1779100000001-target
+        source: "1779049137062"
+        sourceHandle: source
+        target: "1779100000001"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInIteration: false
+          isInLoop: false
+          sourceType: template-transform
+          targetType: parameter-extractor
+        id: 1779100000001-source-1779100000002-target
+        source: "1779100000001"
+        sourceHandle: source
+        target: "1779100000002"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInIteration: false
+          isInLoop: false
+          sourceType: parameter-extractor
+          targetType: tool
+        id: 1779100000002-source-1778843661327-target
+        source: "1779100000002"
+        sourceHandle: source
+        target: "1778843661327"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInIteration: false
+          isInLoop: false
+          sourceType: tool
+          targetType: template-transform
+        id: 1778843661327-source-1779200000005-target
+        source: "1778843661327"
+        sourceHandle: source
+        target: "1779200000005"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInIteration: false
+          isInLoop: false
+          sourceType: template-transform
+          targetType: parameter-extractor
+        id: 1779200000005-source-1779200000006-target
+        source: "1779200000005"
+        sourceHandle: source
+        target: "1779200000006"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInIteration: false
+          isInLoop: false
+          sourceType: parameter-extractor
+          targetType: code
+        id: 1779200000006-source-1779200000010-target
+        source: "1779200000006"
+        sourceHandle: source
+        target: "1779200000010"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInIteration: false
+          isInLoop: false
+          sourceType: code
+          targetType: if-else
+        id: 1779200000010-source-1779200000011-target
+        source: "1779200000010"
+        sourceHandle: source
+        target: "1779200000011"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInIteration: false
+          isInLoop: false
+          sourceType: if-else
+          targetType: tool
+        id: 1779200000011-submit-1779200000007-target
+        source: "1779200000011"
+        sourceHandle: submit
+        target: "1779200000007"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInIteration: false
+          isInLoop: false
+          sourceType: if-else
+          targetType: llm
+        id: 1779200000011-false-1776900001000-target
+        source: "1779200000011"
+        sourceHandle: "false"
+        target: "1776900001000"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInIteration: false
+          isInLoop: false
+          sourceType: tool
+          targetType: code
+        id: 1779200000007-source-1779200000014-target
+        source: "1779200000007"
+        sourceHandle: source
+        target: "1779200000014"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInIteration: false
+          isInLoop: false
+          sourceType: code
+          targetType: if-else
+        id: 1779200000014-source-1779200000015-target
+        source: "1779200000014"
+        sourceHandle: source
+        target: "1779200000015"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInIteration: false
+          isInLoop: false
+          sourceType: if-else
+          targetType: answer
+        id: 1779200000015-found-1779200000016-target
+        source: "1779200000015"
+        sourceHandle: found
+        target: "1779200000016"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+      - data:
+          isInIteration: false
+          isInLoop: false
+          sourceType: if-else
+          targetType: answer
+        id: 1779200000015-false-1779200000017-target
+        source: "1779200000015"
+        sourceHandle: "false"
+        target: "1779200000017"
+        targetHandle: target
+        type: custom
+        zIndex: 0
+    nodes:
+      - data:
+          selected: false
+          title: 开始
+          type: start
+          variables: []
+        height: 52
+        id: "1776498156667"
+        position:
+          x: 30
+          "y": 379.5
+        positionAbsolute:
+          x: 30
+          "y": 379.5
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          context:
+            enabled: true
+            variable_selector:
+              - "1776498277196"
+              - result
+          memory:
+            query_prompt_template: |-
+              {{#sys.query#}}
+
+              {{#sys.files#}}
+            role_prefix:
+              assistant: ""
+              user: ""
+            window:
+              enabled: true
+              size: 10
+          model:
+            completion_params:
+              max_tokens: 501
+              stop: []
+              temperature: 0.2
+              top_k: 1
+              top_p: 0.5
+            mode: chat
+            name: deepseek-v3
+            provider: langgenius/tongyi/tongyi
+          prompt_template:
+            - id: c81552bc-3f33-478c-9228-4485b565cf8d
+              role: system
+              text: >-
+                ## 短确认语防误判规则
+
+                如果用户内容仅为以下短确认语之一：确认预订、正确、好的、好、对、是的、没问题、可以、确认、行、没错、嗯、嗯嗯、OK、ok，不得根据知识库编造预订结果，不得输出“预订成功”、房号预留、短信发送、错误电话或任何支付结果。请固定回复：“您好，如果您是在确认客房预订，请回复「确认预订」，我将为您生成预订流水编号和支付二维码；如需其他服务，也可以继续告诉我。”
+
+
+                用户内容：{{#sys.query#}}
+
+                上下文：{{#context#}}
+
+                角色：
+
+                你是新会碧桂园凤凰酒店的专属客服，仅按照知识库回答，必须严格遵守
+
+                【约束】
+
+                1.据实回答，用语礼貌简洁，尊称客人为"先生/女士"或"您好"。精准答疑，主动引导信息。2.若知识库中没有相关信息，请礼貌告知：
+
+                "抱歉，我暂未在系统中查到相关信息，建议您直接拨打酒店前台电话0750-662-9888进行详细咨询。"
+
+                3.只回答用户当前的问题，不主动添加无关信息、不额外延伸。
+
+                酒店地址：广东省江门市新会区会城镇启超大道1号
+
+                4.所有内容必须基于知识库，禁止编造；无对应信息时礼貌告知无法解答，不主动延伸到用户未提及的业务。
+
+                5.客人提问价格、会员等级时，告知无法提供相关信息，请礼貌婉拒客人：我暂时无法为您提供准确回答，建议您直接联系酒店前台电话：0750-662-9888
+          selected: false
+          title: 酒店概况
+          type: llm
+          vision:
+            enabled: false
+        height: 88
+        id: llm
+        position:
+          x: 936
+          "y": 379.5
+        positionAbsolute:
+          x: 936
+          "y": 379.5
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          classes:
+            - id: "1"
+              name: 酒店概况
+            - id: "2"
+              name: 客房产品体系
+            - id: "1776498527615"
+              name: 餐饮娱乐配套
+            - id: "1776498557607"
+              name: 会议宴会服务
+            - id: "1776498578463"
+              name: 天气查询与周边咨询
+            - id: "1776586502606"
+              name: 开场引导
+            - id: "1776900000000"
+              name: 客房预订/预订确认/支付（确认预订、正确、好的）
+          instructions: >-
+            请将用户问题分类到最匹配的类别。注意区分"客房产品体系"（询问房型特点、设施介绍、入住政策、宠物政策、停车、退房时间）和"客房预订/预订确认/支付"（想要预订、查可用日期、查价格、确认预订、支付、取消订单）。凡涉及预订操作的问题（包括今晚订房、明天入住、确认预订、已支付确认），一律归入"客房预订/预订确认/支付（确认预订、正确、好的）"。如果用户在订房上下文中提到宠物、狗、猫、带宠入住，也归入"客房预订/预订确认/支付（确认预订、正确、好的）"；如果只是单独咨询宠物政策且没有订房意图，才归入"客房产品体系"。如果用户消息只包含房型代码001、002、003、004、005、006、007、008、009、010、011、012、013，或只输入1、2、3等选项数字且上一轮正在展示/选择房型，也必须归入"客房预订/预订确认/支付（确认预订、正确、好的）"，不得归入知识库问答。强制规则：如果用户消息只包含或主要表达肯定确认语，例如"确认预订"、"正确"、"好的"、"好"、"对"、"是的"、"没问题"、"可以"、"确认"、"行"、"没错"、"嗯"、"嗯嗯"、"OK"、"ok"，即使你看不到上一轮历史，也必须归入"客房预订/预订确认/支付（确认预订、正确、好的）"，不得归入酒店概况、客房产品体系、餐饮娱乐配套、会议宴会服务、天气查询与周边咨询或开场引导。凡询问天气、气温、下雨、晴天、风力、天气预报，或询问周边景点、景区门票、游玩路线、附近旅游等问题，归入"天气查询与周边咨询"。
+          model:
+            completion_params:
+              disable_search: true
+              max_tokens: 500
+              temperature: 0.1
+              top_k: 20
+              top_p: 0.5
+            mode: chat
+            name: qwen-plus
+            provider: langgenius/tongyi/tongyi
+          query_variable_selector:
+            - "1776498156667"
+            - sys.query
+          selected: false
+          title: 问题分类器
+          type: question-classifier
+          vision:
+            enabled: false
+        height: 360
+        id: "1776498264454"
+        position:
+          x: 332
+          "y": 379.5
+        positionAbsolute:
+          x: 332
+          "y": 379.5
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          dataset_ids:
+            - 4A1M9en7AsnpkU3ad/f2t2N+ecKzUCZiTcXOd4S7/F0+MuvF+3hyTqeif6W0cz3M
+          multiple_retrieval_config:
+            reranking_enable: true
+            reranking_mode: reranking_model
+            reranking_model:
+              model: gte-rerank-v2
+              provider: langgenius/tongyi/tongyi
+            top_k: 4
+          query_variable_selector:
+            - sys
+            - query
+          retrieval_mode: multiple
+          selected: false
+          title: 酒店概况
+          type: knowledge-retrieval
+        height: 52
+        id: "1776498277196"
+        position:
+          x: 634
+          "y": 379.5
+        positionAbsolute:
+          x: 634
+          "y": 379.5
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          dataset_ids:
+            - 4A1M9en7AsnpkU3ad/f2t2N+ecKzUCZiTcXOd4S7/F0+MuvF+3hyTqeif6W0cz3M
+          multiple_retrieval_config:
+            reranking_enable: true
+            reranking_mode: reranking_model
+            reranking_model:
+              model: gte-rerank-v2
+              provider: langgenius/tongyi/tongyi
+            top_k: 4
+          query_variable_selector:
+            - sys
+            - query
+          retrieval_mode: multiple
+          selected: false
+          title: 客房产品
+          type: knowledge-retrieval
+        height: 52
+        id: "1776499500104"
+        position:
+          x: 634
+          "y": 522.5
+        positionAbsolute:
+          x: 634
+          "y": 522.5
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          context:
+            enabled: true
+            variable_selector:
+              - "1776499500104"
+              - result
+          memory:
+            query_prompt_template: |-
+              {{#sys.query#}}
+
+              {{#sys.files#}}
+            role_prefix:
+              assistant: ""
+              user: ""
+            window:
+              enabled: true
+              size: 10
+          model:
+            completion_params:
+              max_tokens: 501
+              temperature: 0.2
+              top_k: 1
+              top_p: 0.7
+            mode: chat
+            name: deepseek-v3
+            provider: langgenius/tongyi/tongyi
+          prompt_template:
+            - id: 7194962d-632f-4f3b-b40b-bc08d532bb9c
+              role: system
+              text: >-
+                ## 短确认语防误判规则
+
+                如果用户内容仅为以下短确认语之一：确认预订、正确、好的、好、对、是的、没问题、可以、确认、行、没错、嗯、嗯嗯、OK、ok，不得根据知识库编造预订结果，不得输出“预订成功”、房号预留、短信发送、错误电话或任何支付结果。请固定回复：“您好，如果您是在确认客房预订，请回复「确认预订」，我将为您生成预订流水编号和支付二维码；如需其他服务，也可以继续告诉我。”
+
+
+                用户内容：{{#sys.query#}}
+
+                上下文：{{#context#}}
+
+                角色：
+
+                你是酒店客房产品专属智能顾问，负责清晰、友好地介绍各房型特点、设施、权益与预订规则，解答入住、房型升级、加床、儿童政策等相关问题。用语礼貌简洁，复杂问题可礼貌转接人工。
+
+                【约束】：1. 用语礼貌简洁，精准答疑。若知识库中没有相关房型信息，请礼貌告知"关于该项细节我暂时无法确认，建议您拨打酒店前台电话 0750-662-9888 进一步咨询。"
+
+                2. 你是一个基于封闭知识库的 AI。你回答的所有信息（房型、配置、价格、政策等）必须 100% 来源于上下文。严禁使用互联网信息、常识或个人经验进行填补。
+          selected: false
+          title: 客房产品
+          type: llm
+          vision:
+            enabled: false
+        height: 88
+        id: "1776499509929"
+        position:
+          x: 936
+          "y": 522.5
+        positionAbsolute:
+          x: 936
+          "y": 522.5
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          answer: "{{#llm.text#}}"
+          selected: false
+          title: 酒店概况回复
+          type: answer
+          variables: []
+        height: 103
+        id: "1776500219442"
+        position:
+          x: 1238
+          "y": 379.5
+        positionAbsolute:
+          x: 1238
+          "y": 379.5
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          answer: "{{#1776499509929.text#}}"
+          selected: false
+          title: 客房产品回复
+          type: answer
+          variables: []
+        height: 103
+        id: "1776511352860"
+        position:
+          x: 1238
+          "y": 522.5
+        positionAbsolute:
+          x: 1238
+          "y": 522.5
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          dataset_ids:
+            - 4A1M9en7AsnpkU3ad/f2t2N+ecKzUCZiTcXOd4S7/F0+MuvF+3hyTqeif6W0cz3M
+          multiple_retrieval_config:
+            reranking_enable: true
+            reranking_mode: reranking_model
+            reranking_model:
+              model: gte-rerank-v2
+              provider: langgenius/tongyi/tongyi
+            top_k: 4
+          query_variable_selector:
+            - sys
+            - query
+          retrieval_mode: multiple
+          selected: false
+          title: 餐饮娱乐
+          type: knowledge-retrieval
+        height: 52
+        id: "1776511368580"
+        position:
+          x: 634
+          "y": 665.5
+        positionAbsolute:
+          x: 634
+          "y": 665.5
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          context:
+            enabled: true
+            variable_selector:
+              - "1776511368580"
+              - result
+          memory:
+            query_prompt_template: |-
+              {{#sys.query#}}
+
+              {{#sys.files#}}
+            role_prefix:
+              assistant: ""
+              user: ""
+            window:
+              enabled: true
+              size: 10
+          model:
+            completion_params:
+              max_tokens: 300
+              temperature: 0.2
+              top_k: 1
+              top_p: 0.7
+            mode: chat
+            name: deepseek-v3
+            provider: langgenius/tongyi/tongyi
+          prompt_template:
+            - id: 2cd142b7-0933-4123-9872-ecfe40df2abb
+              role: system
+              text: >-
+                ## 短确认语防误判规则
+
+                如果用户内容仅为以下短确认语之一：确认预订、正确、好的、好、对、是的、没问题、可以、确认、行、没错、嗯、嗯嗯、OK、ok，不得根据知识库编造预订结果，不得输出“预订成功”、房号预留、短信发送、错误电话或任何支付结果。请固定回复：“您好，如果您是在确认客房预订，请回复「确认预订」，我将为您生成预订流水编号和支付二维码；如需其他服务，也可以继续告诉我。”
+
+
+                用户内容：{{#sys.query#}}
+
+                上下文：{{#context#}}
+
+                角色：
+
+                你是酒店餐饮娱乐专属顾问，将根据用户提问，清晰友好地介绍酒店餐厅、酒吧、特色餐饮、娱乐设施的开放时间、菜品特色、消费权益与预订规则，解答用餐、酒水、儿童政策及娱乐项目相关问题。用语礼貌简洁，复杂问题可礼貌转人工。
+
+                你是一个基于封闭知识库的 AI。你回答的所有信息（餐饮、配置、价格、政策等）必须 100% 来源于上下文。严禁使用互联网信息、常识或个人经验进行填补。严禁回答任何知识库中未提及的餐饮或娱乐信息。
+
+                【约束】：如信息不确定，请建议用户拨打酒店前台0750-662-9888
+          selected: false
+          title: 餐饮娱乐
+          type: llm
+          vision:
+            enabled: false
+        height: 88
+        id: "1776511376079"
+        position:
+          x: 936
+          "y": 665.5
+        positionAbsolute:
+          x: 936
+          "y": 665.5
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          answer: "{{#1776511376079.text#}}"
+          selected: false
+          title: 餐饮娱乐回复
+          type: answer
+          variables: []
+        height: 103
+        id: "1776511388544"
+        position:
+          x: 1238
+          "y": 665.5
+        positionAbsolute:
+          x: 1238
+          "y": 665.5
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          dataset_ids:
+            - 4A1M9en7AsnpkU3ad/f2t2N+ecKzUCZiTcXOd4S7/F0+MuvF+3hyTqeif6W0cz3M
+          multiple_retrieval_config:
+            reranking_enable: true
+            reranking_mode: reranking_model
+            reranking_model:
+              model: gte-rerank-v2
+              provider: langgenius/tongyi/tongyi
+            top_k: 4
+          query_variable_selector:
+            - sys
+            - query
+          retrieval_mode: multiple
+          selected: false
+          title: 宴会会议
+          type: knowledge-retrieval
+        height: 52
+        id: "1776511399253"
+        position:
+          x: 634
+          "y": 966.5
+        positionAbsolute:
+          x: 634
+          "y": 966.5
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          context:
+            enabled: false
+            variable_selector: []
+          memory:
+            query_prompt_template: |-
+              {{#sys.query#}}
+
+              {{#sys.files#}}
+            role_prefix:
+              assistant: ""
+              user: ""
+            window:
+              enabled: true
+              size: 10
+          model:
+            completion_params:
+              max_tokens: 500
+              temperature: 0.1
+              top_p: 0.7
+            mode: chat
+            name: deepseek-v3
+            provider: langgenius/tongyi/tongyi
+          prompt_template:
+            - id: weather-consult-system-v3-4
+              role: system
+              text: >-
+                ## 短确认语防误判规则
+
+                如果用户内容仅为以下短确认语之一：确认预订、正确、好的、好、对、是的、没问题、可以、确认、行、没错、嗯、嗯嗯、OK、ok，不得根据知识库编造预订结果，不得输出“预订成功”、房号预留、短信发送、错误电话或任何支付结果。请固定回复：“您好，如果您是在确认客房预订，请回复「确认预订」，我将为您生成预订流水编号和支付二维码；如需其他服务，也可以继续告诉我。”
+
+
+                用户内容：{{#sys.query#}}
+
+
+                实时天气数据：{{#1778841497605.text#}}
+
+
+                角色：
+
+                你是新会碧桂园凤凰酒店的天气咨询客服。所有回复直接以中文开始，用语礼貌简洁。
+
+
+                ## 回答规则
+
+
+                1. 如果用户询问天气、气温、晴雨、风力、天气预报，只能根据「实时天气数据」回答；不要编造天气数据里没有的信息。
+
+                2. 如果实时天气数据为空、异常或没有相关字段，请回复："您好，当前天气查询暂时无法确认，建议您拨打酒店前台电话0750-662-9888咨询实时情况。"
+
+                3.
+                如果用户询问周边景点、景区门票、游玩路线、附近旅游、景点推荐、出行攻略等内容，不做景点推荐，不查询知识库，固定回复："您好，周边景点、景区门票、游玩路线和实时出行建议请直接咨询酒店前台。前台电话：0750-662-9888，工作人员会根据当天实际情况为您提供帮助。"
+
+                4. 如果用户同时询问天气和景点游玩建议，可以先简要说明天气数据，再说明景点、门票和路线请咨询前台0750-662-9888；不得推荐具体景点。
+          selected: false
+          title: 天气查询与周边咨询
+          type: llm
+          vision:
+            enabled: false
+        height: 88
+        id: "1776511455200"
+        position:
+          x: 1238
+          "y": 823.5
+        positionAbsolute:
+          x: 1238
+          "y": 823.5
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          answer: "{{#1776760670660.text#}}"
+          selected: false
+          title: 宴会会议回复
+          type: answer
+          variables: []
+        height: 103
+        id: "1776511464396"
+        position:
+          x: 1238
+          "y": 966.5
+        positionAbsolute:
+          x: 1238
+          "y": 966.5
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          answer: "{{#1776511455200.text#}}"
+          selected: false
+          title: 天气与周边咨询回复
+          type: answer
+          variables: []
+        height: 103
+        id: "1776511481705"
+        position:
+          x: 1540
+          "y": 816
+        positionAbsolute:
+          x: 1540
+          "y": 816
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          context:
+            enabled: true
+            variable_selector:
+              - "1776843326129"
+              - result
+          memory:
+            query_prompt_template: |-
+              {{#sys.query#}}
+
+              {{#sys.files#}}
+            role_prefix:
+              assistant: ""
+              user: ""
+            window:
+              enabled: true
+              size: 10
+          model:
+            completion_params:
+              max_tokens: 301
+              temperature: 0.5
+              top_k: 1
+              top_p: 0.6
+            mode: chat
+            name: qwen-plus
+            provider: langgenius/tongyi/tongyi
+          prompt_template:
+            - id: 6c8a135b-ed8f-4dab-ba30-e88d94b5da0e
+              role: system
+              text: >-
+                ## 短确认语防误判规则
+
+                如果用户内容仅为以下短确认语之一：确认预订、正确、好的、好、对、是的、没问题、可以、确认、行、没错、嗯、嗯嗯、OK、ok，不得根据知识库编造预订结果，不得输出“预订成功”、房号预留、短信发送、错误电话或任何支付结果。请固定回复：“您好，如果您是在确认客房预订，请回复「确认预订」，我将为您生成预订流水编号和支付二维码；如需其他服务，也可以继续告诉我。”
+
+
+                用户内容：{{#sys.query#}}
+
+                上下文：{{#context#}}
+
+                角色：
+
+                你是酒店前台客服，以"先生/女士"或"您好"称呼客人。仅回复酒店业务相关问题，闲聊话题请礼貌引导用户咨询酒店相关事宜，不编造、不闲聊。
+
+                开场引导："您好，欢迎莅临新会碧桂园凤凰酒店。我是您的专属 AI 助理，请问有什么可以帮您？"
+
+                结束语：您好！除了刚才聊的这些，还有什么我可以帮您的吗？
+          selected: false
+          title: 开场引导
+          type: llm
+          vision:
+            enabled: false
+        height: 88
+        id: "1776586548774"
+        position:
+          x: 936
+          "y": 1109.5
+        positionAbsolute:
+          x: 936
+          "y": 1109.5
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          answer: "{{#1776586548774.text#}}"
+          selected: false
+          title: 开场引导回复
+          type: answer
+          variables: []
+        height: 103
+        id: "1776586557266"
+        position:
+          x: 1238
+          "y": 1109.5
+        positionAbsolute:
+          x: 1238
+          "y": 1109.5
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          context:
+            enabled: true
+            variable_selector:
+              - "1776511399253"
+              - result
+          memory:
+            query_prompt_template: |-
+              {{#sys.query#}}
+
+              {{#sys.files#}}
+            role_prefix:
+              assistant: ""
+              user: ""
+            window:
+              enabled: true
+              size: 10
+          model:
+            completion_params:
+              max_tokens: 500
+              temperature: 0.1
+              top_p: 0.7
+            mode: chat
+            name: deepseek-v3
+            provider: langgenius/tongyi/tongyi
+          prompt_template:
+            - id: d5f83ff3-af23-4fe6-8d9a-94f4ca2aebf3
+              role: system
+              text: >
+                ## 短确认语防误判规则
+
+                如果用户内容仅为以下短确认语之一：确认预订、正确、好的、好、对、是的、没问题、可以、确认、行、没错、嗯、嗯嗯、OK、ok，不得根据知识库编造预订结果，不得输出“预订成功”、房号预留、短信发送、错误电话或任何支付结果。请固定回复：“您好，如果您是在确认客房预订，请回复「确认预订」，我将为您生成预订流水编号和支付二维码；如需其他服务，也可以继续告诉我。”
+
+
+                用户内容：{{#sys.query#}}
+
+                上下文：{{#context#}}
+
+                角色：
+
+                你是酒店会议宴会专属顾问，负责根据知识库解答会场、宴会厅、设备、茶歇、服务流程和人数适配等相关问题，只能依据知识库内容作答。
+
+                1. 知识库中有明确的会议宴会信息时，请准确、完整输出。
+
+                2. 可针对客户询价、场地选择、设备介绍、茶歇定制、服务流程、人数适配等高频问题进行精准回答。
+
+                3. 不超权限承诺，不编造信息，不泄露隐私。
+
+                4. 具体场地费用及配套价格需要根据会议规模、日期及具体需求进行核算。
+
+                5.为了提供准确方案，请建议用户直接联系酒店前台 0750-662-9888。
+          selected: false
+          title: 宴会会议
+          type: llm
+          vision:
+            enabled: false
+        height: 88
+        id: "1776760670660"
+        position:
+          x: 936
+          "y": 966.5
+        positionAbsolute:
+          x: 936
+          "y": 966.5
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          dataset_ids:
+            - 4A1M9en7AsnpkU3ad/f2t2N+ecKzUCZiTcXOd4S7/F0+MuvF+3hyTqeif6W0cz3M
+          multiple_retrieval_config:
+            reranking_enable: true
+            reranking_mode: reranking_model
+            reranking_model:
+              model: gte-rerank-v2
+              provider: langgenius/tongyi/tongyi
+            top_k: 4
+          query_variable_selector:
+            - "1776498156667"
+            - sys.query
+          retrieval_mode: multiple
+          selected: false
+          title: 开场引导
+          type: knowledge-retrieval
+        height: 52
+        id: "1776843326129"
+        position:
+          x: 634
+          "y": 1109.5
+        positionAbsolute:
+          x: 634
+          "y": 1109.5
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          selected: false
+          template: |-
+            当前日期时间（Asia/Shanghai）：{{ current_time }}
+            用户内容：{{ user_query }}
+
+            请把用户订房、查房态、查房价、确认预订相关表达转换为后续参数提取可用的上下文。处理规则：
+            1. 今天/今晚按当前日期理解；未说离店日期时默认住1晚。
+            2. 明天/后天按当前日期顺延；本周末按当前日期之后最近的周六入住、周日离店。
+            3. 年份不明时使用当前日期所在年份，即2026年。
+            4. 输出中保留用户原话、当前日期时间和推导依据。
+          title: 订房参数上下文
+          type: template-transform
+          variables:
+            - value_selector:
+                - "1779049137062"
+                - text
+              variable: current_time
+            - value_selector:
+                - sys
+                - query
+              variable: user_query
+        height: 54
+        id: "1779100000001"
+        position:
+          x: 936
+          "y": 1201.5
+        positionAbsolute:
+          x: 936
+          "y": 1201.5
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          instruction: |-
+            从输入文本中提取用于酒店房态房价查询的入住日期和离店日期。
+            当前日期时间已包含在输入文本中，必须优先使用该时间解析“今天、今晚、明天、后天、本周末、周末”等相对日期。
+            规则：
+            1. checkInDate 必须输出 YYYY-MM-DD。
+            2. checkOutDate 必须输出 YYYY-MM-DD。
+            3. 用户只说“今晚/今天入住/本周末/高级大床房一间有吗”等没有明确离店日期的表达时，默认住1晚，checkOutDate=checkInDate次日。
+            4. 用户说“本周末”时，按当前日期之后最近的周六入住、周日离店。
+            5. 年份不明时使用当前日期所在年份。
+            6. 如果对话历史中上一轮已经确认过日期，本轮只提供姓名/电话/确认语时，可以沿用上一轮日期。
+            7. 无法判断日期时，两个字段都输出空字符串，不得编造。
+          memory:
+            query_prompt_template: |-
+              {{#sys.query#}}
+
+              {{#sys.files#}}
+            role_prefix:
+              assistant: ""
+              user: ""
+            window:
+              enabled: true
+              size: 10
+          model:
+            completion_params:
+              temperature: 0.1
+            mode: chat
+            name: deepseek-v3
+            provider: langgenius/tongyi/tongyi
+          parameters:
+            - description: 入住日期，YYYY-MM-DD格式；无法判断时为空字符串。
+              name: checkInDate
+              required: true
+              type: string
+            - description: 离店日期，YYYY-MM-DD格式；无法判断时为空字符串。
+              name: checkOutDate
+              required: true
+              type: string
+          query:
+            - "1779100000001"
+            - output
+          reasoning_mode: prompt
+          selected: false
+          title: 预订日期参数提取
+          type: parameter-extractor
+          vision:
+            enabled: false
+        height: 88
+        id: "1779100000002"
+        position:
+          x: 1238
+          "y": 1201.5
+        positionAbsolute:
+          x: 1238
+          "y": 1201.5
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          is_team_authorization: true
+          paramSchemas:
+            - auto_generate: null
+              default: null
+              form: llm
+              human_description:
+                en_US: Target city for weather forecast query
+                ja_JP: Target city for weather forecast query
+                pt_BR: Cidade de destino para consulta de previsão do tempo
+                zh_Hans: 天气预报查询的目标城市
+              label:
+                en_US: city
+                ja_JP: city
+                pt_BR: cidade
+                zh_Hans: 城市
+              llm_description: >-
+                If you don't know you can extract the city name from the question or you can reply：Please tell me your
+                city. You have to extract the Chinese city name from the question.If the input region is in Chinese
+                characters for China, it should be replaced with the corresponding English name, such as '北京' for
+                correct input is 'Beijing'
+              max: null
+              min: null
+              name: city
+              options: []
+              placeholder: null
+              precision: null
+              required: true
+              scope: null
+              template: null
+              type: string
+            - auto_generate: null
+              default: zh_cn
+              form: form
+              human_description:
+                en_US: language
+                ja_JP: language
+                pt_BR: language
+                zh_Hans: 语言
+              label:
+                en_US: language
+                ja_JP: language
+                pt_BR: language
+                zh_Hans: 语言
+              llm_description: ""
+              max: null
+              min: null
+              name: lang
+              options:
+                - icon: ""
+                  label:
+                    en_US: cn
+                    ja_JP: cn
+                    pt_BR: cn
+                    zh_Hans: 中国
+                  value: zh_cn
+                - icon: ""
+                  label:
+                    en_US: usa
+                    ja_JP: usa
+                    pt_BR: usa
+                    zh_Hans: 美国
+                  value: en_us
+              placeholder: null
+              precision: null
+              required: true
+              scope: null
+              template: null
+              type: select
+            - auto_generate: null
+              default: metric
+              form: form
+              human_description:
+                en_US: units for temperature
+                ja_JP: units for temperature
+                pt_BR: units for temperature
+                zh_Hans: 温度单位
+              label:
+                en_US: units
+                ja_JP: units
+                pt_BR: units
+                zh_Hans: 单位
+              llm_description: ""
+              max: null
+              min: null
+              name: units
+              options:
+                - icon: ""
+                  label:
+                    en_US: metric
+                    ja_JP: metric
+                    pt_BR: metric
+                    zh_Hans: ℃
+                  value: metric
+                - icon: ""
+                  label:
+                    en_US: imperial
+                    ja_JP: imperial
+                    pt_BR: imperial
+                    zh_Hans: ℉
+                  value: imperial
+              placeholder: null
+              precision: null
+              required: true
+              scope: null
+              template: null
+              type: select
+          params:
+            city: ""
+            lang: ""
+            units: ""
+          provider_id: langgenius/openweather/openweather
+          provider_name: langgenius/openweather/openweather
+          provider_type: builtin
+          selected: false
+          title: 天气查询
+          tool_configurations:
+            lang:
+              type: constant
+              value: zh_cn
+            units:
+              type: constant
+              value: metric
+          tool_description: 天气查询
+          tool_label: 天气查询
+          tool_name: weather
+          tool_node_version: "2"
+          tool_parameters:
+            city:
+              type: constant
+              value: Xinhui
+          type: tool
+        height: 114
+        id: "1778841497605"
+        position:
+          x: 634
+          "y": 757.5
+        positionAbsolute:
+          x: 634
+          "y": 757.5
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          context:
+            enabled: false
+            variable_selector: []
+          memory:
+            query_prompt_template: |-
+              {{#sys.query#}}
+
+              {{#sys.files#}}
+            role_prefix:
+              assistant: ""
+              user: ""
+            window:
+              enabled: true
+              size: 10
+          model:
+            completion_params:
+              max_tokens: 600
+              stop: []
+              temperature: 0.3
+              top_k: 1
+              top_p: 0.7
+            mode: chat
+            name: deepseek-v3
+            provider: langgenius/tongyi/tongyi
+          prompt_template:
+            - id: hotel-booking-llm-system
+              role: system
+              text: >-
+                用户内容：{{#sys.query#}}
+
+                当前日期时间（Asia/Shanghai）：{{#1779049137062.text#}}
+
+                实时房态数据：{{#1778843661327.json#}}
+
+                已知宾客姓名：{{#conversation.guest_name#}}
+
+                已知入住日期：{{#conversation.checkin_date#}}
+
+                角色：
+
+                你是「新会碧桂园凤凰酒店」的智能预订助理。所有回复直接以中文开始，禁止输出任何技术标签或英文句子开头。
+
+                ## 📅 日期格式规范
+
+                当前日期时间以Asia/Shanghai为准，格式示例：2026-05-17 22:30:00 Sunday。
+
+                            处理“今天/今晚/明天/后天/本周/周末”等相对日期时，必须先基于「当前日期时间」换算成YYYY-MM-DD。
+
+                            客人说“今晚”或“今天入住”时，入住日期=当前日期；如未说明离店日期，默认按住1晚理解为次日离店，并在确认摘要中清楚标明供客人确认。
+
+                            如需提及星期，将English weekday转换成中文星期。年份不明时默认当前日期时间所在年份。
+                ## 🏨 房型代码对照表
+
+                大床房：001 高级大床房 | 002 豪华大床房 | 003 行政大床房
+
+                双床房：010 行政双床房 | 011 豪华双床房 | 012 高级双床房
+
+                套房：004 高级套房 | 005 豪华套房 | 006 行政套房 | 007 皇室套房 | 008 总统套房
+
+                特色：009 蜜月套房 | 013 卡通亲子房
+
+                客人提到列表外的房型（如"标准间"）→礼貌告知没有该房型，询问需求，推荐最接近的房型。
+
+                ## 房态数据使用规则
+
+                1.
+                若「实时房态数据」包含有效JSON（rooms数组），读取各房型的status、available以及价格相关字段展示给客人；价格字段可能叫price、roomPrice、salePrice、rate、amount、minPrice、currentPrice或中文“价格/房价/房费”。
+
+                2. 若目标房型有明确价格，必须在推荐、确认摘要和支付引导中展示该价格；如果有多晚或多间，按价格×晚数×间数计算预估总价，并标注“以小途乐订待支付页面为准”。
+
+                3. 若实时房态数据没有返回价格字段，不得省略价格行，也不得编造价格；必须写“房价：系统未返回实时价格，以小途乐订小程序待支付页面显示金额为准”。
+
+                4. 若房态数据为空或格式异常，告知"房态查询服务暂时繁忙"，继续引导预订流程，并提示价格以小途乐订待支付页面为准；
+
+                5. 目标房型满房时，主动推荐available最多的2个替代房型。
+
+                ## 支付入口命名硬性规则
+
+                客房预订/支付入口只能称为「小途乐订」小程序；支付图片只能称为「小途乐订」小程序码。严禁称为“酒店官方微信小程序”“新会碧桂园凤凰酒店官方微信小程序”或“酒店官方二维码”。如果用户提到二维码或 QR
+                Code，应说明当前展示的是微信小程序码，网页版或 Dify 预览中请使用微信扫描，微信内打开时也可长按识别进入「小途乐订」。
+
+                ## 订房 SOP（基础信息必填，宠物信息条件校验）
+
+                第一步：明确房型，引导选择。
+
+                如果用户只回复房型代码001-013或选项数字，只表示“选择房型”，不是确认预订。必须回复“已为您选择[房型名称]（代码[代码]）”，并继续收集缺失信息，严禁生成流水号或二维码。
+
+                第二步：根据房态数据展示可用房型、房态和房价。
+
+                第三步：收集完整基础预订信息，以下6项缺一不可：
+
+                ① 宾客姓名 ② 手机号码（必须是中国大陆手机号：11位数字、首位为1，如13812345678；若位数不足11位或格式不对，必须要求重新填写，不得使用不合规号码） ③ 入住日期（YYYY-MM-DD）④ 离店日期（YYYY-MM-DD）⑤ 房型名称和房型代码 ⑥ 预订间数（默认1间）。
+
+                如果客人没有主动提到宠物、狗、猫、带宠入住，不要追问是否携带宠物，也不要在确认摘要里显示宠物信息。
+
+                如果客人主动提到宠物、狗、猫、带宠入住，才需要补充确认宠物信息：宠物类型为小型狗或猫、体重不超过10公斤；并告知需支付100元清洁费和500元押金，如无损坏押金可退还。
+
+                已有信息直接复用，不重复询问；缺失信息可以一次列出让客人补充。
+
+                缺少基础6项任意一项时，严禁输出“预订申请已提交”、流水编号、二维码、支付步骤、订单已生成或任何类似提交成功的话术，只能继续询问缺失信息。若客人主动提到宠物但宠物类型、体重或是否符合政策未确认，也必须先追问宠物信息，不得提交。
+
+                第四步：基础6项收集完毕，且宠物场景已完成宠物条件确认后，必须先输出完整确认摘要：
+
+                📋 预订信息确认
+
+                · 宾客姓名：[姓名]
+
+                · 手机号码：[号码]
+
+                · 入住：[日期] → 离店：[日期]（共[n]晚）
+
+                · 房型：[房型名称]（代码：[代码]）
+
+                · 预订间数：[n]间
+
+                · 房价：[若实时房态数据返回明确价格，写“¥[单价]/晚，预估总价¥[总价]（以小途乐订待支付页面为准）”；若未返回价格，写“系统未返回实时价格，以小途乐订小程序待支付页面显示金额为准”]
+
+                如果且仅如果客人主动提到宠物、狗、猫或带宠入住，在房价后追加一行：· 宠物信息：[小型狗/猫，体重不超过10公斤，需支付100元清洁费和500元押金，如无损坏押金可退还]。未提到宠物时严禁输出宠物信息行。
+
+                如以上信息全部正确，请直接回复「确认预订」（或再次发送：房型代码 + 姓名 + 手机号，如：002 张三 13988888888），系统将立即为您提交预订；如需修改请直接说明；如有宠物信息也可一起修改。
+
+                第五步：本节点只负责查询房态、收集信息和展示「📋 预订信息确认」摘要，等待客人确认。提交由系统工具节点自动完成。
+
+                严禁在本节点输出：WCP 编号、流水编号、小程序码、支付步骤、任何”预订申请已提交”的话术。
+
+
+                ## 确认语强制规则
+
+                若摘要缺少姓名、手机号、入住日期、离店日期、房型名称和代码、间数、房价中的任意一项，即使用户回复「确认预订」，也必须继续询问缺失信息，不得生成任何订单相关内容。若客人主动提到宠物，摘要还必须包含宠物信息；若未提到宠物，不得因缺少宠物信息而阻止提交。
+
+
+                ## 严禁
+
+                严禁说："预订成功"、"已锁定房间"、"短信已发送"、"凭证已生成"。
+
+                客人说"已支付"后，确认语气，提醒在小程序查看支付凭证，不宣称支付已核实或房间已锁定。
+
+
+                不得编造房费、含早、周末价、短信发送、预订成功、已锁定房间、电子凭证或任何非 0750-662-9888 的电话号码。只有「实时房态数据」明确返回价格时，才可以输出对应房价；否则必须说明价格以小途乐订待支付页面显示金额为准。
+
+                前台电话：0750-662-9888
+          selected: false
+          title: 客房预订
+          type: llm
+          vision:
+            enabled: false
+        height: 88
+        id: "1776900001000"
+        position:
+          x: 1842
+          "y": 1260
+        positionAbsolute:
+          x: 1842
+          "y": 1260
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          answer: "{{#1776900001000.text#}}"
+          selected: false
+          title: 客房预订回复
+          type: answer
+          variables: []
+        height: 103
+        id: "1776900002000"
+        position:
+          x: 2144
+          "y": 1260
+        positionAbsolute:
+          x: 2144
+          "y": 1260
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          is_team_authorization: true
+          paramSchemas:
+            - auto_generate: null
+              default: null
+              form: llm
+              human_description:
+                en_US: Built-in parameters for large language models
+                ja_JP: Built-in parameters for large language models
+                pt_BR: Built-in parameters for large language models
+                zh_Hans: Built-in parameters for large language models
+              label:
+                en_US: teamId
+                ja_JP: teamId
+                pt_BR: teamId
+                zh_Hans: teamId
+              llm_description: Built-in parameters for large language models
+              max: null
+              min: null
+              name: teamId
+              options: []
+              placeholder: null
+              precision: null
+              required: true
+              scope: null
+              template: null
+              type: number
+            - auto_generate: null
+              default: null
+              form: llm
+              human_description:
+                en_US: Check In Date，provided in ISO-8601 format
+                ja_JP: Check In Date，provided in ISO-8601 format
+                pt_BR: Check In Date，provided in ISO-8601 format
+                zh_Hans: Check In Date，provided in ISO-8601 format
+              label:
+                en_US: checkInDate
+                ja_JP: checkInDate
+                pt_BR: checkInDate
+                zh_Hans: checkInDate
+              llm_description: Check In Date，provided in ISO-8601 format
+              max: null
+              min: null
+              name: checkInDate
+              options: []
+              placeholder: null
+              precision: null
+              required: true
+              scope: null
+              template: null
+              type: string
+            - auto_generate: null
+              default: null
+              form: llm
+              human_description:
+                en_US: Check Out Date，provided in ISO-8601 format
+                ja_JP: Check Out Date，provided in ISO-8601 format
+                pt_BR: Check Out Date，provided in ISO-8601 format
+                zh_Hans: Check Out Date，provided in ISO-8601 format
+              label:
+                en_US: checkOutDate
+                ja_JP: checkOutDate
+                pt_BR: checkOutDate
+                zh_Hans: checkOutDate
+              llm_description: Check Out Date，provided in ISO-8601 format
+              max: null
+              min: null
+              name: checkOutDate
+              options: []
+              placeholder: null
+              precision: null
+              required: true
+              scope: null
+              template: null
+              type: string
+          params:
+            checkInDate: ""
+            checkOutDate: ""
+            teamId: ""
+          provider_id: hotel-booking
+          provider_name: 酒店客房预订
+          provider_type: mcp
+          selected: false
+          title: getAvailableRoomsByDate
+          tool_configurations: {}
+          tool_description: 获取可预订的房型、数量以及房价
+          tool_label: getAvailableRoomsByDate
+          tool_name: getAvailableRoomsByDate
+          tool_node_version: "2"
+          tool_parameters:
+            checkInDate:
+              type: variable
+              value:
+                - "1779100000002"
+                - checkInDate
+            checkOutDate:
+              type: variable
+              value:
+                - "1779100000002"
+                - checkOutDate
+            teamId:
+              type: constant
+              value: 234556
+          type: tool
+        height: 84
+        id: "1778843661327"
+        position:
+          x: 1540
+          "y": 1201.5
+        positionAbsolute:
+          x: 1540
+          "y": 1201.5
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+        selected: false
+      - data:
+          is_team_authorization: true
+          paramSchemas:
+            - auto_generate: null
+              default: "%Y-%m-%d %H:%M:%S"
+              form: form
+              human_description:
+                en_US: Time format in strftime standard.
+                ja_JP: Time format in strftime standard.
+                pt_BR: Time format in strftime standard.
+                zh_Hans: strftime 标准的时间格式。
+              label:
+                en_US: Format
+                ja_JP: Format
+                pt_BR: Format
+                zh_Hans: 格式
+              llm_description: null
+              max: null
+              min: null
+              name: format
+              options: []
+              placeholder: null
+              precision: null
+              required: false
+              scope: null
+              template: null
+              type: string
+            - auto_generate: null
+              default: UTC
+              form: form
+              human_description:
+                en_US: Timezone
+                ja_JP: Timezone
+                pt_BR: Timezone
+                zh_Hans: 时区
+              label:
+                en_US: Timezone
+                ja_JP: Timezone
+                pt_BR: Timezone
+                zh_Hans: 时区
+              llm_description: null
+              max: null
+              min: null
+              name: timezone
+              options:
+                - icon: null
+                  label:
+                    en_US: UTC
+                    ja_JP: UTC
+                    pt_BR: UTC
+                    zh_Hans: UTC
+                  value: UTC
+                - icon: null
+                  label:
+                    en_US: America/New_York
+                    ja_JP: America/New_York
+                    pt_BR: America/New_York
+                    zh_Hans: 美洲/纽约
+                  value: America/New_York
+                - icon: null
+                  label:
+                    en_US: America/Los_Angeles
+                    ja_JP: America/Los_Angeles
+                    pt_BR: America/Los_Angeles
+                    zh_Hans: 美洲/洛杉矶
+                  value: America/Los_Angeles
+                - icon: null
+                  label:
+                    en_US: America/Chicago
+                    ja_JP: America/Chicago
+                    pt_BR: America/Chicago
+                    zh_Hans: 美洲/芝加哥
+                  value: America/Chicago
+                - icon: null
+                  label:
+                    en_US: America/Sao_Paulo
+                    ja_JP: America/Sao_Paulo
+                    pt_BR: América/São Paulo
+                    zh_Hans: 美洲/圣保罗
+                  value: America/Sao_Paulo
+                - icon: null
+                  label:
+                    en_US: Asia/Shanghai
+                    ja_JP: Asia/Shanghai
+                    pt_BR: Asia/Shanghai
+                    zh_Hans: 亚洲/上海
+                  value: Asia/Shanghai
+                - icon: null
+                  label:
+                    en_US: Asia/Ho_Chi_Minh
+                    ja_JP: Asia/Ho_Chi_Minh
+                    pt_BR: Ásia/Ho Chi Minh
+                    zh_Hans: 亚洲/胡志明市
+                  value: Asia/Ho_Chi_Minh
+                - icon: null
+                  label:
+                    en_US: Asia/Tokyo
+                    ja_JP: Asia/Tokyo
+                    pt_BR: Asia/Tokyo
+                    zh_Hans: 亚洲/东京
+                  value: Asia/Tokyo
+                - icon: null
+                  label:
+                    en_US: Asia/Dubai
+                    ja_JP: Asia/Dubai
+                    pt_BR: Asia/Dubai
+                    zh_Hans: 亚洲/迪拜
+                  value: Asia/Dubai
+                - icon: null
+                  label:
+                    en_US: Asia/Kolkata
+                    ja_JP: Asia/Kolkata
+                    pt_BR: Asia/Kolkata
+                    zh_Hans: 亚洲/加尔各答
+                  value: Asia/Kolkata
+                - icon: null
+                  label:
+                    en_US: Asia/Seoul
+                    ja_JP: Asia/Seoul
+                    pt_BR: Asia/Seoul
+                    zh_Hans: 亚洲/首尔
+                  value: Asia/Seoul
+                - icon: null
+                  label:
+                    en_US: Asia/Singapore
+                    ja_JP: Asia/Singapore
+                    pt_BR: Asia/Singapore
+                    zh_Hans: 亚洲/新加坡
+                  value: Asia/Singapore
+                - icon: null
+                  label:
+                    en_US: Europe/London
+                    ja_JP: Europe/London
+                    pt_BR: Europe/London
+                    zh_Hans: 欧洲/伦敦
+                  value: Europe/London
+                - icon: null
+                  label:
+                    en_US: Europe/Berlin
+                    ja_JP: Europe/Berlin
+                    pt_BR: Europe/Berlin
+                    zh_Hans: 欧洲/柏林
+                  value: Europe/Berlin
+                - icon: null
+                  label:
+                    en_US: Europe/Moscow
+                    ja_JP: Europe/Moscow
+                    pt_BR: Europe/Moscow
+                    zh_Hans: 欧洲/莫斯科
+                  value: Europe/Moscow
+                - icon: null
+                  label:
+                    en_US: Australia/Sydney
+                    ja_JP: Australia/Sydney
+                    pt_BR: Australia/Sydney
+                    zh_Hans: 澳大利亚/悉尼
+                  value: Australia/Sydney
+                - icon: null
+                  label:
+                    en_US: Pacific/Auckland
+                    ja_JP: Pacific/Auckland
+                    pt_BR: Pacific/Auckland
+                    zh_Hans: 太平洋/奥克兰
+                  value: Pacific/Auckland
+                - icon: null
+                  label:
+                    en_US: Africa/Cairo
+                    ja_JP: Africa/Cairo
+                    pt_BR: Africa/Cairo
+                    zh_Hans: 非洲/开罗
+                  value: Africa/Cairo
+              placeholder: null
+              precision: null
+              required: false
+              scope: null
+              template: null
+              type: select
+          params:
+            format: ""
+            timezone: ""
+          provider_id: time
+          provider_name: time
+          provider_type: builtin
+          selected: false
+          title: 获取当前时间
+          tool_configurations:
+            format:
+              type: mixed
+              value: "%Y-%m-%d %H:%M:%S %A"
+            timezone:
+              type: constant
+              value: Asia/Shanghai
+          tool_description: 一个用于获取当前时间的工具。
+          tool_label: 获取当前时间
+          tool_name: current_time
+          tool_node_version: "2"
+          tool_parameters: {}
+          type: tool
+        height: 114
+        id: "1779049137062"
+        position:
+          x: 634
+          "y": 1201.5
+        positionAbsolute:
+          x: 634
+          "y": 1201.5
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          selected: false
+          template: >-
+            用户当前消息：{{ user_query }}
+
+
+            提交入住日期：{{ check_in }}
+
+
+            提交离店日期：{{ check_out }}
+
+
+            实时房态与价格数据：{{ rooms_data }}
+
+
+            请结合最近10轮对话，特别是上一轮"📋 预订信息确认"，尝试提取用户已确认的提交字段：房型代码、间数、姓名、手机号、邮箱。
+            rateCode、verifyId、verifyIds 不由大模型提取，后续 Code 节点会从"实时房态与价格数据"中按房型代码确定。
+            email 如客人未提供，使用 guest@example.com。
+          title: 提交参数提取上下文
+          type: template-transform
+          variables:
+            - value_selector:
+                - sys
+                - query
+              variable: user_query
+            - value_selector:
+                - "1779100000002"
+                - checkInDate
+              variable: check_in
+            - value_selector:
+                - "1779100000002"
+                - checkOutDate
+              variable: check_out
+            - value_selector:
+                - "1778843661327"
+                - json
+              variable: rooms_data
+        height: 88
+        id: "1779200000005"
+        position:
+          x: 2144
+          "y": 1378
+        positionAbsolute:
+          x: 2144
+          "y": 1378
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          instruction: >-
+            从最近10轮对话和上一轮"📋 预订信息确认"中提取用户已确认的提交字段。roomCode 来自确认摘要中的房型代码；number 默认1；email 未提供时使用 guest@example.com。
+            不要提取或编造 rateCode、verifyId、verifyIds；这些价格计划字段由后续 Code 节点从实时房态数据中确定。
+            若对话中找不到 roomCode 或 mobile，对应字段返回空字符串，不要猜测或编造。
+          memory:
+            query_prompt_template: |-
+              {{#sys.query#}}
+
+              {{#sys.files#}}
+            role_prefix:
+              assistant: ""
+              user: ""
+            window:
+              enabled: true
+              size: 10
+          model:
+            completion_params:
+              temperature: 0.1
+            mode: chat
+            name: deepseek-v3
+            provider: langgenius/tongyi/tongyi
+          parameters:
+            - description: 房型代码，如001/002/005。找不到则返回空字符串。
+              name: roomCode
+              required: true
+              type: string
+            - description: 预订间数，默认1。
+              name: number
+              required: true
+              type: number
+            - description: 宾客姓名。找不到则返回空字符串。
+              name: name
+              required: true
+              type: string
+            - description: 宾客手机号。找不到则返回空字符串。
+              name: mobile
+              required: true
+              type: string
+            - description: 宾客邮箱，未提供时使用guest@example.com。
+              name: email
+              required: true
+              type: string
+          query:
+            - "1779200000005"
+            - output
+          reasoning_mode: prompt
+          selected: false
+          title: 预订提交参数提取
+          type: parameter-extractor
+          vision:
+            enabled: false
+        height: 88
+        id: "1779200000006"
+        position:
+          x: 2446
+          "y": 1378
+        positionAbsolute:
+          x: 2446
+          "y": 1378
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          code: |
+            import json
+            import re
+
+            def _try_json(text):
+                text = str(text or "").strip()
+                if not text:
+                    return None
+                try:
+                    return json.loads(text)
+                except Exception:
+                    pass
+                decoder = json.JSONDecoder()
+                for index, char in enumerate(text):
+                    if char not in "{[":
+                        continue
+                    try:
+                        value, _ = decoder.raw_decode(text[index:])
+                        return value
+                    except Exception:
+                        continue
+                return None
+
+            def _find_rooms(value, depth=0):
+                if depth > 8 or value is None:
+                    return []
+                if isinstance(value, str):
+                    parsed = _try_json(value)
+                    if parsed is None:
+                        return []
+                    return _find_rooms(parsed, depth + 1)
+                if isinstance(value, dict):
+                    rooms = value.get("rooms")
+                    if isinstance(rooms, list):
+                        return rooms
+                    content = value.get("content")
+                    if isinstance(content, list):
+                        for item in content:
+                            rooms = _find_rooms(item, depth + 1)
+                            if rooms:
+                                return rooms
+                    text = value.get("text")
+                    rooms = _find_rooms(text, depth + 1)
+                    if rooms:
+                        return rooms
+                    for item in value.values():
+                        rooms = _find_rooms(item, depth + 1)
+                        if rooms:
+                            return rooms
+                if isinstance(value, list):
+                    for item in value:
+                        rooms = _find_rooms(item, depth + 1)
+                        if rooms:
+                            return rooms
+                return []
+
+            def _to_iso_date(date_str: str) -> str:
+                date_str = str(date_str or "").strip()
+                if not date_str:
+                    return ""
+                m = re.search(r"(\d{4})[-/](\d{1,2})[-/](\d{1,2})", date_str)
+                if not m:
+                    return ""
+                year = m.group(1)
+                month = int(m.group(2))
+                day = int(m.group(3))
+                return f"{year}-{month:02d}-{day:02d}T00:00:00.000+08:00"
+
+            RATE_FIELDS = ["rates", "ratePlans", "plans", "pricePlans", "rate_plans", "roomRates"]
+            CODE_FIELDS = ["code", "rateCode", "rate_code", "planCode", "id"]
+            VERIFY_FIELDS = ["verifyId", "verify_id", "planVerifyId", "vid", "id"]
+            PRICE_FIELDS = ["dailyPrices", "daily_prices", "prices", "days", "items", "priceList"]
+
+            def _extract_verify_ids(rate_obj):
+                for pf in PRICE_FIELDS:
+                    daily = rate_obj.get(pf) or []
+                    if not isinstance(daily, list):
+                        continue
+                    ids = []
+                    for item in daily:
+                        if not isinstance(item, dict):
+                            continue
+                        for vf in VERIFY_FIELDS:
+                            v = item.get(vf)
+                            if v is not None and str(v) not in ("0", "null", "None", ""):
+                                try:
+                                    ids.append(int(v))
+                                    break
+                                except (ValueError, TypeError):
+                                    pass
+                    if ids:
+                        return ids
+                return []
+
+            def _extract_rate_code(rate_obj):
+                for cf in CODE_FIELDS:
+                    v = rate_obj.get(cf)
+                    if v and str(v).strip() not in ("0", "null", "None", ""):
+                        return str(v).strip()
+                return ""
+
+            def _get_rates(room_obj):
+                for rf in RATE_FIELDS:
+                    v = room_obj.get(rf)
+                    if isinstance(v, list) and v:
+                        return v
+                return []
+
+            def main(roomsData, roomCode: str, checkInDate: str, checkOutDate: str) -> dict:
+                raw_preview = json.dumps(roomsData, ensure_ascii=False)[:600] if not isinstance(roomsData, str) else str(roomsData)[:600]
+                rooms = _find_rooms(roomsData)
+                wanted = str(roomCode or "").strip()
+                check_in_iso = _to_iso_date(checkInDate)
+                check_out_iso = _to_iso_date(checkOutDate)
+
+                empty_result = {
+                    "status": "error",
+                    "errorMessage": "",
+                    "roomCode": wanted,
+                    "rateCode": "",
+                    "verifyId": 0,
+                    "verifyIds": [],
+                    "checkInDateISO": check_in_iso,
+                    "checkOutDateISO": check_out_iso,
+                    "roomsPreview": raw_preview,
+                }
+
+                if not wanted:
+                    empty_result["errorMessage"] = "未收到房型代码。"
+                    return empty_result
+
+                if not rooms:
+                    empty_result["errorMessage"] = f"实时房态数据为空或格式未识别。原始数据前600字：{raw_preview}"
+                    return empty_result
+
+                matched = None
+                for room in rooms:
+                    code = str(room.get("code") or "").strip()
+                    title = str(room.get("title") or room.get("name") or "").strip()
+                    if code == wanted or (wanted and wanted in title):
+                        matched = room
+                        break
+
+                if not matched:
+                    available_codes = "、".join(
+                        str(room.get("code"))
+                        for room in rooms
+                        if room.get("code") is not None
+                    )
+                    matched_preview = str(rooms[0])[:200] if rooms else ""
+                    empty_result["errorMessage"] = (
+                        f"实时房态中没有找到房型代码 {wanted}。"
+                        f"当前可选：{available_codes}。"
+                        f"第一条房型示例：{matched_preview}"
+                    )
+                    return empty_result
+
+                rates = _get_rates(matched)
+                matched_preview = str({k: v for k, v in matched.items() if k != "rates"})[:200]
+                if not rates:
+                    empty_result["errorMessage"] = (
+                        f"房型 {wanted} 在实时房态中没有 rates/ratePlans 字段。"
+                        f"房型数据（不含rates）：{matched_preview}"
+                    )
+                    return empty_result
+
+                for rate in rates:
+                    verify_ids = _extract_verify_ids(rate)
+                    rate_code = _extract_rate_code(rate)
+                    if verify_ids and rate_code:
+                        return {
+                            "status": "ok",
+                            "errorMessage": "",
+                            "roomCode": str(matched.get("code") or wanted),
+                            "rateCode": rate_code,
+                            "verifyId": verify_ids[0],
+                            "verifyIds": verify_ids,
+                            "checkInDateISO": check_in_iso,
+                            "checkOutDateISO": check_out_iso,
+                            "roomsPreview": raw_preview,
+                        }
+
+                rate_preview = str(rates[0])[:300] if rates else ""
+                empty_result["errorMessage"] = (
+                    f"房型 {wanted} 的 rates 存在但找不到 verifyId 或 rateCode。"
+                    f"第一条 rate 示例：{rate_preview}"
+                )
+                return empty_result
+          code_language: python3
+          desc: 从实时房态 JSON 中按房型代码匹配价格计划；同时将 YYYY-MM-DD 日期转为 YYYY-MM-DDT00:00:00.000+08:00 避免 submitBooking 2996 错误。errorMessage 和 roomsPreview 用于调试。
+          outputs:
+            status:
+              type: string
+            errorMessage:
+              type: string
+            roomCode:
+              type: string
+            rateCode:
+              type: string
+            verifyId:
+              type: number
+            verifyIds:
+              type: array[number]
+            checkInDateISO:
+              type: string
+            checkOutDateISO:
+              type: string
+            roomsPreview:
+              type: string
+          selected: false
+          title: 匹配价格计划并转换日期格式
+          type: code
+          variables:
+            - value_selector:
+                - "1778843661327"
+                - json
+              variable: roomsData
+            - value_selector:
+                - "1779200000006"
+                - roomCode
+              variable: roomCode
+            - value_selector:
+                - "1779100000002"
+                - checkInDate
+              variable: checkInDate
+            - value_selector:
+                - "1779100000002"
+                - checkOutDate
+              variable: checkOutDate
+        height: 98
+        id: "1779200000010"
+        position:
+          x: 2748
+          "y": 1378
+        positionAbsolute:
+          x: 2748
+          "y": 1378
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          cases:
+            - case_id: submit
+              conditions:
+                - comparison_operator: contains
+                  id: 1779200000011-condition-1
+                  value: ok
+                  variable_selector:
+                    - "1779200000010"
+                    - status
+                - comparison_operator: not empty
+                  id: 1779200000011-condition-2
+                  variable_selector:
+                    - "1779200000006"
+                    - mobile
+                - comparison_operator: not empty
+                  id: 1779200000011-condition-3
+                  variable_selector:
+                    - "1779200000006"
+                    - name
+              id: submit
+              logical_operator: and
+          desc: 数据驱动触发：仅当 Code 节点成功匹配房型价格计划（status=ok）且 parameter-extractor 提取到 mobile 和 name 时，才调用 submitBooking。否则继续走客房预订 LLM 收集缺失信息。
+          logical_operator: and
+          selected: false
+          title: 是否具备提交条件
+          type: if-else
+        height: 126
+        id: "1779200000011"
+        position:
+          x: 3050
+          "y": 1378
+        positionAbsolute:
+          x: 3050
+          "y": 1378
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          is_team_authorization: true
+          paramSchemas:
+            - auto_generate: null
+              default: null
+              form: llm
+              human_description:
+                en_US: Built-in parameters for large language models
+                ja_JP: Built-in parameters for large language models
+                pt_BR: Built-in parameters for large language models
+                zh_Hans: Built-in parameters for large language models
+              label:
+                en_US: teamId
+                ja_JP: teamId
+                pt_BR: teamId
+                zh_Hans: teamId
+              llm_description: Built-in parameters for large language models
+              max: null
+              min: null
+              name: teamId
+              options: []
+              placeholder: null
+              precision: null
+              required: true
+              scope: null
+              template: null
+              type: number
+            - auto_generate: null
+              default: null
+              form: llm
+              human_description:
+                en_US: Room code
+                ja_JP: Room code
+                pt_BR: Room code
+                zh_Hans: Room code
+              label:
+                en_US: roomCode
+                ja_JP: roomCode
+                pt_BR: roomCode
+                zh_Hans: roomCode
+              llm_description: Room code
+              max: null
+              min: null
+              name: roomCode
+              options: []
+              placeholder: null
+              precision: null
+              required: true
+              scope: null
+              template: null
+              type: string
+            - auto_generate: null
+              default: null
+              form: llm
+              human_description:
+                en_US: Rate code
+                ja_JP: Rate code
+                pt_BR: Rate code
+                zh_Hans: Rate code
+              label:
+                en_US: rateCode
+                ja_JP: rateCode
+                pt_BR: rateCode
+                zh_Hans: rateCode
+              llm_description: Rate code
+              max: null
+              min: null
+              name: rateCode
+              options: []
+              placeholder: null
+              precision: null
+              required: true
+              scope: null
+              template: null
+              type: string
+            - auto_generate: null
+              default: null
+              form: llm
+              human_description:
+                en_US: Rooms rates dailyPrices verifyId
+                ja_JP: Rooms rates dailyPrices verifyId
+                pt_BR: Rooms rates dailyPrices verifyId
+                zh_Hans: Rooms rates dailyPrices verifyId
+              label:
+                en_US: verifyIds
+                ja_JP: verifyIds
+                pt_BR: verifyIds
+                zh_Hans: verifyIds
+              llm_description: Rooms rates dailyPrices verifyId
+              max: null
+              min: null
+              name: verifyIds
+              options: []
+              placeholder: null
+              precision: null
+              required: true
+              scope: null
+              template: null
+              type: array
+            - auto_generate: null
+              default: null
+              form: llm
+              human_description:
+                en_US: Rooms rates dailyPrices verifyId
+                ja_JP: Rooms rates dailyPrices verifyId
+                pt_BR: Rooms rates dailyPrices verifyId
+                zh_Hans: Rooms rates dailyPrices verifyId
+              label:
+                en_US: verifyId
+                ja_JP: verifyId
+                pt_BR: verifyId
+                zh_Hans: verifyId
+              llm_description: Rooms rates dailyPrices verifyId
+              max: null
+              min: null
+              name: verifyId
+              options: []
+              placeholder: null
+              precision: null
+              required: true
+              scope: null
+              template: null
+              type: number
+            - auto_generate: null
+              default: null
+              form: llm
+              human_description:
+                en_US: Booking room number
+                ja_JP: Booking room number
+                pt_BR: Booking room number
+                zh_Hans: Booking room number
+              label:
+                en_US: number
+                ja_JP: number
+                pt_BR: number
+                zh_Hans: number
+              llm_description: Booking room number
+              max: null
+              min: null
+              name: number
+              options: []
+              placeholder: null
+              precision: null
+              required: true
+              scope: null
+              template: null
+              type: number
+            - auto_generate: null
+              default: null
+              form: llm
+              human_description:
+                en_US: Check In Date ISO-8601 with timezone
+                ja_JP: Check In Date ISO-8601 with timezone
+                pt_BR: Check In Date ISO-8601 with timezone
+                zh_Hans: Check In Date ISO-8601 with timezone
+              label:
+                en_US: checkInDate
+                ja_JP: checkInDate
+                pt_BR: checkInDate
+                zh_Hans: checkInDate
+              llm_description: Check In Date ISO-8601 with timezone
+              max: null
+              min: null
+              name: checkInDate
+              options: []
+              placeholder: null
+              precision: null
+              required: true
+              scope: null
+              template: null
+              type: string
+            - auto_generate: null
+              default: null
+              form: llm
+              human_description:
+                en_US: Check Out Date ISO-8601 with timezone
+                ja_JP: Check Out Date ISO-8601 with timezone
+                pt_BR: Check Out Date ISO-8601 with timezone
+                zh_Hans: Check Out Date ISO-8601 with timezone
+              label:
+                en_US: checkOutDate
+                ja_JP: checkOutDate
+                pt_BR: checkOutDate
+                zh_Hans: checkOutDate
+              llm_description: Check Out Date ISO-8601 with timezone
+              max: null
+              min: null
+              name: checkOutDate
+              options: []
+              placeholder: null
+              precision: null
+              required: true
+              scope: null
+              template: null
+              type: string
+            - auto_generate: null
+              default: null
+              form: llm
+              human_description:
+                en_US: Guest name
+                ja_JP: Guest name
+                pt_BR: Guest name
+                zh_Hans: Guest name
+              label:
+                en_US: name
+                ja_JP: name
+                pt_BR: name
+                zh_Hans: name
+              llm_description: Guest name
+              max: null
+              min: null
+              name: name
+              options: []
+              placeholder: null
+              precision: null
+              required: true
+              scope: null
+              template: null
+              type: string
+            - auto_generate: null
+              default: null
+              form: llm
+              human_description:
+                en_US: Guest mobile
+                ja_JP: Guest mobile
+                pt_BR: Guest mobile
+                zh_Hans: Guest mobile
+              label:
+                en_US: mobile
+                ja_JP: mobile
+                pt_BR: mobile
+                zh_Hans: mobile
+              llm_description: Guest mobile
+              max: null
+              min: null
+              name: mobile
+              options: []
+              placeholder: null
+              precision: null
+              required: true
+              scope: null
+              template: null
+              type: string
+            - auto_generate: null
+              default: null
+              form: llm
+              human_description:
+                en_US: Guest email
+                ja_JP: Guest email
+                pt_BR: Guest email
+                zh_Hans: Guest email
+              label:
+                en_US: email
+                ja_JP: email
+                pt_BR: email
+                zh_Hans: email
+              llm_description: Guest email
+              max: null
+              min: null
+              name: email
+              options: []
+              placeholder: null
+              precision: null
+              required: true
+              scope: null
+              template: null
+              type: string
+          params:
+            teamId: ""
+            roomCode: ""
+            rateCode: ""
+            verifyIds: ""
+            verifyId: ""
+            number: ""
+            checkInDate: ""
+            checkOutDate: ""
+            name: ""
+            mobile: ""
+            email: ""
+          provider_id: hotel-booking
+          provider_name: 酒店客房预订
+          provider_type: mcp
+          selected: false
+          title: submitBooking
+          tool_configurations: {}
+          tool_description: 根据房型名称、预订数量、入住离店日期进行客房预订操作
+          tool_label: submitBooking
+          tool_name: submitBooking
+          tool_node_version: "2"
+          tool_parameters:
+            teamId:
+              type: constant
+              value: 234556
+            roomCode:
+              type: variable
+              value:
+                - "1779200000010"
+                - roomCode
+            rateCode:
+              type: variable
+              value:
+                - "1779200000010"
+                - rateCode
+            verifyIds:
+              type: variable
+              value:
+                - "1779200000010"
+                - verifyIds
+            verifyId:
+              type: variable
+              value:
+                - "1779200000010"
+                - verifyId
+            number:
+              type: variable
+              value:
+                - "1779200000006"
+                - number
+            checkInDate:
+              type: variable
+              value:
+                - "1779200000010"
+                - checkInDateISO
+            checkOutDate:
+              type: variable
+              value:
+                - "1779200000010"
+                - checkOutDateISO
+            name:
+              type: variable
+              value:
+                - "1779200000006"
+                - name
+            mobile:
+              type: variable
+              value:
+                - "1779200000006"
+                - mobile
+            email:
+              type: variable
+              value:
+                - "1779200000006"
+                - email
+          type: tool
+        height: 88
+        id: "1779200000007"
+        position:
+          x: 3352
+          "y": 1378
+        positionAbsolute:
+          x: 3352
+          "y": 1378
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          code: |
+            import json
+            import re
+
+            def _try_json(text):
+                text = str(text or "").strip()
+                if not text:
+                    return None
+                try:
+                    return json.loads(text)
+                except Exception:
+                    pass
+                decoder = json.JSONDecoder()
+                for i, ch in enumerate(text):
+                    if ch not in "{[":
+                        continue
+                    try:
+                        val, _ = decoder.raw_decode(text[i:])
+                        return val
+                    except Exception:
+                        continue
+                return None
+
+            ORDER_FIELDS = [
+                "bookingId", "orderId", "orderNo", "order_no",
+                "referenceNo", "reservationId", "confirmationNo",
+            ]
+
+            def _find_order(obj, depth=0):
+                if depth > 6 or obj is None:
+                    return ""
+                if isinstance(obj, dict):
+                    for field in ORDER_FIELDS:
+                        val = obj.get(field)
+                        if val is not None:
+                            s = str(val).strip()
+                            if s and s not in ("0", "null", "None", "false", ""):
+                                return s
+                    for v in obj.values():
+                        r = _find_order(v, depth + 1)
+                        if r:
+                            return r
+                elif isinstance(obj, list):
+                    for item in obj:
+                        r = _find_order(item, depth + 1)
+                        if r:
+                            return r
+                return ""
+
+            def _find_error(obj, depth=0):
+                if depth > 4 or not isinstance(obj, dict):
+                    return ""
+                code = obj.get("errorCode") or obj.get("code")
+                msg = obj.get("message") or obj.get("msg") or obj.get("errMsg") or ""
+                err = obj.get("error")
+                if isinstance(code, int) and code not in (0, 200):
+                    return f"错误码 {code}：{msg}"
+                if isinstance(err, str) and err and err.lower() not in ("false", "null", "none", ""):
+                    return err
+                for v in obj.values():
+                    r = _find_error(v, depth + 1)
+                    if r:
+                        return r
+                return ""
+
+            TEXT_ORDER_PATTERNS = [
+                r"订单号[：:]\s*(\S+)",
+                r"订单编号[：:]\s*(\S+)",
+                r"预订号[：:]\s*(\S+)",
+                r"order\s*no[：:\s]+(\S+)",
+                r"orderNo[：:\s]+(\S+)",
+                r"referenceNo[：:\s]+(\S+)",
+                r"bookingId[：:\s]+(\S+)",
+            ]
+
+            def _extract_from_text(raw: str) -> str:
+                for pattern in TEXT_ORDER_PATTERNS:
+                    m = re.search(pattern, raw, re.IGNORECASE)
+                    if m:
+                        val = m.group(1).strip(".,，。;；\"'")
+                        if val and len(val) >= 4:
+                            return val
+                return ""
+
+            def main(submitResult: str) -> dict:
+                raw = str(submitResult or "").strip()
+                raw_preview = raw[:300] if len(raw) > 300 else raw
+                if not raw:
+                    return {
+                        "orderNo": "",
+                        "errorMessage": "预订接口未返回任何数据，请联系前台确认。电话：0750-662-9888",
+                        "rawResponse": "",
+                    }
+
+                # 优先尝试 JSON 解析
+                data = _try_json(raw)
+                if data is not None:
+                    if isinstance(data, str):
+                        order_no = _extract_from_text(data)
+                        if order_no:
+                            return {"orderNo": order_no, "errorMessage": "", "rawResponse": raw_preview}
+                        raw = data
+                    order_no = _find_order(data)
+                    if order_no:
+                        return {"orderNo": order_no, "errorMessage": "", "rawResponse": raw_preview}
+                    error_msg = _find_error(data)
+                    if not error_msg:
+                        error_msg = "预订接口未返回订单编号，请联系前台确认。电话：0750-662-9888"
+                    return {"orderNo": "", "errorMessage": error_msg, "rawResponse": raw_preview}
+
+                # JSON 解析失败：尝试从纯文本中用正则提取订单号
+                order_no = _extract_from_text(raw)
+                if order_no:
+                    return {"orderNo": order_no, "errorMessage": "", "rawResponse": raw_preview}
+
+                # 文本含成功关键词但未能提取订单号
+                success_keywords = ["预订已经成功", "预订成功", "booking success", "successfully booked"]
+                if any(kw in raw for kw in success_keywords):
+                    return {
+                        "orderNo": "",
+                        "errorMessage": f"预订成功但系统未能提取订单编号，请联系前台查询。电话：0750-662-9888。原始返回：{raw_preview}",
+                        "rawResponse": raw_preview,
+                    }
+
+                return {
+                    "orderNo": "",
+                    "errorMessage": f"预订接口返回未知格式，请联系前台确认。电话：0750-662-9888",
+                    "rawResponse": raw_preview,
+                }
+          code_language: python3
+          desc: 从 submitBooking 返回 JSON 中确定性地提取订单编号，不依赖 LLM。
+          outputs:
+            orderNo:
+              type: string
+            errorMessage:
+              type: string
+            rawResponse:
+              type: string
+          selected: false
+          title: 解析预订结果
+          type: code
+          variables:
+            - value_selector:
+                - "1779200000007"
+                - text
+              variable: submitResult
+        height: 98
+        id: "1779200000014"
+        position:
+          x: 3654
+          "y": 1378
+        positionAbsolute:
+          x: 3654
+          "y": 1378
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          cases:
+            - case_id: found
+              conditions:
+                - comparison_operator: not empty
+                  id: 1779200000015-condition-1
+                  variable_selector:
+                    - "1779200000014"
+                    - orderNo
+              id: found
+              logical_operator: and
+          desc: 订单编号非空则走成功分支，否则走失败分支。
+          logical_operator: and
+          selected: false
+          title: 是否获取到订单编号
+          type: if-else
+        height: 126
+        id: "1779200000015"
+        position:
+          x: 3956
+          "y": 1378
+        positionAbsolute:
+          x: 3956
+          "y": 1378
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          answer: |
+            ✅ 预订申请已提交！订单编号：{{#1779200000014.orderNo#}}
+
+            入住日期：{{#1779100000002.checkInDate#}}（14:00后办理入住）
+            离店日期：{{#1779100000002.checkOutDate#}}（12:00前退房）
+            订单金额：以「小途乐订」小程序待支付页面和订单记录为准
+
+            请按以下步骤完成支付：
+            1. 请使用微信扫描下方小程序码，打开「小途乐订」小程序
+            2. 点击底部「我的」→「我的订单」→「待支付」
+            3. 找到订单编号 {{#1779200000014.orderNo#}}，点击「立即支付」
+            4. 演示账户含 ¥20,000 虚拟余额，确认金额后完成支付
+
+            ![微信扫描小途乐订小程序码](https://cdn.jsdelivr.net/gh/zengtao227/lyp-wentucup-2026-public-data@main/qrcode-xiaotuleding.png)
+
+            支付完成后请在「小途乐订」小程序订单记录中查看支付状态。如需协助请致电前台：0750-662-9888
+          selected: false
+          title: 预订成功回复
+          type: answer
+          variables: []
+        height: 103
+        id: "1779200000016"
+        position:
+          x: 4258
+          "y": 1228
+        positionAbsolute:
+          x: 4258
+          "y": 1228
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+      - data:
+          answer: |
+            ⚠️ 预订提交未成功
+
+            {{#1779200000014.errorMessage#}}
+
+            接口原始返回（调试用）：{{#1779200000014.rawResponse#}}
+
+            如需协助请致电前台：0750-662-9888
+
+            您可以重新描述预订需求，我将为您重新查询并提交。
+          selected: false
+          title: 预订失败回复
+          type: answer
+          variables: []
+        height: 103
+        id: "1779200000017"
+        position:
+          x: 4258
+          "y": 1528
+        positionAbsolute:
+          x: 4258
+          "y": 1528
+        selected: false
+        sourcePosition: right
+        targetPosition: left
+        type: custom
+        width: 242
+    viewport:
+      x: -137.85874241993872
+      "y": -788.0847730158307
+      zoom: 0.8275474591732909
+  rag_pipeline_variables: []
