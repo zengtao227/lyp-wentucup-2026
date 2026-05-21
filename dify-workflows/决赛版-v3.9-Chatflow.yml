@@ -5,7 +5,7 @@ app:
   icon: 🏨
   icon_background: “#FFEAD5”
   mode: advanced-chat
-  name: 决赛版（初赛改）-v3.9-Chatflow
+  name: 决赛版-v3.9-Chatflow
   use_icon_as_answer_icon: false
 dependencies:
   - current_identifier: null
@@ -2217,6 +2217,12 @@ workflow:
                     "roomsPreview": raw_preview,
                 }
 
+                if not check_in_iso or not check_out_iso:
+                    empty_result["errorMessage"] = (
+                        "未能得到合法入住/离店日期，已停止提交以避免后台 2996 日期格式错误。"
+                    )
+                    return empty_result
+
                 if not wanted:
                     empty_result["errorMessage"] = "未收到房型代码。"
                     return empty_result
@@ -2279,7 +2285,7 @@ workflow:
                 )
                 return empty_result
           code_language: python3
-          desc: 从实时房态 JSON 中按房型代码匹配价格计划；同时将 YYYY-MM-DD 日期转为 YYYY-MM-DDT00:00:00.000+08:00 避免 submitBooking 2996 错误。errorMessage 和 roomsPreview 用于调试。
+          desc: 从实时房态 JSON 中按房型代码匹配价格计划；同时将 YYYY-MM-DD 日期转为 YYYY-MM-DDT00:00:00.000+08:00。若日期为空则 status=error，不进入 submitBooking，避免 2996 错误。errorMessage 和 roomsPreview 用于调试。
           outputs:
             status:
               type: string
@@ -2352,9 +2358,19 @@ workflow:
                   variable_selector:
                     - "1779200000006"
                     - name
+                - comparison_operator: not empty
+                  id: 1779200000011-condition-4
+                  variable_selector:
+                    - "1779200000010"
+                    - checkInDateISO
+                - comparison_operator: not empty
+                  id: 1779200000011-condition-5
+                  variable_selector:
+                    - "1779200000010"
+                    - checkOutDateISO
               id: submit
               logical_operator: and
-          desc: 数据驱动触发：仅当 Code 节点成功匹配房型价格计划（status=ok）且 parameter-extractor 提取到 mobile 和 name 时，才调用 submitBooking。否则继续走客房预订 LLM 收集缺失信息。
+          desc: 数据驱动触发：仅当 Code 节点成功匹配房型价格计划（status=ok）、提交日期非空，且 parameter-extractor 提取到 mobile 和 name 时，才调用 submitBooking。否则继续走客房预订 LLM 收集缺失信息。
           logical_operator: and
           selected: false
           title: 是否具备提交条件

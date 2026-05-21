@@ -3,16 +3,16 @@
 ## 当前推荐导入版本
 
 - Agent: `dify-workflows/决赛版（初赛改）-v3.6-Agent.yml`
-- Chatflow: `dify-workflows/决赛版（初赛改）-v3.9-Chatflow.yml`
+- Chatflow: `dify-workflows/决赛版-v3.9-Chatflow.yml`
 
 `v3.7-Chatflow` 保留为旧版结构备份（无正式 submitBooking 提交链路）。
 `v3.8-Chatflow` 原为 Codex 修改版，已被意外覆盖无法恢复，不要使用当前文件。
-`v3.9-Chatflow` 是当前正式版本：基于 v3.7 结构，由 Claude Code 重建完整 submitBooking 链路。
+`决赛版-v3.9-Chatflow` 是当前正式版本：基于 v3.7 结构，由 Claude Code 重建完整 submitBooking 链路。
 
 v3.9 核心设计（含 v3.8 CONTEXT 中所有要求）：
 - 触发逻辑数据驱动，不依赖关键词：parameter-extractor 从对话历史（memory window 10）提取到 roomCode + name + mobile，且 Code 节点在实时房态中成功匹配价格计划（status=ok），才调用 submitBooking。
 - 客人说”确认预订”即可触发，因为 parameter-extractor 会从历史对话中找到已提供的 roomCode/name/mobile；直接发送”002 张三 13988888888”也能触发。
-- 流程：getAvailableRoomsByDate → template-transform → parameter-extractor（提取 roomCode/number/name/mobile/email，不提取 rateCode/verifyId）→ Code 节点 `1779200000010`（从实时房态 JSON 确定 rateCode/verifyId/verifyIds，**同时将日期转为 YYYY-MM-DDT00:00:00.000+08:00**）→ if-else（status=ok AND mobile 非空 AND name 非空）→ submitBooking 工具 → Code 节点 `1779200000014`（解析 JSON 提取 orderNo）→ if-else（orderNo 非空）→ 成功回复 Answer / 失败回复 Answer。
+- 流程：getAvailableRoomsByDate → template-transform → parameter-extractor（提取 roomCode/number/name/mobile/email，不提取 rateCode/verifyId）→ Code 节点 `1779200000010`（从实时房态 JSON 确定 rateCode/verifyId/verifyIds，**同时将日期转为 YYYY-MM-DDT00:00:00.000+08:00**）→ if-else（status=ok AND mobile/name/date 非空）→ submitBooking 工具 → Code 节点 `1779200000014`（解析 JSON 提取 orderNo）→ if-else（orderNo 非空）→ 成功回复 Answer / 失败回复 Answer。
 - 成功路径完全确定性：Code 节点从 submitBooking JSON 提取真实 orderNo，Answer 节点直接嵌入变量，不经过任何 LLM，杜绝幻觉。
 - if-else false 分支（无提交条件）→ 客房预订 LLM（继续收集缺失信息）。
 - 小程序码 Markdown 只在成功 Answer 节点（1779200000016）中输出，URL 单行闭合，无中文注入。
@@ -21,6 +21,7 @@ v3.9 的 `submitBooking` 参数中，`rateCode`、`verifyId`、`verifyIds` 由 C
 `submitBooking` 的日期字段使用 Code 节点输出的 `checkInDateISO` / `checkOutDateISO`（格式 `YYYY-MM-DDT00:00:00.000+08:00`）；`getAvailableRoomsByDate` 仍使用 `YYYY-MM-DD` 查询房态。2026-05-21 已通过 MCP 正式协议验证该 ISO 格式可成功生成真实订单 `3300020137`。
 `checkInDateISO` / `checkOutDateISO` 是 MCP 接口提交格式，不代表客人实际办理入住/退房时间。对客成功回复不得直接展示 `submitBooking` 原始返回中的 `T00:00:00.000+08:00`，必须按知识库展示“14:00后办理入住、12:00前退房”。
 若 Code 节点未能在实时房态中匹配到房型/价格计划，if-else 走 false 分支回客房预订 LLM，不抛异常，不调用 submitBooking。
+若 `checkInDateISO` / `checkOutDateISO` 为空，Code 节点必须返回 `status=error`，if-else 不得调用 `submitBooking`，避免后台返回 `2996 日期/时间字符串格式错误`。
 v3.9 不使用 Agent 节点；MCP 通过 Chatflow 的 Tool 节点直接调用。
 
 `getAvailableRoomsByDate` 的房态数据在 `.json` 字段（array[object]），`.text` 字段为空字符串。客房预订 LLM、template-transform、Code 节点均须读 `1778843661327.json`，不得读 `1778843661327.text`。
