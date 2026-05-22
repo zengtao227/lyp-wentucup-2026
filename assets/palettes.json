@@ -1,0 +1,47 @@
+{
+  "deck_industry": "Hotel AI / Enterprise Tech Platform",
+  "palettes": [
+    {
+      "id": "hotel-tech-navy",
+      "name": "Luxury Navy × Tech",
+      "zh": "深海权威",
+      "category": "tech",
+      "bg": "#F8FAFC",
+      "text": "#1E3A8A",
+      "accent": "#1E3A8A",
+      "muted": "#64748B",
+      "font_zh": "思源黑体",
+      "font_en": "Inter",
+      "mood": "专业权威，酒店+科技双重气质，适合企业IT受众",
+      "lock": "swiss-klein-blue"
+    },
+    {
+      "id": "cool-indigo-academic",
+      "name": "Academic Indigo",
+      "zh": "冷调学术蓝",
+      "category": "academic",
+      "bg": "#F5F7FA",
+      "text": "#2D3748",
+      "accent": "#4F46E5",
+      "muted": "#718096",
+      "font_zh": "思源宋体",
+      "font_en": "IBM Plex Sans",
+      "mood": "冷静理性，信息密度高，适合技术方案与架构展示",
+      "lock": "guizang-indigo"
+    },
+    {
+      "id": "notion-clean-neutral",
+      "name": "Notion Warm Neutral",
+      "zh": "极简温暖",
+      "category": "neutral",
+      "bg": "#FAFAF8",
+      "text": "#1A1A1A",
+      "accent": "#2563EB",
+      "muted": "#6B7280",
+      "font_zh": "思源黑体",
+      "font_en": "Plus Jakarta Sans",
+      "mood": "亲和极简，文档感强，适合内部技术分享",
+      "lock": "notion-warm"
+    }
+  ]
+}

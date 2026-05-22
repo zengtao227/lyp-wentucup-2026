@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "puppeteer": "^25.0.4"
+  },
+  "dependencies": {
+    "pptxgenjs": "^4.0.1"
   }
 }

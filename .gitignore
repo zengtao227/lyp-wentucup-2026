@@ -47,3 +47,13 @@ __pycache__/
 
 # Old export dir
 pptx-export/
+
+# Timestamped deck-builder outputs
+outputs/manual-*/
+outputs/marp-route-a/
+
+# Deck-builder pipeline intermediates
+PPTX/*/v*/
+PPTX/*/status/
+PPTX/*/*.html
+PPTX/*/*.json
