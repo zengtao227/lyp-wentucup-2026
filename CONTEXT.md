@@ -2,8 +2,9 @@
 
 ## 当前推荐导入版本
 
-- Agent: `dify-workflows/决赛版（初赛改）-v3.6-Agent.yml`
-- Chatflow: `dify-workflows/决赛版-v3.9-Chatflow.yml`
+- Agent: `dify-workflows/决赛版-v4.2-Agent.yml`（主力版本，修复订单幻觉）
+- Chatflow: `dify-workflows/决赛版-v3.9.2-Chatflow.yml`（Agent-node 架构，分类7链条缩短）
+- Chatflow 旧版: `dify-workflows/决赛版-v3.9-Chatflow.yml`（38节点完整版，备用）
 
 `v3.7-Chatflow` 保留为旧版结构备份（无正式 submitBooking 提交链路）。
 `v3.8-Chatflow` 原为 Codex 修改版，已被意外覆盖无法恢复，不要使用当前文件。
@@ -52,4 +53,37 @@ v3.9 不使用 Agent 节点；MCP 通过 Chatflow 的 Tool 节点直接调用。
 ## 宠物信息展示约束
 
 - 只有用户主动提到宠物、狗、猫或带宠入住时，才询问或展示宠物政策。
-- 用户未主动提宠物时，不得输出“未提及宠物信息”“按无宠物入住处理”“无宠物入住”“默认无宠物”等任何宠物相关说明。
+- 用户未主动提宠物时，不得输出”未提及宠物信息””按无宠物入住处理””无宠物入住””默认无宠物”等任何宠物相关说明。
+
+## v4.x Agent 系列设计说明
+
+Chatflow 方案（v3.x）已停止迭代，转向 Agent-chat 模式（v4.x）。
+
+v4.1 核心：基于 v3.6，将模型从 deepseek-v3 换为 qwen-plus（工具调用稳定性显著更好）；通过外部 API 工具（getHotelOverviewKnowledge 等）绕过 Dify agent-chat 不注入内部知识库的限制。
+
+## v3.9.2 Chatflow 设计说明
+
+基于 v3.9，将分类7（客房预订）的双PE+双模板链路精简为单一 combined PE + 知识库检索注入 LLM。
+**无需 Agent 策略插件，完全兼容 Dify 1.x。**
+
+结构变化：
+- 删除（4）：OLD_TMPL1（template-transform 订房参数）+ OLD_PE_DATES（PE dates）+ OLD_TMPL2（template-transform 提交参数）+ OLD_PE_BOOK（PE booking）
+- 新增（3）：NEW_TMPL（简化 template-transform, 1779300000001）+ NEW_PE_ALL（合并 PE 提取全部7字段, 1779300000002）+ NEW_KB（知识库检索, 1779300000003）
+- 修改：客房预订 LLM（1776900001000）启用 KB context 注入（variable_selector: NEW_KB.result），模型改为 qwen-plus
+- FALSE 分支：11 节点 → 8 节点；TRUE 分支：13 节点 → 11 节点；净减 1 个节点
+
+关键设计：
+- NEW_PE_ALL（combined parameter-extractor）：从最近10轮对话历史中一次性提取 checkInDate/checkOutDate/roomCode/number/name/mobile/email 全部7字段
+- 链路：time → NEW_TMPL → NEW_PE_ALL → getAvailableRoomsByDate → Code(价格匹配) → if-else(提交条件)
+- FALSE 分支：IFELSE_SUBMIT(false) → NEW_KB → 客房预订 LLM（有房态数据 + KB 上下文）→ 客房预订回复
+- TRUE 分支：IFELSE_SUBMIT(true) → submitBooking 链路（与 v3.9 相同）
+- submitBooking 仍由 Code 节点确定性处理 rateCode/verifyId/orderNo，不经过 LLM
+
+节点 ID 说明：1779300000001=NEW_TMPL, 1779300000002=NEW_PE_ALL, 1779300000003=NEW_KB（1779300000004/1779300000005 未使用，为旧 Agent 方案遗留）
+
+v4.2 修复：解决 submitBooking 后 LLM 偶发幻觉订单编号（如 123456789）的问题。
+- 根本原因：prompt 只说”替换为实际订单 ID”，未明确字段名，模型找不到时直接编造占位符。
+- 修复方式：在 pre_prompt “第七步”中新增”订单编号强制提取规则”：
+  - 明确 Observation 中的字段为 orderNo（纯数字，如 3300020137）
+  - 严禁编造任何示例编号或占位符
+  - 找不到 orderNo 时必须降级回复并引导联系前台，可调用 getHotelHelpAfterSubmitBookingError
