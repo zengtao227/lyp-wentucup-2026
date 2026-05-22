@@ -264,6 +264,35 @@ def transform(data):
         new_kb_retrieval(src_nodes),
     ])
 
+    # ── Two-block layout ─────────────────────────────────────────────────────
+    # Block 1 "沟通+决策" (y=1250) + FALSE branch (y=1500)
+    # Block 2 "干活"      (y=2300) — 800px gap creates visual separation
+    # if-else TRUE arrow drops 1050px vertically → unmistakable "execution start"
+    BLOCK_POSITIONS = {
+        # Block 1 main chain
+        CURRENT_TIME:   (634,  1250),
+        NEW_TMPL:       (936,  1250),
+        NEW_PE_ALL:     (1238, 1250),
+        GET_ROOMS:      (1540, 1250),
+        CODE_PRICE:     (1842, 1250),
+        IFELSE_SUBMIT:  (2144, 1250),
+        # Block 1 FALSE branch
+        NEW_KB:         (1540, 1500),
+        OLD_LLM:        (1842, 1500),
+        "1776900002000": (2144, 1500),   # 客房预订回复
+        # Block 2 "干活"
+        SUBMIT_TOOL:      (2144, 2300),
+        "1779200000014":  (2446, 2300),  # 解析预订结果
+        "1779200000015":  (2748, 2300),  # 是否获取到订单编号
+        "1779200000016":  (3050, 2150),  # 预订成功回复
+        "1779200000017":  (3050, 2450),  # 预订失败回复
+    }
+    for n in wf["nodes"]:
+        if n["id"] in BLOCK_POSITIONS:
+            x, y = BLOCK_POSITIONS[n["id"]]
+            n["position"] = {"x": x, "y": y}
+            n["positionAbsolute"] = {"x": x, "y": y}
+
     return data
 
 
