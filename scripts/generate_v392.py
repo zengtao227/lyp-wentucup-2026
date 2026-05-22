@@ -136,36 +136,19 @@ def new_combined_param_extractor():
     }
 
 
-def new_kb_retrieval():
-    return {
-        "data": {
-            "dataset_ids": ["b5610ab4-2949-4ee1-9641-a4313e6692bf"],
-            "query_variable_selector": ["sys", "query"],
-            "retrieval_model": {
-                "reranking_enable": True,
-                "reranking_enabled": True,
-                "reranking_mode": "reranking_model",
-                "reranking_model": {
-                    "reranking_model_name": "gte-rerank-v2",
-                    "reranking_provider_name": "langgenius/tongyi/tongyi",
-                },
-                "score_threshold_enabled": False,
-                "top_k": 6,
-            },
-            "selected": False,
-            "title": "酒店知识检索",
-            "type": "knowledge-retrieval",
-        },
-        "height": 84,
-        "id": NEW_KB,
-        "position": {"x": 1842, "y": 1540},
-        "positionAbsolute": {"x": 1842, "y": 1540},
-        "selected": False,
-        "sourcePosition": "right",
-        "targetPosition": "left",
-        "type": "custom",
-        "width": 242,
-    }
+def new_kb_retrieval(src_nodes):
+    """Clone structure from an existing KB node in v3.9 to guarantee format compatibility."""
+    existing = next(n for n in src_nodes if n["data"].get("type") == "knowledge-retrieval")
+    node = copy.deepcopy(existing)
+    node["id"] = NEW_KB
+    node["data"]["title"] = "酒店知识检索"
+    node["data"]["query_variable_selector"] = ["sys", "query"]
+    node["data"]["selected"] = False
+    node["position"] = {"x": 1842, "y": 1540}
+    node["positionAbsolute"] = {"x": 1842, "y": 1540}
+    node["height"] = 84
+    node["selected"] = False
+    return node
 
 
 def make_edge(src, src_handle, tgt, src_type, tgt_type):
@@ -191,6 +174,7 @@ def make_edge(src, src_handle, tgt, src_type, tgt_type):
 
 def transform(data):
     wf = data["workflow"]["graph"]
+    src_nodes = wf["nodes"]   # snapshot before any removals
 
     data["app"]["name"] = "决赛版-v3.9.2-Chatflow"
     data["app"]["description"] = (
@@ -277,7 +261,7 @@ def transform(data):
     wf["nodes"].extend([
         new_template_transform(),
         new_combined_param_extractor(),
-        new_kb_retrieval(),
+        new_kb_retrieval(src_nodes),
     ])
 
     return data

@@ -2591,19 +2591,18 @@ workflow:
       width: 242
     - data:
         dataset_ids:
-        - b5610ab4-2949-4ee1-9641-a4313e6692bf
+        - 4A1M9en7AsnpkU3ad/f2t2N+ecKzUCZiTcXOd4S7/F0+MuvF+3hyTqeif6W0cz3M
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: gte-rerank-v2
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
         query_variable_selector:
         - sys
         - query
-        retrieval_model:
-          reranking_enable: true
-          reranking_enabled: true
-          reranking_mode: reranking_model
-          reranking_model:
-            reranking_model_name: gte-rerank-v2
-            reranking_provider_name: langgenius/tongyi/tongyi
-          score_threshold_enabled: false
-          top_k: 6
+        retrieval_mode: multiple
         selected: false
         title: 酒店知识检索
         type: knowledge-retrieval
