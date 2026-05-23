@@ -1230,16 +1230,19 @@ workflow:
               编号、流水号、预订单号。
 
 
-              submitBooking 成功后，不要直接写面向客人的成功回复。必须先把 submitBooking 的原始 Observation 按下面格式原样输出，供后置 Code 节点提取 orderNo：
+              submitBooking 成功后，最终回复只能输出下面的机器可读结果块，严禁输出“预订申请已提交”、支付步骤、小程序码或任何面向客人的成功文案。后置 Code 节点会统一生成支付引导。
+
+              你必须把 submitBooking 的原始 Observation 原样复制到 raw 中。raw 必须是对象，不是自然语言。不得只复制订单号，不得把 orderNo 改写为其它字段，不得自己构造日期开头的订单号。
 
               <submit_booking_result>
 
-              {"tool":"submitBooking","raw":这里放 submitBooking 返回的原始 JSON 对象}
+              {"tool":"submitBooking","raw":{"orderNo":"这里必须是 submitBooking Observation 原始 JSON 中的 orderNo，其它原始字段也一并复制"}}
 
               </submit_booking_result>
 
 
-              除了上面的 XML/JSON 块，不要再输出任何订单编号。后置 Code 节点会从 raw.orderNo 生成最终支付引导。
+              除了上面的 XML/JSON 块，不要再输出任何文字或订单编号。如果你已经调用 submitBooking 但无法看到 Observation 原始 JSON，必须回复“订单提交结果暂未返回有效 orderNo，请联系前台
+              0750-662-9888”，不得输出任何订单号。
 
 
               ## 禁止话术
@@ -2212,30 +2215,38 @@ workflow:
           \n\ndef _try_json_from(text):\n    text = str(text or \"\")\n    decoder = json.JSONDecoder()\n    values = []\n\
           \    for i, ch in enumerate(text):\n        if ch not in \"[{\":\n            continue\n        try:\n         \
           \   value, _ = decoder.raw_decode(text[i:])\n            values.append(value)\n        except Exception:\n     \
-          \       continue\n    return values\n\ndef _find_order(obj, depth=0):\n    if depth > 8 or obj is None:\n      \
-          \  return \"\"\n    if isinstance(obj, dict):\n        for key in (\"orderNo\", \"order_no\"):\n            if key\
-          \ in obj:\n                val = str(obj.get(key) or \"\").strip()\n                if re.fullmatch(r\"\\d{6,20}\"\
-          , val) and not val.startswith(\"2026\"):\n                    return val\n        for value in obj.values():\n \
-          \           found = _find_order(value, depth + 1)\n            if found:\n                return found\n    if isinstance(obj,\
-          \ list):\n        for item in obj:\n            found = _find_order(item, depth + 1)\n            if found:\n  \
-          \              return found\n    return \"\"\n\ndef _strip_fake_success(text):\n    if re.search(r\"订单(编号|号)[：:\\\
-          s]*\\*{0,2}\\d{6,20}\", text):\n        return (\n            \"⚠️ 预订提交未确认\\n\\n\"\n            \"本轮回复中出现了订单编号文本，但没有检测到\
-          \ submitBooking 返回 JSON 中的 orderNo。\"\n            \"为避免展示错误订单号，我已拦截该结果。请重新回复「确认预订」触发正式提交，\"\n            \"或致电前台：0750-662-9888。\"\
+          \       continue\n    return values\n\ndef _find_order(obj, depth=0):\n    if depth > 10 or obj is None:\n     \
+          \   return \"\"\n    if isinstance(obj, str):\n        for value in _try_json_from(obj):\n            found = _find_order(value,\
+          \ depth + 1)\n            if found:\n                return found\n        return \"\"\n    if isinstance(obj, dict):\n\
+          \        for key in (\"orderNo\", \"order_no\"):\n            if key in obj:\n                val = str(obj.get(key)\
+          \ or \"\").strip()\n                if re.fullmatch(r\"\\d{6,20}\", val) and not val.startswith(\"2026\"):\n   \
+          \                 return val\n        for value in obj.values():\n            found = _find_order(value, depth +\
+          \ 1)\n            if found:\n                return found\n    if isinstance(obj, list):\n        for item in obj:\n\
+          \            found = _find_order(item, depth + 1)\n            if found:\n                return found\n    return\
+          \ \"\"\n\ndef _candidate_objects_from_agent_json(agent_json):\n    if agent_json in (None, \"\"):\n        return\
+          \ []\n    if isinstance(agent_json, str):\n        parsed = _try_json_from(agent_json)\n        return parsed if\
+          \ parsed else [agent_json]\n    return [agent_json]\n\ndef _find_order_from_structured_tool_output(agent_json):\n\
+          \    for candidate in _candidate_objects_from_agent_json(agent_json):\n        found = _find_order(candidate)\n\
+          \        if found:\n            preview = json.dumps(candidate, ensure_ascii=False)[:500] if not isinstance(candidate,\
+          \ str) else candidate[:500]\n            return found, preview\n    return \"\", \"\"\n\ndef _find_order_from_tagged_text(text):\n\
+          \    tagged = re.search(r\"<submit_booking_result>\\s*(.*?)\\s*</submit_booking_result>\", text, re.S)\n    if not\
+          \ tagged:\n        return \"\", \"\"\n    search_area = tagged.group(1)\n    for value in _try_json_from(search_area):\n\
+          \        found = _find_order(value)\n        if found:\n            return found, json.dumps(value, ensure_ascii=False)[:500]\n\
+          \    return \"\", \"\"\n\ndef _strip_fake_success(text):\n    if re.search(r\"订单(编号|号)[：:\\s]*\\*{0,2}\\d{6,20}\"\
+          , text):\n        return (\n            \"⚠️ 预订提交未确认\\n\\n\"\n            \"本轮回复中出现了订单编号文本，但没有检测到 submitBooking\
+          \ 返回 JSON 中的 orderNo。\"\n            \"为避免展示错误订单号，我已拦截该结果。请重新回复「确认预订」触发正式提交，\"\n            \"或致电前台：0750-662-9888。\"\
           \n        )\n    if \"预订申请已提交\" in text and \"<submit_booking_result>\" not in text:\n        return (\n       \
           \     \"⚠️ 预订提交未确认\\n\\n\"\n            \"系统没有检测到 submitBooking 返回 JSON 中的 orderNo，因此不会展示订单编号。\"\n            \"\
-          请重新回复「确认预订」触发正式提交，或致电前台：0750-662-9888。\"\n        )\n    return text\n\ndef main(agentText: str) -> dict:\n    text\
-          \ = str(agentText or \"\").strip()\n    order_no = \"\"\n    raw_preview = \"\"\n\n    tagged = re.search(r\"<submit_booking_result>\\\
-          s*(.*?)\\s*</submit_booking_result>\", text, re.S)\n    search_area = tagged.group(1) if tagged else text\n\n  \
-          \  if \"submitBooking\" in search_area or \"submit_booking_result\" in text:\n        for value in _try_json_from(search_area):\n\
-          \            found = _find_order(value)\n            if found:\n                order_no = found\n             \
-          \   raw_preview = json.dumps(value, ensure_ascii=False)[:500]\n                break\n\n    if order_no:\n     \
-          \   safe = (\n            f\"✅ 预订申请已提交！订单编号：**{order_no}**\\n\\n\"\n            \"订单已在系统中生成，无需重新填写信息。\\n\"\n   \
-          \         \"订单金额：以「小途乐订」小程序待支付页面和订单记录为准\\n\\n\"\n            \"请按以下步骤完成支付：\\n\"\n            \"1. 请使用微信扫描下方小程序码，打开「小途乐订」小程序\\\
-          n\"\n            \"2. 点击底部「我的」→「我的订单」→「待支付」\\n\"\n            f\"3. 找到订单编号 {order_no}，点击「立即支付」\\n\\n\"\n       \
-          \     f\"{QR}\\n\\n\"\n            \"支付完成后请在「小途乐订」小程序订单记录中查看支付状态。如需协助请致电前台：0750-662-9888\"\n        )\n        return\
-          \ {\"status\": \"booked\", \"orderNo\": order_no, \"safeReply\": safe, \"rawResponse\": raw_preview}\n\n    safe\
-          \ = _strip_fake_success(text) or \"您好，请继续告诉我您的预订需求。\"\n    return {\"status\": \"normal\", \"orderNo\": \"\", \"\
-          safeReply\": safe, \"rawResponse\": text[:500]}\n"
+          请重新回复「确认预订」触发正式提交，或致电前台：0750-662-9888。\"\n        )\n    return text\n\ndef _success_reply(order_no):\n    return\
+          \ (\n        f\"✅ 预订申请已提交！订单编号：**{order_no}**\\n\\n\"\n        \"订单已在系统中生成，无需重新填写信息。\\n\"\n        \"订单金额：以「小途乐订」小程序待支付页面和订单记录为准\\\
+          n\\n\"\n        \"请按以下步骤完成支付：\\n\"\n        \"1. 请使用微信扫描下方小程序码，打开「小途乐订」小程序\\n\"\n        \"2. 点击底部「我的」→「我的订单」→「待支付」\\\
+          n\"\n        f\"3. 找到订单编号 {order_no}，点击「立即支付」\\n\\n\"\n        f\"{QR}\\n\\n\"\n        \"支付完成后请在「小途乐订」小程序订单记录中查看支付状态。如需协助请致电前台：0750-662-9888\"\
+          \n    )\n\ndef main(agentText: str, agentJson=None) -> dict:\n    text = str(agentText or \"\").strip()\n\n    order_no,\
+          \ raw_preview = _find_order_from_tagged_text(text)\n    if not order_no:\n        order_no, raw_preview = _find_order_from_structured_tool_output(agentJson)\n\
+          \n    if order_no:\n        return {\n            \"status\": \"booked\",\n            \"orderNo\": order_no,\n\
+          \            \"safeReply\": _success_reply(order_no),\n            \"rawResponse\": raw_preview,\n        }\n\n\
+          \    safe = _strip_fake_success(text) or \"您好，请继续告诉我您的预订需求。\"\n    return {\"status\": \"normal\", \"orderNo\":\
+          \ \"\", \"safeReply\": safe, \"rawResponse\": text[:500]}\n"
         code_language: python3
         desc: 从 Agent 输出中提取 submitBooking 原始 JSON 的 orderNo；若只有文本订单号但没有 submitBooking JSON 证据，则拦截假成功。
         outputs:
@@ -2255,6 +2266,10 @@ workflow:
           - '1779521444701'
           - text
           variable: agentText
+        - value_selector:
+          - '1779521444701'
+          - json
+          variable: agentJson
       height: 98
       id: '1779600000001'
       position:

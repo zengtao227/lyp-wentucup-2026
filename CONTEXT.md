@@ -69,6 +69,7 @@ v4.1 核心：基于 v3.6，将模型从 deepseek-v3 换为 qwen-plus（工具�
 
 `决赛版-v5.1-Chatflow.yml` 是当前 Chatflow 推荐版本：借鉴 v4.0 的单 Agent Chatflow 结构，但移除 `bookings_post` / `submitBooking_post` / `roomsavailable_get` 等预订单或模拟通路，只保留一个 Agent 节点，并在该 Agent 节点中挂载「酒店客房预订」5 个正式 MCP 工具：`getAvailableRoomsByDate`、`getAvailableRoomsByRoomTypeAndDate`、`getRoomDetailByRoomCode`、`getHotelHelpAfterSubmitBookingError`、`submitBooking`。用户可以分批提供姓名、手机号、日期、房型和间数；Agent 必须在每轮回复中整理已记录信息和缺失信息。确认预订后，Agent 必须重新查询 `getAvailableRoomsByDate` 并用同源 `rateCode` / `verifyId` / `verifyIds` 调用 `submitBooking`。Agent 后置 Code 节点只从 `<submit_booking_result>` 中的 `submitBooking` 原始 JSON 提取 `orderNo` 生成支付引导；如果 Agent 文本里出现订单号但没有 submitBooking JSON 证据，Code 节点会拦截并提示重新确认，避免 LLM 编造订单号。
 v5.1 的确认轮规则：如果上一轮已经输出“📋 预订信息确认”，用户当前只回复“确认/确认预订/好的/可以/OK”等短确认语，Agent 必须立即调用 `getAvailableRoomsByDate` 并继续 `submitBooking`，不得再次输出确认摘要或再次要求用户确认。
+v5.1 的订单号交接规则：Agent 调用 `submitBooking` 后最终回复只能输出 `<submit_booking_result>` 机器可读结果块；后置 Code 节点会优先从该结果块提取 `raw.orderNo`，并尝试读取 Agent 节点结构化 `json/tool_responses` 中的 `orderNo`。如果只有普通文本订单号而没有 JSON 证据，仍会拦截。
 
 ## v3.9.2 Chatflow 设计说明
 
