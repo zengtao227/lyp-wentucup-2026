@@ -1,9 +1,9 @@
 app:
-  description: '2026问途杯决赛版 v3.9.2。基于v3.9，将分类7（客房预订）的双PE+双模板链路精简为单一combined PE（提取全部7字段）+知识库检索注入客房预订LLM。无需Agent策略插件，完全兼容Dify 1.x。FALSE分支: 11→8节点；TRUE分支: 13→11节点。'
+  description: '2026问途杯决赛版 v5.0 Chatflow。采用 Agent 节点方案，强化 MCP submitBooking 严格调用：确认预订后先查实时房态，再用同源 rateCode/verifyId/verifyIds 和 ISO 日期提交真实订单。'
   icon: 🏨
   icon_background: “#FFEAD5”
   mode: advanced-chat
-  name: 决赛版-v3.9.6-Chatflow
+  name: 决赛版-v5.0-Chatflow
   use_icon_as_answer_icon: false
 dependencies:
 - current_identifier: null
