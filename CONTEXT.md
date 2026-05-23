@@ -3,7 +3,7 @@
 ## 当前推荐导入版本
 
 - Agent: `dify-workflows/决赛版-v4.2-Agent.yml`（主力版本，修复订单幻觉）
-- Chatflow: `dify-workflows/决赛版-v3.9.2-Chatflow.yml`（Agent-node 架构，分类7链条缩短）
+- Chatflow: `dify-workflows/决赛版-v5.1-Chatflow.yml`（确定性 Tool 节点提交链路，支持多轮分批收集信息，禁止 LLM 编造订单号）
 - Chatflow 旧版: `dify-workflows/决赛版-v3.9-Chatflow.yml`（38节点完整版，备用）
 
 `v3.7-Chatflow` 保留为旧版结构备份（无正式 submitBooking 提交链路）。
@@ -60,6 +60,14 @@ v3.9 不使用 Agent 节点；MCP 通过 Chatflow 的 Tool 节点直接调用。
 Chatflow 方案（v3.x）已停止迭代，转向 Agent-chat 模式（v4.x）。
 
 v4.1 核心：基于 v3.6，将模型从 deepseek-v3 换为 qwen-plus（工具调用稳定性显著更好）；通过外部 API 工具（getHotelOverviewKnowledge 等）绕过 Dify agent-chat 不注入内部知识库的限制。
+
+## v5.x Chatflow 设计说明
+
+`决赛版-v5.0-Chatflow.yml` 已停止使用：该版本采用 Chatflow 内 Agent 节点提交预订。2026-05-23 测试日志显示 `tool_responses: []`，Agent 节点未调用 `getAvailableRoomsByDate` / `submitBooking`，却输出了模型编造的订单编号，后台查不到订单。因此 v5.0 不得作为决赛导入版本。
+
+`v4.0 chatflow.yml` 可作为房态查询参考：它通过 `mcp_sse_call_tool` 连接 `mcp-server-booking.v4.test.dossm.cn/sse` 并使用 `teamid:234556`，已能查到真实房态。但 v4.0 仍用 Agent 自行决定提交，并混有 `bookings_post` / `submitBooking_post` 等预订单 API 工具，存在不调用真实 `submitBooking` 而生成假订单的风险。
+
+`决赛版-v5.1-Chatflow.yml` 是当前 Chatflow 推荐版本：借鉴 v4.0 的真实房态 MCP/teamId 方向，但采用 v3.9.2 的确定性 Tool 节点链路，不使用 Agent 节点提交订单。用户可以分批提供姓名、手机号、日期、房型和间数；Parameter Extractor 从最近 10 轮对话历史中整理字段。只有当前用户消息包含“确认”且字段齐全时，才进入 `submitBooking`；确认预订后，Code 节点从同一次实时房态 JSON 中提取 `rateCode` / `verifyId` / `verifyIds`，再由 `submitBooking` Tool 节点提交真实订单，成功 Answer 只展示 submitBooking 返回 JSON 中提取的真实 `orderNo`。
 
 ## v3.9.2 Chatflow 设计说明
 
