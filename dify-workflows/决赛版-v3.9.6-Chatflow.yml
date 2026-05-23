@@ -1,0 +1,1783 @@
+app:
+  description: '2026问途杯决赛版 v3.9.2。基于v3.9，将分类7（客房预订）的双PE+双模板链路精简为单一combined PE（提取全部7字段）+知识库检索注入客房预订LLM。无需Agent策略插件，完全兼容Dify 1.x。FALSE分支: 11→8节点；TRUE分支: 13→11节点。'
+  icon: 🏨
+  icon_background: “#FFEAD5”
+  mode: advanced-chat
+  name: 决赛版-v3.9.6-Chatflow
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.0.42@85e7bb71e461653ac101330c751973085dfdde26c906b07d7dff8030c95bc39e
+    version: null
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openweather:0.0.6@a16f3f6c79b1cb45bc22942ed84c53a9732c118bde0a46d0d9282a9d15581347
+    version: null
+kind: app
+version: 0.4.0
+workflow:
+  conversation_variables:
+  - description: ''
+    id: 8053671c-61a9-4f66-a80a-a4b06ab68ec0
+    name: conversation_history
+    selector:
+    - conversation
+    - conversation_history
+    value: ''
+    value_type: string
+  - description: 宾客姓名
+    id: 1f17e64b-0cb7-4d0a-a7c7-000000000001
+    name: guest_name
+    selector:
+    - conversation
+    - guest_name
+    value: ''
+    value_type: string
+  - description: 入住日期
+    id: 4a78cc37-cac4-401e-a0a7-000000000002
+    name: checkin_date
+    selector:
+    - conversation
+    - checkin_date
+    value: ''
+    value_type: string
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: 您好，欢迎莅临新会碧桂园凤凰酒店。我是您的专属 AI 助理，可以为您解答客房预订、餐饮美食、会议宴会和周边游玩问题，并直接帮您完成订房。本助手支持语音输入，点击麦克风即可说话。请问有什么可以帮您？
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: true
+    suggested_questions:
+    - 今晚还有空房吗？
+    - 可以带宠物入住吗？
+    - 酒店几点可以办理入住和退房？
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1776498264454-1-1776498277196-target
+      selected: false
+      source: '1776498264454'
+      sourceHandle: '1'
+      target: '1776498277196'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1776498277196-source-llm-target
+      selected: false
+      source: '1776498277196'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1776498264454-2-1776499500104-target
+      selected: false
+      source: '1776498264454'
+      sourceHandle: '2'
+      target: '1776499500104'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1776499500104-source-1776499509929-target
+      selected: false
+      source: '1776499500104'
+      sourceHandle: source
+      target: '1776499509929'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: llm-source-1776500219442-target
+      selected: false
+      source: llm
+      sourceHandle: source
+      target: '1776500219442'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1776499509929-source-1776511352860-target
+      selected: false
+      source: '1776499509929'
+      sourceHandle: source
+      target: '1776511352860'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1776498264454-1776498527615-1776511368580-target
+      selected: false
+      source: '1776498264454'
+      sourceHandle: '1776498527615'
+      target: '1776511368580'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1776511368580-source-1776511376079-target
+      selected: false
+      source: '1776511368580'
+      sourceHandle: source
+      target: '1776511376079'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1776511376079-source-1776511388544-target
+      selected: false
+      source: '1776511376079'
+      sourceHandle: source
+      target: '1776511388544'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1776498264454-1776498557607-1776511399253-target
+      selected: false
+      source: '1776498264454'
+      sourceHandle: '1776498557607'
+      target: '1776511399253'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1776511455200-source-1776511481705-target
+      selected: false
+      source: '1776511455200'
+      sourceHandle: source
+      target: '1776511481705'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1776511399253--1776760670660-target
+      selected: false
+      source: '1776511399253'
+      sourceHandle: source
+      target: '1776760670660'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1776760670660-source-1776511464396-target
+      selected: false
+      source: '1776760670660'
+      sourceHandle: source
+      target: '1776511464396'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: assigner
+        targetType: answer
+      id: 1779521454977-source-1779521460143-target
+      selected: false
+      source: '1779521454977'
+      sourceHandle: source
+      target: '1779521460143'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: question-classifier
+      id: 1776498156667-source-1776498264454-target
+      source: '1776498156667'
+      sourceHandle: source
+      target: '1776498264454'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: agent
+        targetType: assigner
+      id: 1779521444701-source-1779521454977-target
+      source: '1779521444701'
+      sourceHandle: source
+      target: '1779521454977'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: tool
+      id: 1776498264454-1776498578463-1778841497605-target
+      source: '1776498264454'
+      sourceHandle: '1776498578463'
+      target: '1778841497605'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1779532574598-source-1776511455200-target
+      source: '1779532574598'
+      sourceHandle: source
+      target: '1776511455200'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: knowledge-retrieval
+      id: 1778841497605-source-1779532574598-target
+      source: '1778841497605'
+      sourceHandle: source
+      target: '1779532574598'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: agent
+      id: 1776498264454-1776900000000-1779521444701-target
+      source: '1776498264454'
+      sourceHandle: '1776900000000'
+      target: '1779521444701'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 开始
+        type: start
+        variables: []
+      height: 52
+      id: '1776498156667'
+      position:
+        x: 30
+        y: 369
+      positionAbsolute:
+        x: 30
+        y: 369
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1776498277196'
+          - result
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 10
+        model:
+          completion_params:
+            max_tokens: 501
+            stop: []
+            temperature: 0.2
+            top_k: 1
+            top_p: 0.5
+          mode: chat
+          name: deepseek-v3
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: c81552bc-3f33-478c-9228-4485b565cf8d
+          role: system
+          text: '## 短确认语防误判规则
+
+            如果用户内容仅为以下短确认语之一：确认预订、正确、好的、好、对、是的、没问题、可以、确认、行、没错、嗯、嗯嗯、OK、ok，不得根据知识库编造预订结果，不得输出“预订成功”、房号预留、短信发送、错误电话或任何支付结果。请固定回复：“您好，如果您是在确认客房预订，请回复「确认预订」，我将为您生成预订流水编号和支付二维码；如需其他服务，也可以继续告诉我。”
+
+
+            用户内容：{{#sys.query#}}
+
+            上下文：{{#context#}}
+
+            角色：
+
+            你是新会碧桂园凤凰酒店的专属客服，仅按照知识库回答，必须严格遵守
+
+            【约束】
+
+            1.据实回答，用语礼貌简洁，尊称客人为"先生/女士"或"您好"。精准答疑，主动引导信息。2.若知识库中没有相关信息，请礼貌告知：
+
+            "抱歉，我暂未在系统中查到相关信息，建议您直接拨打酒店前台电话0750-662-9888进行详细咨询。"
+
+            3.只回答用户当前的问题，不主动添加无关信息、不额外延伸。
+
+            酒店地址：广东省江门市新会区会城镇启超大道1号
+
+            4.所有内容必须基于知识库，禁止编造；无对应信息时礼貌告知无法解答，不主动延伸到用户未提及的业务。
+
+            5.客人提问价格、会员等级时，告知无法提供相关信息，请礼貌婉拒客人：我暂时无法为您提供准确回答，建议您直接联系酒店前台电话：0750-662-9888'
+        selected: false
+        title: 酒店概况
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: llm
+      position:
+        x: 936
+        y: 369
+      positionAbsolute:
+        x: 936
+        y: 369
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        classes:
+        - id: '1'
+          name: 酒店概况
+        - id: '2'
+          name: 客房产品体系
+        - id: '1776498527615'
+          name: 餐饮娱乐配套
+        - id: '1776498557607'
+          name: 会议宴会服务
+        - id: '1776498578463'
+          name: 天气查询与周边咨询
+        - id: '1776900000000'
+          name: /时间/客房预订/预订确认/支付（确认预订）
+        instructions: ''
+        model:
+          completion_params:
+            disable_search: true
+            max_tokens: 500
+            temperature: 0.1
+            top_k: 20
+            top_p: 0.5
+          mode: chat
+          name: qwen-plus
+          provider: langgenius/tongyi/tongyi
+        query_variable_selector:
+        - '1776498156667'
+        - sys.query
+        selected: false
+        title: 问题分类器
+        type: question-classifier
+        vision:
+          enabled: false
+      height: 338
+      id: '1776498264454'
+      position:
+        x: 332
+        y: 369
+      positionAbsolute:
+        x: 332
+        y: 369
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        dataset_ids:
+        - 7BR9ugIXqfy9+kNxQhRZujDVG1Bgo/25jATjswvScVzmiCYLPRGdgMKu29ny1oEt
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: gte-rerank-v2
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
+        query_variable_selector:
+        - sys
+        - query
+        retrieval_mode: multiple
+        selected: false
+        title: 酒店概况
+        type: knowledge-retrieval
+      height: 90
+      id: '1776498277196'
+      position:
+        x: 634
+        y: 369
+      positionAbsolute:
+        x: 634
+        y: 369
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        dataset_ids:
+        - zp7KO1nKANVXGKf4vqQVRCzyl2UDoPSyW73KUbCM0dnjx/2lEbCkgkAm7hMCPXW7
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: gte-rerank-v2
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
+        query_variable_selector:
+        - sys
+        - query
+        retrieval_mode: multiple
+        selected: false
+        title: 客房产品
+        type: knowledge-retrieval
+      height: 90
+      id: '1776499500104'
+      position:
+        x: 634
+        y: 512
+      positionAbsolute:
+        x: 634
+        y: 512
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1776499500104'
+          - result
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 10
+        model:
+          completion_params:
+            max_tokens: 501
+            temperature: 0.2
+            top_k: 1
+            top_p: 0.7
+          mode: chat
+          name: deepseek-v3
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 7194962d-632f-4f3b-b40b-bc08d532bb9c
+          role: system
+          text: '## 短确认语防误判规则
+
+            如果用户内容仅为以下短确认语之一：确认预订、正确、好的、好、对、是的、没问题、可以、确认、行、没错、嗯、嗯嗯、OK、ok，不得根据知识库编造预订结果，不得输出“预订成功”、房号预留、短信发送、错误电话或任何支付结果。请固定回复：“您好，如果您是在确认客房预订，请回复「确认预订」，我将为您生成预订流水编号和支付二维码；如需其他服务，也可以继续告诉我。”
+
+
+            用户内容：{{#sys.query#}}
+
+            上下文：{{#context#}}
+
+            角色：
+
+            你是酒店客房产品专属智能顾问，负责清晰、友好地介绍各房型特点、设施、权益与预订规则，解答入住、房型升级、加床、儿童政策等相关问题。用语礼貌简洁，复杂问题可礼貌转接人工。
+
+            【约束】：1. 用语礼貌简洁，精准答疑。若知识库中没有相关房型信息，请礼貌告知"关于该项细节我暂时无法确认，建议您拨打酒店前台电话 0750-662-9888 进一步咨询。"
+
+            2. 你是一个基于封闭知识库的 AI。你回答的所有信息（房型、配置、价格、政策等）必须 100% 来源于上下文。严禁使用互联网信息、常识或个人经验进行填补。'
+        selected: false
+        title: 客房产品
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1776499509929'
+      position:
+        x: 936
+        y: 512
+      positionAbsolute:
+        x: 936
+        y: 512
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#llm.text#}}'
+        selected: false
+        title: 酒店概况回复
+        type: answer
+        variables: []
+      height: 103
+      id: '1776500219442'
+      position:
+        x: 1238
+        y: 369
+      positionAbsolute:
+        x: 1238
+        y: 369
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#1776499509929.text#}}'
+        selected: false
+        title: 客房产品回复
+        type: answer
+        variables: []
+      height: 103
+      id: '1776511352860'
+      position:
+        x: 1238
+        y: 512
+      positionAbsolute:
+        x: 1238
+        y: 512
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        dataset_ids:
+        - MFL/uNn6iUiExBTMzubuMdt0W8/NGq78ZwxzIkSAqbC6l3YtsrywyelaElKRXFG1
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: gte-rerank-v2
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
+        query_variable_selector:
+        - sys
+        - query
+        retrieval_mode: multiple
+        selected: false
+        title: 餐饮娱乐
+        type: knowledge-retrieval
+      height: 90
+      id: '1776511368580'
+      position:
+        x: 634
+        y: 655
+      positionAbsolute:
+        x: 634
+        y: 655
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1776511368580'
+          - result
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 10
+        model:
+          completion_params:
+            max_tokens: 300
+            temperature: 0.2
+            top_k: 1
+            top_p: 0.7
+          mode: chat
+          name: deepseek-v3
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 2cd142b7-0933-4123-9872-ecfe40df2abb
+          role: system
+          text: '## 短确认语防误判规则
+
+            如果用户内容仅为以下短确认语之一：确认预订、正确、好的、好、对、是的、没问题、可以、确认、行、没错、嗯、嗯嗯、OK、ok，不得根据知识库编造预订结果，不得输出“预订成功”、房号预留、短信发送、错误电话或任何支付结果。请固定回复：“您好，如果您是在确认客房预订，请回复「确认预订」，我将为您生成预订流水编号和支付二维码；如需其他服务，也可以继续告诉我。”
+
+
+            用户内容：{{#sys.query#}}
+
+            上下文：{{#context#}}
+
+            角色：
+
+            你是酒店餐饮娱乐专属顾问，将根据用户提问，清晰友好地介绍酒店餐厅、酒吧、特色餐饮、娱乐设施的开放时间、菜品特色、消费权益与预订规则，解答用餐、酒水、儿童政策及娱乐项目相关问题。用语礼貌简洁，复杂问题可礼貌转人工。
+
+            你是一个基于封闭知识库的 AI。你回答的所有信息（餐饮、配置、价格、政策等）必须 100% 来源于上下文。严禁使用互联网信息、常识或个人经验进行填补。严禁回答任何知识库中未提及的餐饮或娱乐信息。
+
+            【约束】：如信息不确定，请建议用户拨打酒店前台0750-662-9888'
+        selected: false
+        title: 餐饮娱乐
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1776511376079'
+      position:
+        x: 936
+        y: 655
+      positionAbsolute:
+        x: 936
+        y: 655
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#1776511376079.text#}}'
+        selected: false
+        title: 餐饮娱乐回复
+        type: answer
+        variables: []
+      height: 103
+      id: '1776511388544'
+      position:
+        x: 1238
+        y: 655
+      positionAbsolute:
+        x: 1238
+        y: 655
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        dataset_ids:
+        - x649enSuOvORAi92DI8au6A0unPiHi+O5iy9nyI/Hz/eI2MCXFzN5Qni8ED6LoKC
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: gte-rerank-v2
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
+        query_variable_selector:
+        - sys
+        - query
+        retrieval_mode: multiple
+        selected: false
+        title: 宴会会议
+        type: knowledge-retrieval
+      height: 90
+      id: '1776511399253'
+      position:
+        x: 634
+        y: 939
+      positionAbsolute:
+        x: 634
+        y: 939
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 10
+        model:
+          completion_params:
+            max_tokens: 500
+            temperature: 0.1
+            top_p: 0.7
+          mode: chat
+          name: deepseek-v3
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: weather-consult-system-v3-4
+          role: system
+          text: '## 短确认语防误判规则
+
+            如果用户内容仅为以下短确认语之一：确认预订、正确、好的、好、对、是的、没问题、可以、确认、行、没错、嗯、嗯嗯、OK、ok，不得根据知识库编造预订结果，不得输出“预订成功”、房号预留、短信发送、错误电话或任何支付结果。请固定回复：“您好，如果您是在确认客房预订，请回复「确认预订」，我将为您生成预订流水编号和支付二维码；如需其他服务，也可以继续告诉我。”
+
+
+            用户内容：{{#sys.query#}}
+
+
+            实时天气数据：{{#1778841497605.text#}}
+
+
+            角色：
+
+            你是新会碧桂园凤凰酒店的天气咨询客服。所有回复直接以中文开始，用语礼貌简洁。
+
+
+            ## 回答规则
+
+
+            1. 如果用户询问天气、气温、晴雨、风力、天气预报，只能根据「实时天气数据」回答；不要编造天气数据里没有的信息。
+
+            2. 如果实时天气数据为空、异常或没有相关字段，请回复："您好，当前天气查询暂时无法确认，建议您拨打酒店前台电话0750-662-9888咨询实时情况。"
+
+            3. 如果用户询问周边景点、景区门票、游玩路线、附近旅游、景点推荐、出行攻略等内容，不做景点推荐，不查询知识库，固定回复："您好，周边景点、景区门票、游玩路线和实时出行建议请直接咨询酒店前台。前台电话：0750-662-9888，工作人员会根据当天实际情况为您提供帮助。"
+
+            4. 如果用户同时询问天气和景点游玩建议，可以先简要说明天气数据，再说明景点、门票和路线请咨询前台0750-662-9888；不得推荐具体景点。'
+        selected: false
+        title: 天气查询与周边咨询
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1776511455200'
+      position:
+        x: 1238
+        y: 804.5
+      positionAbsolute:
+        x: 1238
+        y: 804.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#1776760670660.text#}}'
+        selected: false
+        title: 宴会会议回复
+        type: answer
+        variables: []
+      height: 103
+      id: '1776511464396'
+      position:
+        x: 1238
+        y: 939
+      positionAbsolute:
+        x: 1238
+        y: 939
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#1776511455200.text#}}'
+        selected: false
+        title: 天气与周边咨询回复
+        type: answer
+        variables: []
+      height: 103
+      id: '1776511481705'
+      position:
+        x: 1540
+        y: 797
+      positionAbsolute:
+        x: 1540
+        y: 797
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1776511399253'
+          - result
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 10
+        model:
+          completion_params:
+            max_tokens: 500
+            temperature: 0.1
+            top_p: 0.7
+          mode: chat
+          name: deepseek-v3
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: d5f83ff3-af23-4fe6-8d9a-94f4ca2aebf3
+          role: system
+          text: '## 短确认语防误判规则
+
+            如果用户内容仅为以下短确认语之一：确认预订、正确、好的、好、对、是的、没问题、可以、确认、行、没错、嗯、嗯嗯、OK、ok，不得根据知识库编造预订结果，不得输出“预订成功”、房号预留、短信发送、错误电话或任何支付结果。请固定回复：“您好，如果您是在确认客房预订，请回复「确认预订」，我将为您生成预订流水编号和支付二维码；如需其他服务，也可以继续告诉我。”
+
+
+            用户内容：{{#sys.query#}}
+
+            上下文：{{#context#}}
+
+            角色：
+
+            你是酒店会议宴会专属顾问，负责根据知识库解答会场、宴会厅、设备、茶歇、服务流程和人数适配等相关问题，只能依据知识库内容作答。
+
+            1. 知识库中有明确的会议宴会信息时，请准确、完整输出。
+
+            2. 可针对客户询价、场地选择、设备介绍、茶歇定制、服务流程、人数适配等高频问题进行精准回答。
+
+            3. 不超权限承诺，不编造信息，不泄露隐私。
+
+            4. 具体场地费用及配套价格需要根据会议规模、日期及具体需求进行核算。
+
+            5.为了提供准确方案，请建议用户直接联系酒店前台 0750-662-9888。
+
+            '
+        selected: false
+        title: 宴会会议
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1776760670660'
+      position:
+        x: 936
+        y: 939
+      positionAbsolute:
+        x: 936
+        y: 939
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        is_team_authorization: true
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Target city for weather forecast query
+            ja_JP: Target city for weather forecast query
+            pt_BR: Cidade de destino para consulta de previsão do tempo
+            zh_Hans: 天气预报查询的目标城市
+          label:
+            en_US: city
+            ja_JP: city
+            pt_BR: cidade
+            zh_Hans: 城市
+          llm_description: If you don't know you can extract the city name from the question or you can reply：Please tell me your city. You have to extract the Chinese city name from the question.If the input region is in Chinese characters for China, it should be replaced with the corresponding English name, such as '北京' for correct input is 'Beijing'
+          max: null
+          min: null
+          name: city
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: zh_cn
+          form: form
+          human_description:
+            en_US: language
+            ja_JP: language
+            pt_BR: language
+            zh_Hans: 语言
+          label:
+            en_US: language
+            ja_JP: language
+            pt_BR: language
+            zh_Hans: 语言
+          llm_description: ''
+          max: null
+          min: null
+          name: lang
+          options:
+          - icon: ''
+            label:
+              en_US: cn
+              ja_JP: cn
+              pt_BR: cn
+              zh_Hans: 中国
+            value: zh_cn
+          - icon: ''
+            label:
+              en_US: usa
+              ja_JP: usa
+              pt_BR: usa
+              zh_Hans: 美国
+            value: en_us
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: select
+        - auto_generate: null
+          default: metric
+          form: form
+          human_description:
+            en_US: units for temperature
+            ja_JP: units for temperature
+            pt_BR: units for temperature
+            zh_Hans: 温度单位
+          label:
+            en_US: units
+            ja_JP: units
+            pt_BR: units
+            zh_Hans: 单位
+          llm_description: ''
+          max: null
+          min: null
+          name: units
+          options:
+          - icon: ''
+            label:
+              en_US: metric
+              ja_JP: metric
+              pt_BR: metric
+              zh_Hans: ℃
+            value: metric
+          - icon: ''
+            label:
+              en_US: imperial
+              ja_JP: imperial
+              pt_BR: imperial
+              zh_Hans: ℉
+            value: imperial
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: select
+        params:
+          city: ''
+          lang: ''
+          units: ''
+        provider_id: langgenius/openweather/openweather
+        provider_name: langgenius/openweather/openweather
+        provider_type: builtin
+        selected: false
+        title: 天气查询
+        tool_configurations:
+          lang:
+            type: constant
+            value: zh_cn
+          units:
+            type: constant
+            value: metric
+        tool_description: 天气查询
+        tool_label: 天气查询
+        tool_name: weather
+        tool_node_version: '2'
+        tool_parameters:
+          city:
+            type: constant
+            value: Xinhui
+        type: tool
+      height: 114
+      id: '1778841497605'
+      position:
+        x: 634
+        y: 785
+      positionAbsolute:
+        x: 634
+        y: 785
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        agent_parameters:
+          instruction:
+            type: constant
+            value: '你是「新会碧桂园凤凰酒店」智能预订助理。直接以中文回复，不输出英文或技术标签。
+
+
+              ## 当前年份：2026
+
+              客人说"5月26号"→ 2026-05-26。遇"今天/明天/本周末"等相对日期，调用 current_time 工具确认再换算。
+
+
+              ## 房型代码
+
+              001 高级大床房 | 002 豪华大床房 | 003 行政大床房
+
+              010 行政双床房 | 011 豪华双床房 | 012 高级双床房
+
+              004 高级套房 | 005 豪华套房 | 006 行政套房 | 007 皇室套房 | 008 总统套房
+
+              009 蜜月套房 | 013 卡通亲子房
+
+
+              ## 订房流程（3步，步骤1不调工具）
+
+
+              **【步骤1】只收集6项信息，不调任何工具**
+
+              缺什么一次问完，不分多轮，不问6项以外的任何信息：
+
+              ① 姓名 ② 手机号 ③ 入住日期（YYYY-MM-DD）④ 离店日期（YYYY-MM-DD）⑤ 房型代码 ⑥ 间数（默认1间）
+
+              严禁在步骤1调用任何 MCP 工具。严禁问含早、楼层、特殊需求等额外信息。
+
+
+              **【步骤2】6项齐全后输出一次确认摘要**
+
+              📋 预订信息确认
+
+              · 姓名：[姓名]
+
+              · 手机：[手机号]
+
+              · 入住：[入住日期] → 离店：[离店日期]（共[n]晚）
+
+              · 房型：[房型名称]（代码：[代码]）
+
+              · 间数：[n]间
+
+              · 房价：以小途乐订待支付页面为准
+
+              以上信息是否正确？请回复"确认预订"或说明修改。
+
+
+              **【步骤3】客人确认后立即执行，不再问任何问题**
+
+              客人回复"确认""好的""是""没问题""OK""嗯""对"等后，依次执行：
+
+
+              操作① 必须调用工具 mcp_sse_call_tool → getAvailableRoomsByDate
+
+              tool_name 固定填：getAvailableRoomsByDate
+
+              arguments 必须是严格 JSON 字符串，不是自然语言，不是 Markdown：
+
+              {"teamId":234556,"checkInDate":"[入住日期]","checkOutDate":"[离店日期]"}
+
+              checkInDate/checkOutDate 使用 YYYY-MM-DD。
+
+              从 Observation 的房态数组中找 roomCode/code 等于 [房型代码] 的记录，从同一条记录的价格计划中提取 rateCode、verifyId、verifyIds（原样复制）。
+
+              verifyIds 必须是整数数组；verifyId 必须是整数；rateCode 必须是同一条价格计划的 code/rateCode。
+
+              此步骤仅供内部取参数，不向客人展示房态结果。
+
+
+              操作② 完成操作①后必须继续调用工具 mcp_sse_call_tool → submitBooking，不得提前回复客人
+
+              tool_name 固定填：submitBooking
+
+              arguments 必须是严格 JSON 字符串，不是自然语言，不是 Markdown：
+
+              {"teamId":234556,"roomCode":"[代码]","rateCode":"[操作①提取值]","verifyIds":[操作①提取的整数数组],"verifyId":[操作①提取的整数],"number":[间数整数],"checkInDate":"[入住日期]T00:00:00.000+08:00","checkOutDate":"[离店日期]T00:00:00.000+08:00","name":"[姓名]","mobile":"[手机号]","email":""}
+
+              teamId、verifyId、number 必须是数字；verifyIds 必须是整数数组；email 没有就传空字符串。
+
+
+              操作③ 从 Observation 取 orderNo（纯数字）。
+
+              若取不到 → 调用 getHotelHelpAfterSubmitBookingError，告知联系前台 0750-662-9888，停止。
+
+
+              操作④ 输出：
+
+              ✅ 预订申请已提交！订单编号：**[orderNo]**
+
+              支付金额：以小途乐订小程序待支付页面为准。
+
+              请使用微信扫描下方小程序码，打开「小途乐订」→「我的订单」→「待支付」→ 找到订单 [orderNo] 点击支付。
+
+              ![微信扫描小途乐订小程序码](https://cdn.jsdelivr.net/gh/zengtao227/lyp-wentucup-2026-public-data@main/qrcode-xiaotuleding.png)
+
+              如需帮助请致电前台：0750-662-9888
+
+
+              ## 硬性规则
+
+              - orderNo 必须来自本次 submitBooking 返回的实际数字，禁止编造
+
+              - rateCode/verifyId/verifyIds 必须来自步骤3操作①的同一条记录，禁止用历史数据
+
+              - 查房态传 YYYY-MM-DD；submitBooking 传 YYYY-MM-DDT00:00:00.000+08:00
+
+              - mcp_sse_call_tool 的 arguments 字段必须传严格 JSON 字符串，不能传 Python dict、自然语言或 Markdown
+
+              - 禁止说"预订成功""已锁定房间""演示账户""虚拟余额"
+
+              - 客人未提宠物不询问，不在摘要里提
+
+              - 确认轮禁止只调用 getAvailableRoomsByDate 后就结束；只要操作①拿到 rateCode/verifyId/verifyIds，就必须立刻执行 submitBooking
+
+              - 前台电话：0750-662-9888'
+          mcp_prompts_as_tools:
+            type: constant
+            value: false
+          mcp_resources_as_tools:
+            type: constant
+            value: false
+          mcp_servers_config:
+            type: constant
+            value: "{  \n    \"fetch\": {\n        \"url\": \"http://mcp-server-booking.v4.test.dossm.cn/sse\",    \n        \"headers\": {}, \n        \"timeout\": 60,    \n        \"sse_read_timeout\": 300  \n    }\n}"
+          model:
+            type: constant
+            value:
+              completion_params:
+                temperature: 0.3
+              mode: chat
+              model: qwen-plus
+              model_type: llm
+              provider: langgenius/tongyi/tongyi
+              type: model-selector
+          query:
+            type: constant
+            value: '{{#sys.query#}}/{{#conversation.conversation_history#}}'
+          tools:
+            type: constant
+            value:
+            - enabled: true
+              extra:
+                description: 获取 MCP 服务端的工具列表。
+              parameters:
+                servers_config:
+                  auto: 1
+                  value: null
+              provider_name: junjiem/mcp_sse/mcp_sse
+              provider_show_name: junjiem/mcp_sse/mcp_sse
+              schemas:
+              - auto_generate: null
+                default: 1
+                form: form
+                human_description:
+                  en_US: Fetch and call the preset MCP Resources as Tools.
+                  ja_JP: Fetch and call the preset MCP Resources as Tools.
+                  pt_BR: Fetch and call the preset MCP Resources as Tools.
+                  zh_Hans: 将预设的 MCP Resources 作为 Tools 返回和调用。
+                label:
+                  en_US: MCP Resources as Tools
+                  ja_JP: MCP Resources as Tools
+                  pt_BR: MCP Resources as Tools
+                  zh_Hans: MCP 资源作为工具
+                llm_description: ''
+                max: null
+                min: null
+                name: resources_as_tools
+                options: []
+                placeholder: null
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: boolean
+              - auto_generate: null
+                default: 1
+                form: form
+                human_description:
+                  en_US: Fetch and call the preset MCP Prompts as Tools.
+                  ja_JP: Fetch and call the preset MCP Prompts as Tools.
+                  pt_BR: Fetch and call the preset MCP Prompts as Tools.
+                  zh_Hans: 将预设的 MCP Prompts 作为 Tools 返回和调用。
+                label:
+                  en_US: MCP Prompts as Tools
+                  ja_JP: MCP Prompts as Tools
+                  pt_BR: MCP Prompts as Tools
+                  zh_Hans: MCP 提示词作为工具
+                llm_description: ''
+                max: null
+                min: null
+                name: prompts_as_tools
+                options: []
+                placeholder: null
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: boolean
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: MCP Servers config, support multiple MCP services. (Optional, Filling in this field will overwrite the MCP Servers config entered during authorization.)
+                  ja_JP: MCP Servers config, support multiple MCP services. (Optional, Filling in this field will overwrite the MCP Servers config entered during authorization.)
+                  pt_BR: MCP Servers config, support multiple MCP services. (Optional, Filling in this field will overwrite the MCP Servers config entered during authorization.)
+                  zh_Hans: MCP服务配置，支持多个MCP服务。 （选填，填写后将覆盖授权时填写的MCP服务配置。）
+                label:
+                  en_US: MCP Servers config
+                  ja_JP: MCP Servers config
+                  pt_BR: MCP Servers config
+                  zh_Hans: MCP 服务配置
+                llm_description: ''
+                max: null
+                min: null
+                name: servers_config
+                options: []
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: string
+              settings:
+                prompts_as_tools:
+                  value:
+                    type: constant
+                    value: 0
+                resources_as_tools:
+                  value:
+                    type: constant
+                    value: 0
+              tool_description: 获取 MCP 服务端的工具列表。
+              tool_label: 获取 MCP 工具列表
+              tool_name: mcp_sse_list_tools
+              type: builtin
+            - enabled: true
+              extra:
+                description: 调用 MCP 服务端工具。
+              parameters:
+                arguments:
+                  auto: 1
+                  value: null
+                servers_config:
+                  auto: 1
+                  value: null
+                tool_name:
+                  auto: 1
+                  value: null
+              provider_name: junjiem/mcp_sse/mcp_sse
+              provider_show_name: junjiem/mcp_sse/mcp_sse
+              schemas:
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: Name of the tool to execute.
+                  ja_JP: Name of the tool to execute.
+                  pt_BR: Name of the tool to execute.
+                  zh_Hans: 要执行的工具的名称。
+                label:
+                  en_US: Tool Name
+                  ja_JP: Tool Name
+                  pt_BR: Tool Name
+                  zh_Hans: 工具名称
+                llm_description: Name of the MCP tool to execute.
+                max: null
+                min: null
+                name: tool_name
+                options: []
+                placeholder: null
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: string
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: Tool arguments (JSON string in the python dict[str, Any] format).
+                  ja_JP: Tool arguments (JSON string in the python dict[str, Any] format).
+                  pt_BR: Tool arguments (JSON string in the python dict[str, Any] format).
+                  zh_Hans: 工具的参数。
+                label:
+                  en_US: Arguments
+                  ja_JP: Arguments
+                  pt_BR: Arguments
+                  zh_Hans: 参数
+                llm_description: MCP Tool arguments (JSON string in the python dict[str, Any] format).
+                max: null
+                min: null
+                name: arguments
+                options: []
+                placeholder: null
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: string
+              - auto_generate: null
+                default: 1
+                form: form
+                human_description:
+                  en_US: Fetch and call the preset MCP Resources as Tools.
+                  ja_JP: Fetch and call the preset MCP Resources as Tools.
+                  pt_BR: Fetch and call the preset MCP Resources as Tools.
+                  zh_Hans: 将预设的 MCP Resources 作为 Tools 返回和调用。
+                label:
+                  en_US: MCP Resources as Tools
+                  ja_JP: MCP Resources as Tools
+                  pt_BR: MCP Resources as Tools
+                  zh_Hans: MCP 资源作为工具
+                llm_description: ''
+                max: null
+                min: null
+                name: resources_as_tools
+                options: []
+                placeholder: null
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: boolean
+              - auto_generate: null
+                default: 1
+                form: form
+                human_description:
+                  en_US: Fetch and call the preset MCP Prompts as Tools.
+                  ja_JP: Fetch and call the preset MCP Prompts as Tools.
+                  pt_BR: Fetch and call the preset MCP Prompts as Tools.
+                  zh_Hans: 将预设的 MCP Prompts 作为 Tools 返回和调用。
+                label:
+                  en_US: MCP Prompts as Tools
+                  ja_JP: MCP Prompts as Tools
+                  pt_BR: MCP Prompts as Tools
+                  zh_Hans: MCP 提示词作为工具
+                llm_description: ''
+                max: null
+                min: null
+                name: prompts_as_tools
+                options: []
+                placeholder: null
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: boolean
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: MCP Servers config, support multiple MCP services. (Optional, Filling in this field will overwrite the MCP Servers config entered during authorization.)
+                  ja_JP: MCP Servers config, support multiple MCP services. (Optional, Filling in this field will overwrite the MCP Servers config entered during authorization.)
+                  pt_BR: MCP Servers config, support multiple MCP services. (Optional, Filling in this field will overwrite the MCP Servers config entered during authorization.)
+                  zh_Hans: MCP服务配置，支持多个MCP服务。 （选填，填写后将覆盖授权时填写的MCP服务配置。）
+                label:
+                  en_US: MCP Servers config
+                  ja_JP: MCP Servers config
+                  pt_BR: MCP Servers config
+                  zh_Hans: MCP 服务配置
+                llm_description: ''
+                max: null
+                min: null
+                name: servers_config
+                options: []
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: string
+              settings:
+                prompts_as_tools:
+                  value:
+                    type: constant
+                    value: 0
+                resources_as_tools:
+                  value:
+                    type: constant
+                    value: 0
+              tool_description: 调用 MCP 服务端工具。
+              tool_label: 调用 MCP 工具
+              tool_name: mcp_sse_call_tool
+              type: builtin
+            - enabled: true
+              extra:
+                description: 一个用于获取当前时间的工具。
+              parameters: {}
+              provider_name: time
+              provider_show_name: time
+              schemas:
+              - auto_generate: null
+                default: '%Y-%m-%d %H:%M:%S'
+                form: form
+                human_description:
+                  en_US: Time format in strftime standard.
+                  ja_JP: Time format in strftime standard.
+                  pt_BR: Time format in strftime standard.
+                  zh_Hans: strftime 标准的时间格式。
+                label:
+                  en_US: Format
+                  ja_JP: Format
+                  pt_BR: Format
+                  zh_Hans: 格式
+                llm_description: null
+                max: null
+                min: null
+                name: format
+                options: []
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: string
+              - auto_generate: null
+                default: UTC
+                form: form
+                human_description:
+                  en_US: Timezone
+                  ja_JP: Timezone
+                  pt_BR: Timezone
+                  zh_Hans: 时区
+                label:
+                  en_US: Timezone
+                  ja_JP: Timezone
+                  pt_BR: Timezone
+                  zh_Hans: 时区
+                llm_description: null
+                max: null
+                min: null
+                name: timezone
+                options:
+                - icon: null
+                  label:
+                    en_US: UTC
+                    ja_JP: UTC
+                    pt_BR: UTC
+                    zh_Hans: UTC
+                  value: UTC
+                - icon: null
+                  label:
+                    en_US: America/New_York
+                    ja_JP: America/New_York
+                    pt_BR: America/New_York
+                    zh_Hans: 美洲/纽约
+                  value: America/New_York
+                - icon: null
+                  label:
+                    en_US: America/Los_Angeles
+                    ja_JP: America/Los_Angeles
+                    pt_BR: America/Los_Angeles
+                    zh_Hans: 美洲/洛杉矶
+                  value: America/Los_Angeles
+                - icon: null
+                  label:
+                    en_US: America/Chicago
+                    ja_JP: America/Chicago
+                    pt_BR: America/Chicago
+                    zh_Hans: 美洲/芝加哥
+                  value: America/Chicago
+                - icon: null
+                  label:
+                    en_US: America/Sao_Paulo
+                    ja_JP: America/Sao_Paulo
+                    pt_BR: América/São Paulo
+                    zh_Hans: 美洲/圣保罗
+                  value: America/Sao_Paulo
+                - icon: null
+                  label:
+                    en_US: Asia/Shanghai
+                    ja_JP: Asia/Shanghai
+                    pt_BR: Asia/Shanghai
+                    zh_Hans: 亚洲/上海
+                  value: Asia/Shanghai
+                - icon: null
+                  label:
+                    en_US: Asia/Ho_Chi_Minh
+                    ja_JP: Asia/Ho_Chi_Minh
+                    pt_BR: Ásia/Ho Chi Minh
+                    zh_Hans: 亚洲/胡志明市
+                  value: Asia/Ho_Chi_Minh
+                - icon: null
+                  label:
+                    en_US: Asia/Tokyo
+                    ja_JP: Asia/Tokyo
+                    pt_BR: Asia/Tokyo
+                    zh_Hans: 亚洲/东京
+                  value: Asia/Tokyo
+                - icon: null
+                  label:
+                    en_US: Asia/Dubai
+                    ja_JP: Asia/Dubai
+                    pt_BR: Asia/Dubai
+                    zh_Hans: 亚洲/迪拜
+                  value: Asia/Dubai
+                - icon: null
+                  label:
+                    en_US: Asia/Kolkata
+                    ja_JP: Asia/Kolkata
+                    pt_BR: Asia/Kolkata
+                    zh_Hans: 亚洲/加尔各答
+                  value: Asia/Kolkata
+                - icon: null
+                  label:
+                    en_US: Asia/Seoul
+                    ja_JP: Asia/Seoul
+                    pt_BR: Asia/Seoul
+                    zh_Hans: 亚洲/首尔
+                  value: Asia/Seoul
+                - icon: null
+                  label:
+                    en_US: Asia/Singapore
+                    ja_JP: Asia/Singapore
+                    pt_BR: Asia/Singapore
+                    zh_Hans: 亚洲/新加坡
+                  value: Asia/Singapore
+                - icon: null
+                  label:
+                    en_US: Europe/London
+                    ja_JP: Europe/London
+                    pt_BR: Europe/London
+                    zh_Hans: 欧洲/伦敦
+                  value: Europe/London
+                - icon: null
+                  label:
+                    en_US: Europe/Berlin
+                    ja_JP: Europe/Berlin
+                    pt_BR: Europe/Berlin
+                    zh_Hans: 欧洲/柏林
+                  value: Europe/Berlin
+                - icon: null
+                  label:
+                    en_US: Europe/Moscow
+                    ja_JP: Europe/Moscow
+                    pt_BR: Europe/Moscow
+                    zh_Hans: 欧洲/莫斯科
+                  value: Europe/Moscow
+                - icon: null
+                  label:
+                    en_US: Australia/Sydney
+                    ja_JP: Australia/Sydney
+                    pt_BR: Australia/Sydney
+                    zh_Hans: 澳大利亚/悉尼
+                  value: Australia/Sydney
+                - icon: null
+                  label:
+                    en_US: Pacific/Auckland
+                    ja_JP: Pacific/Auckland
+                    pt_BR: Pacific/Auckland
+                    zh_Hans: 太平洋/奥克兰
+                  value: Pacific/Auckland
+                - icon: null
+                  label:
+                    en_US: Africa/Cairo
+                    ja_JP: Africa/Cairo
+                    pt_BR: Africa/Cairo
+                    zh_Hans: 非洲/开罗
+                  value: Africa/Cairo
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: select
+              settings:
+                format:
+                  value:
+                    type: mixed
+                    value: '%Y-%m-%d %H:%M:%S'
+                timezone:
+                  value:
+                    type: constant
+                    value: Asia/Shanghai
+              tool_description: 一个用于获取当前时间的工具。
+              tool_label: 获取当前时间
+              tool_name: current_time
+              type: builtin
+        agent_strategy_label: FunctionCalling (支持 MCP 工具)
+        agent_strategy_name: mcp_sse_function_calling
+        agent_strategy_provider_name: junjiem/mcp_see_agent/mcp_see_agent
+        meta:
+          minimum_dify_version: null
+          version: 0.0.1
+        plugin_unique_identifier: junjiem/mcp_see_agent:0.2.4@82caf96890992e9dec2c43c3fac82bfce8bd18a41de7c2b6948151b2d7f7b7a2
+        selected: false
+        title: Agent
+        tool_node_version: '2'
+        type: agent
+      height: 196
+      id: '1779521444701'
+      position:
+        x: 634
+        y: 1069
+      positionAbsolute:
+        x: 634
+        y: 1069
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        items:
+        - input_type: variable
+          operation: over-write
+          value:
+          - '1779521444701'
+          - text
+          variable_selector:
+          - conversation
+          - conversation_history
+          write_mode: over-write
+        selected: false
+        title: 变量赋值
+        type: assigner
+        version: '2'
+      height: 84
+      id: '1779521454977'
+      position:
+        x: 936
+        y: 1124
+      positionAbsolute:
+        x: 936
+        y: 1124
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#1779521444701.text#}}'
+        selected: false
+        title: 直接回复 10
+        type: answer
+        variables: []
+      height: 103
+      id: '1779521460143'
+      position:
+        x: 1238
+        y: 1122
+      positionAbsolute:
+        x: 1238
+        y: 1122
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        dataset_ids:
+        - Zvgef34EZRuGKAN8gT6ta4i92grXBYlpJOQY3cnvl0ShIE1PxF9tEY1efC+eKNr5
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: gte-rerank-v2
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
+        query_variable_selector:
+        - '1776498156667'
+        - sys.query
+        retrieval_mode: multiple
+        selected: false
+        title: 天气与周边
+        type: knowledge-retrieval
+      height: 90
+      id: '1779532574598'
+      position:
+        x: 936
+        y: 796
+      positionAbsolute:
+        x: 936
+        y: 796
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: 178.21661917727923
+      y: 92.86410307717654
+      zoom: 0.4085206826677594
+  rag_pipeline_variables: []
