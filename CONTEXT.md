@@ -3,7 +3,7 @@
 ## 当前推荐导入版本
 
 - Agent: `dify-workflows/决赛版-v4.2-Agent.yml`（主力版本，修复订单幻觉）
-- Chatflow: `dify-workflows/决赛版-v5.1-Chatflow.yml`（确定性 Tool 节点提交链路，支持多轮分批收集信息，禁止 LLM 编造订单号）
+- Chatflow: `dify-workflows/决赛版-v5.1-Chatflow.yml`（单 Agent 节点挂载酒店客房预订 5 个正式 MCP 工具，支持多轮分批收集信息，后置 Code 节点拦截假订单号）
 - Chatflow 旧版: `dify-workflows/决赛版-v3.9-Chatflow.yml`（38节点完整版，备用）
 
 `v3.7-Chatflow` 保留为旧版结构备份（无正式 submitBooking 提交链路）。
@@ -67,7 +67,7 @@ v4.1 核心：基于 v3.6，将模型从 deepseek-v3 换为 qwen-plus（工具�
 
 `v4.0 chatflow.yml` 可作为房态查询参考：它通过 `mcp_sse_call_tool` 连接 `mcp-server-booking.v4.test.dossm.cn/sse` 并使用 `teamid:234556`，已能查到真实房态。但 v4.0 仍用 Agent 自行决定提交，并混有 `bookings_post` / `submitBooking_post` 等预订单 API 工具，存在不调用真实 `submitBooking` 而生成假订单的风险。
 
-`决赛版-v5.1-Chatflow.yml` 是当前 Chatflow 推荐版本：借鉴 v4.0 的真实房态 MCP/teamId 方向，但采用 v3.9.2 的确定性 Tool 节点链路，不使用 Agent 节点提交订单。用户可以分批提供姓名、手机号、日期、房型和间数；Parameter Extractor 从最近 10 轮对话历史中整理字段。只有当前用户消息包含“确认”且字段齐全时，才进入 `submitBooking`；确认预订后，Code 节点从同一次实时房态 JSON 中提取 `rateCode` / `verifyId` / `verifyIds`，再由 `submitBooking` Tool 节点提交真实订单，成功 Answer 只展示 submitBooking 返回 JSON 中提取的真实 `orderNo`。
+`决赛版-v5.1-Chatflow.yml` 是当前 Chatflow 推荐版本：借鉴 v4.0 的单 Agent Chatflow 结构，但移除 `bookings_post` / `submitBooking_post` / `roomsavailable_get` 等预订单或模拟通路，只保留一个 Agent 节点，并在该 Agent 节点中挂载「酒店客房预订」5 个正式 MCP 工具：`getAvailableRoomsByDate`、`getAvailableRoomsByRoomTypeAndDate`、`getRoomDetailByRoomCode`、`getHotelHelpAfterSubmitBookingError`、`submitBooking`。用户可以分批提供姓名、手机号、日期、房型和间数；Agent 必须在每轮回复中整理已记录信息和缺失信息。确认预订后，Agent 必须重新查询 `getAvailableRoomsByDate` 并用同源 `rateCode` / `verifyId` / `verifyIds` 调用 `submitBooking`。Agent 后置 Code 节点只从 `<submit_booking_result>` 中的 `submitBooking` 原始 JSON 提取 `orderNo` 生成支付引导；如果 Agent 文本里出现订单号但没有 submitBooking JSON 证据，Code 节点会拦截并提示重新确认，避免 LLM 编造订单号。
 
 ## v3.9.2 Chatflow 设计说明
 
