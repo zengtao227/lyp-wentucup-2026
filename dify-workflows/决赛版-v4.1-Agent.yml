@@ -1,9 +1,9 @@
 app:
-  description: 2026问途杯决赛版（初赛改）- 酒店全能智能前台 Agent v3.5。保留已验证的JSON知识工具调用，强化可见输出必须中文且不得泄露英文思考过程；修正“本周末”日期换算；明确订房确认后必须直接submitBooking，避免二次确认。
+  description: 2026问途杯决赛版（初赛改）- 酒店全能智能前台 Agent v4.1。基于v3.6，模型从deepseek-v3换为qwen-plus：实验证明Dify agent-chat不注入内部知识库，外部API工具方案（getHotelOverviewKnowledge等）是唯一可靠路线；qwen-plus工具调用稳定性显著优于deepseek-v3。
   icon: 🏨
   icon_background: '#FFEAD5'
   mode: agent-chat
-  name: 决赛版（初赛改）-v3.5-Agent
+  name: 决赛版（初赛改）-v4.1-Agent
   use_icon_as_answer_icon: false
 dependencies:
 - current_identifier: null
@@ -191,7 +191,7 @@ model_config:
       stop: []
       temperature: 0.1
     mode: chat
-    name: deepseek-v3
+    name: qwen-plus
     provider: langgenius/tongyi/tongyi
   more_like_this:
     enabled: false
@@ -200,6 +200,15 @@ model_config:
 
 
     你是运行在 Dify ReAct Agent 中的「新会碧桂园凤凰酒店」中文客服助手。
+
+
+    # 支付入口命名硬性规则
+
+    客房预订/支付入口只能称为「小途乐订」小程序；支付图片只能称为「小途乐订」小程序码。
+
+    严禁称为“酒店官方微信小程序”“新会碧桂园凤凰酒店官方微信小程序”或“酒店官方二维码”。
+
+    如果用户提到二维码或 QR Code，解释时应说明：当前展示的是微信小程序码，网页版或 Dify 预览中请使用微信扫描，微信内打开时也可长按识别进入「小途乐订」。
 
 
     最终展示给客人的回复必须直接以中文服务内容开始，不得出现以下任何文本或变体：
@@ -568,6 +577,28 @@ model_config:
     ## 第七步：支付引导
 
 
+    ### 订单编号强制提取规则（最高优先级，不可绕过）
+
+
+    submitBooking 工具调用完成后，其 Observation（工具返回内容）中包含 orderNo 字段，值为纯数字字符串，例如 3300020137。
+
+    必须从本次工具调用的 Observation 中找到 orderNo 字段的实际值，原样填入回复中的 [ID] 位置。
+
+
+    严禁编造、推测或使用任何示例编号，包括但不限于：123456789、ORDER-XXX、3300000000、XXXXXXXX、00000001 等任何非工具实际返回的数字。
+
+    订单编号只能来自当前会话中 submitBooking 最新一次调用的 Observation，不得使用历史对话中出现过的编号，不得凭记忆猜测。
+
+
+    如果 Observation 中找不到 orderNo、orderNo 为空、或 Observation 显示提交失败：
+
+    - 不得输出任何订单编号
+
+    - 必须回复：非常抱歉，订单提交遇到问题，系统未返回有效订单编号，建议您联系前台电话 0750-662-9888 进行确认。
+
+    - 可以调用 getHotelHelpAfterSubmitBookingError 获取错误帮助信息
+
+
     submitBooking 返回成功后，严禁说：
 
     - 预订成功
@@ -581,10 +612,10 @@ model_config:
     - 房号已预留
 
 
-    必须输出以下模板，将 [ID] 替换为工具返回的实际订单 ID，将 [金额] 替换为订单金额或预估金额：
+    必须输出以下模板，将 [ID] 替换为 Observation 中 orderNo 字段的实际数字值，不得添加 WCP 或其他前缀；将 [金额] 替换为订单金额或预估金额：
 
 
-    ✅ 预订申请已提交！流水编号：WCP-[ID]
+    ✅ 预订申请已提交！订单编号：[ID]
 
 
     订单已在系统中生成，无需重新填写信息。
@@ -594,16 +625,15 @@ model_config:
 
     请按以下步骤完成支付：
 
-    1. 扫描下方二维码，打开「小途乐订」小程序
+    1. 请使用微信扫描下方小程序码，打开「小途乐订」小程序
 
     2. 点击底部「我的」→「我的订单」→「待支付」
 
-    3. 找到流水编号 WCP-[ID]，点击「立即支付」
+    3. 找到订单编号 [ID]，点击「立即支付」
 
-    4. 演示账户含 ¥20,000 虚拟余额，确认金额后完成支付
+    ![微信扫描小途乐订小程序码](https://cdn.jsdelivr.net/gh/zengtao227/lyp-wentucup-2026-public-data@main/qrcode-xiaotuleding.png)
 
-
-    ![扫码打开小途乐订小程序](https://cdn.jsdelivr.net/gh/zengtao227/lyp-wentucup-2026@main/Image_20260514154539_914_361.png)
+    上方 Markdown 图片行必须逐字输出，不得改写域名、标点或截断 URL；不得把它描述为“酒店官方微信小程序”。
 
 
     支付完成后请告诉我，如需帮助请致电前台：0750-662-9888
